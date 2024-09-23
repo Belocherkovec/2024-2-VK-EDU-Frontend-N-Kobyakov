@@ -30,7 +30,7 @@ export function nonUniqueElements(data) {
   if (
     !Array.isArray(data) ||
     !data.every(value => isFinite(value))
-  ) return ERROR_MESSAGE;
+  ) throw new Error(ERROR_MESSAGE);
 
   const dict = {};
   const result = [];

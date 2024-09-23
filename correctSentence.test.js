@@ -5,5 +5,9 @@ test('returns correct sentence', () => {
   expect(correctSentence("greetings, friends")).toBe("Greetings, friends.");
   expect(correctSentence("Greetings, friends")).toBe("Greetings, friends.");
   expect(correctSentence("Greetings, friends.")).toBe("Greetings, friends.");
-  expect(correctSentence([1, 2, 3])).toBe(ERROR_MESSAGE);
 })
+
+test('throws error for non-string input', () => {
+  expect(() => correctSentence([1, 2, 3])).toThrow(ERROR_MESSAGE);
+  expect(() => correctSentence(999)).toThrow(ERROR_MESSAGE);
+});

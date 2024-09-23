@@ -19,13 +19,12 @@
 
 export function convertBytesToHuman(bytes) {
   if (
-    !isFinite(bytes) || 
-    bytes === null ||
+    !Number.isFinite(bytes) ||
     bytes < 0
   ) return false;
 
+  const byteUnits = ['B', 'kB', 'MB', 'GB', 'TB']
   let unitIndex = 0;
-  let byteUnits = ['B', 'kB', 'MB', 'GB', 'TB']
 
   while(bytes >= 1024 && unitIndex < byteUnits.length - 1) {
     bytes /= 1024;

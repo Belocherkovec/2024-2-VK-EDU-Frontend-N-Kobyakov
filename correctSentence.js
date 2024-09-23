@@ -1,4 +1,4 @@
-import { ERROR_MESSAGE } from "./consts";
+import { ERROR_MESSAGE } from "./consts.js";
 /*
 For the input of your function, you will be given one sentence.
 You have to return a corrected version,
@@ -19,7 +19,9 @@ correctSentence("Greetings, friends.") == "Greetings, friends."
  */
 
 export function correctSentence(text) {
-  if (typeof text !== 'string') return ERROR_MESSAGE;
+  if (typeof text !== 'string') {
+    throw new Error(ERROR_MESSAGE);
+  }
 
   return `${text.charAt(0).toUpperCase()}${text.slice(1)}${text.endsWith('.') ? '' : '.'}`;
 }
