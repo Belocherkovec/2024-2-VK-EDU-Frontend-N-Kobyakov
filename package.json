@@ -1,34 +1,16 @@
 {
-  "name": "2024-2-vk-edu-frontend-n-kobyakov",
-  "version": "1.0.0",
-  "description": "study project on vk_education course",
-  "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "jest"
+    "lint": "eslint",
+    "lint:fix": "eslint --fix"
   },
-  "jest": {
-    "transform": {
-      "^.+\\.jsx?$": "babel-jest"
-    }
-  },
-  "babel": {
-    "presets": ["@babel/preset-env"]
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Belocherkovec/2024-2-VK-EDU-Frontend-N-Kobyakov.git"
-  },
-  "author": "Belotserkovets",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Belocherkovec/2024-2-VK-EDU-Frontend-N-Kobyakov/issues"
-  },
-  "homepage": "https://github.com/Belocherkovec/2024-2-VK-EDU-Frontend-N-Kobyakov#readme",
   "devDependencies": {
-    "@babel/core": "^7.25.2",
-    "@babel/preset-env": "^7.25.4",
-    "babel-jest": "^29.7.0",
-    "jest": "^29.7.0"
+    "@eslint/js": "^9.11.1",
+    "@stylistic/eslint-plugin-js": "^2.8.0",
+    "eslint": "^9.11.1",
+    "eslint-plugin-perfectionist": "^3.7.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "globals": "^15.9.0",
+    "prettier": "^3.3.3"
   }
 }
