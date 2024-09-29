@@ -1,0 +1,47 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 15px;
+}
+
+.form {
+  width: 100%;
+  border-top: 1px solid rgba(25, 25, 25, 0.32);
+  position: fixed;
+  bottom: 0;
+  display: flex;
+  padding: 0 12px;
+  background: white;
+  align-items: center;
+  column-gap: 12px;
+}
+
+.form__input {
+  resize: none;
+  padding: 12px 0;
+  border: 0;
+  outline: none;
+  width: 100%;
+  font-size: inherit;
+}
+
+.form__send-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--color-main);
+  border: none;
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+
+.form__send-icon {
+  color: white;
+  width: 24px;
+}
