@@ -91,6 +91,16 @@ button {
     width: unset;
     border-radius: 50%;
 }
+.user__name {
+    background: transparent;
+    color: white;
+    font-weight: bold;
+    border-bottom: 1px solid white;
+}
+.user__name::placeholder {
+    color: white;
+    opacity: 0.5;
+}
 .user__last-online {
     opacity: 0.5;
     font-size: 0.85em;
