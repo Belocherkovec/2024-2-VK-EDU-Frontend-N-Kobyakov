@@ -19,10 +19,13 @@ export class MessagesList extends HTMLElement {
 
   render() {
     this.messages = JSON.parse(localStorage.getItem('messages')) || [];
+
     this.removeEventListeners();
     this.shadowRoot.innerHTML = this.getHtml();
+
     this.container = this.shadowRoot.querySelector('.messages-container');
     this.actions = this.shadowRoot.querySelector('.actions');
+
     this.addEventListeners();
   }
 
@@ -52,14 +55,8 @@ export class MessagesList extends HTMLElement {
       this.actions.classList.contains('actions_active')
     ) {
       this.actions.classList.remove('actions_active');
+      this.messageContextIndex = null;
     }
-  }
-
-  #getFormattedDate(date) {
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-
-    return `${hours}:${minutes}`;
   }
 
   hadnleContextClick(event) {
@@ -67,25 +64,29 @@ export class MessagesList extends HTMLElement {
 
     const item = event.target.closest('.messages-container__message');
 
-    if (item) {
-      this.messageContextIndex = item.getAttribute('data-index');
+    const isActionsMenuShow = this.actions.classList.contains('actions_active');
+
+    if (item && !isActionsMenuShow) {
+      this.messageContextIndex = +item.getAttribute('data-index');
+      this.renderActionsMenu(event);
     } else {
       this.messageContextIndex = null;
+      this.actions.classList.remove('actions_active');
+    }
+  }
+
+  renderActionsMenu(event) {
+    const screenWidth = window.innerWidth;
+    const elementWidth = 142;
+
+    if (event.pageX < screenWidth / 2) {
+      this.actions.style.left = `${event.pageX}px`;
+    } else {
+      this.actions.style.left = `${event.pageX - elementWidth}px`;
     }
 
-    if (this.actions) {
-      const screenWidth = window.innerWidth;
-      const elementWidth = 142;
-
-      if (event.pageX < screenWidth / 2) {
-        this.actions.style.left = `${event.pageX}px`;
-      } else {
-        this.actions.style.left = `${event.pageX - elementWidth}px`; // Устанавливаем на правую границу
-      }
-
-      this.actions.style.top = `${event.pageY}px`;
-      this.actions.classList.toggle('actions_active');
-    }
+    this.actions.style.top = `${event.pageY}px`;
+    this.actions.classList.add('actions_active');
   }
 
   removeMessage() {
@@ -97,26 +98,44 @@ export class MessagesList extends HTMLElement {
     this.render();
   }
 
+  #getFormattedDate(date) {
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+
+    return `${hours}:${minutes}`;
+  }
+
+  #getMessage(msg, index) {
+    let messageClasses;
+
+    if (
+      msg.author.trim() === document.getElementById('userName')?.value.trim()
+    ) {
+      messageClasses =
+        'messages-container__message messages-container__message';
+    } else {
+      messageClasses =
+        'messages-container__message messages-container__message_user';
+    }
+
+    return `
+      <li data-index="${index}" class="${messageClasses}">
+        <h6 class="messages-container__author">${msg.author.trim()}</h6>
+        <p class="messages-container__text">${msg.text.replace(/\n/g, '<br>')}</p>
+        <span class="messages-container__timestamp">${this.#getFormattedDate(new Date(msg.sendDate))}</span>
+      </li>
+      `;
+  }
+
   getHtml() {
     return `
       <style>${styles}</style>
       <ul class="messages-container">
-        ${this.messages
-          .map(
-            (msg, index) => `
-          <li data-index="${index}" class="messages-container__message">
-          <p class="messages-container__text">${msg.text.replace(/\n/g, '<br>')}</p>
-          <span class="messages-container__timestamp">${this.#getFormattedDate(new Date(msg.sendDate))}</span>
-          </li>
-          `,
-          )
-          .join('')}
+        ${this.messages.map((msg, index) => this.#getMessage(msg, index)).join('')}
       </ul>
       <div class="actions">
         <button class="actions__elem" data-action="delete" onclick="this.getRootNode().host.removeMessage()">Удалить сообщение</button>
       </div>
     `;
   }
-
-  // disconnectedCallback() {}
 }
