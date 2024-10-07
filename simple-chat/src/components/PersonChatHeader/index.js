@@ -1,0 +1,1 @@
+export { PersonChatHeader } from './PersonChatHeader';

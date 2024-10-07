@@ -1,3 +1,6 @@
+import { STATUS_SEND } from '@consts/messageStatus';
+import { USERNAME } from '@consts/userName';
+
 import styles from './MessageInput.module.css';
 
 export class MessageInput extends HTMLElement {
@@ -5,6 +8,10 @@ export class MessageInput extends HTMLElement {
   input;
   formSendButton;
 
+  #userId;
+  #companionName;
+  #isInvertAuthor = false;
+  #messages;
   #defaultPlaceholder = 'Введите сообщение';
   #errorPlaceholder = 'Сначала вы должны ввести имя';
 
@@ -13,6 +20,20 @@ export class MessageInput extends HTMLElement {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleKeyPress = this.handleKeyPress.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  static get observedAttributes() {
+    return ['userid'];
+  }
+
+  attributeChangedCallback(attrName, oldValue, newValue) {
+    const localStorageChatData = JSON.parse(localStorage.getItem('chat'));
+
+    if (attrName === 'userid') {
+      this.#userId = newValue;
+      this.#messages = localStorageChatData[this.#userId].messages;
+      this.#companionName = localStorageChatData[this.#userId].userName;
+    }
   }
 
   connectedCallback() {
@@ -50,17 +71,29 @@ export class MessageInput extends HTMLElement {
     event.preventDefault();
 
     const messageComponent = document.querySelector('messages-list');
-    const messagesList = JSON.parse(localStorage.getItem('messages')) || [];
+    const currentChatData = JSON.parse(localStorage.getItem('chat'));
 
     if (this.input.value.trim()) {
-      messagesList.push({
-        author: document.getElementById('userName')?.value,
-        text: this.input.value.trim(),
+      this.#messages.push({
+        author: this.getAuthor(),
         sendDate: new Date(),
+        status: STATUS_SEND,
+        text: this.input.value.trim(),
       });
+
       this.input.value = '';
       this.formSendButton.classList.remove('form__send-button_active');
-      localStorage.setItem('messages', JSON.stringify(messagesList));
+
+      localStorage.setItem(
+        'chat',
+        JSON.stringify({
+          ...currentChatData,
+          [this.#userId]: {
+            ...currentChatData[this.#userId],
+            messages: this.#messages,
+          },
+        }),
+      );
     }
 
     if (messageComponent) {
@@ -95,21 +128,29 @@ export class MessageInput extends HTMLElement {
     this.handleInputChange();
   }
 
+  getAuthor() {
+    return [USERNAME, this.#companionName][+this.#isInvertAuthor];
+  }
+
+  invertAuthor() {
+    this.#isInvertAuthor = !this.#isInvertAuthor;
+  }
+
   getHtml() {
     return `
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" />
       <style>${styles}</style>
       <form class="form" action="/" autocomplete="off">
         <textarea 
           class="form__input" 
           name="message-text" 
-          placeholder="${this.#errorPlaceholder}" 
+          placeholder="${this.#defaultPlaceholder}" 
           rows="1" 
-          disabled
         ></textarea>
         <button class="form__send-button">
-          <svg class="form__send-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path d="M5 18.5V13.346L10.846 12L5 10.654V5.5L20.423 12L5 18.5Z"/>
-          </svg>
+          <span class="material-symbols-rounded form__send-icon">
+            send
+          </span>
         </button>
       </form>`;
   }
