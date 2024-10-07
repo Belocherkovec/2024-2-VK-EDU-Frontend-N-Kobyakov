@@ -1,0 +1,30 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-white-full: #FDFDFD;
+  --color-white-light: #F6F6F8;
+  --color-white-blue: #F0F1F5;
+  --color-black: #26282C;
+  --color-accent: #176EF9;
+  --color-gray-light: #A5ADBA;
+  --color-gray-dark: #7B8493;
+
+}
+
+chat-dialog {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  min-height: 100dvh;
+}
+
+messages-list {
+  background: var(--color-white-blue);
+  flex: 1;
+}

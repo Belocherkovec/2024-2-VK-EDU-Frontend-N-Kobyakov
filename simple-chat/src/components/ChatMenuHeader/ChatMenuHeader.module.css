@@ -1,0 +1,40 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-white-full: #FDFDFD;
+  --color-white-light: #F6F6F8;
+  --color-white-blue: #F0F1F5;
+  --color-black: #26282C;
+  --color-accent: #176EF9;
+  --color-gray-light: #A5ADBA;
+  --color-gray-dark: #7B8493;
+
+}
+
+button {
+  cursor: pointer;
+  color: inherit;
+  background: none;
+  border: none;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  column-gap: 12px;
+  padding: 14px 16px;
+  background: var(--color-accent);
+  color: var(--color-white-full);
+}
+
+.header__username {
+  flex: 1;
+  line-height: 1;
+  font-size: 1.4em;
+}

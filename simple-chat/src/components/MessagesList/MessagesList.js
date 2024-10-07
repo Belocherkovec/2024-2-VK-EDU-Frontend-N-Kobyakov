@@ -1,15 +1,30 @@
+import { timeFormatter } from '@consts/formatters';
+import { USERNAME } from '@consts/userName';
+
 import styles from './MessagesList.module.css';
 
 export class MessagesList extends HTMLElement {
+  #userId;
+  #messages;
+  #isInvertedUsers = false;
   container;
-  messages;
   actions;
   messageContextIndex;
+
+  static get observedAttributes() {
+    return ['userid'];
+  }
 
   constructor() {
     super();
     this.handleMessageMouseDown = this.handleMessageMouseDown.bind(this);
     this.hadnleContextClick = this.hadnleContextClick.bind(this);
+  }
+
+  attributeChangedCallback(attrName, oldValue, newValue) {
+    if (attrName === 'userid') {
+      this.#userId = newValue;
+    }
   }
 
   connectedCallback() {
@@ -18,8 +33,9 @@ export class MessagesList extends HTMLElement {
   }
 
   render() {
-    this.messages = JSON.parse(localStorage.getItem('messages')) || [];
-
+    this.#messages = JSON.parse(localStorage.getItem('chat'))[
+      this.#userId
+    ].messages;
     this.removeEventListeners();
     this.shadowRoot.innerHTML = this.getHtml();
 
@@ -98,18 +114,25 @@ export class MessagesList extends HTMLElement {
     this.render();
   }
 
-  #getFormattedDate(date) {
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
+  invertUsers() {
+    this.#isInvertedUsers = !this.#isInvertedUsers;
+    this.render();
+  }
 
-    return `${hours}:${minutes}`;
+  #getFormattedDate(date) {
+    const formattedTime = timeFormatter.format(date);
+
+    return `${formattedTime}`;
   }
 
   #getMessage(msg, index) {
+    const isYouAuthor = msg.author.trim() === USERNAME;
+
     let messageClasses;
 
     if (
-      msg.author.trim() === document.getElementById('userName')?.value.trim()
+      (!this.#isInvertedUsers && isYouAuthor) ||
+      (this.#isInvertedUsers && !isYouAuthor)
     ) {
       messageClasses =
         'messages-container__message messages-container__message';
@@ -120,7 +143,6 @@ export class MessagesList extends HTMLElement {
 
     return `
       <li data-index="${index}" class="${messageClasses}">
-        <h6 class="messages-container__author">${msg.author.trim()}</h6>
         <p class="messages-container__text">${msg.text.replace(/\n/g, '<br>')}</p>
         <span class="messages-container__timestamp">${this.#getFormattedDate(new Date(msg.sendDate))}</span>
       </li>
@@ -131,7 +153,7 @@ export class MessagesList extends HTMLElement {
     return `
       <style>${styles}</style>
       <ul class="messages-container">
-        ${this.messages.map((msg, index) => this.#getMessage(msg, index)).join('')}
+        ${this.#messages.map((msg, index) => this.#getMessage(msg, index)).join('')}
       </ul>
       <div class="actions">
         <button class="actions__elem" data-action="delete" onclick="this.getRootNode().host.removeMessage()">Удалить сообщение</button>
