@@ -57,6 +57,10 @@ export class PersonChatHeader extends HTMLElement {
     this.backButton = this.shadowRoot.querySelector('#button-back');
     this.swapButton = this.shadowRoot.querySelector('#button-swap');
 
+    if (this.#isSwapped) {
+      this.swapButton.classList.add('button__swap_active');
+    }
+
     this.addEventListeners();
   }
 
@@ -106,7 +110,7 @@ export class PersonChatHeader extends HTMLElement {
             <p class="user__last-online">был недавно</p>
           </div>
         </div>
-        <button class="button" id="button-swap"><span class="material-symbols-rounded">more_vert</span></button>
+        <button class="button" id="button-swap"><span class="material-symbols-rounded">swap_horiz</span></button>
       </header>
     `;
   }

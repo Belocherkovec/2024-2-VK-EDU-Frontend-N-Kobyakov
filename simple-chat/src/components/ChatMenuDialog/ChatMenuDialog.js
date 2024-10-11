@@ -139,9 +139,9 @@ export class ChatMenuDialog extends HTMLElement {
 
   getHtml() {
     return `
-      <link 
+      <link
         rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" 
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0"
       />
       <style>${styles}</style>
       <div class="dialog">
@@ -155,7 +155,7 @@ export class ChatMenuDialog extends HTMLElement {
           <p class="dialog__check-mark">
             ${this.#lastMessage ? this.#getCheckMark() : ''}
           </p>
-        </div> 
+        </div>
       </div>
     `;
   }

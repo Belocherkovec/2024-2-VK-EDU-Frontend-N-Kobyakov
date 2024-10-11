@@ -70,3 +70,7 @@ button {
   color: var(--color-gray-light);
   font-size: 0.8em;
 }
+
+.button__swap_active {
+  color: var(--color-accent);
+}

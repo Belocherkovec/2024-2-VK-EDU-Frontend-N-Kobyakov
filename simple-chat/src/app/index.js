@@ -1,6 +1,6 @@
 import { USERNAME } from '@consts/userName';
 import { ChatsList } from '@features/ChatsList';
-import { templateChatsData } from '@features/ChatsList/model/ChatDataTemplate';
+import { templateChatsData } from '@features/ChatsList';
 import { Dialog } from '@features/Dialog';
 import '@icons/favicon.ico';
 import '@public/index.css';

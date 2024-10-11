@@ -1,4 +1,5 @@
 import { timeFormatter } from '@consts/formatters';
+import { STATUS_READ } from '@consts/messageStatus';
 import { USERNAME } from '@consts/userName';
 
 import styles from './MessagesList.module.css';
@@ -6,6 +7,7 @@ import styles from './MessagesList.module.css';
 export class MessagesList extends HTMLElement {
   #userId;
   #messages;
+  #chatsData;
   #isInvertedUsers = false;
   container;
   actions;
@@ -19,6 +21,7 @@ export class MessagesList extends HTMLElement {
     super();
     this.handleMessageMouseDown = this.handleMessageMouseDown.bind(this);
     this.hadnleContextClick = this.hadnleContextClick.bind(this);
+    this.updateMessageStatus = this.updateMessageStatus.bind(this);
   }
 
   attributeChangedCallback(attrName, oldValue, newValue) {
@@ -33,9 +36,14 @@ export class MessagesList extends HTMLElement {
   }
 
   render() {
-    this.#messages = JSON.parse(localStorage.getItem('chat'))[
-      this.#userId
-    ].messages;
+    this.#chatsData = JSON.parse(localStorage.getItem('chat'));
+
+    const userData = this.#chatsData[this.#userId];
+
+    this.#messages = userData.messages;
+
+    this.updateMessageStatus(userData);
+
     this.removeEventListeners();
     this.shadowRoot.innerHTML = this.getHtml();
 
@@ -43,6 +51,29 @@ export class MessagesList extends HTMLElement {
     this.actions = this.shadowRoot.querySelector('.actions');
 
     this.addEventListeners();
+  }
+
+  updateMessageStatus(userData) {
+    const newMessagesState = this.#messages.map((message) => {
+      if (!this.#isInvertedUsers && message.author === userData.userName) {
+        return { ...message, status: STATUS_READ };
+      } else if (this.#isInvertedUsers && message.author === USERNAME) {
+        return { ...message, status: STATUS_READ };
+      }
+
+      return message;
+    });
+
+    localStorage.setItem(
+      'chat',
+      JSON.stringify({
+        ...this.#chatsData,
+        [this.#userId]: {
+          ...userData,
+          messages: newMessagesState,
+        },
+      }),
+    );
   }
 
   addEventListeners() {
@@ -106,11 +137,19 @@ export class MessagesList extends HTMLElement {
   }
 
   removeMessage() {
-    this.messages = [
-      ...this.messages.slice(0, this.messageContextIndex),
-      ...this.messages.slice(this.messageContextIndex + 1),
+    const chatData = JSON.parse(localStorage.getItem('chat'));
+
+    this.#messages = [
+      ...this.#messages.slice(0, this.messageContextIndex),
+      ...this.#messages.slice(this.messageContextIndex + 1),
     ];
-    localStorage.setItem('messages', JSON.stringify(this.messages));
+    localStorage.setItem(
+      'chat',
+      JSON.stringify({
+        ...chatData,
+        [this.#userId]: { ...chatData[this.#userId], messages: this.#messages },
+      }),
+    );
     this.render();
   }
 

@@ -17,6 +17,21 @@
 
 }
 
+input[type=submit] {
+  visibility: collapse;
+}
+
+input {
+  border: 0;
+  outline: none;
+  width: 100%;
+  font-size: inherit;
+}
+
+input:-webkit-autofill {
+  -webkit-background-clip: text;
+}
+
 button {
   cursor: pointer;
   color: inherit;
@@ -37,4 +52,14 @@ button {
   flex: 1;
   line-height: 1;
   font-size: 1.4em;
+}
+
+.header__search-input {
+  background: transparent;
+  color: var(--color-white-full);
+}
+
+.header__search-input::placeholder {
+  color: var(--color-white-full);
+  opacity: 0.5;
 }

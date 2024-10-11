@@ -41,8 +41,21 @@ export class ChatsList extends HTMLElement {
   }
 
   render() {
-    this.chatData = JSON.parse(localStorage.getItem('chat')) || [];
+    this.chatData =
+      JSON.parse(sessionStorage.getItem('chat')) ||
+      JSON.parse(localStorage.getItem('chat')) ||
+      [];
     this.innerHTML = this.getHtml();
+  }
+
+  partialRerender() {
+    this.chatData =
+      JSON.parse(sessionStorage.getItem('chat')) ||
+      JSON.parse(localStorage.getItem('chat')) ||
+      [];
+    document.querySelector('.chats').innerHTML = Object.keys(this.chatData)
+      .map((key) => `<chatmenu-dialog userid="${key}"></chatmenu-dialog>`)
+      .join('');
   }
 
   getHtml() {
