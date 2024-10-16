@@ -5,6 +5,7 @@ export class ChatMenuHeader extends HTMLElement {
   #backButton;
   #searchInput;
   #ChatListNode;
+  #headerUsername;
   #isSearchMode = false;
   inputRequestDelay;
 
@@ -104,7 +105,28 @@ export class ChatMenuHeader extends HTMLElement {
     this.#backButton = this.shadowRoot.querySelector('#button-back');
     this.#searchInput = this.shadowRoot.querySelector('#input-search');
     this.#ChatListNode = document.querySelector('chats-menu');
+    this.#headerUsername = this.shadowRoot.querySelector('.header__username');
     this.addEventListeners();
+
+    // add animate after render
+    if (this.#searchInput) {
+      setTimeout(() => {
+        this.#searchInput.classList.add('header__search-input_animate');
+      }, 0);
+    }
+
+    // add animate after render
+    if (this.#backButton) {
+      setTimeout(() => {
+        this.#backButton.classList.add('button-back_animate');
+      }, 0);
+    }
+
+    if (this.#headerUsername) {
+      setTimeout(() => {
+        this.#headerUsername.classList.add('header__username_animate');
+      }, 0);
+    }
   }
 
   getHeaderContent() {
@@ -121,7 +143,7 @@ export class ChatMenuHeader extends HTMLElement {
     }
 
     return `
-      <button class="header__button button-menu" id="button-back">
+      <button class="header__button button-back" id="button-back">
         <span class="material-symbols-rounded">arrow_back_ios_new</span>
       </button>
       <input placeholder="Поиск..." class="header__search-input" id="input-search" />

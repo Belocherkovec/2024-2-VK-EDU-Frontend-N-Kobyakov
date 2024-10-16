@@ -6,7 +6,6 @@ import styles from './Dialog.module.css';
 
 export class Dialog extends HTMLElement {
   #userId;
-  #userData;
 
   static get observedAttributes() {
     return ['userid'];
@@ -31,7 +30,6 @@ export class Dialog extends HTMLElement {
   attributeChangedCallback(attrName, oldValue, newValue) {
     if (attrName === 'userid') {
       this.#userId = newValue;
-      this.#userData = JSON.parse(localStorage.getItem('chat'))[this.#userId];
     }
   }
 

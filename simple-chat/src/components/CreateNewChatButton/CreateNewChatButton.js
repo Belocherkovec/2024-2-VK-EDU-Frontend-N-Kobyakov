@@ -37,7 +37,7 @@ export class CreateNewChatButton extends HTMLElement {
     const lastChatId = Object.keys(localStorageChatData).length;
     const chatsMenuComponent = document.querySelector('chats-menu');
 
-    if (newUserName.trim()) {
+    if (newUserName && newUserName.trim()) {
       localStorageChatData[lastChatId + 1] = {
         avatar: generator.generateRandomAvatar(),
         messages: [],

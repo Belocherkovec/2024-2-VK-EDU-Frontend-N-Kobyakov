@@ -10,8 +10,10 @@
   --color-white-full: #FDFDFD;
   --color-white-light: #F6F6F8;
   --color-white-blue: #F0F1F5;
+  --color-white-hover: #dfe2e9;
   --color-black: #26282C;
   --color-accent: #176EF9;
+  --color-accent-hover: #458BFA;
   --color-gray-light: #A5ADBA;
   --color-gray-dark: #7B8493;
 
@@ -34,7 +36,17 @@
   border-radius: 8px 8px 0 8px;
   background: var(--color-accent);
   color: var(--color-white-full);
+  opacity: 0;
+  transition: opacity 0.3s ease-in;
 }
+.messages-container__message_animate, .messages-container__message_show {
+  opacity: 1;
+}
+.messages-container__message_new {
+  position: relative;
+  animation: new-message 0.2s ease-in;
+}
+
 .messages-container__message_user {
   background: var(--color-white-full);
   color: var(--color-black);
@@ -68,4 +80,13 @@
   cursor: pointer;
   border: none;
   background: none;
+}
+
+@keyframes new-message {
+  0% {
+    right: -25%;
+  }
+  100% {
+    right: 0;
+  }
 }

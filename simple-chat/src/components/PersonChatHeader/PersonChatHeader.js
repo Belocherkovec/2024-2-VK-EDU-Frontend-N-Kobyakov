@@ -6,6 +6,8 @@ import styles from './PersonChatHeader.module.css';
 export class PersonChatHeader extends HTMLElement {
   #userId;
   #userName;
+  #userNameElem;
+  #avatar;
   #avatarSrc;
   #isSwapped = false;
   backButton;
@@ -56,6 +58,8 @@ export class PersonChatHeader extends HTMLElement {
     this.shadowRoot.innerHTML = this.getHtml();
     this.backButton = this.shadowRoot.querySelector('#button-back');
     this.swapButton = this.shadowRoot.querySelector('#button-swap');
+    this.#avatar = this.shadowRoot.querySelector('.user__avatar');
+    this.#userNameElem = this.shadowRoot.querySelector('.user__name');
 
     if (this.#isSwapped) {
       this.swapButton.classList.add('button__swap_active');
@@ -82,6 +86,8 @@ export class PersonChatHeader extends HTMLElement {
 
     this.#isSwapped = !this.#isSwapped;
     this.render();
+    this.#avatar.classList.add('user__avatar_animate');
+    this.#userNameElem.classList.add('user__name_animate');
   }
 
   getAvatar() {

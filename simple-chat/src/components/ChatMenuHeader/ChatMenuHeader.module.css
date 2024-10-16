@@ -10,8 +10,10 @@
   --color-white-full: #FDFDFD;
   --color-white-light: #F6F6F8;
   --color-white-blue: #F0F1F5;
+  --color-white-hover: #dfe2e9;
   --color-black: #26282C;
   --color-accent: #176EF9;
+  --color-accent-hover: #458BFA;
   --color-gray-light: #A5ADBA;
   --color-gray-dark: #7B8493;
 
@@ -48,15 +50,41 @@ button {
   color: var(--color-white-full);
 }
 
+.header__button {
+  transition: color 0.3s ease-in;
+}
+.header__button:hover {
+  color: var(--color-white-hover);
+}
+
+.button-back {
+  opacity: 0;
+  transition: color 0.3s ease-in, opacity 0.1s ease-in;
+}
+.button-back_animate {
+  opacity: 1;
+}
+
 .header__username {
   flex: 1;
   line-height: 1;
   font-size: 1.4em;
+  opacity: 0;
+  transition: opacity 0.3s ease-in;
+}
+.header__username_animate {
+  opacity: 1;
 }
 
 .header__search-input {
   background: transparent;
   color: var(--color-white-full);
+  width: 0;
+  transition: width 0.3s ease-in;
+}
+.header__search-input_animate {
+  width: 100%;
+
 }
 
 .header__search-input::placeholder {

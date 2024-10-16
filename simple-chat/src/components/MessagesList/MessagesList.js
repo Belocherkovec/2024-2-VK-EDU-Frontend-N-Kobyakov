@@ -9,6 +9,8 @@ export class MessagesList extends HTMLElement {
   #messages;
   #chatsData;
   #isInvertedUsers = false;
+  #prevIsInvertedUsers = null;
+  #messagesLastLength;
   container;
   actions;
   messageContextIndex;
@@ -33,24 +35,6 @@ export class MessagesList extends HTMLElement {
   connectedCallback() {
     this.attachShadow({ mode: 'open' });
     this.render();
-  }
-
-  render() {
-    this.#chatsData = JSON.parse(localStorage.getItem('chat'));
-
-    const userData = this.#chatsData[this.#userId];
-
-    this.#messages = userData.messages;
-
-    this.updateMessageStatus(userData);
-
-    this.removeEventListeners();
-    this.shadowRoot.innerHTML = this.getHtml();
-
-    this.container = this.shadowRoot.querySelector('.messages-container');
-    this.actions = this.shadowRoot.querySelector('.actions');
-
-    this.addEventListeners();
   }
 
   updateMessageStatus(userData) {
@@ -154,6 +138,7 @@ export class MessagesList extends HTMLElement {
   }
 
   invertUsers() {
+    this.#prevIsInvertedUsers = this.#isInvertedUsers;
     this.#isInvertedUsers = !this.#isInvertedUsers;
     this.render();
   }
@@ -167,18 +152,18 @@ export class MessagesList extends HTMLElement {
   #getMessage(msg, index) {
     const isYouAuthor = msg.author.trim() === USERNAME;
 
-    let messageClasses;
-
-    if (
+    const addUserClass = () =>
       (!this.#isInvertedUsers && isYouAuthor) ||
       (this.#isInvertedUsers && !isYouAuthor)
-    ) {
-      messageClasses =
-        'messages-container__message messages-container__message';
-    } else {
-      messageClasses =
-        'messages-container__message messages-container__message_user';
-    }
+        ? ''
+        : 'messages-container__message_user';
+
+    const addNewMessageClass = () =>
+      index >= this.#messagesLastLength
+        ? 'messages-container__message_new'
+        : '';
+
+    const messageClasses = `messages-container__message ${addUserClass()} ${addNewMessageClass()}`;
 
     return `
       <li data-index="${index}" class="${messageClasses}">
@@ -186,6 +171,50 @@ export class MessagesList extends HTMLElement {
         <span class="messages-container__timestamp">${this.#getFormattedDate(new Date(msg.sendDate))}</span>
       </li>
       `;
+  }
+
+  render() {
+    this.#chatsData = JSON.parse(localStorage.getItem('chat'));
+
+    const userData = this.#chatsData[this.#userId];
+
+    this.#messages = userData.messages;
+
+    this.updateMessageStatus(userData);
+
+    this.removeEventListeners();
+    this.shadowRoot.innerHTML = this.getHtml();
+
+    this.container = this.shadowRoot.querySelector('.messages-container');
+    this.actions = this.shadowRoot.querySelector('.actions');
+
+    this.addEventListeners();
+
+    // add show to render without changeUsers
+    if (this.#prevIsInvertedUsers === null) {
+      this.shadowRoot
+        .querySelectorAll('.messages-container__message')
+        .forEach((message) =>
+          message.classList.add('messages-container__message_show'),
+        );
+    }
+
+    // add animate
+    if (
+      this.#prevIsInvertedUsers !== null &&
+      this.#prevIsInvertedUsers !== this.#isInvertedUsers
+    ) {
+      setTimeout(() => {
+        this.shadowRoot
+          .querySelectorAll('.messages-container__message')
+          .forEach((message) =>
+            message.classList.add('messages-container__message_animate'),
+          );
+      }, 0);
+    }
+
+    this.#prevIsInvertedUsers = null;
+    this.#messagesLastLength = this.#messages.length;
   }
 
   getHtml() {

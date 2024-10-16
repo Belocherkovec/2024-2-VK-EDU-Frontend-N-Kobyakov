@@ -10,8 +10,10 @@
   --color-white-full: #FDFDFD;
   --color-white-light: #F6F6F8;
   --color-white-blue: #F0F1F5;
+  --color-white-hover: #dfe2e9;
   --color-black: #26282C;
   --color-accent: #176EF9;
+  --color-accent-hover: #458BFA;
   --color-gray-light: #A5ADBA;
   --color-gray-dark: #7B8493;
 
@@ -27,7 +29,6 @@ body {
   padding: 10px 12px;
   background: var(--color-white-blue);
   align-items: center;
-  column-gap: 12px;
 }
 
 .form__input {
@@ -43,21 +44,29 @@ body {
 
 .form__send-button {
   cursor: pointer;
-  display: none;
+  visibility: hidden;
+  opacity: 0;
   justify-content: center;
   align-items: center;
   background: var(--color-accent);
   border: none;
   border-radius: 50%;
-  width: 40px;
+  width: 0px;
   height: 40px;
   place-items: center;
+  transition: margin, width, opacity 0.3s ease-in, visibility 0s 0.3s;
 }
 .form__send-button_active {
   display: grid;
+  opacity: 1;
+  visibility: visible;
+  width: 40px;
+  margin-left: 12px;
+  transition: margin, width, opacity 0.3s ease-in, visibility 0s 0s;
 }
 
 .form__send-icon {
   color: var(--color-white-full);
   padding-left: 3px;
+  line-height: 40px;
 }

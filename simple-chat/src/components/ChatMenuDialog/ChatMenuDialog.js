@@ -145,7 +145,7 @@ export class ChatMenuDialog extends HTMLElement {
       />
       <style>${styles}</style>
       <div class="dialog">
-        <img src="${this.#dialogData.avatar}" class="dialog__avatar" alt="изображение пользователя" />
+        <img src="${this.#dialogData.avatar}" class="dialog__avatar loading" alt="изображение пользователя" onload="this.classList.remove('loading')" />
         <div class="dialog__user">
           <h2 class="dialog__username">${this.#dialogData.userName}</h2>
           <p class="dialog__last-message">${this.#lastMessage?.text || ''}</p>

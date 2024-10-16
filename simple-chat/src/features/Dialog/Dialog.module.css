@@ -10,21 +10,29 @@
   --color-white-full: #FDFDFD;
   --color-white-light: #F6F6F8;
   --color-white-blue: #F0F1F5;
+  --color-white-hover: #dfe2e9;
   --color-black: #26282C;
   --color-accent: #176EF9;
+  --color-accent-hover: #458BFA;
   --color-gray-light: #A5ADBA;
   --color-gray-dark: #7B8493;
 
 }
 
-chat-dialog {
-  display: flex;
-  flex-direction: column;
-  height: 100dvh;
-  min-height: 100dvh;
+chat-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
 messages-list {
   background: var(--color-white-blue);
   flex: 1;
+  padding: 60px 0;
+}
+
+message-input {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }

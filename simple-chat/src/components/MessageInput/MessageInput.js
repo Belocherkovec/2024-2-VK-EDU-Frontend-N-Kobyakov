@@ -70,8 +70,11 @@ export class MessageInput extends HTMLElement {
   handleSubmit(event) {
     event.preventDefault();
 
+    const localStorageChatData = JSON.parse(localStorage.getItem('chat'));
     const messageComponent = document.querySelector('messages-list');
     const currentChatData = JSON.parse(localStorage.getItem('chat'));
+
+    this.#messages = localStorageChatData[this.#userId].messages;
 
     if (this.input.value.trim()) {
       this.#messages.push({
