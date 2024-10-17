@@ -1,15 +1,35 @@
+import { timeFormatter } from '@consts/formatters';
+import { STATUS_READ } from '@consts/messageStatus';
+import { USERNAME } from '@consts/userName';
+
 import styles from './MessagesList.module.css';
 
 export class MessagesList extends HTMLElement {
+  #userId;
+  #messages;
+  #chatsData;
+  #isInvertedUsers = false;
+  #prevIsInvertedUsers = null;
+  #messagesLastLength;
   container;
-  messages;
   actions;
   messageContextIndex;
+
+  static get observedAttributes() {
+    return ['userid'];
+  }
 
   constructor() {
     super();
     this.handleMessageMouseDown = this.handleMessageMouseDown.bind(this);
     this.hadnleContextClick = this.hadnleContextClick.bind(this);
+    this.updateMessageStatus = this.updateMessageStatus.bind(this);
+  }
+
+  attributeChangedCallback(attrName, oldValue, newValue) {
+    if (attrName === 'userid') {
+      this.#userId = newValue;
+    }
   }
 
   connectedCallback() {
@@ -17,16 +37,27 @@ export class MessagesList extends HTMLElement {
     this.render();
   }
 
-  render() {
-    this.messages = JSON.parse(localStorage.getItem('messages')) || [];
+  updateMessageStatus(userData) {
+    const newMessagesState = this.#messages.map((message) => {
+      if (!this.#isInvertedUsers && message.author === userData.userName) {
+        return { ...message, status: STATUS_READ };
+      } else if (this.#isInvertedUsers && message.author === USERNAME) {
+        return { ...message, status: STATUS_READ };
+      }
 
-    this.removeEventListeners();
-    this.shadowRoot.innerHTML = this.getHtml();
+      return message;
+    });
 
-    this.container = this.shadowRoot.querySelector('.messages-container');
-    this.actions = this.shadowRoot.querySelector('.actions');
-
-    this.addEventListeners();
+    localStorage.setItem(
+      'chat',
+      JSON.stringify({
+        ...this.#chatsData,
+        [this.#userId]: {
+          ...userData,
+          messages: newMessagesState,
+        },
+      }),
+    );
   }
 
   addEventListeners() {
@@ -90,48 +121,107 @@ export class MessagesList extends HTMLElement {
   }
 
   removeMessage() {
-    this.messages = [
-      ...this.messages.slice(0, this.messageContextIndex),
-      ...this.messages.slice(this.messageContextIndex + 1),
+    const chatData = JSON.parse(localStorage.getItem('chat'));
+
+    this.#messages = [
+      ...this.#messages.slice(0, this.messageContextIndex),
+      ...this.#messages.slice(this.messageContextIndex + 1),
     ];
-    localStorage.setItem('messages', JSON.stringify(this.messages));
+    localStorage.setItem(
+      'chat',
+      JSON.stringify({
+        ...chatData,
+        [this.#userId]: { ...chatData[this.#userId], messages: this.#messages },
+      }),
+    );
+    this.render();
+  }
+
+  invertUsers() {
+    this.#prevIsInvertedUsers = this.#isInvertedUsers;
+    this.#isInvertedUsers = !this.#isInvertedUsers;
     this.render();
   }
 
   #getFormattedDate(date) {
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const formattedTime = timeFormatter.format(date);
 
-    return `${hours}:${minutes}`;
+    return `${formattedTime}`;
   }
 
   #getMessage(msg, index) {
-    let messageClasses;
+    const isYouAuthor = msg.author.trim() === USERNAME;
 
-    if (
-      msg.author.trim() === document.getElementById('userName')?.value.trim()
-    ) {
-      messageClasses =
-        'messages-container__message messages-container__message';
-    } else {
-      messageClasses =
-        'messages-container__message messages-container__message_user';
-    }
+    const addUserClass = () =>
+      (!this.#isInvertedUsers && isYouAuthor) ||
+      (this.#isInvertedUsers && !isYouAuthor)
+        ? ''
+        : 'messages-container__message_user';
+
+    const addNewMessageClass = () =>
+      index >= this.#messagesLastLength
+        ? 'messages-container__message_new'
+        : '';
+
+    const messageClasses = `messages-container__message ${addUserClass()} ${addNewMessageClass()}`;
 
     return `
       <li data-index="${index}" class="${messageClasses}">
-        <h6 class="messages-container__author">${msg.author.trim()}</h6>
         <p class="messages-container__text">${msg.text.replace(/\n/g, '<br>')}</p>
         <span class="messages-container__timestamp">${this.#getFormattedDate(new Date(msg.sendDate))}</span>
       </li>
       `;
   }
 
+  render() {
+    this.#chatsData = JSON.parse(localStorage.getItem('chat'));
+
+    const userData = this.#chatsData[this.#userId];
+
+    this.#messages = userData.messages;
+
+    this.updateMessageStatus(userData);
+
+    this.removeEventListeners();
+    this.shadowRoot.innerHTML = this.getHtml();
+
+    this.container = this.shadowRoot.querySelector('.messages-container');
+    this.actions = this.shadowRoot.querySelector('.actions');
+
+    this.addEventListeners();
+
+    // add show to render without changeUsers
+    if (this.#prevIsInvertedUsers === null) {
+      this.shadowRoot
+        .querySelectorAll('.messages-container__message')
+        .forEach((message) =>
+          message.classList.add('messages-container__message_show'),
+        );
+    }
+
+    // add animate
+    if (
+      this.#prevIsInvertedUsers !== null &&
+      this.#prevIsInvertedUsers !== this.#isInvertedUsers
+    ) {
+      setTimeout(() => {
+        this.shadowRoot
+          .querySelectorAll('.messages-container__message')
+          .forEach((message) =>
+            message.classList.add('messages-container__message_animate'),
+          );
+      }, 0);
+    }
+
+    this.#prevIsInvertedUsers = null;
+    this.#messagesLastLength = this.#messages.length;
+  }
+
   getHtml() {
     return `
       <style>${styles}</style>
       <ul class="messages-container">
-        ${this.messages.map((msg, index) => this.#getMessage(msg, index)).join('')}
+        ${this.#messages.map((msg, index) => this.#getMessage(msg, index)).join('')}
       </ul>
       <div class="actions">
         <button class="actions__elem" data-action="delete" onclick="this.getRootNode().host.removeMessage()">Удалить сообщение</button>
