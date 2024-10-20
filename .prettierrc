@@ -1,5 +1,15 @@
- {
+{
   "singleQuote": true,
   "arrowParens": "always",
-  "quoteProps": "consistent"
+  "quoteProps": "consistent",
+  "endOfLine": "auto",
+  "trailingComma": "none",
+  "overrides": [
+    {
+      "files": "**/*.s?{c,cs}s?(|.module)",
+      "options": {
+        "singleQuote": false
+      }
+    }
+  ]
 }
