@@ -28,6 +28,5 @@ export default defineConfig(({ command }) => {
     server: {
       open: true
     },
-    logLevel: 'info'
   }
 });
