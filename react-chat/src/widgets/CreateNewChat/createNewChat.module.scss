@@ -1,0 +1,42 @@
+@use "@/app/styles/variables.scss" as *;
+
+.new-chat-button {
+  background-color: $color-accent;
+  color: $color-white-full;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  transition: background-color 0.3s ease-in;
+}
+
+.new-chat-button:hover {
+  animation: pulse 2s infinite;
+  background-color: $color-accent-hover;
+}
+
+.new-chat-button:active {
+  background-color: $color-accent-hover;
+}
+
+.icon.icon {
+  margin-top: 2px;
+  width: 30px;
+  height: 30px;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(23, 110, 249, 0.4);
+  }
+
+  90% {
+    box-shadow: 0 0 0 10px rgba(23, 110, 249, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(23, 110, 249, 0);
+  }
+}

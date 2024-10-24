@@ -1,0 +1,35 @@
+@use "@/app/styles/variables.scss" as *;
+
+.header {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  column-gap: 12px;
+  padding: 14px 16px;
+
+  &.colored {
+    background-color: $color-accent;
+    color: $color-white-full;
+
+  }
+
+  &.white {
+    background-color: $color-white-full;
+    color: $color-black;
+  }
+
+  &>*:nth-child(2) {
+    flex: 1;
+  }
+}
+
+// .header {
+//   
+//   width: 100%;
+//   padding: 8px 16px;
+//   column-gap: 16px;
+//   box-sizing: border-box;
+//   display: flex;
+//   align-items: center;
+//   z-index: 1;
+// }
