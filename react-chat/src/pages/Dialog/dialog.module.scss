@@ -1,11 +1,12 @@
 @use "@/app/styles/variables.scss" as *;
 
 // почему то не применяется
-:global {
-  body: {
-    background-color: red;
-  }
-}
+// и вызывает [WARNING] Unexpected "{"[css-syntax-error] при сборке!
+// :global {
+//   body: {
+//     background-color: red;
+//   }
+// }
 
 // и этот тоже
 :global(body) {
