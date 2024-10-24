@@ -9,16 +9,16 @@
   background: $color-accent;
   color: $color-white-full;
   transition: opacity 0.3s ease-in;
-}
 
-.message_user {
-  background: $color-white-full;
-  color: $color-black;
-  align-self: flex-start;
-  border-radius: 8px 8px 8px 0;
+  &_user {
+    background: $color-white-full;
+    color: $color-black;
+    align-self: flex-start;
+    border-radius: 8px 8px 8px 0;
 
-  .timestamp {
-    color: $color-gray-dark;
+    .timestamp {
+      color: $color-gray-dark;
+    }
   }
 }
 

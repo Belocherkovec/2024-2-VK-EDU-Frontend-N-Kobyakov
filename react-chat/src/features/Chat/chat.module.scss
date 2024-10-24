@@ -11,64 +11,59 @@
   border-bottom: 1px solid $color-white-blue;
   cursor: pointer;
   transition: background-color 0.3s ease-in;
-}
 
-.dialog:hover {
-  background-color: $color-white-light;
-}
+  &:hover {
+    background-color: $color-white-light;
+  }
 
-.dialog:active {
-  background-color: $color-white-blue;
-}
+  &:active {
+    background-color: $color-white-blue;
+  }
 
-.dialog__avatar {
-  width: 60px;
-  height: 60px;
-}
+  &__avatar {
+    width: 60px;
+    height: 60px;
+  }
 
-.dialog__avatar.loading {
-  background: $color-white-light;
-  border-radius: 50%;
-}
+  &__user {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    justify-content: space-evenly;
+    flex: 1;
+  }
 
-.dialog__user {
-  display: flex;
-  flex-direction: column;
-  align-self: stretch;
-  justify-content: space-evenly;
-  flex: 1;
-}
+  &__username {
+    font-size: 1em;
+  }
 
-.dialog__username {
-  font-size: 1em;
-}
+  &__last-message {
+    font-size: 0.9em;
+    color: $color-gray-dark;
+  }
 
-.dialog__last-message {
-  font-size: 0.9em;
-  color: $color-gray-dark;
-}
+  &__info {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    justify-content: space-around;
+    align-items: end;
+  }
 
-.dialog__info {
-  display: flex;
-  flex-direction: column;
-  align-self: stretch;
-  justify-content: space-around;
-  align-items: end;
-}
+  &__last-message-time {
+    font-size: 0.9em;
+    color: $color-gray-light;
+  }
 
-.dialog__last-message-time {
-  font-size: 0.9em;
-  color: $color-gray-light;
-}
+  &__check-mark {
+    color: $color-accent;
+  }
 
-.dialog__check-mark {
-  color: $color-accent;
-}
-
-.dialog__unread {
-  color: $color-white-full;
-  background: $color-accent;
-  padding: 1px 6px;
-  border-radius: 4px;
-  font-size: 0.8em;
+  &__unread {
+    color: $color-white-full;
+    background: $color-accent;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.8em;
+  }
 }
