@@ -7,7 +7,8 @@ export const StoreProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [store, setStore] = useState(() => ({
     chat: getLocalStorageData(),
-    filter: ''
+    filter: '',
+    isInverted: false
   }));
 
   const handleStoreUpdate = (path: string, value: any) => {

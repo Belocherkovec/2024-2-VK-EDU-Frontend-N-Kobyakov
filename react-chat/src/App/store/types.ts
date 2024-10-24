@@ -5,7 +5,8 @@ export const Store = createContext<IStore>({
   handleStoreUpdate: () => { },
   store: {
     chat: {},
-    filter: ''
+    filter: '',
+    isInverted: false
   }
 });
 

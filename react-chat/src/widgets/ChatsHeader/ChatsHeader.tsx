@@ -4,8 +4,8 @@ import {
   BackButton,
   MenuRoundedButton,
   SearchInput
-} from '@/widgets/ChatsHeader/components';
-import { SearchButton } from '@/widgets/ChatsHeader/components';
+} from '@/shared/components';
+import { SearchButton } from '@/shared/components';
 import { useContext, useState } from 'react';
 
 import styles from './ChatsHeader.module.scss';

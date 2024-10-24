@@ -17,6 +17,7 @@ export interface IReactChatMessage {
 export interface IStorage {
   chat: Record<string, IReactChat>;
   filter: string;
+  isInverted: boolean;
 }
 
 export type ChatType = Record<string, IReactChat>;

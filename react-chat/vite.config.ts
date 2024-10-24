@@ -4,20 +4,21 @@ import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/2024-2-VK-EDU-Frontend-N-Kobyakov',
   css: {
     preprocessorOptions: {
       scss: {
-        api: 'modern-compiler',
-      },
-    },
+        api: 'modern-compiler'
+      }
+    }
   },
   plugins: [react()],
   resolve: {
     alias: {
-      '@': resolve('src'),
-    },
+      '@': resolve('src')
+    }
   },
   server: {
-    open: true,
-  },
+    open: true
+  }
 });

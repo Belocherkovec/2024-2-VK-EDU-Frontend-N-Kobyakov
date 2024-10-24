@@ -20,7 +20,7 @@ export const Chat: React.FC<{ userId: number }> = ({ userId }) => {
   const lastMessage = userData.messages.at(-1);
 
   const CheckMark = (): ReactNode => {
-    const { author, status: messageStatus } = lastMessage;
+    const { author, status: messageStatus } = lastMessage as IReactChatMessage;
 
     const unreadMessage: number = userData.messages.filter(
       (msg: IReactChatMessage) =>
@@ -50,8 +50,12 @@ export const Chat: React.FC<{ userId: number }> = ({ userId }) => {
     return Result;
   };
 
+  const handleClick = () => {
+    window.location.hash = `dialog?id=${userId}`;
+  };
+
   return (
-    <div className={styles.dialog}>
+    <div className={styles.dialog} onClick={handleClick}>
       <img
         alt="изображение пользователя"
         className={cn(styles.dialog__avatar, styles.loading)}
