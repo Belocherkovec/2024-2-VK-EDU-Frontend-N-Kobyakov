@@ -1,0 +1,11 @@
+@use "@/app/styles/variables.scss" as *;
+
+.header {
+  &__button {
+    transition: color 0.3s ease-in;
+
+    &:hover {
+      color: $color-white-hover;
+    }
+  }
+}

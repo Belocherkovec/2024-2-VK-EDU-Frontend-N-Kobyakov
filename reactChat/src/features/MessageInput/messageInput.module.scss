@@ -1,0 +1,51 @@
+@use "@/app/styles/variables.scss" as *;
+
+.form {
+  width: 100%;
+  display: flex;
+  padding: 10px 12px;
+  background: $color-white-blue;
+  align-items: center;
+
+  &__input {
+    resize: none;
+    padding: 12px 16px;
+    border: 0;
+    outline: none;
+    flex: 1;
+    font-size: inherit;
+    background: $color-white-full;
+    border-radius: 20px;
+  }
+
+  &__button {
+    cursor: pointer;
+    visibility: hidden;
+    opacity: 0;
+    justify-content: center;
+    align-items: center;
+    background: $color-accent;
+    border: none;
+    border-radius: 50%;
+    width: 0px;
+    height: 40px;
+    place-items: center;
+    transition: margin, width, opacity 0.3s ease-in, visibility 0s 0.3s;
+
+    &_active {
+      display: grid;
+      opacity: 1;
+      visibility: visible;
+      width: 40px;
+      margin-left: 12px;
+      transition: margin, width, opacity 0.3s ease-in, visibility 0s 0s;
+    }
+  }
+
+  &__icon {
+    color: $color-white-full;
+    padding-left: 3px;
+    line-height: 40px;
+  }
+
+}

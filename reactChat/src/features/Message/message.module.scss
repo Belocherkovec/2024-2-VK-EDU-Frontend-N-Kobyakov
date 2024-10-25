@@ -1,0 +1,31 @@
+@use "@/app/styles/variables.scss" as *;
+
+.message {
+  list-style-type: none;
+  max-width: 90%;
+  margin: 4px 0;
+  padding: 4px 12px;
+  border-radius: 8px 8px 0 8px;
+  background: $color-accent;
+  color: $color-white-full;
+  transition: opacity 0.3s ease-in;
+
+  &_user {
+    background: $color-white-full;
+    color: $color-black;
+    align-self: flex-start;
+    border-radius: 8px 8px 8px 0;
+
+    .timestamp {
+      color: $color-gray-dark;
+    }
+  }
+}
+
+.timestamp {
+  font-size: 0.7em;
+  color: $color-white-blue;
+  opacity: 0.5;
+  display: block;
+  text-align: right;
+}
