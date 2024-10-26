@@ -1,14 +1,16 @@
 import { ReactNode } from 'react';
 
-export enum HeaderThemes {
-  COLORED = 'colored',
-  WHITE = 'white'
-}
+export const HeaderThemes = {
+  COLORED: 'colored',
+  WHITE: 'white'
+} as const;
+
+type THeaderThemes = (typeof HeaderThemes)[keyof typeof HeaderThemes];
 
 export interface IHeaderProps {
   centerNode?: ReactNode;
   className?: string;
   leftNode?: ReactNode;
   rightNode?: ReactNode;
-  theme?: HeaderThemes;
+  theme?: THeaderThemes;
 }

@@ -1,4 +1,4 @@
-import { MessageStatuses } from '@/shared/consts/statuses';
+import { TMessageStatuses } from '@/shared/consts/statuses';
 
 export interface IReactChat {
   avatar: string;
@@ -10,7 +10,7 @@ export interface IReactChat {
 export interface IReactChatMessage {
   author: string;
   sendDate: string;
-  status: MessageStatuses;
+  status: TMessageStatuses;
   text: string;
 }
 

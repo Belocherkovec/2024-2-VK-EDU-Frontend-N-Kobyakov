@@ -1,4 +1,3 @@
-import { Store } from '@/app/store';
 import { Header, HeaderThemes } from '@/features/Header';
 import {
   BackButton,
@@ -6,30 +5,29 @@ import {
   SearchInput
 } from '@/shared/components';
 import { SearchButton } from '@/shared/components';
-import { useContext, useState } from 'react';
+import { TEXTS } from '@/shared/consts/texts.ts';
 
 import styles from './ChatsHeader.module.scss';
+import { useChatsHeader } from './hooks/useChatsHeader.ts';
 
 export const ChatsHeader: React.FC<{
   username: string;
 }> = ({ username }) => {
-  const [isSearchMode, setIsSearchMode] = useState(false);
-
-  const { handleStoreUpdate } = useContext(Store);
-
-  const handleSearch = (value: string) => {
-    handleStoreUpdate('filter', value);
-  };
-
-  const handleBackClick = () => {
-    setIsSearchMode(!isSearchMode);
-  };
+  const {
+    handleBackClick,
+    handleSearch,
+    handleSearchModeChange,
+    isSearchMode
+  } = useChatsHeader();
 
   return (
     <Header
       {...{
         centerNode: isSearchMode ? (
-          <SearchInput onSearch={handleSearch} placeholder="Поиск..." />
+          <SearchInput
+            onSearch={handleSearch}
+            placeholder={TEXTS.placeholders.search}
+          />
         ) : (
           <h1>{username}</h1>
         ),
@@ -44,7 +42,7 @@ export const ChatsHeader: React.FC<{
         rightNode: isSearchMode ? null : (
           <SearchButton
             className={styles.header__button}
-            onClick={() => setIsSearchMode(!isSearchMode)}
+            onClick={handleSearchModeChange}
           />
         ),
         theme: HeaderThemes.COLORED

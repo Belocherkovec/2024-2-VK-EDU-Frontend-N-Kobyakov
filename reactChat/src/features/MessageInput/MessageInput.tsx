@@ -1,26 +1,15 @@
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import cn from 'classnames';
-import { useState } from 'react';
 
+import { UseMessageInput } from './hooks/useMessageInput.ts';
 import styles from './messageInput.module.scss';
 
 export const MessageInput: React.FC<{
   className?: string;
   onSend: (value: string) => void;
 }> = ({ className, onSend }) => {
-  const [value, setValue] = useState('');
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-    onSend(value);
-    setValue('');
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>): void => {
-    if (!e.shiftKey && e.key === 'Enter') {
-      handleSubmit(e);
-    }
-  };
+  const { handleKeyDown, handleSubmit, handleValueChange, value } =
+    UseMessageInput(onSend);
 
   return (
     <form
@@ -33,8 +22,7 @@ export const MessageInput: React.FC<{
       <textarea
         className={styles.form__input}
         name="message-text"
-        onChange={(e) => setValue(e.target.value)}
-        placeholder="Сначала вы должны ввести имя"
+        onChange={handleValueChange}
         rows={1}
         value={value}
       ></textarea>

@@ -1,5 +1,6 @@
 import { Store } from '@/app/store';
 import SwapHorizRoundedIcon from '@mui/icons-material/SwapHorizRounded';
+import cn from 'classnames';
 import { useContext } from 'react';
 
 import styles from './swapButton.module.scss';
@@ -15,7 +16,7 @@ export const SwapButton: React.FC = () => {
   };
 
   return (
-    <button className={isInverted ? styles.active : ''} onClick={handleClick}>
+    <button className={cn(isInverted && styles.active)} onClick={handleClick}>
       <SwapHorizRoundedIcon />
     </button>
   );

@@ -1,19 +1,5 @@
 @use "@/app/styles/variables.scss" as *;
 
-// почему то не применяется
-// и вызывает [WARNING] Unexpected "{"[css-syntax-error] при сборке!
-// :global {
-//   body: {
-//     background-color: red;
-//   }
-// }
-
-// и этот тоже
-:global(body) {
-  background-color: red;
-}
-
-
 .messages {
   display: flex;
   flex-direction: column;
@@ -26,6 +12,7 @@
   position: fixed;
   left: 0;
   width: 100%;
+  z-index: 1;
 }
 
 .header {

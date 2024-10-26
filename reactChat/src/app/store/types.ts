@@ -2,7 +2,7 @@ import { IStorage } from '@/shared/types';
 import { createContext } from 'react';
 
 export const Store = createContext<IStore>({
-  handleStoreUpdate: () => { },
+  handleStoreUpdate: () => {},
   store: {
     chat: {},
     filter: '',
