@@ -1,3 +1,4 @@
+import { TEXTS } from '@/shared/consts/texts.ts';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import cn from 'classnames';
 
@@ -23,6 +24,7 @@ export const MessageInput: React.FC<{
         className={styles.form__input}
         name="message-text"
         onChange={handleValueChange}
+        placeholder={TEXTS.placeholders.message}
         rows={1}
         value={value}
       ></textarea>

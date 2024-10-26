@@ -24,7 +24,7 @@ export const CheckMark: React.FC<{
       {messageStatus === MessageStatuses.STATUS_SEND && author === USERNAME && (
         <CheckRoundedIcon />
       )}
-      {author !== USERNAME && (
+      {author !== USERNAME && !!unreadMessage && (
         <span className={unreadClassName}>{unreadMessage}</span>
       )}
     </>

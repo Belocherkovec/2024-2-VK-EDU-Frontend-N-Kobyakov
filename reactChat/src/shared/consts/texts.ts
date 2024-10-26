@@ -11,6 +11,7 @@ export const TEXTS = {
   },
   lastActivity: { recently: 'был недавно' },
   placeholders: {
+    message: 'Сообщение...',
     search: 'Поиск...'
   }
 };

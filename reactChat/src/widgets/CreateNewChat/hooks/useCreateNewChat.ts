@@ -14,7 +14,7 @@ export const useCreateNewChat = () => {
     const newUserName = prompt(TEXTS.actions.createNewUser);
 
     if (!newUserName) {
-      throw new Error(TEXTS.errors.invalidNewUser);
+      return;
     }
 
     const newUserId = Object.keys(chat).length + 1;
