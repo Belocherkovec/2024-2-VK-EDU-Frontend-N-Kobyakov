@@ -1,26 +1,41 @@
-import jsPlugin from '@eslint/js';
+import js from '@eslint/js';
 import stylisticJsPlugin from '@stylistic/eslint-plugin-js';
 import perfectionistPlugin from 'eslint-plugin-perfectionist';
 import prettierPlugin from 'eslint-plugin-prettier';
+import eslintReact from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
 import globals from 'globals';
+import tseslint from 'typescript-eslint';
 
-export default [
-  jsPlugin.configs.recommended,
-  perfectionistPlugin.configs['recommended-natural'],
+export default tseslint.config(
+  { ignores: ['dist', 'node_modules'] },
   {
-    files: ['**/*.js'],
+    extends: [
+      js.configs.recommended,
+      ...tseslint.configs.recommended,
+      perfectionistPlugin.configs['recommended-natural']
+    ],
+    files: ['**/*.{js,ts}?(x)'],
     languageOptions: {
       globals: {
         ...globals.browser,
+        ...globals.node,
         ...globals.es2025,
         ...globals.jest
       }
     },
     plugins: {
-      prettier: prettierPlugin,
-      stylistic: stylisticJsPlugin
+      '@typescript-eslint': tseslint.plugin,
+      'prettier': prettierPlugin,
+      'react': eslintReact,
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh,
+      'stylistic': stylisticJsPlugin
     },
     rules: {
+      ...reactHooks.configs.recommended.rules,
+      '@typescript-eslint/no-explicit-any': 'warn',
       'accessor-pairs': 'error',
       'array-callback-return': 'error',
       'arrow-body-style': 'error',
@@ -47,11 +62,14 @@ export default [
       'prefer-destructuring': 'error',
       'prefer-template': 'error',
       'prettier/prettier': 'error',
+      'react-refresh/only-export-components': [
+        'warn',
+        { allowConstantExport: true }
+      ],
       'require-await': 'error',
       'stylistic/padding-line-between-statements': [
         'error',
         // В будущем заменить правила для 'import' на eslint-plugin-import.
-        // Сейчас eslint-plugin-import не работает на ESLint 9.
         { blankLine: 'always', next: '*', prev: 'import' },
         { blankLine: 'any', next: 'import', prev: 'import' },
         { blankLine: 'always', next: 'return', prev: '*' },
@@ -71,8 +89,5 @@ export default [
         }
       ]
     }
-  },
-  {
-    ignores: ['dist', 'node_modules']
   }
-];
+);

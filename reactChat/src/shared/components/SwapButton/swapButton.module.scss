@@ -1,0 +1,5 @@
+@use "@/app/styles/variables.scss" as *;
+
+.active {
+  color: $color-accent;
+}
