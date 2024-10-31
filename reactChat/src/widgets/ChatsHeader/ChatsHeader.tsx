@@ -1,14 +1,14 @@
 import { Header, HeaderThemes } from '@/features/Header';
+import { SearchInput } from '@/shared/components';
 import {
   BackButton,
   MenuRoundedButton,
-  SearchInput
-} from '@/shared/components';
-import { SearchButton } from '@/shared/components';
-import { TEXTS } from '@/shared/consts/texts.ts';
+  SearchButton
+} from '@/shared/components/buttons';
+import { TEXTS } from '@/shared/consts/texts';
 
-import styles from './ChatsHeader.module.scss';
 import { useChatsHeader } from './hooks/useChatsHeader.ts';
+import styles from './сhatsHeader.module.scss';
 
 export const ChatsHeader: React.FC<{
   username: string;

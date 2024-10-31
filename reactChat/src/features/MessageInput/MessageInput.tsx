@@ -1,4 +1,4 @@
-import { TEXTS } from '@/shared/consts/texts.ts';
+import { TEXTS } from '@/shared/consts/texts';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import cn from 'classnames';
 
@@ -6,11 +6,12 @@ import { UseMessageInput } from './hooks/useMessageInput.ts';
 import styles from './messageInput.module.scss';
 
 export const MessageInput: React.FC<{
+  chatId: number;
   className?: string;
   onSend: (value: string) => void;
-}> = ({ className, onSend }) => {
+}> = ({ chatId, className, onSend }) => {
   const { handleKeyDown, handleSubmit, handleValueChange, value } =
-    UseMessageInput(onSend);
+    UseMessageInput(onSend, chatId);
 
   return (
     <form

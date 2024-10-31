@@ -1,0 +1,73 @@
+@use "@/app/styles/variables" as *;
+
+.dialog {
+  height: 80px;
+  padding: 10px 16px;
+  color: $color-black;
+  display: flex;
+  align-items: center;
+  column-gap: 12px;
+  position: relative;
+  border-bottom: 1px solid $color-white-blue;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in;
+
+  &:hover {
+    background-color: $color-white-light;
+  }
+
+  &:active {
+    background-color: $color-white-blue;
+  }
+
+  &__avatar {
+    width: 60px;
+    height: 60px;
+  }
+
+  &__user {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    justify-content: space-evenly;
+    flex: 1;
+  }
+
+  &__username {
+    font-size: 1em;
+  }
+
+  &__last-message {
+    font-size: 0.9em;
+    color: $color-gray-dark;
+
+    & span {
+      color: $color-accent;
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    justify-content: space-around;
+    align-items: end;
+  }
+
+  &__last-message-time {
+    font-size: 0.9em;
+    color: $color-gray-light;
+  }
+
+  &__check-mark {
+    color: $color-accent;
+  }
+
+  &__unread {
+    color: $color-white-full;
+    background: $color-accent;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 0.8em;
+  }
+}

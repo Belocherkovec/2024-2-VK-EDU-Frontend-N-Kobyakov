@@ -1,5 +1,6 @@
 import { USERNAME } from '@/shared/consts';
 import { MessageStatuses } from '@/shared/consts/statuses';
+import { TEXTS } from '@/shared/consts/texts.ts';
 import { ChatType } from '@/shared/types';
 import { AvatarGenerator } from 'random-avatar-generator';
 
@@ -8,6 +9,8 @@ export const generator = new AvatarGenerator();
 export const templateChatsData: ChatType = {
   1: {
     avatar: generator.generateRandomAvatar(),
+    draftMessage: TEXTS.empty,
+    fullName: 'Дженнифер Эшли',
     messages: [
       {
         author: USERNAME,
@@ -34,11 +37,12 @@ export const templateChatsData: ChatType = {
         text: `Хорошо!`
       }
     ],
-    userId: 1,
-    userName: 'Дженнифер Эшли'
+    userId: 1
   },
   2: {
     avatar: generator.generateRandomAvatar(),
+    draftMessage: TEXTS.empty,
+    fullName: 'Антон Иванов',
     messages: [
       {
         author: USERNAME,
@@ -59,11 +63,12 @@ export const templateChatsData: ChatType = {
         text: 'Тоха, ты где?'
       }
     ],
-    userId: 2,
-    userName: 'Антон Иванов'
+    userId: 2
   },
   3: {
     avatar: generator.generateRandomAvatar(),
+    draftMessage: TEXTS.empty,
+    fullName: 'Серёга (Должен 2000 ₽)',
     messages: [
       {
         author: USERNAME,
@@ -84,11 +89,12 @@ export const templateChatsData: ChatType = {
         text: 'Серег, где бабло моё?!'
       }
     ],
-    userId: 3,
-    userName: 'Серёга (Должен 2000 ₽)'
+    userId: 3
   },
   4: {
     avatar: generator.generateRandomAvatar(),
+    draftMessage: TEXTS.empty,
+    fullName: 'Сэм с Нижнего',
     messages: [
       {
         author: USERNAME,
@@ -97,7 +103,6 @@ export const templateChatsData: ChatType = {
         text: 'Привет, Сэм!'
       }
     ],
-    userId: 4,
-    userName: 'Сэм с Нижнего'
+    userId: 4
   }
 };

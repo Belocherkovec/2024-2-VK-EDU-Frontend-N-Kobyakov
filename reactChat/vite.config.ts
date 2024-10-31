@@ -1,4 +1,5 @@
 import react from '@vitejs/plugin-react';
+import autoprefixer from 'autoprefixer';
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
 
@@ -13,6 +14,9 @@ export default defineConfig(({ command }) => {
   return {
     base,
     css: {
+      postcss: {
+        plugins: [autoprefixer]
+      },
       preprocessorOptions: {
         scss: {
           api: 'modern-compiler'
@@ -27,6 +31,6 @@ export default defineConfig(({ command }) => {
     },
     server: {
       open: true
-    },
-  }
+    }
+  };
 });

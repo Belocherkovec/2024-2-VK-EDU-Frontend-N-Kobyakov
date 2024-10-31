@@ -1,7 +1,7 @@
 import { AppRouter } from '@/app/routers';
 import { StoreProvider } from '@/app/store';
 
-import './App.scss';
+import './app.scss';
 
 export const App = () => (
   <StoreProvider>
