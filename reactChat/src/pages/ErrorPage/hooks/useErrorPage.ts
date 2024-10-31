@@ -21,6 +21,7 @@ export const useErrorPage = () => {
   const handleClearButtonClick = () => {
     localStorage.clear();
     navigate('/');
+    location.reload();
   };
 
   return { errorMessage, handleClearButtonClick };

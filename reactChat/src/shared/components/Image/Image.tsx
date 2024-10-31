@@ -1,6 +1,6 @@
 import { Loader } from '@/shared/components/Loader';
 import cn from 'classnames';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import styles from './image.module.scss';
 
@@ -10,9 +10,13 @@ export const Image: React.FC<{
   src: string;
 }> = ({ alt, className, src }) => {
   const [isLoaded, setIsLoaded] = useState(false);
+  const prevSrc = useRef(src);
 
   useEffect(() => {
-    setIsLoaded(false);
+    if (prevSrc.current !== src) {
+      setIsLoaded(false);
+      prevSrc.current = src;
+    }
   }, [src]);
 
   return (
