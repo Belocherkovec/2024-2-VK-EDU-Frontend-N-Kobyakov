@@ -18,6 +18,12 @@
     border-radius: 8px;
     background-color: $color-accent;
     color: $color-white-full;
+
+    &._noAccent {
+      color: $color-accent;
+      border: 2px solid $color-accent;
+      background-color: transparent;
+    }
   }
 
   &__details {
