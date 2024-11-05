@@ -1,27 +1,31 @@
-import { Chats } from '@/pages/Chats';
-import { Dialog } from '@/pages/Dialog';
-import { useEffect, useState } from 'react';
+import { ChatsPage } from '@/pages';
+import { ErrorPage } from '@/pages';
+import { DialogPage } from '@/pages';
+import { EditProfilePage } from '@/pages';
+import { NotFoundPage } from '@/pages';
+import { createHashRouter, RouterProvider } from 'react-router-dom';
 
-const pages = {
-  default: <Chats />,
-  dialog: <Dialog />
-};
+const router = createHashRouter([
+  {
+    element: <ChatsPage />,
+    errorElement: <ErrorPage />,
+    path: '/'
+  },
+  {
+    element: <DialogPage />,
+    errorElement: <ErrorPage />,
+    path: '/dialog/:chatId'
+  },
+  {
+    element: <EditProfilePage />,
+    errorElement: <ErrorPage />,
+    path: '/profile/edit/:profileId'
+  },
+  {
+    element: <NotFoundPage />,
+    errorElement: <ErrorPage />,
+    path: '*'
+  }
+]);
 
-const getPageName = (): string => location.hash.slice(1);
-
-export const AppRouter: React.FC = () => {
-  const [page, setPage] = useState<string>(() => getPageName());
-  const CurrentPage = page.includes('dialog') ? pages.dialog : pages.default;
-
-  useEffect(() => {
-    const handleHashChange = () => {
-      setPage(getPageName());
-    };
-
-    window.addEventListener('hashchange', handleHashChange);
-
-    return () => window.removeEventListener('hashchange', handleHashChange);
-  }, []);
-
-  return <main>{CurrentPage}</main>;
-};
+export const AppRouter = () => <RouterProvider router={router} />;

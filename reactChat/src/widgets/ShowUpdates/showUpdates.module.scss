@@ -1,0 +1,20 @@
+@use "@/app/styles/variables.scss" as *;
+
+.title {
+  margin-top: 7px;
+  margin-bottom: 24px;
+}
+
+.subtitle {
+  margin-bottom: 12px;
+  color: $color-accent;
+}
+
+.list {
+  list-style: disc;
+  padding-left: 16px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+  color: rgba(0, 0, 0, 0.8);
+}

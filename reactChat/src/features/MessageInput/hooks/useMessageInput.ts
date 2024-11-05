@@ -1,16 +1,34 @@
-import { TEXTS } from '@/shared/consts/texts.ts';
-import { useState } from 'react';
+import { Store } from '@/app/store';
+import { TEXTS } from '@/shared/consts/texts';
+import { useContext, useState } from 'react';
 
-export const UseMessageInput = (onSend: (value: string) => void) => {
-  const [value, setValue] = useState(TEXTS.empty);
+export const UseMessageInput = (
+  onSend: (value: string) => void,
+  chatId: number
+) => {
+  const {
+    handleStoreUpdate,
+    store: {
+      chat: {
+        [chatId]: { draftMessage }
+      }
+    }
+  } = useContext(Store);
 
-  const handleValueChange = (e: React.ChangeEvent<HTMLTextAreaElement>) =>
+  const [value, setValue] = useState(draftMessage);
+
+  const handleValueChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
+    handleStoreUpdate(`chat.${chatId}.draftMessage`, e.target.value);
+  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    onSend(value);
-    setValue(TEXTS.empty);
+
+    if (value) {
+      onSend(value);
+      setValue(TEXTS.empty);
+    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>): void => {

@@ -1,7 +1,9 @@
-export { BackButton } from './BackButton';
+export { Image } from './Image';
 
-export { MenuRoundedButton } from './MenuRoundedButton';
+export { Input } from './Input';
 
-export { SearchButton } from './SearchButton';
+export { Loader } from './Loader';
 
 export { SearchInput } from './SearchInput';
+
+export { StatusMark } from './StatusMark';

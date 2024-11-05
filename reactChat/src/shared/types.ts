@@ -2,9 +2,12 @@ import { TMessageStatuses } from '@/shared/consts/statuses';
 
 export interface IReactChat {
   avatar: string;
+  bio?: string;
+  draftMessage: string;
+  fullName: string;
   messages: Array<IReactChatMessage>;
   userId: number;
-  userName: string;
+  userName?: string;
 }
 
 export interface IReactChatMessage {

@@ -1,5 +1,5 @@
 import { IStore } from '@/app/store/types';
-import { TEXTS } from '@/shared/consts/texts.ts';
+import { TEXTS } from '@/shared/consts/texts';
 import { getLocalStorageData, setLocalStorageData } from '@/shared/utils';
 import { useState } from 'react';
 
