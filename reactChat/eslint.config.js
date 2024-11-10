@@ -39,7 +39,7 @@ export default tseslint.config(
       'accessor-pairs': 'error',
       'array-callback-return': 'error',
       'arrow-body-style': 'error',
-      'camelcase': 'error',
+      'camelcase': 'warn',
       'consistent-return': 'error',
       'curly': 'error',
       'dot-notation': 'error',

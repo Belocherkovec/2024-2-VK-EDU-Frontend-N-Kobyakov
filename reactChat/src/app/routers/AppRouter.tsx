@@ -1,13 +1,10 @@
-import { ChatsPage } from '@/pages';
-import { ErrorPage } from '@/pages';
-import { DialogPage } from '@/pages';
-import { EditProfilePage } from '@/pages';
-import { NotFoundPage } from '@/pages';
+import { DialogPage, EditProfilePage, ErrorPage, NotFoundPage } from '@/pages';
+import { AuthPage } from '@/pages/AuthPage';
 import { createHashRouter, RouterProvider } from 'react-router-dom';
 
 const router = createHashRouter([
   {
-    element: <ChatsPage />,
+    element: <AuthPage />,
     errorElement: <ErrorPage />,
     path: '/'
   },

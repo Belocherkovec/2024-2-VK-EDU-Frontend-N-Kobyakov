@@ -1,6 +1,6 @@
-import { TEXTS } from '@/shared/consts/texts.ts';
+import { useInput } from '@/shared/components/Input/hooks/useInput';
+import { VisibilityOffRounded, VisibilityRounded } from '@mui/icons-material';
 import cn from 'classnames';
-import { useState } from 'react';
 
 import styles from './input.module.scss';
 
@@ -8,47 +8,94 @@ export const Input: React.FC<{
   className?: string;
   id?: string;
   isDisabled?: boolean;
+  label?: string;
+  maxLength?: number;
+  minLength?: number;
   name?: string;
   onChange?: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
+  onValidChange?: (value: boolean) => void;
+  pattern?: string;
   placeholder?: string;
+  required?: boolean;
   resize?: boolean;
+  title?: string;
   type?: string;
   value?: string;
 }> = ({
   className,
   id,
   isDisabled = false,
+  label,
+  maxLength,
+  minLength,
   name,
   onChange,
+  onValidChange,
+  pattern,
   placeholder,
+  required = false,
   resize = false,
+  title,
   type = 'text',
   value,
   ...props
 }) => {
-  const [innerValue, setInnerValue] = useState(TEXTS.empty);
-
-  const TagName = type === 'textarea' ? 'textarea' : 'input';
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ): void => {
-    setInnerValue(e.target.value);
-  };
+  const {
+    errorMessages,
+    handleBlur,
+    handleChange,
+    handleTypeChange,
+    innerType,
+    innerValue,
+    inputRef,
+    TagName
+  } = useInput(type, onChange, onValidChange);
 
   return (
-    <TagName
-      className={cn(className, !resize && styles.resizeDisable)}
-      id={id}
-      name={name}
-      onChange={onChange || handleChange}
-      type={type}
-      value={value || innerValue}
-      {...props}
-      disabled={isDisabled}
-      placeholder={placeholder}
-    />
+    <label className={styles.input}>
+      <span className={cn(styles.input__label, required && styles._required)}>
+        {label}
+      </span>
+      <TagName
+        className={cn(
+          styles.input__input,
+          className,
+          !resize && styles._resizeDisable,
+          errorMessages.length && styles._error,
+          type === 'password' && styles._password
+        )}
+        id={id}
+        name={name}
+        onBlur={handleBlur}
+        onChange={handleChange}
+        type={innerType}
+        value={value || innerValue}
+        {...props}
+        disabled={isDisabled}
+        maxLength={maxLength}
+        minLength={minLength}
+        pattern={pattern}
+        placeholder={placeholder}
+        ref={inputRef}
+        required={required}
+        title={title}
+      />
+      {type === 'password' && (
+        <button className={styles.input__changeShow} onClick={handleTypeChange}>
+          {innerType === 'password' ? (
+            <VisibilityRounded />
+          ) : (
+            <VisibilityOffRounded />
+          )}
+        </button>
+      )}
+      {errorMessages.map((message, idx) => (
+        <span className={styles.input__errorMessage} key={idx}>
+          {message}
+        </span>
+      ))}
+    </label>
   );
 };

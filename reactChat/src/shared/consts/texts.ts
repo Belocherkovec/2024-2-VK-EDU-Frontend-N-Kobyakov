@@ -18,6 +18,11 @@ export const TEXTS = {
   },
   lastActivity: { recently: 'был недавно' },
   pages: {
+    auth: {
+      action: 'Войти',
+      login: 'Логин',
+      password: 'Пароль'
+    },
     errorPage: {
       callToAction:
         'Чтобы ошибка исчезла, попробуйте нажать на кнопку "Обновить локальное хранилище"',
