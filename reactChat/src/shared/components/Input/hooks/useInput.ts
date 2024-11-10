@@ -72,9 +72,7 @@ export const useInput = (
     setInnerValue(e.target.value);
   };
 
-  const handleTypeChange = (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault();
-
+  const handleTypeChange = () => {
     if (innerType === 'text') {
       setInnerType('password');
     } else {

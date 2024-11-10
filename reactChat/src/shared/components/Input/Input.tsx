@@ -89,7 +89,11 @@ export const Input: React.FC<IInputProps> = ({
         title={title}
       />
       {type === 'password' && (
-        <button className={styles.input__changeShow} onClick={handleTypeChange}>
+        <button
+          className={styles.input__changeShow}
+          onClick={handleTypeChange}
+          type="button"
+        >
           {innerType === 'password' ? (
             <VisibilityRounded />
           ) : (

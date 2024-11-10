@@ -16,7 +16,7 @@ export const AuthPage: React.FC = () => {
     if (isAuthorized) {
       navigate(RoutePaths.chatsPage);
     }
-  }, []);
+  }, [isAuthorized]);
 
   return (
     <section className={styles.auth}>

@@ -1,3 +1,4 @@
+import { PrivateRoute } from '@/app/routers/PrivateRoute';
 import { setUserAuthorized } from '@/entities/User';
 import {
   ChatsPage,
@@ -19,17 +20,17 @@ const router = createHashRouter([
     path: RoutePaths.authPage
   },
   {
-    element: <ChatsPage />,
+    element: <PrivateRoute children={<ChatsPage />} />,
     errorElement: <ErrorPage />,
     path: RoutePaths.chatsPage
   },
   {
-    element: <DialogPage />,
+    element: <PrivateRoute children={<DialogPage />} />,
     errorElement: <ErrorPage />,
     path: RoutePaths.dialogPage
   },
   {
-    element: <EditProfilePage />,
+    element: <PrivateRoute children={<EditProfilePage />} />,
     errorElement: <ErrorPage />,
     path: RoutePaths.editProfilePage
   },
