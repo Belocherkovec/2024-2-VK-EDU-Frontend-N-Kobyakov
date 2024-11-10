@@ -1,10 +1,9 @@
-import { Message } from '@/features';
-import { MessageInput } from '@/features';
+import { Message, MessageInput } from '@/features';
 import { timeFormatter } from '@/shared/utils/timeFormatter';
 import { DialogHeader } from '@/widgets';
 
 import styles from './dialogPage.module.scss';
-import { useDialogPage } from './hooks/useDialogPage.ts';
+import { useDialogPage } from './hooks/useDialogPage';
 
 export const DialogPage = () => {
   const {

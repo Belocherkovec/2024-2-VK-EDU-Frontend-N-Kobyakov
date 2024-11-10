@@ -1,4 +1,4 @@
-import { useErrorPage } from '@/pages/ErrorPage/hooks/useErrorPage.ts';
+import { useErrorPage } from '@/pages/ErrorPage/hooks/useErrorPage';
 import { TEXTS } from '@/shared/consts/texts';
 import ErrorOutlineRoundedIcon from '@mui/icons-material/ErrorOutlineRounded';
 import cn from 'classnames';

@@ -7,7 +7,7 @@ import {
 } from '@/shared/components/buttons';
 import { TEXTS } from '@/shared/consts/texts';
 
-import { useChatsHeader } from './hooks/useChatsHeader.ts';
+import { useChatsHeader } from './hooks/useChatsHeader';
 import styles from './сhatsHeader.module.scss';
 
 export const ChatsHeader: React.FC<{

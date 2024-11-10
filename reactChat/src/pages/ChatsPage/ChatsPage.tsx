@@ -1,8 +1,7 @@
-import { useChatsPage } from '@/pages/ChatsPage/hooks/useChatsPage.ts';
+import { useChatsPage } from '@/pages/ChatsPage/hooks/useChatsPage';
 import { NewChatButton } from '@/shared/components/buttons';
 import { USERNAME } from '@/shared/consts';
-import { ChatsHeader, ShowUpdates } from '@/widgets';
-import { Chat } from '@/widgets';
+import { Chat, ChatsHeader, ShowUpdates } from '@/widgets';
 
 export const ChatsPage = () => {
   const { chat, filter, handleCloseShowUpdates, isShowUpdates } =

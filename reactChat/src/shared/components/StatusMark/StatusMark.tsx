@@ -1,4 +1,4 @@
-import { MessageStatuses, TMessageStatuses } from '@/shared/consts/statuses.ts';
+import { MessageStatuses, TMessageStatuses } from '@/shared/consts/statuses';
 import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 import DoneAllRoundedIcon from '@mui/icons-material/DoneAllRounded';
 

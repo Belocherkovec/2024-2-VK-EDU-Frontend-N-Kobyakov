@@ -1,11 +1,10 @@
-import { Image } from '@/shared/components';
-import { Input } from '@/shared/components';
+import { Image, Input } from '@/shared/components';
 import { TEXTS } from '@/shared/consts/texts';
 import { EditProfileHeader } from '@/widgets/EditProfileHeader';
 import cn from 'classnames';
 
 import styles from './editProfilePage.module.scss';
-import { useEditProfilePage } from './hooks/useEditProfilePage.ts';
+import { useEditProfilePage } from './hooks/useEditProfilePage';
 
 export const EditProfilePage = () => {
   const {

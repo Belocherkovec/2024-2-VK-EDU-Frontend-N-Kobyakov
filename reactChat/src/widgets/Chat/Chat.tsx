@@ -8,7 +8,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import styles from './chat.module.scss';
-import { useChat } from './hooks/useChat.ts';
+import { useChat } from './hooks/useChat';
 
 export const Chat: React.FC<{ userId: number }> = ({ userId }) => {
   const { avatar, draftMessage, fullName, lastMessage, unreadMessage } =

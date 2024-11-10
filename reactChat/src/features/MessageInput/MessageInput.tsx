@@ -2,7 +2,7 @@ import { TEXTS } from '@/shared/consts/texts';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import cn from 'classnames';
 
-import { UseMessageInput } from './hooks/useMessageInput.ts';
+import { UseMessageInput } from './hooks/useMessageInput';
 import styles from './messageInput.module.scss';
 
 export const MessageInput: React.FC<{
