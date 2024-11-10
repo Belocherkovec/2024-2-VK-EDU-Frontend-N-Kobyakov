@@ -1,10 +1,14 @@
-import { AppRouter } from '@/app/routers';
-import { StoreProvider } from '@/app/store';
+import { Provider } from 'react-redux';
 
 import './app.scss';
+import { StoreProvider } from './oldStore';
+import { AppRouter } from './routers';
+import { store } from './store';
 
 export const App = () => (
   <StoreProvider>
-    <AppRouter />
+    <Provider store={store}>
+      <AppRouter />
+    </Provider>
   </StoreProvider>
 );

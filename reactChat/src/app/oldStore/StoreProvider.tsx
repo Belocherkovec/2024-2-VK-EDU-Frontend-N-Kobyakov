@@ -1,7 +1,7 @@
-import { Store } from '@/app/store';
 import { ReactNode } from 'react';
 
 import { useStoreProvider } from './hooks/useStoreProvider';
+import { Store } from './types';
 
 export const StoreProvider: React.FC<{ children: ReactNode }> = ({
   children

@@ -1,6 +1,6 @@
 import { CheckMark } from '@/features';
 import { Image } from '@/shared/components';
-import { USERNAME } from '@/shared/consts';
+import { RoutePaths, USERNAME } from '@/shared/consts';
 import { TEXTS } from '@/shared/consts/texts';
 import { getFormattedDate } from '@/shared/utils/timeFormatter';
 import cn from 'classnames';
@@ -15,7 +15,10 @@ export const Chat: React.FC<{ userId: number }> = ({ userId }) => {
     useChat(userId);
 
   return (
-    <Link className={styles.dialog} to={`/dialog/${userId}`}>
+    <Link
+      className={styles.dialog}
+      to={RoutePaths.dialogPage.replace(':chatId', userId.toString())}
+    >
       <Image
         alt={TEXTS.images.avatar}
         className={cn(styles.dialog__avatar, styles.loading)}

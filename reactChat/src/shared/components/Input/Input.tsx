@@ -4,10 +4,11 @@ import cn from 'classnames';
 
 import styles from './input.module.scss';
 
-export const Input: React.FC<{
+interface IInputProps {
   className?: string;
   id?: string;
   isDisabled?: boolean;
+  isError?: boolean;
   label?: string;
   maxLength?: number;
   minLength?: number;
@@ -23,10 +24,13 @@ export const Input: React.FC<{
   title?: string;
   type?: string;
   value?: string;
-}> = ({
+}
+
+export const Input: React.FC<IInputProps> = ({
   className,
   id,
   isDisabled = false,
+  isError = false,
   label,
   maxLength,
   minLength,
@@ -46,6 +50,7 @@ export const Input: React.FC<{
     errorMessages,
     handleBlur,
     handleChange,
+    handleKeyUp,
     handleTypeChange,
     innerType,
     innerValue,
@@ -63,15 +68,16 @@ export const Input: React.FC<{
           styles.input__input,
           className,
           !resize && styles._resizeDisable,
-          errorMessages.length && styles._error,
+          (errorMessages.length || isError) && styles._error,
           type === 'password' && styles._password
         )}
         id={id}
         name={name}
         onBlur={handleBlur}
         onChange={handleChange}
+        onKeyUp={handleKeyUp}
         type={innerType}
-        value={value || innerValue}
+        value={value ?? innerValue}
         {...props}
         disabled={isDisabled}
         maxLength={maxLength}

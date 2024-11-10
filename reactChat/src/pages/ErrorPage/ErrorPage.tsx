@@ -1,4 +1,5 @@
 import { useErrorPage } from '@/pages/ErrorPage/hooks/useErrorPage';
+import { RoutePaths } from '@/shared/consts';
 import { TEXTS } from '@/shared/consts/texts';
 import ErrorOutlineRoundedIcon from '@mui/icons-material/ErrorOutlineRounded';
 import cn from 'classnames';
@@ -20,7 +21,10 @@ export const ErrorPage: React.FC = () => {
       <button className={styles.error__button} onClick={handleClearButtonClick}>
         {TEXTS.buttons.clearStorage}
       </button>
-      <Link className={cn(styles.error__button, styles._noAccent)} to={'/'}>
+      <Link
+        className={cn(styles.error__button, styles._noAccent)}
+        to={RoutePaths.chatsPage}
+      >
         {TEXTS.buttons.toMain}
       </Link>
     </section>

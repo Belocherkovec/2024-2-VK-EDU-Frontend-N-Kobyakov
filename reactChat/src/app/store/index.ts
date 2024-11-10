@@ -1,5 +1,3 @@
-export { StoreProvider } from './StoreProvider';
+export { store } from './store';
 
-export { Store } from './types';
-
-export type { IStore } from './types';
+export type { AppDispatch, RootState } from './store';

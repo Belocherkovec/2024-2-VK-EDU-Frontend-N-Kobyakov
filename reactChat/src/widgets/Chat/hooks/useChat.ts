@@ -1,4 +1,4 @@
-import { Store } from '@/app/store';
+import { Store } from '@/app/oldStore';
 import { USERNAME } from '@/shared/consts';
 import { MessageStatuses } from '@/shared/consts/statuses';
 import { IReactChatMessage } from '@/shared/types';

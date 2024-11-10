@@ -1,4 +1,4 @@
-import { Store } from '@/app/store';
+import { Store } from '@/app/oldStore';
 import { generator } from '@/shared/consts';
 import { TEXTS } from '@/shared/consts/texts';
 import { IReactChat } from '@/shared/types';

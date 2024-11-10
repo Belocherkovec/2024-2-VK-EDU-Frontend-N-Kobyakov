@@ -1,4 +1,4 @@
-import { Store } from '@/app/store';
+import { Store } from '@/app/oldStore';
 import { TEXTS } from '@/shared/consts/texts';
 import { useContext, useState } from 'react';
 

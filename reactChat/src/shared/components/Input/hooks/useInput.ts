@@ -8,7 +8,8 @@ interface IUseInputReturnProps {
   handleChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
-  handleTypeChange: () => void;
+  handleKeyUp: () => void;
+  handleTypeChange: (e: React.MouseEvent<HTMLButtonElement>) => void;
   innerType: string;
   innerValue: string;
   inputRef: React.MutableRefObject<any>;
@@ -22,12 +23,15 @@ export const useInput = (
   ) => void,
   onValidChange?: (value: boolean) => void
 ): IUseInputReturnProps => {
-  const TagName = type === 'textarea' ? 'textarea' : 'input';
-
   const [innerValue, setInnerValue] = useState(TEXTS.empty);
   const [innerType, setInnerType] = useState(type);
   const [errorMessages, setErrorMessages] = useState<string[]>([]);
+
   const inputRef = useRef<any>(null);
+
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const TagName = type === 'textarea' ? 'textarea' : 'input';
 
   const formValidate = () => {
     if (!inputRef.current) {
@@ -50,7 +54,13 @@ export const useInput = (
     setErrorMessages(errorMessages);
   };
 
-  const handleBlur = () => formValidate();
+  const handleBlur = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    formValidate();
+  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -62,7 +72,9 @@ export const useInput = (
     setInnerValue(e.target.value);
   };
 
-  const handleTypeChange = () => {
+  const handleTypeChange = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
     if (innerType === 'text') {
       setInnerType('password');
     } else {
@@ -70,10 +82,21 @@ export const useInput = (
     }
   };
 
+  const handleKeyUp = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    timeoutRef.current = setTimeout(() => {
+      formValidate();
+    }, 1000);
+  };
+
   return {
     errorMessages,
     handleBlur,
     handleChange,
+    handleKeyUp,
     handleTypeChange,
     innerType,
     innerValue,

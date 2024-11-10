@@ -1,4 +1,4 @@
-import { Store } from '@/app/store';
+import { Store } from '@/app/oldStore';
 import { useContext, useState } from 'react';
 
 export const useChatsHeader = () => {

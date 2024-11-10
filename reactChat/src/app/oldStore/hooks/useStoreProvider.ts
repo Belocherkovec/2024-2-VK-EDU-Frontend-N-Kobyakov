@@ -1,4 +1,4 @@
-import { IStore } from '@/app/store/types';
+import { IStore } from '@/app/oldStore/types';
 import { TEXTS } from '@/shared/consts/texts';
 import { getLocalStorageData, setLocalStorageData } from '@/shared/utils';
 import { useState } from 'react';
