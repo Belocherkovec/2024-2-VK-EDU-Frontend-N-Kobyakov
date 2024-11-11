@@ -1,0 +1,1 @@
+export { getChats } from './chats';

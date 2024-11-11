@@ -1,4 +1,4 @@
-import { $api } from '@/shared/api';
+import axios from 'axios';
 
 import { IAuthResponse } from './types';
 
@@ -7,8 +7,8 @@ export const login = (
   password: string,
   callback?: (isAuth: boolean) => void
 ): void => {
-  $api
-    .post<IAuthResponse>('auth/', {
+  axios
+    .post<IAuthResponse>(`${import.meta.env.VITE_PUBLIC_API}auth/`, {
       password,
       username
     })

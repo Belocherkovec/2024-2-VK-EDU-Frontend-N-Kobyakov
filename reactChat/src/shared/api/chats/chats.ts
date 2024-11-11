@@ -1,20 +1,15 @@
 import { $api } from '@/shared/api';
 import { IGetUserResponse } from '@/shared/api/users/types';
 import { buildUrlWithQuery } from '@/shared/utils/urlUtils';
-import { AxiosResponse } from 'axios';
 
-type IGetUsersQueryParams = {
+type IGetChatsQueryParams = {
   page?: number;
   page_size?: number;
   search?: string;
 };
 
-export const getUsers = (
-  pageSize?: number,
-  page?: number,
-  search?: string
-): Promise<AxiosResponse<IGetUserResponse>> => {
-  const queryParams: IGetUsersQueryParams = {};
+export const getChats = (pageSize?: number, page?: number, search?: string) => {
+  const queryParams: IGetChatsQueryParams = {};
 
   if (pageSize) {
     queryParams.page_size = pageSize;
@@ -28,5 +23,5 @@ export const getUsers = (
     queryParams.search = search;
   }
 
-  return $api.get<IGetUserResponse>(buildUrlWithQuery('users/', queryParams));
+  return $api.get<IGetUserResponse>(buildUrlWithQuery('chats/', queryParams));
 };
