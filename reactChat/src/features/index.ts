@@ -1,7 +1,5 @@
 export { AuthForm } from './AuthForm';
 
-export { CheckMark } from './CheckMark';
-
 export { Header } from './Header';
 
 export { Message } from './Message';

@@ -1,5 +1,4 @@
 import { PrivateRoute } from '@/app/routers/PrivateRoute';
-import { setUserAuthorized } from '@/entities/User';
 import {
   ChatsPage,
   DialogPage,
@@ -8,10 +7,7 @@ import {
   NotFoundPage
 } from '@/pages';
 import { AuthPage } from '@/pages/AuthPage';
-import { setupRefreshInterceptor } from '@/shared/api';
 import { RoutePaths } from '@/shared/consts';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 import { createHashRouter, RouterProvider } from 'react-router-dom';
 
 const router = createHashRouter([
@@ -42,16 +38,4 @@ const router = createHashRouter([
   }
 ]);
 
-export const AppRouter = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    setupRefreshInterceptor(dispatch);
-
-    if (localStorage.getItem('token')) {
-      dispatch(setUserAuthorized());
-    }
-  }, []);
-
-  return <RouterProvider router={router} />;
-};
+export const AppRouter = () => <RouterProvider router={router} />;

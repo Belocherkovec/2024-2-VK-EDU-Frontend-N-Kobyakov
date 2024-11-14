@@ -5,7 +5,7 @@ export interface IGetUserResponse {
   results: IUser[];
 }
 
-interface IUser {
+export interface IUser {
   avatar: null | string;
   bio: string;
   first_name: string;

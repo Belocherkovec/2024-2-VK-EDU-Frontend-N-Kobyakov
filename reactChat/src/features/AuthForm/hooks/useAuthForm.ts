@@ -1,6 +1,7 @@
 import { AppDispatch } from '@/app/store';
-import { setUserAuthorized } from '@/entities/User';
+import { setUserAuthorized, setUserInfo } from '@/entities/User';
 import { login as loginRequest } from '@/shared/api/auth';
+import { getCurrentUser } from '@/shared/api/user';
 import { TEXTS } from '@/shared/consts';
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -46,6 +47,7 @@ export const useAuthForm = () => {
   const handleLoginRequest = (isAuth: boolean) => {
     if (isAuth) {
       dispatch(setUserAuthorized());
+      getCurrentUser().then(({ data }) => dispatch(setUserInfo(data)));
     } else {
       setIsLoginError(true);
     }

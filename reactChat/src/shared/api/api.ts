@@ -1,5 +1,5 @@
 import { AppDispatch } from '@/app/store';
-import { reset } from '@/entities/User';
+import { resetUserState } from '@/entities/User';
 import { IAuthResponse } from '@/shared/api/auth';
 import axios from 'axios';
 
@@ -17,7 +17,7 @@ export const setupRefreshInterceptor = (dispatch: AppDispatch) => {
   const handleRefreshError = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('refresh');
-    dispatch(reset());
+    dispatch(resetUserState());
   };
 
   $api.interceptors.response.use(

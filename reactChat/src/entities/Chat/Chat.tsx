@@ -1,5 +1,4 @@
-import { CheckMark } from '@/features';
-import { Image } from '@/shared/components';
+import { CheckMark, Image } from '@/shared/components';
 import { RoutePaths, USERNAME } from '@/shared/consts';
 import { TEXTS } from '@/shared/consts/texts';
 import { getFormattedDate } from '@/shared/utils/timeFormatter';

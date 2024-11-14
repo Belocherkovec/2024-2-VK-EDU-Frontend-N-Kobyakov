@@ -1,13 +1,17 @@
-import { $api } from '@/shared/api';
-import { IGetUserResponse } from '@/shared/api/users/types';
 import { buildUrlWithQuery } from '@/shared/utils/urlUtils';
 import { AxiosResponse } from 'axios';
+
+import { $api } from '../api';
+import { IGetUserResponse, IUser } from './types';
 
 type IGetUsersQueryParams = {
   page?: number;
   page_size?: number;
   search?: string;
 };
+
+export const getCurrentUser = (): Promise<AxiosResponse<IUser>> =>
+  $api.get<IUser>('user/current/');
 
 export const getUsers = (
   pageSize?: number,

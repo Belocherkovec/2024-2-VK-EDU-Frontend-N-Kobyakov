@@ -1,3 +1,5 @@
+export { CheckMark } from './CheckMark';
+
 export { Image } from './Image';
 
 export { Input } from './Input';
