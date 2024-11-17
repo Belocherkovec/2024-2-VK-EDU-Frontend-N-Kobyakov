@@ -1,4 +1,4 @@
-import { Image } from '@/shared/components';
+import { Avatar } from '@/shared/components';
 import { TEXTS } from '@/shared/consts/texts';
 import { useNavigate } from 'react-router-dom';
 
@@ -17,7 +17,7 @@ export const UserInfo: React.FC<{
 
   return (
     <div className={styles.user} onClick={handleClick}>
-      <Image
+      <Avatar
         alt={TEXTS.images.avatar}
         className={styles.user__avatar}
         src={avatar}

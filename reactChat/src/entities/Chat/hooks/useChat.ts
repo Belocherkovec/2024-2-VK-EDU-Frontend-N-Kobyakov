@@ -1,30 +1,13 @@
-import { Store } from '@/app/oldStore';
-import { USERNAME } from '@/shared/consts';
-import { MessageStatuses } from '@/shared/consts/statuses';
-import { IReactChatMessage } from '@/shared/types';
-import { useContext } from 'react';
+import { RootState } from '@/app/store';
+import { selectCurrentChat } from '@/entities/Chat/model';
+import { useSelector } from 'react-redux';
 
-export const useChat = (userId: number) => {
-  const {
-    store: {
-      chat: {
-        [userId]: { avatar, draftMessage, fullName, messages }
-      }
-    }
-  } = useContext(Store);
+export const useChat = (userId: string) => {
+  const chatData = useSelector((state: RootState) =>
+    selectCurrentChat(state, userId)
+  );
 
-  const lastMessage = messages.at(-1);
+  const { avatar, title } = chatData;
 
-  const unreadMessage: number = messages.filter(
-    (msg: IReactChatMessage) =>
-      msg.author !== USERNAME && msg.status === MessageStatuses.STATUS_SEND
-  ).length;
-
-  return {
-    avatar,
-    draftMessage,
-    fullName,
-    lastMessage,
-    unreadMessage
-  };
+  return { avatar, title };
 };

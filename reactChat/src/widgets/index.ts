@@ -1,5 +1,7 @@
 export { ChatsHeader } from './ChatsHeader';
 
+export { CreateChatHeader } from './CreateChatHeader';
+
 export { DialogHeader } from './DialogHeader';
 
 export { EditProfileHeader } from './EditProfileHeader';

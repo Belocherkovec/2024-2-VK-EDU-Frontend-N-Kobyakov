@@ -1,3 +1,4 @@
+import { RoutePaths } from '@/shared/consts';
 import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import cn from 'classnames';
 import { useNavigate } from 'react-router-dom';
@@ -10,7 +11,7 @@ export const NewChatButton: React.FC<{
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate('/profile/edit/create');
+    navigate(RoutePaths.createChatPage);
   };
 
   return (

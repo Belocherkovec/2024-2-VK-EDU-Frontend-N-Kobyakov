@@ -1,7 +1,7 @@
-import { selectUserIsAuthenticated } from '@/entities/User';
+import { selectUserIsAuthenticated } from '@/entities/User/model';
 import { RoutePaths } from '@/shared/consts';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 interface PrivateRouteProps {
   children: React.ReactNode;
@@ -9,11 +9,10 @@ interface PrivateRouteProps {
 
 export const PrivateRoute = ({ children }: PrivateRouteProps) => {
   const isAuthorized = useSelector(selectUserIsAuthenticated);
-  const navigate = useNavigate();
 
-  if (!isAuthorized) {
-    navigate(RoutePaths.authPage, { replace: true });
-  }
-
-  return isAuthorized ? <>{children}</> : null;
+  return isAuthorized ? (
+    children
+  ) : (
+    <Navigate replace to={RoutePaths.authPage} />
+  );
 };

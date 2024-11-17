@@ -8,8 +8,18 @@ export interface IGetChatsResponse {
   results: IChat[];
 }
 
+export interface ICreateChatResponse {
+  avatar: File | null;
+  created_at: string;
+  id: string;
+  is_private: boolean;
+  members: string[];
+  title: string;
+  updated_at: string;
+}
+
 export interface IChat {
-  avatar: string;
+  avatar: null | string;
   created_at: string;
   creator: IUser;
   id: string;

@@ -1,6 +1,6 @@
-export { CheckMark } from './CheckMark';
+export { Avatar } from './Avatar';
 
-export { Image } from './Image';
+export { CheckMark } from './CheckMark';
 
 export { Input } from './Input';
 

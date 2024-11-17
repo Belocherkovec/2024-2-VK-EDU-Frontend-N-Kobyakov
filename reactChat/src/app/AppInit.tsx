@@ -1,11 +1,8 @@
-import {
-  selectUserInfo,
-  setUserAuthorized,
-  setUserInfo
-} from '@/entities/User';
+import { AppDispatch } from '@/app/store';
+import { selectUserInfo, setUserUnauthorized } from '@/entities/User/model';
+import { fetchCurrentUser } from '@/entities/User/model/User.thunk';
 import { setupRefreshInterceptor } from '@/shared/api';
 import { centrifugoConnect } from '@/shared/api/centrifugo';
-import { getCurrentUser } from '@/shared/api/user';
 import { Centrifuge, Subscription } from 'centrifuge';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppRouter } from './routers';
 
 export const AppInit = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const selectCurrentUserInfo = useSelector(selectUserInfo);
 
   const [centrifugeObj, setCentrifugeObj] = useState<{
@@ -24,10 +21,11 @@ export const AppInit = () => {
   useEffect(() => {
     setupRefreshInterceptor(dispatch);
 
-    if (localStorage.getItem('token')) {
-      dispatch(setUserAuthorized());
-      getCurrentUser().then(({ data }) => dispatch(setUserInfo(data)));
+    if (!localStorage.getItem('token')) {
+      dispatch(setUserUnauthorized());
     }
+
+    dispatch(fetchCurrentUser());
   }, []);
 
   useEffect(() => {
@@ -43,6 +41,12 @@ export const AppInit = () => {
       }
     };
   }, [selectCurrentUserInfo]);
+
+  useEffect(() => {
+    sessionStorage.setItem('lastVisitedUrl', location.pathname);
+
+    return () => sessionStorage.removeItem('lastVisitedUrl');
+  }, [location.pathname]);
 
   return <AppRouter />;
 };

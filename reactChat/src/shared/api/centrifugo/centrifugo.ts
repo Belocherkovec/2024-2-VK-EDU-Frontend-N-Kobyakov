@@ -7,7 +7,7 @@ export const centrifugoConnect = (userId: string) => {
   const centrifuge = new Centrifuge(
     'wss://vkedu-fullstack-div2.ru/connection/websocket/',
     {
-      debug: true,
+      debug: false,
       getToken: async (ctx) => {
         const {
           data: { token }

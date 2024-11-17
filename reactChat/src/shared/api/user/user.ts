@@ -2,7 +2,7 @@ import { buildUrlWithQuery } from '@/shared/utils/urlUtils';
 import { AxiosResponse } from 'axios';
 
 import { $api } from '../api';
-import { IGetUserResponse, IUser } from './types';
+import { IGetUsersResponse, IUser } from './types';
 
 type IGetUsersQueryParams = {
   page?: number;
@@ -17,7 +17,7 @@ export const getUsers = (
   pageSize?: number,
   page?: number,
   search?: string
-): Promise<AxiosResponse<IGetUserResponse>> => {
+): Promise<AxiosResponse<IGetUsersResponse>> => {
   const queryParams: IGetUsersQueryParams = {};
 
   if (pageSize) {
@@ -32,5 +32,5 @@ export const getUsers = (
     queryParams.search = search;
   }
 
-  return $api.get<IGetUserResponse>(buildUrlWithQuery('users/', queryParams));
+  return $api.get<IGetUsersResponse>(buildUrlWithQuery('users/', queryParams));
 };

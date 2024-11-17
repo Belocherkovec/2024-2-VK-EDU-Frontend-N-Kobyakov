@@ -1,1 +1,1 @@
-export * from './User.slice';
+export { User } from './User';

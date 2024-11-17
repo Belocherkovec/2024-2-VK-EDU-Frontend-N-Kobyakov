@@ -1,5 +1,8 @@
 import { $api } from '@/shared/api';
-import { IGetChatsResponse } from '@/shared/api/chat/types';
+import {
+  ICreateChatResponse,
+  IGetChatsResponse
+} from '@/shared/api/chat/types';
 import { buildUrlWithQuery } from '@/shared/utils/urlUtils';
 import { AxiosResponse } from 'axios';
 
@@ -30,3 +33,11 @@ export const getChats = (
 
   return $api.get<IGetChatsResponse>(buildUrlWithQuery('chats/', queryParams));
 };
+
+export const createPrivateChat = (
+  interlocutorId: string
+): Promise<AxiosResponse<ICreateChatResponse>> =>
+  $api.post<ICreateChatResponse>('chats/', {
+    is_private: true,
+    members: [interlocutorId]
+  });

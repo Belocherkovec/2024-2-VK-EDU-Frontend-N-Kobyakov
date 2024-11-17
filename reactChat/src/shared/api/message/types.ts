@@ -7,6 +7,7 @@ export interface IMessage {
   id: string;
   sender: IUser;
   text: null | string;
-  updated_at: string;
+  updated_at: null | string;
   voice: null | string;
+  was_read_by: IUser[];
 }

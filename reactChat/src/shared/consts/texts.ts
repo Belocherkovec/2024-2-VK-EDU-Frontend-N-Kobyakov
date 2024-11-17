@@ -26,6 +26,9 @@ export const TEXTS = {
       login: 'Логин',
       password: 'Пароль'
     },
+    createChat: {
+      title: 'Новое сообщение'
+    },
     errorPage: {
       callToAction:
         'Чтобы ошибка исчезла, попробуйте нажать на кнопку "Обновить локальное хранилище"',

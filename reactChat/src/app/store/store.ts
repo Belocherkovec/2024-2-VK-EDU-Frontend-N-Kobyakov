@@ -1,5 +1,5 @@
 import { chatSliceReducer } from '@/entities/Chat/model';
-import { userSliceReducer } from '@/entities/User';
+import { userSliceReducer } from '@/entities/User/model';
 import { configureStore } from '@reduxjs/toolkit';
 
 export const store = configureStore({

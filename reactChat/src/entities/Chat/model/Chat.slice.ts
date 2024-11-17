@@ -8,25 +8,25 @@ import {
 import { fetchChats } from './Chat.thunk';
 
 interface IChatState {
-  chatList: IChat[];
+  chatIds: string[];
   chatMap: Record<string, IChat>;
 }
 
 const initialState: IChatState = {
-  chatList: [],
+  chatIds: [],
   chatMap: {}
 };
 
 const selectors = {
-  selectChatList: (state: IChatState) => state.chatList,
+  selectChatIds: (state: IChatState) => state.chatIds,
   selectChatMap: (state: IChatState) => state.chatMap,
   selectCurrentChat: (state: IChatState, id: string) => state.chatMap[id]
 };
 
 const reducers = {
   resetChat: () => initialState,
-  setChatList: (state: IChatState, action: PayloadAction<IChat[]>) => {
-    state.chatList = action.payload;
+  setChatIds: (state: IChatState, action: PayloadAction<string[]>) => {
+    state.chatIds = action.payload;
   },
   setChatMap: (
     state: IChatState,
@@ -40,7 +40,7 @@ const extraReducers = (builder: ActionReducerMapBuilder<IChatState>) => {
   builder.addCase(
     fetchChats.fulfilled,
     (state, action: PayloadAction<IChat[]>) => {
-      state.chatList = action.payload;
+      state.chatIds = action.payload.map((chat) => chat.id);
       state.chatMap = action.payload.reduce(
         (acc, cur) => {
           acc[cur.id] = cur;
@@ -63,7 +63,7 @@ const chatSlice = createSlice({
 
 export const chatSliceReducer = chatSlice.reducer;
 
-export const { resetChat, setChatList, setChatMap } = chatSlice.actions;
+export const { resetChat, setChatIds, setChatMap } = chatSlice.actions;
 
-export const { selectChatList, selectChatMap, selectCurrentChat } =
+export const { selectChatIds, selectChatMap, selectCurrentChat } =
   chatSlice.selectors;

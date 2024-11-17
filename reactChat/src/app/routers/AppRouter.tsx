@@ -7,6 +7,7 @@ import {
   NotFoundPage
 } from '@/pages';
 import { AuthPage } from '@/pages/AuthPage';
+import { CreateChatPage } from '@/pages/CreateChatPage/CreateChatPage';
 import { RoutePaths } from '@/shared/consts';
 import { createHashRouter, RouterProvider } from 'react-router-dom';
 
@@ -20,6 +21,11 @@ const router = createHashRouter([
     element: <PrivateRoute children={<ChatsPage />} />,
     errorElement: <ErrorPage />,
     path: RoutePaths.chatsPage
+  },
+  {
+    element: <PrivateRoute children={<CreateChatPage />} />,
+    errorElement: <ErrorPage />,
+    path: RoutePaths.createChatPage
   },
   {
     element: <PrivateRoute children={<DialogPage />} />,

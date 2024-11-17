@@ -1,5 +1,5 @@
 import { AppDispatch } from '@/app/store';
-import { setUserAuthorized, setUserInfo } from '@/entities/User';
+import { setUserAuthorized, setUserInfo } from '@/entities/User/model';
 import { login as loginRequest } from '@/shared/api/auth';
 import { getCurrentUser } from '@/shared/api/user';
 import { TEXTS } from '@/shared/consts';
