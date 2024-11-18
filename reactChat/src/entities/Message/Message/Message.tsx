@@ -8,7 +8,7 @@ import styles from './message.module.scss';
 export const Message = forwardRef<
   HTMLLIElement,
   {
-    dataIndex?: number;
+    dataIndex?: string;
     isUserMessage?: boolean;
     message: string;
     status: TMessageStatuses;
@@ -23,7 +23,9 @@ export const Message = forwardRef<
     <p>{message.replace(/\n/g, '<br>')}</p>
     <div className={styles.message__info}>
       <span className={styles.message__timestamp}>{timeStamp}</span>
-      <StatusMark className={styles.message__icon} status={status} />
+      {!isUserMessage && (
+        <StatusMark className={styles.message__icon} status={status} />
+      )}
     </div>
   </li>
 ));

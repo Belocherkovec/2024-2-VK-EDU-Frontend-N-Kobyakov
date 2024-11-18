@@ -1,21 +1,17 @@
 import { Header, HeaderThemes } from '@/features/Header';
-import { BackButton, SwapButton } from '@/shared/components/buttons';
+import { BackButton } from '@/shared/components/buttons';
 
 import { UserInfo } from './ui';
 
 export const DialogHeader: React.FC<{
-  avatar: string;
-  chatId: string;
+  avatar: null | string;
   className?: string;
-  fullName: string;
-}> = ({ avatar, chatId, className, fullName }) => (
+  title: string;
+}> = ({ avatar, className, title }) => (
   <Header
-    centerNode={
-      <UserInfo avatar={avatar} chatId={chatId} fullName={fullName} />
-    }
+    centerNode={<UserInfo avatar={avatar} title={title} />}
     className={className}
     leftNode={<BackButton />}
-    rightNode={<SwapButton />}
     theme={HeaderThemes.WHITE}
   />
 );

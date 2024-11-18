@@ -1,4 +1,6 @@
 import { Message, MessageInput } from '@/features';
+import { TEXTS } from '@/shared/consts';
+import { MessageStatuses } from '@/shared/consts/statuses';
 import { timeFormatter } from '@/shared/utils/timeFormatter';
 import { DialogHeader } from '@/widgets';
 
@@ -9,30 +11,37 @@ export const DialogPage = () => {
   const {
     avatar,
     chatId,
-    fullName,
-    getIsUserMessageValue,
     handleAreaSend,
     handleSetRef,
-    messages
+    isUserMessage,
+    messagesIdx,
+    messagesMap,
+    title
   } = useDialogPage();
 
   return (
     <section className={styles.dialog}>
-      <DialogHeader avatar={avatar} chatId={chatId} fullName={fullName} />
+      <DialogHeader avatar={avatar} title={title} />
       <ul className={styles.dialog__messages}>
-        {messages.map((message, idx) => (
+        {messagesIdx.map((msgId) => (
           <Message
-            dataIndex={idx}
-            isUserMessage={getIsUserMessageValue(message.author)}
-            key={`${idx}_${message.author}`}
-            message={message.text}
-            ref={(element) => handleSetRef(element, idx)}
-            status={message.status}
-            timeStamp={timeFormatter.format(new Date(message.sendDate))}
+            dataIndex={msgId}
+            isUserMessage={isUserMessage(msgId)}
+            key={msgId}
+            message={messagesMap[msgId].text || TEXTS.empty}
+            ref={(element) => handleSetRef(element)}
+            status={
+              messagesMap[msgId].was_read_by?.length
+                ? MessageStatuses.STATUS_READ
+                : MessageStatuses.STATUS_SEND
+            }
+            timeStamp={timeFormatter.format(
+              new Date(messagesMap[msgId].created_at)
+            )}
           />
         ))}
       </ul>
-      <MessageInput chatId={+chatId} onSend={handleAreaSend} />
+      <MessageInput chatId={chatId} onSend={handleAreaSend} />
     </section>
   );
 };

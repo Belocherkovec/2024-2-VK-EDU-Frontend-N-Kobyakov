@@ -1,5 +1,19 @@
 import { IUser } from '../user';
 
+export interface ICreateMessageRequest {
+  chat: string;
+  files?: File[];
+  text: null | string;
+  voice?: File;
+}
+
+export interface IGetMessagesResponse {
+  count: number;
+  next: null | string;
+  previous: null | string;
+  results: IMessage[];
+}
+
 export interface IMessage {
   chat: string;
   created_at: string;

@@ -51,6 +51,7 @@ const extraReducers = (builder: ActionReducerMapBuilder<IChatState>) => {
       );
     }
   );
+  builder.addCase(fetchChats.rejected, () => initialState);
 };
 
 const chatSlice = createSlice({

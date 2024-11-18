@@ -6,7 +6,7 @@ import { UseMessageInput } from './hooks/useMessageInput';
 import styles from './messageInput.module.scss';
 
 export const MessageInput: React.FC<{
-  chatId: number;
+  chatId: string;
   className?: string;
   onSend: (value: string) => void;
 }> = ({ chatId, className, onSend }) => {

@@ -1,4 +1,3 @@
-import { resetChat } from '@/entities/Chat/model/Chat.slice';
 import { getChats, IChat } from '@/shared/api/chat';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
@@ -10,8 +9,6 @@ export const fetchChats = createAsyncThunk<IChat[], void>(
 
       return response.data.results;
     } catch {
-      thunkAPI.dispatch(resetChat());
-
       return thunkAPI.rejectWithValue('Error fetching chats');
     }
   }
