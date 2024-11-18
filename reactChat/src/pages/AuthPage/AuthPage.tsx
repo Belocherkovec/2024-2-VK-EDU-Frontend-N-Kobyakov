@@ -17,7 +17,9 @@ export const AuthPage: React.FC = () => {
 
   useEffect(() => {
     const from =
-      lastVisitedUrl && lastVisitedUrl !== '/'
+      lastVisitedUrl &&
+      lastVisitedUrl !== '/' &&
+      lastVisitedUrl !== '/2024-2-VK-EDU-Frontend-N-Kobyakov/'
         ? lastVisitedUrl
         : RoutePaths.chatsPage;
 

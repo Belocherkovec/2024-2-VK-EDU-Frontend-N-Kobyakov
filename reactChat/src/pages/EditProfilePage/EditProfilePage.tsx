@@ -1,4 +1,4 @@
-import { Avatar, Input } from '@/shared/components';
+import { Input } from '@/shared/components';
 import { TEXTS } from '@/shared/consts/texts';
 import { EditProfileHeader } from '@/widgets/EditProfileHeader';
 import cn from 'classnames';
@@ -25,7 +25,7 @@ export const EditProfilePage = () => {
         className={cn(styles.form__avatar, !avatar && styles._bg)}
         onClick={handleClickAvatar}
       >
-        {avatar && <Avatar alt={TEXTS.images.avatar} src={avatar} />}
+        {/*{avatar && <Avatar alt={TEXTS.images.avatar} src={avatar} />}*/}
       </button>
       <form action="/" className={styles.form} onSubmit={handleSubmit}>
         <label>

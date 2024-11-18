@@ -1,7 +1,7 @@
 import { Avatar } from '@/shared/components';
 import React from 'react';
 
-import styles from './User.module.scss';
+import styles from './user.module.scss';
 
 interface IUserProps {
   avatar: null | string;
