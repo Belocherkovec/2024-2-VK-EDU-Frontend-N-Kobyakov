@@ -1,16 +1,14 @@
 import { AppDispatch } from '@/app/store';
 import { fetchChats, selectChatMap } from '@/entities/Chat/model';
 import {
+  resetMessages,
   selectMessagesIdx,
   selectMessagesMap
-} from '@/entities/Message/Message/model/Message.slice';
-import {
-  fetchMessages,
-  readMessage,
-  sendMessage
-} from '@/entities/Message/Message/model/Message.thunk';
+} from '@/entities/Message/model/Message.slice';
+import { fetchMessages } from '@/entities/Message/model/Message.thunk';
 import { selectUserInfo, selectUsersMap } from '@/entities/User/model';
 import { fetchUsers } from '@/entities/User/model/User.thunk';
+import { createMessage, postReadMessage } from '@/shared/api/message';
 import { ICreateMessageRequest } from '@/shared/api/message/types';
 import { TEXTS } from '@/shared/consts/texts';
 import { useIntersectionObserver } from '@/shared/hooks';
@@ -51,6 +49,7 @@ export const useDialogPage = () => {
 
     return () => {
       document.body.style.backgroundColor = TEXTS.empty;
+      dispatch(resetMessages());
     };
   }, []);
 
@@ -91,7 +90,7 @@ export const useDialogPage = () => {
           isUserMessage(msgId) &&
           !messagesMap[msgId].was_read_by.length
         ) {
-          dispatch(readMessage(msgId));
+          postReadMessage(msgId);
         }
       }
     });
@@ -109,7 +108,7 @@ export const useDialogPage = () => {
       text: value
     };
 
-    dispatch(sendMessage(responseData));
+    createMessage(responseData);
   };
 
   return {

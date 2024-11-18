@@ -1,9 +1,12 @@
 import { Centrifuge } from 'centrifuge';
 
 import { $api } from '../api';
-import { ICentrifugoResponse } from './types';
+import { ICentrifugoEvent, ICentrifugoResponse } from './types';
 
-export const centrifugoConnect = (userId: string) => {
+export const centrifugoConnect = (
+  userId: string,
+  callback: (data: ICentrifugoEvent) => void
+) => {
   const centrifuge = new Centrifuge(
     'wss://vkedu-fullstack-div2.ru/connection/websocket/',
     {
@@ -43,7 +46,7 @@ export const centrifugoConnect = (userId: string) => {
   });
 
   subscription.on('publication', (ctx) => {
-    console.log(ctx.data);
+    callback(ctx.data);
   });
 
   centrifuge.connect();

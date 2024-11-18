@@ -1,4 +1,5 @@
-import { Message, MessageInput } from '@/features';
+import { Message } from '@/entities/Message';
+import { MessageInput } from '@/features';
 import { TEXTS } from '@/shared/consts';
 import { MessageStatuses } from '@/shared/consts/statuses';
 import { timeFormatter } from '@/shared/utils/timeFormatter';
@@ -23,11 +24,11 @@ export const DialogPage = () => {
     <section className={styles.dialog}>
       <DialogHeader avatar={avatar} title={title} />
       <ul className={styles.dialog__messages}>
-        {messagesIdx.map((msgId) => (
+        {messagesIdx.map((msgId, idx) => (
           <Message
             dataIndex={msgId}
             isUserMessage={isUserMessage(msgId)}
-            key={msgId}
+            key={msgId + idx}
             message={messagesMap[msgId].text || TEXTS.empty}
             ref={(element) => handleSetRef(element)}
             status={

@@ -1,8 +1,4 @@
-import {
-  fetchMessages,
-  readMessage,
-  sendMessage
-} from '@/entities/Message/Message/model/Message.thunk';
+import { fetchMessages } from '@/entities/Message/model/Message.thunk';
 import { IMessage } from '@/shared/api/message';
 import {
   ActionReducerMapBuilder,
@@ -26,7 +22,20 @@ const selectors = {
 };
 
 const reducers = {
-  reset: () => initialState
+  createMessage: (state: IMessagesState, action: PayloadAction<IMessage>) => {
+    state.messagesIdx.push(action.payload.id);
+    state.messagesMap[action.payload.id] = action.payload;
+  },
+  deleteMessage: (state: IMessagesState, action: PayloadAction<IMessage>) => {
+    const msgId = state.messagesIdx.indexOf(action.payload.id);
+
+    state.messagesIdx.splice(msgId, 1);
+    delete state.messagesMap[action.payload.id];
+  },
+  resetMessages: () => initialState,
+  updateMessage: (state: IMessagesState, action: PayloadAction<IMessage>) => {
+    state.messagesMap[action.payload.id] = action.payload;
+  }
 };
 
 const extraReducers = (builder: ActionReducerMapBuilder<IMessagesState>) => {
@@ -45,19 +54,6 @@ const extraReducers = (builder: ActionReducerMapBuilder<IMessagesState>) => {
     }
   );
   builder.addCase(fetchMessages.rejected, () => initialState);
-  builder.addCase(
-    sendMessage.fulfilled,
-    (state, action: PayloadAction<IMessage>) => {
-      state.messagesIdx.push(action.payload.id);
-      state.messagesMap[action.payload.id] = action.payload;
-    }
-  );
-  builder.addCase(
-    readMessage.fulfilled,
-    (state, action: PayloadAction<IMessage>) => {
-      state.messagesMap[action.payload.id] = action.payload;
-    }
-  );
 };
 
 const messageSlice = createSlice({
@@ -70,6 +66,7 @@ const messageSlice = createSlice({
 
 export const messagesSliceReducer = messageSlice.reducer;
 
-export const { reset } = messageSlice.actions;
+export const { createMessage, deleteMessage, resetMessages, updateMessage } =
+  messageSlice.actions;
 
 export const { selectMessagesIdx, selectMessagesMap } = messageSlice.selectors;
