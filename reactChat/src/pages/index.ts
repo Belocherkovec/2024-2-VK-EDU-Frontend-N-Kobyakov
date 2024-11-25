@@ -7,3 +7,5 @@ export { EditProfilePage } from './EditProfilePage';
 export { ErrorPage } from './ErrorPage';
 
 export { NotFoundPage } from './NotFoundPage';
+
+export { RegistrationPage } from './RegistrationPage';

@@ -1,47 +1,31 @@
-import { useInput } from '@/shared/components/Input/hooks/useInput';
+import { useInput } from '@/shared/components/inputs/Input/hooks/useInput';
 import { VisibilityOffRounded, VisibilityRounded } from '@mui/icons-material';
 import cn from 'classnames';
+import React, { memo } from 'react';
 
 import styles from './input.module.scss';
 
-interface IInputProps {
-  className?: string;
-  id?: string;
+interface IInputProps
+  extends React.InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
   isDisabled?: boolean;
   isError?: boolean;
   label?: string;
-  maxLength?: number;
-  minLength?: number;
-  name?: string;
   onChange?: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
-  onValidChange?: (value: boolean) => void;
-  pattern?: string;
-  placeholder?: string;
-  required?: boolean;
+  onValidChange?: (name: string, value: boolean) => void;
   resize?: boolean;
-  title?: string;
-  type?: string;
-  value?: string;
 }
 
-export const Input: React.FC<IInputProps> = ({
+const InputComponent: React.FC<IInputProps> = ({
   className,
-  id,
   isDisabled = false,
   isError = false,
   label,
-  maxLength,
-  minLength,
-  name,
   onChange,
   onValidChange,
-  pattern,
-  placeholder,
   required = false,
   resize = false,
-  title,
   type = 'text',
   value,
   ...props
@@ -56,7 +40,12 @@ export const Input: React.FC<IInputProps> = ({
     innerValue,
     inputRef,
     TagName
-  } = useInput(type, onChange, onValidChange);
+  } = useInput({
+    isError,
+    onChange,
+    onValidChange,
+    type
+  });
 
   return (
     <label className={styles.input}>
@@ -71,22 +60,15 @@ export const Input: React.FC<IInputProps> = ({
           (errorMessages.length || isError) && styles._error,
           type === 'password' && styles._password
         )}
-        id={id}
-        name={name}
+        disabled={isDisabled}
         onBlur={handleBlur}
         onChange={handleChange}
         onKeyUp={handleKeyUp}
+        ref={inputRef}
+        required={required}
         type={innerType}
         value={value ?? innerValue}
         {...props}
-        disabled={isDisabled}
-        maxLength={maxLength}
-        minLength={minLength}
-        pattern={pattern}
-        placeholder={placeholder}
-        ref={inputRef}
-        required={required}
-        title={title}
       />
       {type === 'password' && (
         <button
@@ -109,3 +91,5 @@ export const Input: React.FC<IInputProps> = ({
     </label>
   );
 };
+
+export const Input = memo(InputComponent);

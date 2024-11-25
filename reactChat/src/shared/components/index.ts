@@ -2,10 +2,12 @@ export { Avatar } from './Avatar';
 
 export { CheckMark } from './CheckMark';
 
-export { Input } from './Input';
+export { Input } from './inputs/Input';
+
+export { SearchInput } from './inputs/SearchInput';
 
 export { Loader } from './Loader';
 
-export { SearchInput } from './SearchInput';
-
 export { StatusMark } from './StatusMark';
+
+export { TextLink } from './TextLink';
