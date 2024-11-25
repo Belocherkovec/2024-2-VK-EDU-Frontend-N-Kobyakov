@@ -7,37 +7,40 @@ import { useAuthForm } from './hooks/useAuthForm';
 
 export const AuthForm: React.FC = () => {
   const {
-    formValues,
+    formValues: { login, password },
     handleFormChange,
     handleFormValidChange,
     handleSubmit,
     isDisabled,
+    isFormValid,
     isLoginError
   } = useAuthForm();
 
   return (
-    <form action="/" className={styles.form} noValidate onSubmit={handleSubmit}>
+    <form className={styles.form} noValidate onSubmit={handleSubmit}>
       {isLoginError && (
         <span className={styles.form__error}>{TEXTS.errors.loginError}</span>
       )}
       <Input
-        isError={isLoginError}
+        isError={isLoginError || !isFormValid.login}
         label={TEXTS.pages.auth.login}
         minLength={3}
-        onChange={(e) => handleFormChange('login', e.target.value)}
-        onValidChange={(value) => handleFormValidChange('login', value)}
+        name="login"
+        onChange={handleFormChange}
+        onValidChange={handleFormValidChange}
         required
-        value={formValues.login}
+        value={login}
       />
       <Input
-        isError={isLoginError}
+        isError={isLoginError || !isFormValid.password}
         label={TEXTS.pages.auth.password}
         minLength={3}
-        onChange={(e) => handleFormChange('password', e.target.value)}
-        onValidChange={(value) => handleFormValidChange('password', value)}
+        name="password"
+        onChange={handleFormChange}
+        onValidChange={handleFormValidChange}
         required
         type="password"
-        value={formValues.password}
+        value={password}
       />
       <button
         className={cn(styles.form__button, isDisabled() && styles._disabled)}

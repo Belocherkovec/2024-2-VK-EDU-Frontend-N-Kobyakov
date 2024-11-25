@@ -2,6 +2,15 @@ import { ErrorMessages, TEXTS } from '@/shared/consts';
 import { IErrorMessages } from '@/shared/consts/errorMessages';
 import { useRef, useState } from 'react';
 
+interface IUseInputProps {
+  isError: boolean;
+  onChange?: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  onValidChange?: (name: string, value: boolean) => void;
+  type?: string;
+}
+
 interface IUseInputReturnProps {
   errorMessages: string[];
   handleBlur: () => void;
@@ -16,13 +25,13 @@ interface IUseInputReturnProps {
   TagName: 'input' | 'textarea';
 }
 
-export const useInput = (
-  type: string = 'text',
-  onChange?: (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => void,
-  onValidChange?: (value: boolean) => void
-): IUseInputReturnProps => {
+export const useInput = ({
+  isError,
+  onChange,
+  onValidChange,
+  type = 'text'
+}: IUseInputProps): IUseInputReturnProps => {
+  const TIMEOUT = 500;
   const [innerValue, setInnerValue] = useState(TEXTS.empty);
   const [innerType, setInnerType] = useState(type);
   const [errorMessages, setErrorMessages] = useState<string[]>([]);
@@ -30,7 +39,6 @@ export const useInput = (
   const inputRef = useRef<any>(null);
 
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
-
   const TagName = type === 'textarea' ? 'textarea' : 'input';
 
   const formValidate = () => {
@@ -39,19 +47,24 @@ export const useInput = (
     }
 
     const errors = inputRef.current.validity;
-    const errorMessages: string[] = [];
+    const innerErrorMessages: string[] = [];
 
     Object.entries(ErrorMessages).forEach(([errorType, getErrorMessage]) => {
       if (errors[errorType as keyof IErrorMessages]) {
-        errorMessages.push(getErrorMessage(inputRef.current));
+        innerErrorMessages.push(getErrorMessage(inputRef.current));
       }
     });
 
-    if (onValidChange) {
-      onValidChange(!errorMessages.length);
-    }
+    if (
+      JSON.stringify(innerErrorMessages) !== JSON.stringify(errorMessages) ||
+      !!innerErrorMessages.length !== isError
+    ) {
+      if (onValidChange) {
+        onValidChange(inputRef.current.name, !innerErrorMessages.length);
+      }
 
-    setErrorMessages(errorMessages);
+      setErrorMessages(innerErrorMessages);
+    }
   };
 
   const handleBlur = () => {
@@ -87,7 +100,7 @@ export const useInput = (
 
     timeoutRef.current = setTimeout(() => {
       formValidate();
-    }, 1000);
+    }, TIMEOUT);
   };
 
   return {

@@ -1,9 +1,8 @@
 import { AppDispatch } from '@/app/store';
 import { setUserAuthorized, setUserInfo } from '@/entities/User/model';
-import { login as loginRequest } from '@/shared/api/auth';
-import { getCurrentUser } from '@/shared/api/user';
+import { getCurrentUser, login as loginRequest } from '@/shared/api/user';
 import { TEXTS } from '@/shared/consts';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 export const useAuthForm = () => {
@@ -14,8 +13,8 @@ export const useAuthForm = () => {
     password: TEXTS.empty
   });
   const [isFormValid, setIsFormValid] = useState({
-    login: false,
-    password: false
+    login: true,
+    password: true
   });
 
   const [isLoginError, setIsLoginError] = useState<boolean>(false);
@@ -26,25 +25,32 @@ export const useAuthForm = () => {
     }
   }, [formValues]);
 
-  const handleFormChange = (field: 'login' | 'password', value: string) => {
-    setFormValues({ ...formValues, [field]: value });
-  };
+  const handleFormChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      const { name, value } = event.target;
 
-  const handleFormValidChange = (
-    field: 'login' | 'password',
-    value: boolean
-  ) => {
-    setIsFormValid({ ...isFormValid, [field]: value });
-  };
+      setFormValues((prev) => ({
+        ...prev,
+        [name]: value
+      }));
+    },
+    []
+  );
+
+  const handleFormValidChange = useCallback((name: string, value: boolean) => {
+    setIsFormValid((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  }, []);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    loginRequest(formValues.login, formValues.password, handleLoginRequest);
+    loginRequest(formValues.login, formValues.password, handleLoginResponse);
     resetForm();
-    resetIsValidForm();
   };
 
-  const handleLoginRequest = (isAuth: boolean) => {
+  const handleLoginResponse = (isAuth: boolean) => {
     if (isAuth) {
       dispatch(setUserAuthorized());
       getCurrentUser().then(({ data }) => dispatch(setUserInfo(data)));
@@ -53,12 +59,16 @@ export const useAuthForm = () => {
     }
   };
 
-  const resetForm = () =>
+  const resetForm = () => {
     setFormValues({ login: TEXTS.empty, password: TEXTS.empty });
-  const resetIsValidForm = () =>
     setIsFormValid({ login: false, password: false });
+  };
 
-  const isDisabled = () => !(isFormValid.login && isFormValid.password);
+  const isDisabled = () =>
+    !(
+      Object.values(isFormValid).every((field) => field) &&
+      Object.values(formValues).every((field) => field)
+    );
 
   return {
     formValues,

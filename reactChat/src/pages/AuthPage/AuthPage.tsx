@@ -1,38 +1,25 @@
-import { selectUserIsAuthenticated } from '@/entities/User/model';
-import { AuthForm } from '@/features';
-import { RoutePaths } from '@/shared/consts';
-import Logo from '@/shared/icons/Logo.svg?react';
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { TextLink } from '@/shared/components';
+import { RoutePaths, TEXTS } from '@/shared/consts';
+import { useAuthRedirect } from '@/shared/hooks';
+import { Logo } from '@/shared/icons';
+import { AuthForm } from '@/widgets';
 
 import styles from './authPage.module.scss';
 
 export const AuthPage: React.FC = () => {
-  const isAuthorized = useSelector(selectUserIsAuthenticated);
-  const navigate = useNavigate();
-
-  const lastVisitedUrl: null | string =
-    sessionStorage.getItem('lastVisitedUrl');
-
-  useEffect(() => {
-    const from =
-      lastVisitedUrl &&
-      lastVisitedUrl !== '/' &&
-      lastVisitedUrl !== '/2024-2-VK-EDU-Frontend-N-Kobyakov/'
-        ? lastVisitedUrl
-        : RoutePaths.chatsPage;
-
-    if (isAuthorized) {
-      navigate(from, { replace: true });
-    }
-  }, [isAuthorized]);
+  useAuthRedirect();
 
   return (
     <section className={styles.auth}>
       <Logo className={styles.auth__logo} />
-      <h1 className={styles.auth__title}>Авторизация в Simple Chat</h1>
+      <h1 className={styles.auth__title}>{TEXTS.pages.auth.title}</h1>
       <AuthForm />
+      <TextLink
+        isReplace
+        label={TEXTS.pages.auth.noAccount}
+        linkText={TEXTS.pages.auth.toRegistration}
+        src={RoutePaths.registrationPage}
+      />
     </section>
   );
 };
