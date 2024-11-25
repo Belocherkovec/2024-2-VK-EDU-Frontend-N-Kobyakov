@@ -20,11 +20,15 @@ export const TEXTS = {
     avatar: 'Аватар (изображение) пользователя'
   },
   lastActivity: { recently: 'был недавно' },
+  noFile: 'Файл не выбран',
   pages: {
     auth: {
       action: 'Войти',
       login: 'Логин',
-      password: 'Пароль'
+      noAccount: 'Нет аккаунта?',
+      password: 'Пароль',
+      title: 'Авторизация в Simple Chat',
+      toRegistration: 'Зарегистрироваться'
     },
     createChat: {
       title: 'Новое сообщение'
@@ -39,6 +43,22 @@ export const TEXTS = {
       subtitle:
         'Вы видите эту ошибку, потому что страница, которую вы запросили - не найдена!',
       title: 'Ошибка 404'
+    },
+    registration: {
+      action: 'Зарегистрироваться',
+      avatar: 'Аватар пользователя',
+      bio: 'Описание профиля',
+      firstName: 'Имя пользователя',
+      hasAccount: 'Уже зарегистированы?',
+      lastName: 'Фамилия пользователя',
+      login: 'Логин',
+      password: 'Пароль',
+      passwordNoEqual: 'Пароли должны совпадать!',
+      registrationError: 'Ошибка, данный пользователь уже зарегистрирован',
+      repeatPassword: 'Повторите пароль',
+      title: 'Регистрация в Simple Chat',
+      toAuth: 'Войти',
+      unknownError: 'Произошла неизвестная ошибка, попробуйте еще раз'
     }
   },
   placeholders: {

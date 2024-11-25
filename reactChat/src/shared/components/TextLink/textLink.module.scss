@@ -1,0 +1,36 @@
+@use "@/app/styles/variables.scss" as *;
+
+.link {
+  color: $color-black;
+  &__text {
+    color: $color-accent;
+    position: relative;
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $color-accent-hover;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      height: 1px;
+      width: 100%;
+      background-color: $color-accent;
+      transition: width 0.2s ease;
+    }
+
+
+    &::after {
+      right: 50%;
+      transform: translateX(50%);
+    }
+
+    &:hover::after {
+      background-color: $color-accent-hover;
+      width: 0;
+    }
+  }
+}

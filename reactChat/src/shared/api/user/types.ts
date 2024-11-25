@@ -1,3 +1,17 @@
+export interface IRegistrationRequest {
+  avatar?: File | null;
+  bio?: null | string;
+  first_name: string;
+  last_name: string;
+  password: string;
+  username: string;
+}
+
+export interface IAuthResponse {
+  access: string;
+  refresh: string;
+}
+
 export interface IGetUsersResponse {
   count: number;
   next: null | string;
@@ -15,3 +29,9 @@ export interface IUser {
   last_online_at: string;
   username: string;
 }
+
+export type IGetUsersQueryParams = {
+  page?: number;
+  page_size?: number;
+  search?: string;
+};

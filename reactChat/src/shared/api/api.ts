@@ -1,7 +1,8 @@
 import { AppDispatch } from '@/app/store';
-import { resetCurrentUserState } from '@/entities/User/model';
-import { IAuthResponse } from '@/shared/api/auth';
+import { setUserUnauthorized } from '@/entities/User/model';
 import axios from 'axios';
+
+import { IAuthResponse } from './user';
 
 const $api = axios.create({
   baseURL: import.meta.env.VITE_PUBLIC_API
@@ -17,7 +18,7 @@ export const setupRefreshInterceptor = (dispatch: AppDispatch) => {
   const handleRefreshError = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('refresh');
-    dispatch(resetCurrentUserState());
+    dispatch(setUserUnauthorized());
   };
 
   $api.interceptors.response.use(

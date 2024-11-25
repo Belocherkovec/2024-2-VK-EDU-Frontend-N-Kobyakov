@@ -54,12 +54,6 @@ export const AppInit = () => {
     };
   }, [selectCurrentUserInfo]);
 
-  useEffect(() => {
-    sessionStorage.setItem('lastVisitedUrl', location.pathname);
-
-    return () => sessionStorage.removeItem('lastVisitedUrl');
-  }, [location.pathname]);
-
   const handlePublicationEvent = (data: ICentrifugoEvent) => {
     const currentPage = window.location.hash.split('/');
 
