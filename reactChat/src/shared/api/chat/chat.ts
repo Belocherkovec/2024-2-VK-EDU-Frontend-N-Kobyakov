@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 
 import { buildUrlWithQuery } from '../../utils';
 import { $api } from '../api';
-import { ICreateChatResponse, IGetChatsResponse } from './types';
+import { IChat, ICreateChatResponse, IGetChatsResponse } from './types';
 
 type IGetChatsQueryParams = {
   page?: number;
@@ -31,6 +31,8 @@ export const getChats = (
 
   return $api.get<IGetChatsResponse>(buildUrlWithQuery('chats/', queryParams));
 };
+
+export const getChat = (uuid: string) => $api.get<IChat>(`chat/${uuid}/`);
 
 export const createPrivateChat = (
   interlocutorId: string

@@ -24,6 +24,10 @@ const selectors = {
 };
 
 const reducers = {
+  addChat: (state: IChatState, action: PayloadAction<IChat>) => {
+    state.chatMap[action.payload.id] = action.payload;
+    state.chatIds.push(action.payload.id);
+  },
   resetChat: () => initialState,
   setChatIds: (state: IChatState, action: PayloadAction<string[]>) => {
     state.chatIds = action.payload;
@@ -64,7 +68,7 @@ const chatSlice = createSlice({
 
 export const chatSliceReducer = chatSlice.reducer;
 
-export const { resetChat, setChatIds, setChatMap } = chatSlice.actions;
+export const { addChat, resetChat, setChatIds, setChatMap } = chatSlice.actions;
 
 export const { selectChatIds, selectChatMap, selectCurrentChat } =
   chatSlice.selectors;
