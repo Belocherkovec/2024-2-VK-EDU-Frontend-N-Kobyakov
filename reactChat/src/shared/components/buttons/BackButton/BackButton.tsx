@@ -1,5 +1,6 @@
-import { TEXTS } from '@/shared/consts/texts';
 import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
+
+import { TEXTS } from '../../../consts';
 
 export const BackButton: React.FC<{
   className?: string;

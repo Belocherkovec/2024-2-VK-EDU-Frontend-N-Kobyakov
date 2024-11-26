@@ -1,5 +1,5 @@
-import { selectUserIsAuthenticated } from '@/entities/User/model';
-import { RoutePaths } from '@/shared/consts';
+import { selectUserIsAuthenticated } from '@/entities/User';
+import { RoutePaths } from '@/shared';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 

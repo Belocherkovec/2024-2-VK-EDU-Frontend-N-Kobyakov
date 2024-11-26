@@ -1,4 +1,4 @@
-import { IChat } from '@/shared/api/chat';
+import { IChat } from '@/shared';
 import {
   ActionReducerMapBuilder,
   createSlice,

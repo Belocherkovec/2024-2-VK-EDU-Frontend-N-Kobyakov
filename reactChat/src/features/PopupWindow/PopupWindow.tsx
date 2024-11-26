@@ -1,8 +1,8 @@
-import { usePopupWindow } from '@/features/PopupWindow/hooks/usePopupWindow';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import cn from 'classnames';
 import { ReactNode } from 'react';
 
+import { usePopupWindow } from './hooks';
 import styles from './popupWindow.module.scss';
 
 export const PopupWindow: React.FC<{

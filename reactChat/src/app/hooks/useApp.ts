@@ -1,21 +1,25 @@
-import { AppDispatch } from '@/app/store';
 import {
   createMessage,
   deleteMessage,
   updateMessage
-} from '@/entities/Message/model';
-import { selectUserInfo, setUserUnauthorized } from '@/entities/User';
-import { fetchCurrentUser } from '@/entities/User/model/User.thunk';
-import { setupRefreshInterceptor } from '@/shared/api';
-import { centrifugoConnect } from '@/shared/api/centrifugo';
+} from '@/entities/Message';
 import {
+  fetchCurrentUser,
+  selectUserInfo,
+  setUserUnauthorized
+} from '@/entities/User';
+import {
+  centrifugoConnect,
   CentrifugoEventTypes,
-  ICentrifugoEvent
-} from '@/shared/api/centrifugo/types';
-import { useAuthRedirect } from '@/shared/hooks';
+  ICentrifugoEvent,
+  setupRefreshInterceptor,
+  useAuthRedirect
+} from '@/shared';
 import { Centrifuge, Subscription } from 'centrifuge';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
+import { AppDispatch } from '../store';
 
 export const useApp = () => {
   useAuthRedirect();

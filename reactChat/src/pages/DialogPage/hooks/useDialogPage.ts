@@ -1,17 +1,19 @@
-import { AppDispatch } from '@/app/store';
-import { fetchChats, selectChatMap } from '@/entities/Chat/model';
+import { AppDispatch } from '@/app';
+import { fetchChats, selectChatMap } from '@/entities/Chat';
 import {
+  fetchMessages,
   resetMessages,
   selectMessagesIdx,
   selectMessagesMap
-} from '@/entities/Message/model/Message.slice';
-import { fetchMessages } from '@/entities/Message/model/Message.thunk';
-import { selectUserInfo, selectUsersMap } from '@/entities/User/model';
-import { fetchUsers } from '@/entities/User/model/User.thunk';
-import { createMessage, postReadMessage } from '@/shared/api/message';
-import { ICreateMessageRequest } from '@/shared/api/message/types';
-import { TEXTS } from '@/shared/consts/texts';
-import { useIntersectionObserver } from '@/shared/hooks';
+} from '@/entities/Message';
+import { fetchUsers, selectUserInfo, selectUsersMap } from '@/entities/User';
+import {
+  createMessage,
+  ICreateMessageRequest,
+  postReadMessage,
+  TEXTS,
+  useIntersectionObserver
+} from '@/shared';
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';

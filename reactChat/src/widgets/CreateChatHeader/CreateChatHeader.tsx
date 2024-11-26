@@ -1,6 +1,5 @@
 import { Header, HeaderThemes } from '@/features/Header';
-import { BackButton, SearchButton } from '@/shared/components/buttons';
-import { TEXTS } from '@/shared/consts';
+import { BackButton, SearchButton, TEXTS } from '@/shared';
 
 export const CreateChatHeader: React.FC = () => (
   <Header

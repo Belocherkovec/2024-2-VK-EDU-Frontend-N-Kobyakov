@@ -1,9 +1,9 @@
-import { useAvatar } from '@/shared/components/Avatar/hooks/useAvatar';
-import { Loader } from '@/shared/components/Loader';
 import cn from 'classnames';
 import React from 'react';
 
+import { Loader } from '../Loader';
 import styles from './avatar.module.scss';
+import { useAvatar } from './hooks';
 
 export const Avatar: React.FC<{
   alt?: string;

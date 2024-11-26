@@ -1,3 +1,7 @@
 export * from './message';
 
-export type { IMessage } from './types';
+export type {
+  ICreateMessageRequest,
+  IGetMessagesResponse,
+  IMessage
+} from './types';

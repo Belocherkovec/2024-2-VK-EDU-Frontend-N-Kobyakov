@@ -1,5 +1,5 @@
 import { Chat } from '@/entities/Chat';
-import { NewChatButton } from '@/shared/components/buttons';
+import { NewChatButton } from '@/shared';
 import { ChatsHeader, ShowUpdates } from '@/widgets';
 
 import { useChatsPage } from './hooks/useChatsPage';

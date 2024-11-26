@@ -1,8 +1,8 @@
-import { useInput } from '@/shared/components/inputs/Input/hooks/useInput';
 import { VisibilityOffRounded, VisibilityRounded } from '@mui/icons-material';
 import cn from 'classnames';
 import React, { memo } from 'react';
 
+import { useInput } from './hooks';
 import styles from './input.module.scss';
 
 interface IInputProps

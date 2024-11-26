@@ -1,7 +1,7 @@
 import { User } from '@/entities/User';
 import { CreateChatHeader } from '@/widgets';
 
-import { useCreateChatPage } from './hooks/useCreateChatPage';
+import { useCreateChatPage } from './hooks';
 
 export const CreateChatPage: React.FC = () => {
   const { handleUserClick, usersIds, usersMap } = useCreateChatPage();

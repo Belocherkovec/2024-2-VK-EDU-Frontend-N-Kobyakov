@@ -1,6 +1,5 @@
-import { StatusMark } from '@/shared/components';
-import { TMessageStatuses } from '@/shared/consts/statuses';
-import { TEXTS } from '@/shared/consts/texts';
+import { StatusMark } from '../';
+import { TEXTS, TMessageStatuses } from '../../consts';
 
 export const CheckMark: React.FC<{
   isShowUnread?: boolean;

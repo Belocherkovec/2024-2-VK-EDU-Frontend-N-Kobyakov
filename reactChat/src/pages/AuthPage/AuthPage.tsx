@@ -1,6 +1,4 @@
-import { TextLink } from '@/shared/components';
-import { RoutePaths, TEXTS } from '@/shared/consts';
-import { Logo } from '@/shared/icons';
+import { Logo, RoutePaths, TextLink, TEXTS } from '@/shared';
 import { AuthForm } from '@/widgets';
 
 import styles from './authPage.module.scss';

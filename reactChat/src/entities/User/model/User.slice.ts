@@ -1,10 +1,11 @@
-import { fetchCurrentUser, fetchUsers } from '@/entities/User/model/User.thunk';
-import { IUser } from '@/shared/api/user';
+import { IUser } from '@/shared';
 import {
   ActionReducerMapBuilder,
   createSlice,
   PayloadAction
 } from '@reduxjs/toolkit';
+
+import { fetchCurrentUser, fetchUsers } from './User.thunk';
 
 interface IUserState {
   isAuthenticated: boolean;

@@ -1,6 +1,6 @@
-import { ErrorMessages, TEXTS } from '@/shared/consts';
-import { IErrorMessages } from '@/shared/consts/errorMessages';
 import { useRef, useState } from 'react';
+
+import { ErrorMessages, IErrorMessages, TEXTS } from '../../../../consts';
 
 interface IUseInputProps {
   isError: boolean;

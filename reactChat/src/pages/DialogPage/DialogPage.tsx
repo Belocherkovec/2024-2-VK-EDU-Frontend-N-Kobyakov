@@ -1,8 +1,6 @@
 import { Message } from '@/entities/Message';
 import { MessageInput } from '@/features';
-import { TEXTS } from '@/shared/consts';
-import { MessageStatuses } from '@/shared/consts/statuses';
-import { timeFormatter } from '@/shared/utils/timeFormatter';
+import { MessageStatuses, TEXTS, timeFormatter } from '@/shared';
 import { DialogHeader } from '@/widgets';
 
 import styles from './dialogPage.module.scss';

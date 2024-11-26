@@ -1,10 +1,11 @@
-import { fetchMessages } from '@/entities/Message/model/Message.thunk';
-import { IMessage } from '@/shared/api/message';
+import { IMessage } from '@/shared';
 import {
   ActionReducerMapBuilder,
   createSlice,
   PayloadAction
 } from '@reduxjs/toolkit';
+
+import { fetchMessages } from './Message.thunk';
 
 interface IMessagesState {
   messagesIdx: string[];

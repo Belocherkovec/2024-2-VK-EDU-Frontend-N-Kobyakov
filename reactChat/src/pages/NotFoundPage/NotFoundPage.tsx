@@ -1,5 +1,4 @@
-import { RoutePaths } from '@/shared/consts';
-import { TEXTS } from '@/shared/consts/texts';
+import { RoutePaths, TEXTS } from '@/shared';
 import SearchOffRoundedIcon from '@mui/icons-material/SearchOffRounded';
 import { Link } from 'react-router-dom';
 

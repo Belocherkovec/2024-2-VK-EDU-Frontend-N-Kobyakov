@@ -1,4 +1,8 @@
+export { AuthPage } from './AuthPage';
+
 export { ChatsPage } from './ChatsPage';
+
+export { CreateChatPage } from './CreateChatPage';
 
 export { DialogPage } from './DialogPage';
 

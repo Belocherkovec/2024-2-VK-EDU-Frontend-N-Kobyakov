@@ -1,4 +1,4 @@
-import { TEXTS } from '@/shared/consts';
+import { TEXTS } from '../consts';
 
 export const convertBytesToHuman = (bytes: number): string => {
   if (!Number.isFinite(bytes) || bytes < 0) {

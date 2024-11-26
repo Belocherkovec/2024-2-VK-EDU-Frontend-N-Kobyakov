@@ -1,5 +1,4 @@
-import { Avatar } from '@/shared/components';
-import { TEXTS } from '@/shared/consts/texts';
+import { Avatar, TEXTS } from '@/shared';
 
 import styles from './userInfo.module.scss';
 

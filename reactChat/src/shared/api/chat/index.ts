@@ -1,3 +1,3 @@
-export { getChats } from './chat';
+export * from './chat';
 
 export type { IChat } from './types';

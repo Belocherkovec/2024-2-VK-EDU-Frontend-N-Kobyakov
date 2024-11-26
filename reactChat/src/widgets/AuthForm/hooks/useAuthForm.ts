@@ -1,7 +1,6 @@
-import { AppDispatch } from '@/app/store';
-import { setUserAuthorized, setUserInfo } from '@/entities/User/model';
-import { getCurrentUser, login as loginRequest } from '@/shared/api/user';
-import { TEXTS } from '@/shared/consts';
+import { AppDispatch } from '@/app';
+import { setUserAuthorized, setUserInfo } from '@/entities/User';
+import { getCurrentUser, loginRequest, TEXTS } from '@/shared';
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 

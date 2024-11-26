@@ -1,6 +1,4 @@
-import { Input } from '@/shared/components';
-import { FileInput } from '@/shared/components/inputs/FileInput';
-import { TEXTS } from '@/shared/consts';
+import { FileInput, Input, TEXTS } from '@/shared';
 import cn from 'classnames';
 
 import { useRegistrationForm } from './hooks';

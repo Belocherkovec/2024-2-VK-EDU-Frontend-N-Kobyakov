@@ -1,4 +1,4 @@
-import { registrationRequest } from '@/shared/api/user';
+import { registrationRequest } from '@/shared';
 import { AxiosResponse } from 'axios';
 import { useCallback, useEffect, useState } from 'react';
 

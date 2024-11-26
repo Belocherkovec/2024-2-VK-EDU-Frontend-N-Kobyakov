@@ -1,5 +1,5 @@
 import { Header, HeaderThemes } from '@/features/Header';
-import { BackButton } from '@/shared/components/buttons';
+import { BackButton } from '@/shared';
 
 import { UserInfo } from './ui';
 

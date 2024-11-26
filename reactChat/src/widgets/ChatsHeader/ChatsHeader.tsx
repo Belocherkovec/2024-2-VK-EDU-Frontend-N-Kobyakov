@@ -1,11 +1,11 @@
 import { Header, HeaderThemes } from '@/features/Header';
-import { SearchInput } from '@/shared/components';
 import {
   BackButton,
   MenuRoundedButton,
-  SearchButton
-} from '@/shared/components/buttons';
-import { TEXTS } from '@/shared/consts/texts';
+  SearchButton,
+  SearchInput,
+  TEXTS
+} from '@/shared';
 
 import { useChatsHeader } from './hooks/useChatsHeader';
 import styles from './сhatsHeader.module.scss';

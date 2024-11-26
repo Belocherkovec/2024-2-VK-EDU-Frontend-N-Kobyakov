@@ -1,3 +1,9 @@
 export { centrifugoConnect } from './centrifugo';
 
-export type { ICentrifugoResponse } from './types';
+export type {
+  ICentrifugoEvent,
+  ICentrifugoResponse,
+  TCentrifugoEventTypes
+} from './types';
+
+export { CentrifugoEventTypes } from './types';

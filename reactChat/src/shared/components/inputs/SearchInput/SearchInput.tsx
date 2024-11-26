@@ -1,6 +1,5 @@
-import { TEXTS } from '@/shared/consts/texts';
-
-import { useSearchInput } from './hooks/useSearchInput';
+import { TEXTS } from '../../../consts';
+import { useSearchInput } from './hooks';
 import styles from './searchInput.module.scss';
 
 export const SearchInput: React.FC<{

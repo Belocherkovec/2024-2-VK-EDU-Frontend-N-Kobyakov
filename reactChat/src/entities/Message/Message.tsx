@@ -1,5 +1,4 @@
-import { StatusMark } from '@/shared/components';
-import { TMessageStatuses } from '@/shared/consts/statuses';
+import { StatusMark, TMessageStatuses } from '@/shared';
 import cn from 'classnames';
 import { forwardRef } from 'react';
 

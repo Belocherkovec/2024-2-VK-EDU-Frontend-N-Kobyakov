@@ -1,8 +1,9 @@
 import { selectUserIsAuthenticated } from '@/entities/User';
-import { RoutePaths } from '@/shared/consts';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
+
+import { RoutePaths } from '../consts';
 
 export const useAuthRedirect = () => {
   const isAuthorized = useSelector(selectUserIsAuthenticated);

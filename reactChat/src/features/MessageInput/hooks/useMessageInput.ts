@@ -1,4 +1,4 @@
-import { TEXTS } from '@/shared/consts/texts';
+import { TEXTS } from '@/shared';
 import { useState } from 'react';
 
 export const UseMessageInput = (

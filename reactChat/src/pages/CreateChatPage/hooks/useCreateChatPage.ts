@@ -1,7 +1,6 @@
-import { AppDispatch } from '@/app/store';
-import { selectUsersIds, selectUsersMap } from '@/entities/User/model';
-import { fetchUsers } from '@/entities/User/model/User.thunk';
-import { createPrivateChat } from '@/shared/api/chat/chat';
+import { AppDispatch } from '@/app';
+import { fetchUsers, selectUsersIds, selectUsersMap } from '@/entities/User';
+import { createPrivateChat } from '@/shared';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 

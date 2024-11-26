@@ -1,7 +1,7 @@
-import { TEXTS } from '@/shared/consts';
-import { convertBytesToHuman } from '@/shared/utils/convertBytesToHuman';
 import { useRef } from 'react';
 
+import { TEXTS } from '../../../../consts';
+import { convertBytesToHuman } from '../../../../utils';
 import { IFileInputProps } from '../FileInput';
 
 export const useFileInput = (props: IFileInputProps) => {

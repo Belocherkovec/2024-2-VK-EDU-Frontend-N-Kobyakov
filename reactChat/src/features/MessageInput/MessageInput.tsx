@@ -1,4 +1,4 @@
-import { TEXTS } from '@/shared/consts/texts';
+import { TEXTS } from '@/shared';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import cn from 'classnames';
 

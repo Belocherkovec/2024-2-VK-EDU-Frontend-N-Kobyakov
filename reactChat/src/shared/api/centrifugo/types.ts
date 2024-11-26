@@ -1,4 +1,4 @@
-import { IMessage } from '@/shared/api/message';
+import { IMessage } from '../message';
 
 export interface ICentrifugoResponse {
   token: string;

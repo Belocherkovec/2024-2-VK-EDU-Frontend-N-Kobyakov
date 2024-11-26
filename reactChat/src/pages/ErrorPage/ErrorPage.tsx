@@ -1,11 +1,10 @@
-import { useErrorPage } from '@/pages/ErrorPage/hooks/useErrorPage';
-import { RoutePaths } from '@/shared/consts';
-import { TEXTS } from '@/shared/consts/texts';
+import { RoutePaths, TEXTS } from '@/shared';
 import ErrorOutlineRoundedIcon from '@mui/icons-material/ErrorOutlineRounded';
 import cn from 'classnames';
 import { Link } from 'react-router-dom';
 
 import styles from './errorPage.module.scss';
+import { useErrorPage } from './hooks';
 
 export const ErrorPage: React.FC = () => {
   const { errorMessage, handleClearButtonClick } = useErrorPage();

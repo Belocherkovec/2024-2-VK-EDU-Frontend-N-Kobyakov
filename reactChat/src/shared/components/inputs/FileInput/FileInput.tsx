@@ -3,7 +3,7 @@ import InsertDriveFileRoundedIcon from '@mui/icons-material/InsertDriveFileRound
 import cn from 'classnames';
 
 import styles from './FileInput.module.scss';
-import { useFileInput } from './hooks/useFileInput';
+import { useFileInput } from './hooks';
 
 export interface IFileInputProps {
   accept?: string;

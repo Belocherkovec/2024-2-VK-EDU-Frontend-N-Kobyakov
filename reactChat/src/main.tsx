@@ -1,5 +1,4 @@
-import { AppRouter } from '@/app/routers';
-import { store } from '@/app/store';
+import { AppRouter, store } from '@/app';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';

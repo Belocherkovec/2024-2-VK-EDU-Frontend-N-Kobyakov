@@ -1,10 +1,8 @@
-import { $api } from '@/shared/api';
-import {
-  ICreateChatResponse,
-  IGetChatsResponse
-} from '@/shared/api/chat/types';
-import { buildUrlWithQuery } from '@/shared/utils/urlUtils';
 import { AxiosResponse } from 'axios';
+
+import { buildUrlWithQuery } from '../../utils';
+import { $api } from '../api';
+import { ICreateChatResponse, IGetChatsResponse } from './types';
 
 type IGetChatsQueryParams = {
   page?: number;

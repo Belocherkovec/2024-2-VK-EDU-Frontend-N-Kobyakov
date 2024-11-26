@@ -1,9 +1,8 @@
-import { Input } from '@/shared/components';
-import { TEXTS } from '@/shared/consts';
+import { Input, TEXTS } from '@/shared';
 import cn from 'classnames';
 
 import styles from './authForm.module.scss';
-import { useAuthForm } from './hooks/useAuthForm';
+import { useAuthForm } from './hooks';
 
 export const AuthForm: React.FC = () => {
   const {

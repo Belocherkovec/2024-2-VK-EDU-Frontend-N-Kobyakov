@@ -1,8 +1,7 @@
-import { useApp } from '@/app/hooks/useApp';
+import { Outlet } from 'react-router-dom';
 
 import './app.scss';
-
-import { Outlet } from 'react-router-dom';
+import { useApp } from './hooks';
 
 export const App = () => {
   useApp();

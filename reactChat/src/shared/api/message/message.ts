@@ -1,8 +1,7 @@
-import { $api } from '@/shared/api';
-import { buildUrlWithQuery } from '@/shared/utils/urlUtils';
-import { data } from 'autoprefixer';
 import { AxiosResponse } from 'axios';
 
+import { buildUrlWithQuery } from '../../utils';
+import { $api } from '../api';
 import { ICreateMessageRequest, IGetMessagesResponse, IMessage } from './types';
 
 type IGetMessageQueryParams = {
@@ -46,4 +45,4 @@ export const createMessage = (
 export const postReadMessage = (
   msgId: string
 ): Promise<AxiosResponse<IMessage>> =>
-  $api.post<IMessage>(`message/${msgId}/read/`, data, {});
+  $api.post<IMessage>(`message/${msgId}/read/`, {});

@@ -1,6 +1,6 @@
-import { buildUrlWithQuery } from '@/shared/utils/urlUtils';
 import axios, { AxiosResponse } from 'axios';
 
+import { buildUrlWithQuery } from '../../utils/urlUtils';
 import { $api } from '../api';
 import {
   IAuthResponse,
@@ -34,7 +34,7 @@ export const registrationRequest = (
     });
 };
 
-export const login = (
+export const loginRequest = (
   username: string,
   password: string,
   callback?: (isAuth: boolean) => void

@@ -1,6 +1,7 @@
-import { resetUsersState } from '@/entities/User/model/User.slice';
-import { getCurrentUser, getUsers, IUser } from '@/shared/api/user';
+import { getCurrentUser, getUsers, IUser } from '@/shared';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+
+import { resetUsersState } from './User.slice';
 
 export const fetchUsers = createAsyncThunk<IUser[], void>(
   'user/fetchUsers',

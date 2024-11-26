@@ -1,6 +1,10 @@
 export { Avatar } from './Avatar';
 
+export * from './buttons';
+
 export { CheckMark } from './CheckMark';
+
+export * from './inputs';
 
 export { Input } from './inputs/Input';
 

@@ -1,4 +1,4 @@
-import { Avatar } from '@/shared/components';
+import { Avatar } from '@/shared';
 import React from 'react';
 
 import styles from './user.module.scss';

@@ -1,17 +1,18 @@
-import { App } from '@/app';
-import { PrivateRoute } from '@/app/routers/PrivateRoute';
 import {
+  AuthPage,
   ChatsPage,
+  CreateChatPage,
   DialogPage,
   EditProfilePage,
   ErrorPage,
-  NotFoundPage
+  NotFoundPage,
+  RegistrationPage
 } from '@/pages';
-import { AuthPage } from '@/pages/AuthPage';
-import { CreateChatPage } from '@/pages/CreateChatPage/CreateChatPage';
-import { RegistrationPage } from '@/pages/RegistrationPage';
-import { RoutePaths } from '@/shared/consts';
+import { RoutePaths } from '@/shared';
 import { createHashRouter, RouterProvider } from 'react-router-dom';
+
+import { App } from '../App';
+import { PrivateRoute } from './PrivateRoute';
 
 const router = createHashRouter([
   {

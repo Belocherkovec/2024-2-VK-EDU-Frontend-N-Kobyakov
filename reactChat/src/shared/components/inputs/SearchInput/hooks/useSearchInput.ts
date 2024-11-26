@@ -1,5 +1,6 @@
-import { TEXTS } from '@/shared/consts/texts.ts';
 import { useEffect, useRef, useState } from 'react';
+
+import { TEXTS } from '../../../../consts';
 
 export const useSearchInput = (
   value?: string,

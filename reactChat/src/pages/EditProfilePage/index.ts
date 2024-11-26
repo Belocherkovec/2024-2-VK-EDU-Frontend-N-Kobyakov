@@ -1,1 +1,1 @@
-export { EditProfilePage } from './EditProfilePage.tsx';
+export { EditProfilePage } from './EditProfilePage';

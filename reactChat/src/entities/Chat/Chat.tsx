@@ -1,6 +1,4 @@
-import { Avatar } from '@/shared/components';
-import { RoutePaths } from '@/shared/consts';
-import { TEXTS } from '@/shared/consts/texts';
+import { Avatar, RoutePaths, TEXTS } from '@/shared';
 import cn from 'classnames';
 import React from 'react';
 import { Link } from 'react-router-dom';

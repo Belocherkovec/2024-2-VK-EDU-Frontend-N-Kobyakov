@@ -1,0 +1,1 @@
+export { useSearchInput } from './useSearchInput';
