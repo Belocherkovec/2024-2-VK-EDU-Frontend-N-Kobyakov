@@ -1,9 +1,8 @@
 import { selectUserIsAuthenticated } from '@/entities/User';
+import { PublicPaths, RoutePaths } from '@/shared';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
-
-import { RoutePaths } from '../consts';
 
 export const useAuthRedirect = () => {
   const isAuthorized = useSelector(selectUserIsAuthenticated);
@@ -11,18 +10,24 @@ export const useAuthRedirect = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    sessionStorage.setItem('lastVisitedUrl', location.pathname);
+    if (location.pathname === RoutePaths.initial) {
+      const from = isAuthorized ? RoutePaths.chatsPage : RoutePaths.authPage;
 
-    return () => sessionStorage.removeItem('lastVisitedUrl');
-  }, [location.pathname]);
-
-  useEffect(() => {
-    if (isAuthorized) {
-      if (history.length < 3) {
-        navigate(RoutePaths.chatsPage, { replace: true });
-      } else {
-        navigate(-1);
-      }
+      navigate(from, { replace: true });
     }
-  }, [isAuthorized]);
+
+    if (
+      isAuthorized &&
+      Object.values(PublicPaths).some((path) =>
+        location.pathname.includes(path)
+      )
+    ) {
+      const from =
+        sessionStorage.getItem('lastVisitedUrl') || RoutePaths.chatsPage;
+
+      navigate(from, { replace: true });
+    }
+
+    sessionStorage.setItem('lastVisitedUrl', location.pathname);
+  }, [location.pathname, isAuthorized]);
 };

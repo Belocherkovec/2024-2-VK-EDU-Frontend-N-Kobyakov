@@ -1,6 +1,6 @@
 export { ErrorMessages, type IErrorMessages } from './errorMessages';
 
-export { RoutePaths } from './routePaths';
+export { PublicPaths, RoutePaths } from './routePaths';
 
 export { MessageStatuses, type TMessageStatuses } from './statuses';
 
