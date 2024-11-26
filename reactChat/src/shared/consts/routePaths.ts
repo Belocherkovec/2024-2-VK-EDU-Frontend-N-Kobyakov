@@ -4,5 +4,7 @@ export const RoutePaths = {
   createChatPage: '/chats/create',
   dialogPage: '/dialog/:chatId',
   editProfilePage: '/profile/edit/:profileId',
+  main: '',
+  notFound: '*',
   registrationPage: '/registration'
 };

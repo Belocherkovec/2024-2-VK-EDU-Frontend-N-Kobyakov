@@ -4,7 +4,7 @@ import {
   deleteMessage,
   updateMessage
 } from '@/entities/Message/model';
-import { selectUserInfo, setUserUnauthorized } from '@/entities/User/model';
+import { selectUserInfo, setUserUnauthorized } from '@/entities/User';
 import { fetchCurrentUser } from '@/entities/User/model/User.thunk';
 import { setupRefreshInterceptor } from '@/shared/api';
 import { centrifugoConnect } from '@/shared/api/centrifugo';
@@ -12,13 +12,14 @@ import {
   CentrifugoEventTypes,
   ICentrifugoEvent
 } from '@/shared/api/centrifugo/types';
+import { useAuthRedirect } from '@/shared/hooks';
 import { Centrifuge, Subscription } from 'centrifuge';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { AppRouter } from './routers';
+export const useApp = () => {
+  useAuthRedirect();
 
-export const AppInit = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const selectCurrentUserInfo = useSelector(selectUserInfo);
@@ -76,6 +77,4 @@ export const AppInit = () => {
         break;
     }
   };
-
-  return <AppRouter />;
 };

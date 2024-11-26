@@ -1,15 +1,11 @@
+import { useApp } from '@/app/hooks/useApp';
+
 import './app.scss';
 
-import { Provider } from 'react-redux';
+import { Outlet } from 'react-router-dom';
 
-import { AppInit } from './AppInit';
-import { StoreProvider } from './oldStore';
-import { store } from './store';
+export const App = () => {
+  useApp();
 
-export const App = () => (
-  <StoreProvider>
-    <Provider store={store}>
-      <AppInit />
-    </Provider>
-  </StoreProvider>
-);
+  return <Outlet />;
+};

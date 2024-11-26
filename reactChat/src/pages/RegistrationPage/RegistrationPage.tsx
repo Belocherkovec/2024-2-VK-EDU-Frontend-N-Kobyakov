@@ -6,8 +6,6 @@ import { RegistrationForm } from '@/widgets';
 import styles from './registrationPage.module.scss';
 
 export const RegistrationPage: React.FC = () => (
-  // useAuthRedirect();
-
   <section className={styles.registration}>
     <Logo className={styles.registration__logo} />
     <h1 className={styles.registration__title}>
