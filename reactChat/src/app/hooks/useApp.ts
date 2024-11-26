@@ -9,10 +9,11 @@ import {
   setUserUnauthorized
 } from '@/entities/User';
 import {
-  centrifugoConnect,
   CentrifugoEventTypes,
   ICentrifugoEvent,
+  initAndStartCentrifugo,
   setupRefreshInterceptor,
+  switchStatusOffline,
   useAuthRedirect
 } from '@/shared';
 import { Centrifuge, Subscription } from 'centrifuge';
@@ -46,7 +47,7 @@ export const useApp = () => {
   useEffect(() => {
     if (selectCurrentUserInfo.id) {
       setCentrifugeObj(
-        centrifugoConnect(selectCurrentUserInfo.id, handlePublicationEvent)
+        initAndStartCentrifugo(selectCurrentUserInfo.id, handlePublicationEvent)
       );
     }
 
@@ -55,6 +56,7 @@ export const useApp = () => {
         centrifugeObj.centrifuge.disconnect();
         centrifugeObj.subscription.removeAllListeners();
         centrifugeObj.subscription.unsubscribe();
+        switchStatusOffline();
       }
     };
   }, [selectCurrentUserInfo]);

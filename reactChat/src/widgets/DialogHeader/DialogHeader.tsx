@@ -1,5 +1,5 @@
 import { Header, HeaderThemes } from '@/features/Header';
-import { BackButton } from '@/shared';
+import { BackButton, RoutePaths } from '@/shared';
 
 import { UserInfo } from './ui';
 
@@ -11,7 +11,7 @@ export const DialogHeader: React.FC<{
   <Header
     centerNode={<UserInfo avatar={avatar} title={title} />}
     className={className}
-    leftNode={<BackButton />}
+    leftNode={<BackButton to={RoutePaths.chatsPage} isReplace />}
     theme={HeaderThemes.WHITE}
   />
 );

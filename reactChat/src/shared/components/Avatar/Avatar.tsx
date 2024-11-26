@@ -5,14 +5,17 @@ import { Loader } from '../Loader';
 import styles from './avatar.module.scss';
 import { useAvatar } from './hooks';
 
-export const Avatar: React.FC<{
+export interface IAvatarProps {
   alt?: string;
   className?: string;
   firstName: string;
   lastName: string;
   src: null | string;
-}> = ({ alt, className, firstName = '', lastName = '', src }) => {
-  const { getRandomColor, handleLoaded, isLoaded } = useAvatar(src);
+}
+
+export const Avatar: React.FC<IAvatarProps> = (props) => {
+  const { alt, className, firstName = '', lastName = '', src } = props;
+  const { handleLoaded, isLoaded } = useAvatar(props);
 
   return (
     <fieldset
@@ -27,10 +30,7 @@ export const Avatar: React.FC<{
           src={src}
         />
       ) : (
-        <div
-          className={styles.fieldset__userInitials}
-          style={{ backgroundColor: `#${getRandomColor()}` }}
-        >
+        <div className={styles.fieldset__userInitials}>
           {firstName[0]}
           {lastName[0]}
         </div>

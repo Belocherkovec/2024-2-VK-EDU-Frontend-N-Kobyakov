@@ -1,4 +1,4 @@
-export { centrifugoConnect } from './centrifugo';
+export { initAndStartCentrifugo } from './centrifugo';
 
 export type {
   ICentrifugoEvent,

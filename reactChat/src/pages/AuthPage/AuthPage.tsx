@@ -9,7 +9,6 @@ export const AuthPage: React.FC = () => (
     <h1 className={styles.auth__title}>{TEXTS.pages.auth.title}</h1>
     <AuthForm />
     <TextLink
-      isReplace
       label={TEXTS.pages.auth.noAccount}
       linkText={TEXTS.pages.auth.toRegistration}
       src={RoutePaths.registrationPage}

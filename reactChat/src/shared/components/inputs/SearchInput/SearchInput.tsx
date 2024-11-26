@@ -7,7 +7,15 @@ export const SearchInput: React.FC<{
   onSearch?: (value: string) => void;
   placeholder?: string;
   value?: string;
-}> = ({ onChange, onSearch, placeholder = TEXTS.empty, value, ...props }) => {
+  isAutocomplete?: boolean;
+}> = ({
+  onChange,
+  onSearch,
+  placeholder = TEXTS.empty,
+  value,
+  isAutocomplete,
+  ...props
+}) => {
   const { handleChange, handleKeyUp, innerValue } = useSearchInput(
     value,
     onSearch
@@ -22,6 +30,7 @@ export const SearchInput: React.FC<{
       placeholder={placeholder}
       type="text"
       value={value || innerValue}
+      autoComplete={isAutocomplete ? 'on' : 'off'}
       {...props}
     />
   );

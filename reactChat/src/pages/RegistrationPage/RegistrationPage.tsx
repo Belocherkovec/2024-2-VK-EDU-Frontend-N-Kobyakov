@@ -11,7 +11,6 @@ export const RegistrationPage: React.FC = () => (
     </h1>
     <RegistrationForm />
     <TextLink
-      isReplace
       label={TEXTS.pages.registration.hasAccount}
       linkText={TEXTS.pages.registration.toAuth}
       src={RoutePaths.authPage}

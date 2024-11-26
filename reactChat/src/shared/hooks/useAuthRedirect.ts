@@ -22,8 +22,15 @@ export const useAuthRedirect = () => {
         location.pathname.includes(path)
       )
     ) {
+      const lastVisitedUrl = sessionStorage.getItem('lastVisitedUrl');
+
       const from =
-        sessionStorage.getItem('lastVisitedUrl') || RoutePaths.chatsPage;
+        lastVisitedUrl &&
+        !Object.values(PublicPaths).some((path) =>
+          lastVisitedUrl.includes(path)
+        )
+          ? lastVisitedUrl
+          : RoutePaths.chatsPage;
 
       navigate(from, { replace: true });
     }

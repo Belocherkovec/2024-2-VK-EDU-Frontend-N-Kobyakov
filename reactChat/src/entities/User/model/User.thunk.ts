@@ -1,13 +1,13 @@
-import { getCurrentUser, getUsers, IUser } from '@/shared';
+import { getUsers, IUser, switchStatusOnline } from '@/shared';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { resetUsersState } from './User.slice';
 
-export const fetchUsers = createAsyncThunk<IUser[], void>(
+export const fetchUsers = createAsyncThunk<IUser[], string | undefined>(
   'user/fetchUsers',
-  async (_, thunkAPI) => {
+  async (searchStr, thunkAPI) => {
     try {
-      const response = await getUsers(200);
+      const response = await getUsers(200, undefined, searchStr);
 
       return response.data.results;
     } catch {
@@ -22,7 +22,7 @@ export const fetchCurrentUser = createAsyncThunk<IUser, void>(
   'user/fetchCurrentUser',
   async (_, thunkAPI) => {
     try {
-      const response = await getCurrentUser();
+      const response = await switchStatusOnline();
 
       return response.data;
     } catch {

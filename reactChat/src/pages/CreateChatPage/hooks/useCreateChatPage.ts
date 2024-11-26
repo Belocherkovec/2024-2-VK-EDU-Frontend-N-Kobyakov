@@ -1,10 +1,10 @@
 import { AppDispatch } from '@/app';
-import { addChat } from '@/entities/Chat';
 import { fetchUsers, selectUsersIds, selectUsersMap } from '@/entities/User';
-import { createPrivateChat, getChat, RoutePaths } from '@/shared';
+import { createPrivateChat, RoutePaths } from '@/shared';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { addChat } from '@/entities/Chat';
 
 export const useCreateChatPage = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -15,14 +15,8 @@ export const useCreateChatPage = () => {
   const handleUserClick = async (id: string) => {
     const createChatResult = await createPrivateChat(id);
 
-    let getCreatedChatInfo;
-
     if (createChatResult.status === 201) {
-      getCreatedChatInfo = await getChat(createChatResult.data.id);
-    }
-
-    if (getCreatedChatInfo && getCreatedChatInfo.status === 200) {
-      dispatch(addChat(getCreatedChatInfo.data));
+      dispatch(addChat(createChatResult.data));
     }
 
     navigate(

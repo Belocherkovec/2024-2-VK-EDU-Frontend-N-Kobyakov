@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios';
 
 import { buildUrlWithQuery } from '../../utils';
 import { $api } from '../api';
-import { IChat, ICreateChatResponse, IGetChatsResponse } from './types';
+import { IChat, IGetChatsResponse } from './types';
 
 type IGetChatsQueryParams = {
   page?: number;
@@ -36,8 +36,8 @@ export const getChat = (uuid: string) => $api.get<IChat>(`chat/${uuid}/`);
 
 export const createPrivateChat = (
   interlocutorId: string
-): Promise<AxiosResponse<ICreateChatResponse>> =>
-  $api.post<ICreateChatResponse>('chats/', {
+): Promise<AxiosResponse<IChat>> =>
+  $api.post<IChat>('chats/?fallback=on', {
     is_private: true,
     members: [interlocutorId]
   });

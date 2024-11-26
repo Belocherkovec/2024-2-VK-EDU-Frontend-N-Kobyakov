@@ -25,8 +25,12 @@ const selectors = {
 
 const reducers = {
   addChat: (state: IChatState, action: PayloadAction<IChat>) => {
-    state.chatMap[action.payload.id] = action.payload;
-    state.chatIds.push(action.payload.id);
+    const chatId = action.payload.id;
+
+    if (!state.chatMap[chatId]) {
+      state.chatMap[chatId] = action.payload;
+      state.chatIds.push(chatId);
+    }
   },
   resetChat: () => initialState,
   setChatIds: (state: IChatState, action: PayloadAction<string[]>) => {

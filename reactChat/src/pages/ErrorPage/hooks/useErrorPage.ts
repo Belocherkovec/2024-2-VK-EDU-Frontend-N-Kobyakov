@@ -3,6 +3,7 @@ import {
   useNavigate,
   useRouteError
 } from 'react-router-dom';
+import { RoutePaths } from '@/shared';
 
 export const useErrorPage = () => {
   const navigate = useNavigate();
@@ -20,7 +21,7 @@ export const useErrorPage = () => {
 
   const handleClearButtonClick = () => {
     localStorage.clear();
-    navigate('/');
+    navigate(RoutePaths.initial);
     location.reload();
   };
 

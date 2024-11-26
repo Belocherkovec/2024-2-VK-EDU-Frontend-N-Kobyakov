@@ -1,13 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
+import { IAvatarProps } from '../Avatar';
 
-export const useAvatar = (src: null | string) => {
-  const [isLoaded, setIsLoaded] = useState(false);
+export const useAvatar = (props: IAvatarProps) => {
+  const { src, firstName, lastName } = props;
+  const [isLoaded, setIsLoaded] = useState(!!(!src && (firstName || lastName)));
   const prevSrc = useRef(src);
 
   const handleLoaded = () => setIsLoaded(true);
-
-  const getRandomColor = () =>
-    Math.floor(Math.random() * 16777215).toString(16);
 
   useEffect(() => {
     if (!src) {
@@ -21,7 +20,6 @@ export const useAvatar = (src: null | string) => {
   }, [src]);
 
   return {
-    getRandomColor,
     handleLoaded,
     isLoaded
   };
