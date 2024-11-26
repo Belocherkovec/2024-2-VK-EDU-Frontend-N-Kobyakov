@@ -16,7 +16,12 @@ export const AuthForm: React.FC = () => {
   } = useAuthForm();
 
   return (
-    <form className={styles.form} noValidate onSubmit={handleSubmit}>
+    <form
+      autoComplete="off"
+      className={styles.form}
+      noValidate
+      onSubmit={handleSubmit}
+    >
       {isLoginError && (
         <span className={styles.form__error}>{TEXTS.errors.loginError}</span>
       )}

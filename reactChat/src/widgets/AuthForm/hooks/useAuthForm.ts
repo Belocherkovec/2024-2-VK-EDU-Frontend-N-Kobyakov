@@ -60,7 +60,7 @@ export const useAuthForm = () => {
 
   const resetForm = () => {
     setFormValues({ login: TEXTS.empty, password: TEXTS.empty });
-    setIsFormValid({ login: false, password: false });
+    setIsFormValid({ login: true, password: true });
   };
 
   const isDisabled = () =>
