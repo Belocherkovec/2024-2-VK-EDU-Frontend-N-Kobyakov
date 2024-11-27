@@ -14,7 +14,7 @@ export const RegistrationForm = () => {
     handleSubmit,
     isDisabled,
     isFormValid,
-    isRegistrationError
+    registrationErrors
   } = useRegistrationForm();
 
   return (
@@ -24,23 +24,30 @@ export const RegistrationForm = () => {
       noValidate
       onSubmit={handleSubmit}
     >
-      {isRegistrationError && (
-        <span className={styles.form__error}>{TEXTS.errors.loginError}</span>
+      {!!registrationErrors.length && (
+        <div className={cn(styles.form__errorBlock)}>
+          {registrationErrors.map((error) => (
+            <p className={styles.form__error} key={error}>
+              {error}
+            </p>
+          ))}
+        </div>
       )}
       <fieldset className={styles.form__group}>
         <Input
-          isError={isRegistrationError || !isFormValid.username}
+          isError={!!registrationErrors.length || !isFormValid.username}
           label={TEXTS.pages.registration.login}
           minLength={3}
           name={'username'}
           onChange={handleFormChange}
           onValidChange={handleFormValidChange}
-          pattern="^[a-zA-Z0-9]+$"
+          pattern="^[\w.@+\-]+$"
           required
+          patternMessage={TEXTS.pages.registration.UsernameMismatchError}
           value={username}
         />
         <Input
-          isError={isRegistrationError || !isFormValid.firstName}
+          isError={!!registrationErrors.length || !isFormValid.firstName}
           label={TEXTS.pages.registration.firstName}
           name={'firstName'}
           onChange={handleFormChange}
@@ -49,7 +56,7 @@ export const RegistrationForm = () => {
           value={firstName}
         />
         <Input
-          isError={isRegistrationError || !isFormValid.lastName}
+          isError={!!registrationErrors.length || !isFormValid.lastName}
           label={TEXTS.pages.registration.lastName}
           name={'lastName'}
           onChange={handleFormChange}
@@ -76,14 +83,16 @@ export const RegistrationForm = () => {
       </fieldset>
       <fieldset className={styles.form__group}>
         <Input
-          isError={isRegistrationError || !isFormValid.password}
+          isError={!!registrationErrors.length || !isFormValid.password}
           label={TEXTS.pages.registration.password}
-          minLength={3}
+          minLength={8}
           name="password"
           onChange={handleFormChange}
           onValidChange={handleFormValidChange}
           required
           type="password"
+          pattern="^(?!\d+$).+"
+          patternMessage={TEXTS.pages.registration.PasswordMismatchError}
           value={password}
         />
       </fieldset>

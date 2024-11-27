@@ -15,6 +15,7 @@ interface IInputProps
   ) => void;
   onValidChange?: (name: string, value: boolean) => void;
   resize?: boolean;
+  patternMessage?: string;
 }
 
 const InputComponent: React.FC<IInputProps> = ({
@@ -28,6 +29,7 @@ const InputComponent: React.FC<IInputProps> = ({
   resize = false,
   type = 'text',
   value,
+  patternMessage,
   ...props
 }) => {
   const {
@@ -44,7 +46,8 @@ const InputComponent: React.FC<IInputProps> = ({
     isError,
     onChange,
     onValidChange,
-    type
+    type,
+    patternMessage
   });
 
   return (

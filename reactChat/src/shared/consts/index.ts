@@ -1,4 +1,8 @@
-export { ErrorMessages, type IErrorMessages } from './errorMessages';
+export {
+  ErrorMessages,
+  type IErrorMessages,
+  type KErrorMessages
+} from './errorMessages';
 
 export { PublicPaths, RoutePaths } from './routePaths';
 

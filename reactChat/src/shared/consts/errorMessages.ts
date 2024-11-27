@@ -1,3 +1,5 @@
+export type KErrorMessages = keyof IErrorMessages;
+
 export interface IErrorMessages {
   patternMismatch: ({ title }: { title: string }) => string;
   tooLong: ({ maxLength }: { maxLength: string }) => string;

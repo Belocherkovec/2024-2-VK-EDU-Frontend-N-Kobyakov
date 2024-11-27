@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 
-import { ErrorMessages, IErrorMessages, TEXTS } from '../../../../consts';
+import { ErrorMessages, KErrorMessages, TEXTS } from '../../../../consts';
 
 interface IUseInputProps {
   isError: boolean;
@@ -9,6 +9,7 @@ interface IUseInputProps {
   ) => void;
   onValidChange?: (name: string, value: boolean) => void;
   type?: string;
+  patternMessage?: string;
 }
 
 interface IUseInputReturnProps {
@@ -29,7 +30,8 @@ export const useInput = ({
   isError,
   onChange,
   onValidChange,
-  type = 'text'
+  type = 'text',
+  patternMessage
 }: IUseInputProps): IUseInputReturnProps => {
   const TIMEOUT = 500;
   const [innerValue, setInnerValue] = useState(TEXTS.empty);
@@ -50,8 +52,18 @@ export const useInput = ({
     const innerErrorMessages: string[] = [];
 
     Object.entries(ErrorMessages).forEach(([errorType, getErrorMessage]) => {
-      if (errors[errorType as keyof IErrorMessages]) {
-        innerErrorMessages.push(getErrorMessage(inputRef.current));
+      const getPropWithKey = (key: KErrorMessages): string => {
+        let result;
+        if (key === 'patternMismatch' && patternMessage) {
+          result = getErrorMessage({ title: patternMessage });
+        } else {
+          result = getErrorMessage(inputRef.current);
+        }
+        return result;
+      };
+
+      if (errors[errorType as KErrorMessages]) {
+        innerErrorMessages.push(getPropWithKey(errorType as KErrorMessages));
       }
     });
 

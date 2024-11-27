@@ -1,6 +1,35 @@
-import { registrationRequest } from '@/shared';
-import { AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from 'axios';
+import { registrationRequest, TEXTS } from '@/shared';
 import { useCallback, useEffect, useState } from 'react';
+
+interface IErrorResponse {
+  username?: string[];
+  password?: string[];
+}
+
+const getRegistrationErrors = (responseData: IErrorResponse): string[] => {
+  const { username, password } = responseData;
+  const result = [];
+
+  if (
+    username &&
+    username.includes('A user with that username already exists.')
+  ) {
+    result.push(TEXTS.pages.registration.NonUniqueError);
+  }
+
+  if (password && password.includes('This password is too common.')) {
+    result.push(TEXTS.pages.registration.CommonPasswordError);
+  }
+  if (password && password.includes('This password is entirely numeric.')) {
+    result.push(TEXTS.pages.registration.OnlyNumberPasswordError);
+  }
+  if (password && !result.length) {
+    result.push(TEXTS.pages.registration.UnknownError);
+  }
+
+  return result.sort((a, b) => a.length - b.length);
+};
 
 export const useRegistrationForm = () => {
   const [formValues, setFormValues] = useState({
@@ -19,11 +48,11 @@ export const useRegistrationForm = () => {
   });
 
   const [avatar, setAvatar] = useState<File | null>(null);
-  const [isRegistrationError, setIsRegistrationError] = useState(false);
+  const [registrationErrors, setRegistrationErrors] = useState<string[]>([]);
 
   useEffect(() => {
-    if (isRegistrationError) {
-      setIsRegistrationError(false);
+    if (registrationErrors.length) {
+      setRegistrationErrors([]);
     }
   }, [formValues]);
 
@@ -60,9 +89,17 @@ export const useRegistrationForm = () => {
     resetForm();
   };
 
-  const handleRegistrationResponse = (response: AxiosResponse) => {
-    if (response.status >= 400) {
-      setIsRegistrationError(true);
+  const handleRegistrationResponse = (response: AxiosResponse | AxiosError) => {
+    const handleErrorRegistrationResponse = (error: AxiosError) => {
+      if (error.response) {
+        setRegistrationErrors(
+          getRegistrationErrors(error.response.data as IErrorResponse)
+        );
+      }
+    };
+
+    if (response.status && response.status >= 400) {
+      handleErrorRegistrationResponse(response as AxiosError);
     }
   };
 
@@ -102,6 +139,6 @@ export const useRegistrationForm = () => {
     handleSubmit,
     isDisabled,
     isFormValid,
-    isRegistrationError
+    registrationErrors
   };
 };
