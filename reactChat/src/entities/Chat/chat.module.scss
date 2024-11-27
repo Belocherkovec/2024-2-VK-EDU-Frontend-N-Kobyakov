@@ -37,7 +37,7 @@
     font-size: 1em;
   }
 
-  &__last-message {
+  &__lastMessage {
     font-size: 0.9em;
     color: $color-gray-dark;
 
@@ -54,12 +54,12 @@
     align-items: end;
   }
 
-  &__last-message-time {
+  &__last-messageTime {
     font-size: 0.9em;
     color: $color-gray-light;
   }
 
-  &__check-mark {
+  &__checkMark {
     color: $color-accent;
   }
 

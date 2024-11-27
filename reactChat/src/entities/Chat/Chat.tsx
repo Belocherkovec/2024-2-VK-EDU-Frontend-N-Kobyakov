@@ -1,4 +1,4 @@
-import { Avatar, RoutePaths, TEXTS } from '@/shared';
+import { Avatar, CheckMark, RoutePaths, TEXTS } from '@/shared';
 import cn from 'classnames';
 import React from 'react';
 import { Link } from 'react-router-dom';
@@ -7,7 +7,15 @@ import styles from './chat.module.scss';
 import { useChat } from './hooks/useChat';
 
 export const Chat: React.FC<{ chatId: string }> = ({ chatId }) => {
-  const { avatar, title } = useChat(chatId);
+  const {
+    avatar,
+    title,
+    isPrivate,
+    lastMessageText,
+    lastMessageTimestamp,
+    isUserMessage,
+    lastMessageStatus
+  } = useChat(chatId);
 
   return (
     <Link
@@ -20,32 +28,21 @@ export const Chat: React.FC<{ chatId: string }> = ({ chatId }) => {
         firstName={title.split(' ')[0]}
         lastName={title.split(' ')[1]}
         src={avatar}
+        isGroupChat={!isPrivate}
       />
       <div className={styles.dialog__user}>
         <h2 className={styles.dialog__username}>{title}</h2>
-        {/*<p className={styles['dialog__last-message']}>*/}
-        {/*  {!unreadMessage && draftMessage && <span>Черновик: </span>}*/}
-        {/*  {(!unreadMessage && draftMessage) || lastMessage?.text || TEXTS.empty}*/}
-        {/*</p>*/}
+        {lastMessageText && (
+          <p className={styles.dialog__lastMessage}>{lastMessageText}</p>
+        )}
       </div>
       <div className={styles.dialog__info}>
-        {/*<p className={styles['dialog__last-message-time']}>*/}
-        {/*  {lastMessage*/}
-        {/*    ? getFormattedDate(new Date(lastMessage?.sendDate))*/}
-        {/*    : TEXTS.empty}*/}
-        {/*</p>*/}
-        {/*<p className={styles['dialog__check-mark']}>*/}
-        {/*  {lastMessage ? (*/}
-        {/*    <CheckMark*/}
-        {/*      isShowUnread={lastMessage.author !== USERNAME}*/}
-        {/*      messageStatus={lastMessage.status}*/}
-        {/*      undeadMessagesCount={unreadMessage}*/}
-        {/*      unreadClassName={styles.dialog__unread}*/}
-        {/*    />*/}
-        {/*  ) : (*/}
-        {/*    TEXTS.empty*/}
-        {/*  )}*/}
-        {/*</p>*/}
+        <p className={styles.dialog__lastMessageTime}>{lastMessageTimestamp}</p>
+        {!isUserMessage && lastMessageText && (
+          <p className={styles.dialog__checkMark}>
+            <CheckMark messageStatus={lastMessageStatus} />
+          </p>
+        )}
       </div>
     </Link>
   );

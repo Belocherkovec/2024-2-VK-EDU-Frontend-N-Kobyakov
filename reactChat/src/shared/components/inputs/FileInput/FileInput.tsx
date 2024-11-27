@@ -2,7 +2,7 @@ import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import InsertDriveFileRoundedIcon from '@mui/icons-material/InsertDriveFileRounded';
 import cn from 'classnames';
 
-import styles from './FileInput.module.scss';
+import styles from './fileInput.module.scss';
 import { useFileInput } from './hooks';
 
 export interface IFileInputProps {

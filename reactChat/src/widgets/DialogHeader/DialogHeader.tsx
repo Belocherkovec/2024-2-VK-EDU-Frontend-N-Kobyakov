@@ -7,9 +7,12 @@ export const DialogHeader: React.FC<{
   avatar: null | string;
   className?: string;
   title: string;
-}> = ({ avatar, className, title }) => (
+  lastOnline?: string;
+}> = ({ avatar, className, title, lastOnline }) => (
   <Header
-    centerNode={<UserInfo avatar={avatar} title={title} />}
+    centerNode={
+      <UserInfo avatar={avatar} title={title} lastOnline={lastOnline} />
+    }
     className={className}
     leftNode={<BackButton to={RoutePaths.chatsPage} isReplace />}
     theme={HeaderThemes.WHITE}

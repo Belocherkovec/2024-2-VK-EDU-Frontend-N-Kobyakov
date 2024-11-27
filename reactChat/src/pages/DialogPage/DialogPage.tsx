@@ -15,12 +15,13 @@ export const DialogPage = () => {
     isUserMessage,
     messagesIdx,
     messagesMap,
+    lastOnline,
     title
   } = useDialogPage();
 
   return (
     <section className={styles.dialog}>
-      <DialogHeader avatar={avatar} title={title} />
+      <DialogHeader avatar={avatar} title={title} lastOnline={lastOnline} />
       <ul className={styles.dialog__messages}>
         {messagesIdx.map((msgId, idx) => (
           <Message

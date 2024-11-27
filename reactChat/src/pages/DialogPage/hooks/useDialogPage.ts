@@ -9,6 +9,7 @@ import {
 import { fetchUsers, selectUserInfo, selectUsersMap } from '@/entities/User';
 import {
   createMessage,
+  getFormattedDate,
   ICreateMessageRequest,
   postReadMessage,
   TEXTS,
@@ -29,10 +30,23 @@ export const useDialogPage = () => {
   const messagesMap = useSelector(selectMessagesMap);
   const user = useSelector(selectUserInfo);
 
-  const { avatar, title } = chats[chatId] || {
+  const {
+    avatar,
+    title,
+    members,
+    is_private: isPrivate
+  } = chats[chatId] || {
     avatar: null,
-    title: TEXTS.empty
+    title: TEXTS.empty,
+    members: {}
   };
+  const lastOnline = isPrivate
+    ? getFormattedDate(
+        new Date(
+          members.filter((member) => member.id !== user.id)[0].last_online_at
+        )
+      )
+    : undefined;
 
   useEffect(() => {
     document.body.style.backgroundColor = '#F0F1F5';
@@ -115,6 +129,7 @@ export const useDialogPage = () => {
 
   return {
     avatar,
+    lastOnline,
     chatId,
     handleAreaSend,
     handleSetRef,

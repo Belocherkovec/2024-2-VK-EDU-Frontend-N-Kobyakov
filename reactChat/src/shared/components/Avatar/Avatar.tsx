@@ -11,15 +11,31 @@ export interface IAvatarProps {
   firstName: string;
   lastName: string;
   src: null | string;
+  isOnline?: boolean;
+  isGroupChat?: boolean;
 }
 
 export const Avatar: React.FC<IAvatarProps> = (props) => {
-  const { alt, className, firstName = '', lastName = '', src } = props;
+  const {
+    alt,
+    className,
+    firstName = '',
+    lastName = '',
+    src,
+    isOnline,
+    isGroupChat
+  } = props;
   const { handleLoaded, isLoaded } = useAvatar(props);
 
   return (
     <fieldset
-      className={cn(styles.fieldset, isLoaded && styles._loaded, className)}
+      className={cn(
+        styles.fieldset,
+        isLoaded && styles._loaded,
+        isOnline && styles._isOnline,
+        isGroupChat && styles._isGroupChat,
+        className
+      )}
     >
       {!isLoaded && <Loader />}
       {src ? (
