@@ -7,6 +7,7 @@ export const TEXTS = {
     toMain: 'Вернуться на главную'
   },
   empty: '',
+  online: 'Онлайн',
   errors: {
     invalidNewUser: 'Не задано имя для нового пользователя',
     loginError:

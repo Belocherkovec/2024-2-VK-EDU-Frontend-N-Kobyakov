@@ -6,18 +6,27 @@ import { selectUserInfo } from '@/entities/User';
 import { getFormattedDate, MessageStatuses } from '@/shared';
 
 export const useChat = (userId: string) => {
-  const selectCurrentUserInfo = useSelector(selectUserInfo);
+  const currentUserInfo = useSelector(selectUserInfo);
   const chatData = useSelector((state: RootState) =>
     selectCurrentChat(state, userId)
   );
 
-  const { avatar, title, is_private: isPrivate, last_message } = chatData;
+  const {
+    avatar,
+    title,
+    is_private: isPrivate,
+    last_message,
+    members
+  } = chatData;
 
   const lastMessageText = last_message.text;
   const lastMessageTimestamp = last_message.created_at
     ? getFormattedDate(new Date(last_message.created_at))
     : undefined;
-  const isUserMessage = selectCurrentUserInfo.id === userId;
+  const isUserMessage = currentUserInfo.id === userId;
+  const isOnline = members.filter(
+    (member) => member.id !== currentUserInfo.id
+  )[0].is_online;
   const lastMessageStatus = last_message.was_read_by.length
     ? MessageStatuses.STATUS_READ
     : MessageStatuses.STATUS_SEND;
@@ -25,6 +34,7 @@ export const useChat = (userId: string) => {
   return {
     avatar,
     title,
+    isOnline,
     isPrivate,
     lastMessageText,
     isUserMessage,

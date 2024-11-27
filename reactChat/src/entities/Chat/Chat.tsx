@@ -14,6 +14,7 @@ export const Chat: React.FC<{ chatId: string }> = ({ chatId }) => {
     lastMessageText,
     lastMessageTimestamp,
     isUserMessage,
+    isOnline,
     lastMessageStatus
   } = useChat(chatId);
 
@@ -29,6 +30,7 @@ export const Chat: React.FC<{ chatId: string }> = ({ chatId }) => {
         lastName={title.split(' ')[1]}
         src={avatar}
         isGroupChat={!isPrivate}
+        isOnline={isOnline}
       />
       <div className={styles.dialog__user}>
         <h2 className={styles.dialog__username}>{title}</h2>

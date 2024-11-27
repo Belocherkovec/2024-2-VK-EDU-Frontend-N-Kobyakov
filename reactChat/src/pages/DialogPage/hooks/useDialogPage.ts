@@ -28,7 +28,7 @@ export const useDialogPage = () => {
   const users = useSelector(selectUsersMap);
   const messagesIdx = useSelector(selectMessagesIdx);
   const messagesMap = useSelector(selectMessagesMap);
-  const user = useSelector(selectUserInfo);
+  const currentUserInfo = useSelector(selectUserInfo);
 
   const {
     avatar,
@@ -38,15 +38,20 @@ export const useDialogPage = () => {
   } = chats[chatId] || {
     avatar: null,
     title: TEXTS.empty,
-    members: {}
+    members: []
   };
   const lastOnline = isPrivate
     ? getFormattedDate(
         new Date(
-          members.filter((member) => member.id !== user.id)[0].last_online_at
+          members.filter(
+            (member) => member.id !== currentUserInfo.id
+          )[0].last_online_at
         )
       )
     : undefined;
+  const isOnline = members.filter(
+    (member) => member.id !== currentUserInfo.id
+  )[0]?.is_online;
 
   useEffect(() => {
     document.body.style.backgroundColor = '#F0F1F5';
@@ -74,9 +79,9 @@ export const useDialogPage = () => {
 
     if (
       messagesMap[msgId].sender &&
-      user &&
-      user.id &&
-      messagesMap[msgId].sender.id !== user.id
+      currentUserInfo &&
+      currentUserInfo.id &&
+      messagesMap[msgId].sender.id !== currentUserInfo.id
     ) {
       result = true;
     }
@@ -130,6 +135,7 @@ export const useDialogPage = () => {
   return {
     avatar,
     lastOnline,
+    isOnline,
     chatId,
     handleAreaSend,
     handleSetRef,

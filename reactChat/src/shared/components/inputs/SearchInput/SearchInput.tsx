@@ -29,6 +29,7 @@ export const SearchInput: React.FC<{
       onKeyUp={handleKeyUp}
       placeholder={placeholder}
       type="text"
+      autoFocus
       value={value || innerValue}
       autoComplete={isAutocomplete ? 'on' : 'off'}
       {...props}

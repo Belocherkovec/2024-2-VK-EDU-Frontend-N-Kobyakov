@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
+import { IPopupWindowProps } from '../PopupWindow';
 
-export const usePopupWindow = (onClose: () => void) => {
+export const usePopupWindow = (props: IPopupWindowProps) => {
+  const { onClose } = props;
   const handleClose = () => onClose();
   const stopPropagation = (e: React.SyntheticEvent) => e.stopPropagation();
 
@@ -12,9 +14,11 @@ export const usePopupWindow = (onClose: () => void) => {
     };
 
     document.addEventListener('keydown', handleKeyDown);
+    document.body.style.overflow = 'hidden';
 
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = '';
     };
   }, []);
 

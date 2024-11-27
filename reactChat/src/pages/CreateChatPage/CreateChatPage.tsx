@@ -17,6 +17,7 @@ export const CreateChatPage: React.FC = () => {
           lastName={usersMap[id].last_name}
           onCLick={handleUserClick}
           userId={id}
+          isOnline={usersMap[id].is_online}
         />
       ))}
     </section>

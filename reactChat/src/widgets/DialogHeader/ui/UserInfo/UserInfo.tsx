@@ -6,7 +6,8 @@ export const UserInfo: React.FC<{
   avatar: null | string;
   title: string;
   lastOnline?: string;
-}> = ({ avatar, title, lastOnline }) => (
+  isOnline?: boolean;
+}> = ({ avatar, title, lastOnline, isOnline }) => (
   <div className={styles.user}>
     <Avatar
       alt={TEXTS.images.avatar}
@@ -15,11 +16,13 @@ export const UserInfo: React.FC<{
       lastName={title.split(' ')[1]}
       src={avatar}
       isGroupChat={!lastOnline}
+      isOnline={isOnline}
     />
     <div className={styles['user__name-container']}>
       <p className={styles.user__name}>{title}</p>
       <p className={styles['user__last-online']}>
-        {lastOnline && `был(а) в ${lastOnline}`}
+        {isOnline ? TEXTS.online : ''}
+        {lastOnline && !isOnline && `был(а) в ${lastOnline}`}
       </p>
     </div>
   </div>

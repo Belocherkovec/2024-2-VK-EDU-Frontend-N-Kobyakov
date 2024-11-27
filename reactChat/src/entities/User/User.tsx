@@ -9,6 +9,7 @@ interface IUserProps {
   lastName: string;
   onCLick: (id: string) => void;
   userId: string;
+  isOnline: boolean;
 }
 
 export const User: React.FC<IUserProps> = ({
@@ -16,7 +17,8 @@ export const User: React.FC<IUserProps> = ({
   firstName,
   lastName,
   onCLick,
-  userId
+  userId,
+  isOnline
 }) => (
   <div className={styles.user} onClick={() => onCLick(userId)}>
     {
@@ -25,6 +27,7 @@ export const User: React.FC<IUserProps> = ({
         firstName={firstName}
         lastName={lastName}
         src={avatar}
+        isOnline={isOnline}
       />
     }
     <h2 className={styles.user__username}>
