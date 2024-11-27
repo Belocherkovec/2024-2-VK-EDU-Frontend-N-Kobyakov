@@ -28,7 +28,7 @@ export const TEXTS = {
       login: 'Логин',
       noAccount: 'Нет аккаунта?',
       password: 'Пароль',
-      title: 'Авторизация в Simple Chat',
+      title: 'Авторизация в Simple Messenger',
       toRegistration: 'Зарегистрироваться'
     },
     createChat: {
@@ -57,7 +57,7 @@ export const TEXTS = {
       passwordNoEqual: 'Пароли должны совпадать!',
       registrationError: 'Ошибка, данный пользователь уже зарегистрирован',
       repeatPassword: 'Повторите пароль',
-      title: 'Регистрация в Simple Chat',
+      title: 'Регистрация в Simple Messenger',
       toAuth: 'Войти',
       unknownError: 'Произошла неизвестная ошибка, попробуйте еще раз'
     }
