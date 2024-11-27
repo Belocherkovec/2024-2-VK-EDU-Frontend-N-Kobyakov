@@ -19,15 +19,21 @@ export const useChat = (userId: string) => {
     members
   } = chatData;
 
-  const lastMessageText = last_message.text;
-  const lastMessageTimestamp = last_message.created_at
-    ? getFormattedDate(new Date(last_message.created_at))
+  const lastMessage = last_message || {
+    text: '',
+    created_at: null,
+    was_read_by: []
+  };
+
+  const lastMessageText = lastMessage.text;
+  const lastMessageTimestamp = lastMessage.created_at
+    ? getFormattedDate(new Date(lastMessage.created_at))
     : undefined;
   const isUserMessage = currentUserInfo.id === userId;
   const isOnline = members.filter(
     (member) => member.id !== currentUserInfo.id
   )[0].is_online;
-  const lastMessageStatus = last_message.was_read_by.length
+  const lastMessageStatus = lastMessage.was_read_by.length
     ? MessageStatuses.STATUS_READ
     : MessageStatuses.STATUS_SEND;
 
