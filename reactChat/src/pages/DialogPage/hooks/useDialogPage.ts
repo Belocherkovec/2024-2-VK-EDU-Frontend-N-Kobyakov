@@ -129,7 +129,13 @@ export const useDialogPage = () => {
       text: value
     };
 
-    createMessage(responseData);
+    createMessage(responseData).then(() =>
+      console.log(
+        containersRef.current
+          .at(-1)
+          ?.scrollIntoView({ behavior: 'smooth', block: 'end' })
+      )
+    );
   };
 
   return {

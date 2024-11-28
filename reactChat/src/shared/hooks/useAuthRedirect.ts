@@ -1,8 +1,8 @@
 import { selectUserIsAuthenticated } from '@/entities/User';
-import { PublicPaths, RoutePaths } from '@/shared';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { PublicPaths, RoutePaths } from '@/shared';
 
 export const useAuthRedirect = () => {
   const isAuthorized = useSelector(selectUserIsAuthenticated);
@@ -10,8 +10,6 @@ export const useAuthRedirect = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const lastVisitedUrl = sessionStorage.getItem('lastVisitedUrl');
-
     if (location.pathname === RoutePaths.initial) {
       const from = isAuthorized ? RoutePaths.chatsPage : RoutePaths.authPage;
 
@@ -24,17 +22,9 @@ export const useAuthRedirect = () => {
         location.pathname.includes(path)
       )
     ) {
-      const from =
-        lastVisitedUrl &&
-        !Object.values(PublicPaths).some((path) =>
-          lastVisitedUrl.includes(path)
-        )
-          ? lastVisitedUrl
-          : RoutePaths.chatsPage;
-
-      navigate(from, { replace: true });
-    } else if (RoutePaths.registrationPage.includes(location.pathname)) {
-      navigate(RoutePaths.registrationPage, { replace: true });
+      navigate.length > 2
+        ? navigate(-1)
+        : navigate(RoutePaths.chatsPage, { replace: true });
     }
 
     sessionStorage.setItem('lastVisitedUrl', location.pathname);

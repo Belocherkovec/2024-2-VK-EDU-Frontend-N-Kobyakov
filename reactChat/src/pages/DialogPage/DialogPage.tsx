@@ -4,7 +4,7 @@ import { MessageStatuses, TEXTS, timeFormatter } from '@/shared';
 import { DialogHeader } from '@/widgets';
 
 import styles from './dialogPage.module.scss';
-import { useDialogPage } from './hooks/useDialogPage';
+import { useDialogPage } from './hooks';
 
 export const DialogPage = () => {
   const {

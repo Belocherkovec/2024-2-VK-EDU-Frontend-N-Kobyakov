@@ -4,17 +4,24 @@ import {
   RoutePaths,
   SearchButton,
   SearchInput,
-  TEXTS
+  TEXTS,
+  useSearch
 } from '@/shared';
-import { useCreateChatHeader } from './hooks';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '@/app';
+import { fetchUsers } from '@/entities/User';
 
 export const CreateChatHeader: React.FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
   const {
-    handleBackClick,
-    handleSearch,
+    isSearchMode,
     handleSearchModeChange,
-    isSearchMode
-  } = useCreateChatHeader();
+    handleSearch,
+    handleBackClick
+  } = useSearch({
+    onSearch: (value: string) => dispatch(fetchUsers(value)),
+    onClose: () => dispatch(fetchUsers())
+  });
 
   return (
     <Header

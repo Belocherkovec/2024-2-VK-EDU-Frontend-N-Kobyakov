@@ -10,6 +10,8 @@ export const TEXTS = {
   online: 'Онлайн',
   errors: {
     invalidNewUser: 'Не задано имя для нового пользователя',
+    invalidImageFormat:
+      'Неподдерживаемый формат. Пожалуйста, загрузите изображение!',
     loginError:
       'При авторизации произошла ошибка! Проверьте правильность ввода логина\n' +
       '          и пароля.'
@@ -65,7 +67,8 @@ export const TEXTS = {
       passwordNoEqual: 'Пароли должны совпадать!',
       repeatPassword: 'Повторите пароль',
       title: 'Регистрация в Simple Messenger',
-      toAuth: 'Войти'
+      toAuth: 'Войти',
+      preview: 'Предпросмотр пользователя'
     }
   },
   placeholders: {

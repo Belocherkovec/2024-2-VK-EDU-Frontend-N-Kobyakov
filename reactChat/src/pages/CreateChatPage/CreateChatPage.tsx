@@ -11,13 +11,13 @@ export const CreateChatPage: React.FC = () => {
       <CreateChatHeader />
       {usersIds.map((id) => (
         <User
-          avatar={usersMap[id].avatar}
-          firstName={usersMap[id].first_name}
+          avatar={usersMap[id]?.avatar}
+          firstName={usersMap[id]?.first_name}
           key={id}
-          lastName={usersMap[id].last_name}
+          lastName={usersMap[id]?.last_name}
           onCLick={handleUserClick}
           userId={id}
-          isOnline={usersMap[id].is_online}
+          isOnline={usersMap[id]?.is_online}
         />
       ))}
     </section>

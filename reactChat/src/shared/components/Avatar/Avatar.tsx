@@ -11,6 +11,7 @@ export interface IAvatarProps {
   firstName: string;
   lastName: string;
   src: null | string;
+  file?: File;
   isOnline?: boolean;
   isGroupChat?: boolean;
 }
@@ -25,7 +26,7 @@ export const Avatar: React.FC<IAvatarProps> = (props) => {
     isOnline,
     isGroupChat
   } = props;
-  const { handleLoaded, isLoaded } = useAvatar(props);
+  const { handleLoaded, isLoaded, fileImage } = useAvatar(props);
 
   return (
     <fieldset
@@ -37,15 +38,24 @@ export const Avatar: React.FC<IAvatarProps> = (props) => {
         className
       )}
     >
-      {!isLoaded && <Loader />}
-      {src ? (
+      {!isLoaded && src && <Loader />}
+      {src && (
         <img
           alt={alt}
           className={cn(styles.fieldset__img, isLoaded && styles._loaded)}
           onLoad={handleLoaded}
           src={src}
         />
-      ) : (
+      )}
+      {!src && fileImage && (
+        <img
+          alt={alt}
+          className={cn(styles.fieldset__img, styles._loaded)}
+          onLoad={handleLoaded}
+          src={fileImage}
+        />
+      )}
+      {!src && !fileImage && (
         <div className={styles.fieldset__userInitials}>
           {firstName[0]}
           {lastName[0]}

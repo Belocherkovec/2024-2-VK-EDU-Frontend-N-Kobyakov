@@ -1,21 +1,24 @@
 import { useState } from 'react';
-import { fetchUsers } from '@/entities/User';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '@/app';
 
-export const useCreateChatHeader = () => {
-  const dispatch = useDispatch<AppDispatch>();
+interface IUseSerachProps {
+  onClose: () => void;
+  onSearch: (search: string) => void;
+}
+
+export const useSearch = (props: IUseSerachProps) => {
+  const { onClose, onSearch } = props;
+
   const [isSearchMode, setIsSearchMode] = useState(false);
 
   const handleSearchModeChange = () => setIsSearchMode(!isSearchMode);
 
   const handleSearch = (value: string) => {
-    dispatch(fetchUsers(value));
+    onSearch(value);
   };
 
   const handleBackClick = () => {
     setIsSearchMode(!isSearchMode);
-    dispatch(fetchUsers());
+    onClose();
   };
 
   return {

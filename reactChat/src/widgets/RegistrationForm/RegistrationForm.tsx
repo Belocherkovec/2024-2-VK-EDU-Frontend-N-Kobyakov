@@ -3,6 +3,7 @@ import cn from 'classnames';
 
 import { useRegistrationForm } from './hooks';
 import styles from './registrationForm.module.scss';
+import { UserInfo } from '@/widgets/DialogHeader/ui';
 
 export const RegistrationForm = () => {
   const {
@@ -14,7 +15,8 @@ export const RegistrationForm = () => {
     handleSubmit,
     isDisabled,
     isFormValid,
-    registrationErrors
+    registrationErrors,
+    handleAvatarErrorChange
   } = useRegistrationForm();
 
   return (
@@ -75,10 +77,11 @@ export const RegistrationForm = () => {
           value={bio}
         />
         <FileInput
-          accept="image/*"
+          accept={['image/png', 'image/jpeg']}
           file={avatar}
           label={TEXTS.pages.registration.avatar}
           onChange={handleAvatarChange}
+          isValid={handleAvatarErrorChange}
         />
       </fieldset>
       <fieldset className={styles.form__group}>
@@ -96,6 +99,16 @@ export const RegistrationForm = () => {
           value={password}
         />
       </fieldset>
+      <div className={styles.form__userPreview}>
+        <p>{TEXTS.pages.registration.preview}</p>
+        <UserInfo
+          avatar={null}
+          file={avatar || undefined}
+          title={`${firstName} ${lastName}`}
+          bio={bio}
+          className={styles.form__userInfo}
+        />
+      </div>
       <button
         className={cn(styles.form__button, isDisabled() && styles._disabled)}
         disabled={isDisabled()}

@@ -1,10 +1,9 @@
 import { TEXTS } from '@/shared';
 import { useState } from 'react';
+import { IMessageInputProps } from '@/features/MessageInput/MessageInput';
 
-export const UseMessageInput = (
-  onSend: (value: string) => void,
-  chatId: string
-) => {
+export const useMessageInput = (props: IMessageInputProps) => {
+  const { chatId, onSend } = props;
   const [value, setValue] = useState(
     localStorage.getItem(chatId) || TEXTS.empty
   );

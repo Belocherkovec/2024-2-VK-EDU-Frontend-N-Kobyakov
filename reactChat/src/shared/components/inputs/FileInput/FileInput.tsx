@@ -4,12 +4,14 @@ import cn from 'classnames';
 
 import styles from './fileInput.module.scss';
 import { useFileInput } from './hooks';
+import { TEXTS } from '@/shared';
 
 export interface IFileInputProps {
-  accept?: string;
+  accept?: string[];
   file: File | null;
   label?: string;
   onChange: (file: File | null) => void;
+  isValid?: (state: boolean) => void;
 }
 
 export const FileInput: React.FC<IFileInputProps> = (props) => {
@@ -21,14 +23,15 @@ export const FileInput: React.FC<IFileInputProps> = (props) => {
     handleChooseFile,
     handleFileChange,
     handleResetFile,
-    inputRef
+    inputRef,
+    isError
   } = useFileInput(props);
 
   return (
     <div className={styles.fileInput}>
       <p className={styles.fileInput__label}>{label}</p>
       <input
-        accept={accept}
+        accept={accept?.join(',')}
         className={styles.fileInput__input}
         onChange={handleFileChange}
         ref={inputRef}
@@ -41,11 +44,19 @@ export const FileInput: React.FC<IFileInputProps> = (props) => {
           type="button"
         >
           <InsertDriveFileRoundedIcon
-            className={cn(styles.fileInput__icon, file && styles._withFile)}
+            className={cn(
+              styles.fileInput__icon,
+              file && styles._withFile,
+              isError && styles._withError
+            )}
           />
           <p className={styles.fileInput__info}>
-            <span>{fileName}</span>
-            <span className={styles.fileInput__fileSize}>{fileSize}</span>
+            <span className={cn(isError && styles._withError)}>
+              {(isError && TEXTS.errors.invalidImageFormat) || fileName}
+            </span>
+            <span className={styles.fileInput__fileSize}>
+              {(isError && fileName) || fileSize}
+            </span>
           </p>
         </button>
         <button

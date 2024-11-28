@@ -5,7 +5,8 @@ import axios from 'axios';
 import { IAuthResponse } from './user';
 
 const $api = axios.create({
-  baseURL: import.meta.env.VITE_PUBLIC_API
+  baseURL: import.meta.env.VITE_PUBLIC_API,
+  adapter: 'fetch'
 });
 
 $api.interceptors.request.use((config) => {

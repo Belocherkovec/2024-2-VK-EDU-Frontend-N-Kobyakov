@@ -1,6 +1,6 @@
 import { AppDispatch } from '@/app';
 import { setUserAuthorized, setUserInfo } from '@/entities/User';
-import { getCurrentUser, loginRequest, TEXTS } from '@/shared';
+import { loginRequest, switchStatusOnline, TEXTS } from '@/shared';
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -52,7 +52,7 @@ export const useAuthForm = () => {
   const handleLoginResponse = (isAuth: boolean) => {
     if (isAuth) {
       dispatch(setUserAuthorized());
-      getCurrentUser().then(({ data }) => dispatch(setUserInfo(data)));
+      switchStatusOnline().then(({ data }) => dispatch(setUserInfo(data)));
     } else {
       setIsLoginError(true);
     }

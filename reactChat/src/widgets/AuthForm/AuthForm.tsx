@@ -38,7 +38,7 @@ export const AuthForm: React.FC = () => {
       <Input
         isError={isLoginError || !isFormValid.password}
         label={TEXTS.pages.auth.password}
-        minLength={3}
+        minLength={8}
         name="password"
         onChange={handleFormChange}
         onValidChange={handleFormValidChange}

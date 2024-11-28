@@ -12,6 +12,33 @@ export const ShowUpdates: React.FC<{
     title={'Что нового?'}
   >
     <details open className={styles.modal__detail}>
+      <summary className={styles.modal__summary}>v1.2.0</summary>
+      <ul className={styles.modal__list}>
+        <li>Обновлены требования к логину и паролю при регистрации</li>
+        <li>
+          Ошибка при регистрации теперь имеет более подробное описание: аккаунт
+          уже существует, пароль не соответствует требованиям и т.п.
+        </li>
+        <li>
+          Исправлено ошибочное поведение, при котором после перезагрузки
+          страницы регистрации пользователя перенаправляло на страницу
+          авторизации
+        </li>
+        <li>Добавлен предпросмотр пользователя при регистрации</li>
+        <li>
+          Теперь в диалоге, при отправке сообщения пользователя скроллит вниз
+        </li>
+        <li>
+          Решена проблема: ранее, когда авторизованный пользователь вручную
+          вводил url страницы авторизации или регистрации и пытался перейти на
+          нее - его возвращало обратно, но после этого, при нажатии кнопки
+          ‘назад’ в браузере, пользователь возвращался на ту же самую страничку,
+          на которой он был. Теперь это работает корректно.
+        </li>
+        <li>Реализован поиск по чатам</li>
+      </ul>
+    </details>
+    <details className={styles.modal__detail}>
       <summary className={styles.modal__summary}>v1.1.0</summary>
       <ul className={styles.modal__list}>
         <li>Реализована страница регистрации</li>
@@ -24,7 +51,7 @@ export const ShowUpdates: React.FC<{
         </li>
       </ul>
     </details>
-    <details open className={styles.modal__detail}>
+    <details className={styles.modal__detail}>
       <summary className={styles.modal__summary}>v1.0.0</summary>
       <p className={styles.modal__text}>
         <b>

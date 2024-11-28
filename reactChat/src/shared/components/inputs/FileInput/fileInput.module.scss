@@ -64,4 +64,8 @@
     font-size: 0.8em;
     color: $color-gray-dark;
   }
+
+  ._withError {
+    color: $color-error;
+  }
 }

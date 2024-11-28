@@ -44,7 +44,8 @@ export const useRegistrationForm = () => {
     firstName: true,
     lastName: true,
     password: true,
-    username: true
+    username: true,
+    avatar: true
   });
 
   const [avatar, setAvatar] = useState<File | null>(null);
@@ -74,6 +75,9 @@ export const useRegistrationForm = () => {
 
   const handleAvatarChange = (file: File | null) => {
     setAvatar(file);
+  };
+  const handleAvatarErrorChange = (state: boolean) => {
+    setIsFormValid({ ...isFormValid, avatar: state });
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -116,7 +120,8 @@ export const useRegistrationForm = () => {
       firstName: true,
       lastName: true,
       password: true,
-      username: true
+      username: true,
+      avatar: true
     });
     setAvatar(null);
   };
@@ -139,6 +144,7 @@ export const useRegistrationForm = () => {
     handleSubmit,
     isDisabled,
     isFormValid,
-    registrationErrors
+    registrationErrors,
+    handleAvatarErrorChange
   };
 };

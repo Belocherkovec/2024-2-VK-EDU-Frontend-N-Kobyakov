@@ -1,14 +1,18 @@
 import { Avatar, TEXTS } from '@/shared';
+import cn from 'classnames';
 
 import styles from './userInfo.module.scss';
 
 export const UserInfo: React.FC<{
   avatar: null | string;
+  file?: File;
   title: string;
   lastOnline?: string;
   isOnline?: boolean;
-}> = ({ avatar, title, lastOnline, isOnline }) => (
-  <div className={styles.user}>
+  bio?: string;
+  className?: string;
+}> = ({ avatar, title, lastOnline, isOnline, bio, file, className }) => (
+  <div className={cn(styles.user, className)}>
     <Avatar
       alt={TEXTS.images.avatar}
       className={styles.user__avatar}
@@ -17,12 +21,14 @@ export const UserInfo: React.FC<{
       src={avatar}
       isGroupChat={!lastOnline}
       isOnline={isOnline}
+      file={file}
     />
-    <div className={styles['user__name-container']}>
+    <div>
       <p className={styles.user__name}>{title}</p>
-      <p className={styles['user__last-online']}>
+      <p className={styles.user__lastOnline}>
         {isOnline ? TEXTS.online : ''}
         {lastOnline && !isOnline && `был(а) в ${lastOnline}`}
+        {bio && bio}
       </p>
     </div>
   </div>
