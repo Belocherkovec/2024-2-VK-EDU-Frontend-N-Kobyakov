@@ -1,7 +1,5 @@
-import { Header, HeaderThemes } from '@/features/Header';
+import { Header, HeaderThemes, UserInfo } from '@/features';
 import { BackButton, RoutePaths } from '@/shared';
-
-import { UserInfo } from './ui';
 
 export const DialogHeader: React.FC<{
   avatar: null | string;

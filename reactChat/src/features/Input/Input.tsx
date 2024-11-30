@@ -13,6 +13,15 @@ interface IInputProps
   onChange?: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
+  onKeyUp?: (
+    e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  onBlur?: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  onFocus?: (
+    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
   onValidChange?: (name: string, value: boolean) => void;
   resize?: boolean;
   patternMessage?: string;
@@ -29,12 +38,16 @@ const InputComponent: React.FC<IInputProps> = ({
   resize = false,
   type = 'text',
   value,
+  onBlur,
+  onFocus,
+  onKeyUp,
   patternMessage,
   ...props
 }) => {
   const {
     errorMessages,
     handleBlur,
+    handleFocus,
     handleChange,
     handleKeyUp,
     handleTypeChange,
@@ -47,7 +60,10 @@ const InputComponent: React.FC<IInputProps> = ({
     onChange,
     onValidChange,
     type,
-    patternMessage
+    patternMessage,
+    onFocus,
+    onBlur,
+    onKeyUp
   });
 
   return (
@@ -65,6 +81,7 @@ const InputComponent: React.FC<IInputProps> = ({
         )}
         disabled={isDisabled}
         onBlur={handleBlur}
+        onFocus={handleFocus}
         onChange={handleChange}
         onKeyUp={handleKeyUp}
         ref={inputRef}

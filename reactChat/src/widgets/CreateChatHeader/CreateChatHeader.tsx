@@ -1,13 +1,13 @@
-import { Header, HeaderThemes } from '@/features/Header';
+import { useDispatch } from 'react-redux';
+
+import { Header, HeaderThemes, SearchInput } from '@/features';
 import {
   BackButton,
   RoutePaths,
   SearchButton,
-  SearchInput,
   TEXTS,
   useSearch
 } from '@/shared';
-import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/app';
 import { fetchUsers } from '@/entities/User';
 

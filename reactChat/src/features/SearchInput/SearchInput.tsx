@@ -1,4 +1,5 @@
-import { TEXTS } from '../../../consts';
+import { TEXTS } from '@/shared';
+
 import { useSearchInput } from './hooks';
 import styles from './searchInput.module.scss';
 

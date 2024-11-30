@@ -1,10 +1,10 @@
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import InsertDriveFileRoundedIcon from '@mui/icons-material/InsertDriveFileRounded';
+import { TEXTS } from '@/shared';
 import cn from 'classnames';
 
 import styles from './fileInput.module.scss';
 import { useFileInput } from './hooks';
-import { TEXTS } from '@/shared';
 
 export interface IFileInputProps {
   accept?: string[];

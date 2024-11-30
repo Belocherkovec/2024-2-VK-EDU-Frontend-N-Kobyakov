@@ -1,11 +1,20 @@
 import { useRef, useState } from 'react';
 
-import { ErrorMessages, KErrorMessages, TEXTS } from '../../../../consts';
+import { ErrorMessages, KErrorMessages, TEXTS } from '@/shared';
 
 interface IUseInputProps {
   isError: boolean;
   onChange?: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  onKeyUp?: (
+    e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  onBlur?: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  onFocus?: (
+    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
   onValidChange?: (name: string, value: boolean) => void;
   type?: string;
@@ -14,11 +23,18 @@ interface IUseInputProps {
 
 interface IUseInputReturnProps {
   errorMessages: string[];
-  handleBlur: () => void;
+  handleBlur: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  handleFocus: (
+    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
   handleChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
-  handleKeyUp: () => void;
+  handleKeyUp: (
+    e: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
   handleTypeChange: (e: React.MouseEvent<HTMLButtonElement>) => void;
   innerType: string;
   innerValue: string;
@@ -31,13 +47,17 @@ export const useInput = ({
   onChange,
   onValidChange,
   type = 'text',
-  patternMessage
+  patternMessage,
+  onKeyUp,
+  onBlur,
+  onFocus
 }: IUseInputProps): IUseInputReturnProps => {
   const TIMEOUT = 500;
   const [innerValue, setInnerValue] = useState(TEXTS.empty);
   const [innerType, setInnerType] = useState(type);
   const [errorMessages, setErrorMessages] = useState<string[]>([]);
 
+  const isInputFocus = useRef<boolean>(false);
   const inputRef = useRef<any>(null);
 
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -56,6 +76,10 @@ export const useInput = ({
         let result;
         if (key === 'patternMismatch' && patternMessage) {
           result = getErrorMessage({ title: patternMessage });
+        } else if (key === 'valueMissing') {
+          result = isInputFocus.current
+            ? null
+            : getErrorMessage(inputRef.current);
         } else {
           result = getErrorMessage(inputRef.current);
         }
@@ -63,7 +87,8 @@ export const useInput = ({
       };
 
       if (errors[errorType as KErrorMessages]) {
-        innerErrorMessages.push(getPropWithKey(errorType as KErrorMessages));
+        const errorProp = getPropWithKey(errorType as KErrorMessages);
+        errorProp && innerErrorMessages.push(errorProp);
       }
     });
 
@@ -79,11 +104,29 @@ export const useInput = ({
     }
   };
 
-  const handleBlur = () => {
+  const handleBlur = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
 
+    if (onBlur) {
+      onBlur(event);
+    }
+
+    isInputFocus.current = false;
+    formValidate();
+  };
+
+  const handleFocus = (
+    event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    if (onFocus) {
+      onFocus(event);
+    }
+
+    isInputFocus.current = true;
     formValidate();
   };
 
@@ -105,9 +148,15 @@ export const useInput = ({
     }
   };
 
-  const handleKeyUp = () => {
+  const handleKeyUp = (
+    event: React.KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
+    }
+
+    if (onKeyUp) {
+      onKeyUp(event);
     }
 
     timeoutRef.current = setTimeout(() => {
@@ -121,6 +170,7 @@ export const useInput = ({
     handleChange,
     handleKeyUp,
     handleTypeChange,
+    handleFocus,
     innerType,
     innerValue,
     inputRef,

@@ -1,7 +1,6 @@
 import { useRef, useState } from 'react';
 
-import { ALLOWED_IMG_TYPES, TEXTS } from '../../../../consts';
-import { convertBytesToHuman } from '../../../../utils';
+import { ALLOWED_IMG_TYPES, convertBytesToHuman, TEXTS } from '@/shared';
 import { IFileInputProps } from '../FileInput';
 
 export const useFileInput = (props: IFileInputProps) => {

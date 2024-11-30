@@ -13,8 +13,6 @@ import {
   ICentrifugoEvent,
   initAndStartCentrifugo,
   setupRefreshInterceptor,
-  switchStatusOffline,
-  switchStatusOnline,
   useAuthRedirect
 } from '@/shared';
 import { Centrifuge, Subscription } from 'centrifuge';
@@ -37,17 +35,12 @@ export const useApp = () => {
 
   useEffect(() => {
     setupRefreshInterceptor(dispatch);
-    document.addEventListener('visibilitychange', handleCloseTab);
 
     if (!localStorage.getItem('token')) {
       dispatch(setUserUnauthorized());
     }
 
     dispatch(fetchCurrentUser());
-
-    return () => {
-      document.removeEventListener('visibilitychange', handleCloseTab);
-    };
   }, []);
 
   useEffect(() => {
@@ -62,18 +55,9 @@ export const useApp = () => {
         centrifugeObj.centrifuge.disconnect();
         centrifugeObj.subscription.removeAllListeners();
         centrifugeObj.subscription.unsubscribe();
-        switchStatusOffline();
       }
     };
   }, [selectCurrentUserInfo]);
-
-  const handleCloseTab = () => {
-    if (document.visibilityState === 'hidden') {
-      switchStatusOffline();
-    } else {
-      switchStatusOnline();
-    }
-  };
 
   const handlePublicationEvent = (data: ICentrifugoEvent) => {
     const currentPage = window.location.hash.split('/');

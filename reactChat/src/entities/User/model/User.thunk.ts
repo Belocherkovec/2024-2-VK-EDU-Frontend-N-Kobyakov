@@ -1,4 +1,4 @@
-import { getUsers, IUser, switchStatusOnline } from '@/shared';
+import { getCurrentUser, getUsers, IUser } from '@/shared';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { resetUsersState } from './User.slice';
@@ -22,7 +22,7 @@ export const fetchCurrentUser = createAsyncThunk<IUser, void>(
   'user/fetchCurrentUser',
   async (_, thunkAPI) => {
     try {
-      const response = await switchStatusOnline();
+      const response = await getCurrentUser();
 
       return response.data;
     } catch {
