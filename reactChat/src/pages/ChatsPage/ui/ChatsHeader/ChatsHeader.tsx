@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux';
 
+import { AppDispatch } from '@/app';
 import { Header, HeaderThemes, SearchInput } from '@/features';
 import {
   BackButton,
@@ -9,8 +10,9 @@ import {
   TEXTS,
   useSearch
 } from '@/shared';
-import { AppDispatch } from '@/app';
 import { fetchChats } from '@/entities/Chat';
+
+import styles from './сhatsHeader.module.scss';
 
 export const ChatsHeader: React.FC<{
   username: string;
@@ -28,6 +30,7 @@ export const ChatsHeader: React.FC<{
 
   return (
     <Header
+      className={styles.header}
       {...{
         centerNode: isSearchMode ? (
           <SearchInput
@@ -35,19 +38,23 @@ export const ChatsHeader: React.FC<{
             placeholder={TEXTS.placeholders.search}
           />
         ) : (
-          <h1>{username}</h1>
+          <h1 className={styles.header__title}>{username}</h1>
         ),
         leftNode: isSearchMode ? (
           <BackButton
             onClick={handleBackClick}
             to={RoutePaths.chatsPage}
+            className={styles.header__button}
             isReplace
           />
         ) : (
           <MenuRoundedButton />
         ),
         rightNode: isSearchMode ? null : (
-          <SearchButton onClick={handleSearchModeChange} />
+          <SearchButton
+            onClick={handleSearchModeChange}
+            className={styles.header__button}
+          />
         ),
         theme: HeaderThemes.COLORED
       }}

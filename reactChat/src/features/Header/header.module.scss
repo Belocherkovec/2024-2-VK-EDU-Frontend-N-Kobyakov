@@ -2,15 +2,17 @@
 
 .header {
   height: 60px;
+  min-height: 60px;
   display: flex;
   align-items: center;
   column-gap: 12px;
-  padding: 14px 16px;
+  padding: 0 16px;
+  width: 100vw;
+  overflow: hidden;
 
   &.colored {
     background-color: $color-accent;
     color: $color-white-full;
-
   }
 
   &.white {

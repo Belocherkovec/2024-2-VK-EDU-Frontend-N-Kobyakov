@@ -1,4 +1,4 @@
-import { TEXTS } from '@/shared';
+import { ALLOWED_IMG_TYPES, TEXTS } from '@/shared';
 import { FileInput, Input, UserInfo } from '@/features';
 import cn from 'classnames';
 
@@ -87,7 +87,7 @@ export const RegistrationForm = () => {
           value={bio}
         />
         <FileInput
-          accept={['image/png', 'image/jpeg']}
+          accept={ALLOWED_IMG_TYPES}
           file={avatar}
           label={TEXTS.pages.registration.avatar}
           onChange={handleAvatarChange}

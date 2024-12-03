@@ -3,7 +3,6 @@
 .dialog {
   height: 80px;
   padding: 10px 16px;
-  color: $color-black;
   display: flex;
   align-items: center;
   column-gap: 12px;
@@ -28,18 +27,26 @@
   &__user {
     display: flex;
     flex-direction: column;
+    row-gap: 4px;
     align-self: stretch;
     justify-content: space-evenly;
     flex: 1;
+    overflow: hidden;
   }
 
   &__username {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     font-size: 1em;
+    flex-shrink: 0;
   }
 
   &__lastMessage {
     font-size: 0.9em;
     color: $color-gray-dark;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     & span {
       color: $color-accent;

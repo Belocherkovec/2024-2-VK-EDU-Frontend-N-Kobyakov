@@ -7,9 +7,16 @@ export const fetchUsers = createAsyncThunk<IUser[], string | undefined>(
   'user/fetchUsers',
   async (searchStr, thunkAPI) => {
     try {
-      const response = await getUsers(200, undefined, searchStr);
+      let page = 1;
+      let response = await getUsers(100, page, searchStr);
+      const users = [...response.data.results];
 
-      return response.data.results;
+      while (response.data.next) {
+        response = await getUsers(100, ++page, searchStr);
+        users.push(...response.data.results);
+      }
+
+      return users;
     } catch {
       thunkAPI.dispatch(resetUsersState());
 

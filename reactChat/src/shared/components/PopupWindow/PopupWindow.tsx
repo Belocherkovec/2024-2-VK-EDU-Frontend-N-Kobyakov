@@ -8,25 +8,44 @@ import styles from './popupWindow.module.scss';
 export interface IPopupWindowProps {
   children: ReactNode;
   className?: string;
+  contentClassName?: string;
   isVisible: boolean;
   onClose: () => void;
   title?: string;
+  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 }
 
 export const PopupWindow: React.FC<IPopupWindowProps> = (props) => {
-  const { children, className, isVisible, onClose, title } = props;
+  const {
+    children,
+    className,
+    contentClassName,
+    isVisible,
+    onClose,
+    title,
+    size = 'xs'
+  } = props;
   const { handleClose, stopPropagation } = usePopupWindow(props);
 
   return isVisible ? (
     <aside className={styles.overlay} onClick={handleClose}>
-      <div className={cn(styles.popup, className)} onClick={stopPropagation}>
+      <div
+        className={cn(
+          styles.popup,
+          !className && styles[`_${size}`],
+          className
+        )}
+        onClick={stopPropagation}
+      >
         <header className={styles.popup__header}>
           <h1>{title}</h1>
           <span className={styles.popup__close} onClick={onClose}>
             <CloseRoundedIcon />
           </span>
         </header>
-        <main className={styles.popup__content}>{children}</main>
+        <main className={cn(styles.popup__content, contentClassName)}>
+          {children}
+        </main>
       </div>
     </aside>
   ) : (

@@ -9,3 +9,5 @@ export { Loader } from './Loader';
 export { StatusMark } from './StatusMark';
 
 export { TextLink } from './TextLink';
+
+export { PopupWindow, type IPopupWindowProps } from './PopupWindow';

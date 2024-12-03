@@ -19,7 +19,7 @@ export const Message = forwardRef<
     data-index={dataIndex}
     ref={ref}
   >
-    <p>{message.replace(/\n/g, '<br>')}</p>
+    <p className={styles.message__text}>{message.replace(/\n/g, '<br>')}</p>
     <div className={styles.message__info}>
       <span className={styles.message__timestamp}>{timeStamp}</span>
       {!isUserMessage && (

@@ -1,15 +1,36 @@
-@use "@/app/styles/variables.scss" as *;
+@use "@/app/styles/variables" as *;
 
 .popup {
   position: relative;
   background-color: $color-white-full;
-  width: 80vw;
-  height: 80vh;
+  min-width: 200px;
+  min-height: 100px ;
   border-radius: 20px;
   padding: 16px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+
+  &._xs {
+    width: 20vw;
+    height: 20vh;
+  }
+  &._sm {
+    width: 35vw;
+    height: 35vh;
+  }
+  &._md {
+    width: 50vw;
+    height: 50vh;
+  }
+  &._lg {
+    width: 75vw;
+    height: 75vh;
+  }
+  &._xl {
+    width: 90vw;
+    height: 90vh;
+  }
 
   &__content {
     overflow-y: auto;
@@ -33,6 +54,11 @@
     width: 40px;
     border-radius: 50%;
     background-color: $color-accent;
+    transition: background-color 0.2s ease;
+
+    &:hover, &:focus {
+      background-color: $color-accent-hover;
+    }
   }
 }
 
