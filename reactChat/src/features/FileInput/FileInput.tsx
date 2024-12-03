@@ -1,17 +1,12 @@
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
 import InsertDriveFileRoundedIcon from '@mui/icons-material/InsertDriveFileRounded';
-import { TEXTS } from '@/shared';
+import { IUseFileInputProps, TEXTS, useFileInput } from '@/shared';
 import cn from 'classnames';
 
 import styles from './fileInput.module.scss';
-import { useFileInput } from './hooks';
 
-export interface IFileInputProps {
-  accept?: string[];
-  file: File | null;
+interface IFileInputProps extends IUseFileInputProps {
   label?: string;
-  onChange: (file: File | null) => void;
-  isValid?: (state: boolean) => void;
 }
 
 export const FileInput: React.FC<IFileInputProps> = (props) => {
@@ -61,7 +56,7 @@ export const FileInput: React.FC<IFileInputProps> = (props) => {
         </button>
         <button
           className={styles.fileInput__trash}
-          disabled={!file}
+          disabled={!file && !isError}
           onClick={handleResetFile}
           type="button"
         >
@@ -69,7 +64,7 @@ export const FileInput: React.FC<IFileInputProps> = (props) => {
             className={cn(
               styles.fileInput__icon,
               styles.fileInput__iconTrash,
-              file && styles._withHover
+              (file || isError) && styles._withHover
             )}
           />
         </button>

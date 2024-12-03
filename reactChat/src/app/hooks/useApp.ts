@@ -19,10 +19,12 @@ import { Centrifuge, Subscription } from 'centrifuge';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { useNotification } from '@/entities/Notification';
 import { AppDispatch } from '../store';
 
 export const useApp = () => {
   useAuthRedirect();
+  useNotification();
 
   const dispatch = useDispatch<AppDispatch>();
 

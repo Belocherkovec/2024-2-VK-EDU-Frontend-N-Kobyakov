@@ -23,8 +23,8 @@ export const UserInfo: React.FC<{
       isOnline={isOnline}
       file={file}
     />
-    <div>
-      <p className={styles.user__name}>{title}</p>
+    <div className={styles.user__userWrapper}>
+      <h2 className={styles.user__name}>{title}</h2>
       <p className={styles.user__lastOnline}>
         {isOnline ? TEXTS.online : ''}
         {lastOnline && !isOnline && `был(а) в ${lastOnline}`}

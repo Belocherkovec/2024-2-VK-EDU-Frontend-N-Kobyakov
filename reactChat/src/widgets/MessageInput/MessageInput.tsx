@@ -1,11 +1,13 @@
 import cn from 'classnames';
-import { TEXTS, useFileInput } from '@/shared';
+import { ActionsMenu, TEXTS, useFileInput } from '@/shared';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
+import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded';
+import ImageRoundedIcon from '@mui/icons-material/ImageRounded';
 import AttachFileRoundedIcon from '@mui/icons-material/AttachFileRounded';
 
 import { useMessageInput } from './hooks';
+import { ImagePreview, LimitDialog } from './ui';
 import styles from './messageInput.module.scss';
-import { ActionsMenu, ImagePreview, LimitDialog } from './ui';
 
 export interface IMessageInputProps {
   chatId: string;
@@ -77,15 +79,30 @@ export const MessageInput: React.FC<IMessageInputProps> = (props) => {
           className={styles.form__fileInput}
         />
         <ActionsMenu
-          className={styles.form__actionsMenu}
           isShow={isShowActions}
-          onClickGeoAction={handleActionGeo}
-          onClickPhotoAction={() =>
-            files.length >= FILES_LIMIT
-              ? handlePopupOpen(false, true)
-              : handleChooseFile()
-          }
-        />
+          className={styles.form__actionsMenu}
+        >
+          <button
+            type="button"
+            className={styles.form__actionItem}
+            onClick={handleActionGeo}
+          >
+            <LocationOnRoundedIcon className={styles.form__actionIcon} />
+            <span>{TEXTS.pages.dialogPage.sendGeo}</span>
+          </button>
+          <button
+            type="button"
+            className={styles.form__actionItem}
+            onClick={() =>
+              files.length >= FILES_LIMIT
+                ? handlePopupOpen(false, true)
+                : handleChooseFile()
+            }
+          >
+            <ImageRoundedIcon className={styles.form__actionIcon} />
+            <span>{TEXTS.pages.dialogPage.image}</span>
+          </button>
+        </ActionsMenu>
         <button
           type="button"
           className={styles.form__file}

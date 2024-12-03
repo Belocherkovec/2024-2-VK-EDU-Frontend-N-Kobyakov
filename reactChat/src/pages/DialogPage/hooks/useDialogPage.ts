@@ -119,7 +119,7 @@ export const useDialogPage = () => {
 
   useIntersectionObserver(containersRef.current, callbackFunction);
 
-  const handleAreaSend = (value: string) => {
+  const handleAreaSend = (value: string, files?: File[], voice?: File) => {
     if (!value) {
       return;
     }
@@ -129,12 +129,18 @@ export const useDialogPage = () => {
       text: value
     };
 
+    if (files) {
+      responseData.files = files;
+    }
+
+    if (voice) {
+      responseData.voice = voice;
+    }
+
     createMessage(responseData).then(() =>
-      console.log(
-        containersRef.current
-          .at(-1)
-          ?.scrollIntoView({ behavior: 'smooth', block: 'end' })
-      )
+      containersRef.current
+        .at(-1)
+        ?.scrollIntoView({ behavior: 'smooth', block: 'end' })
     );
   };
 

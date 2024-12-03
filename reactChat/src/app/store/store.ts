@@ -2,12 +2,14 @@ import { chatSliceReducer } from '@/entities/Chat';
 import { messagesSliceReducer } from '@/entities/Message';
 import { userSliceReducer } from '@/entities/User';
 import { configureStore } from '@reduxjs/toolkit';
+import { notificationsSliceReducer } from '@/entities/Notification';
 
 export const store = configureStore({
   reducer: {
     chats: chatSliceReducer,
     messages: messagesSliceReducer,
-    user: userSliceReducer
+    user: userSliceReducer,
+    notifications: notificationsSliceReducer
   }
 });
 

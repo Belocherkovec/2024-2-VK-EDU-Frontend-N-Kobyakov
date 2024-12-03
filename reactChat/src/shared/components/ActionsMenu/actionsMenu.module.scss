@@ -1,0 +1,17 @@
+@use "@/app/styles/variables" as *;
+
+.menu {
+  background-color: $color-white-full;
+  padding: 6px 4px;
+  border-radius: 20px;
+  top: -140%;
+  left: 10px;
+  z-index: 2;
+  display: none;
+  flex-direction: column;
+  position: absolute;
+
+  &._show {
+    display: flex;
+  }
+}
