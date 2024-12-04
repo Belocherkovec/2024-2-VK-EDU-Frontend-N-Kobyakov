@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { ActionsMenu, TEXTS, useFileInput } from '@/shared';
+import { ActionsMenu, Gallery, TEXTS, useFileInput } from '@/shared';
 import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded';
 import ImageRoundedIcon from '@mui/icons-material/ImageRounded';
@@ -20,9 +20,11 @@ export const MessageInput: React.FC<IMessageInputProps> = (props) => {
   const {
     files,
     value,
+    FILES_LIMIT,
+    imageClickId,
     isShowActions,
     isPopupVisible,
-    FILES_LIMIT,
+    isGalleryVisible,
     handleFilesChange,
     handleFileRemove,
     handleFileClick,
@@ -33,7 +35,8 @@ export const MessageInput: React.FC<IMessageInputProps> = (props) => {
     handleShowActions,
     handlePopupOpen,
     handlePopupClose,
-    handlePopupConfirm
+    handlePopupConfirm,
+    handleGalleryClose
   } = useMessageInput(props);
 
   const { inputRef, handleChooseFile, handleFileChange } = useFileInput({
@@ -70,6 +73,12 @@ export const MessageInput: React.FC<IMessageInputProps> = (props) => {
           isVisible={isPopupVisible}
           onClose={handlePopupClose}
           onConfirm={handlePopupConfirm}
+        />
+        <Gallery
+          isVisible={isGalleryVisible}
+          images={files}
+          onClose={handleGalleryClose}
+          clickIndex={imageClickId}
         />
         <input
           type="file"

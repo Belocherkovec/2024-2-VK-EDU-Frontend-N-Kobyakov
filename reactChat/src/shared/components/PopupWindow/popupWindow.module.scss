@@ -31,6 +31,9 @@
     width: 90vw;
     height: 90vh;
   }
+  &._isTransparent {
+    background-color: transparent;
+  }
 
   &__content {
     overflow-y: auto;
@@ -42,6 +45,10 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 16px;
+
+    &._isTransparent {
+      background-color: transparent;
+    }
   }
 
   &__close {
@@ -54,10 +61,26 @@
     width: 40px;
     border-radius: 50%;
     background-color: $color-accent;
-    transition: background-color 0.2s ease;
+    transition: background-color, color 0.2s ease;
+
+    &._isFixed {
+      position: fixed;
+      top: 16px;
+      right: 16px;
+    }
+
+    &._isTransparent {
+      color: $color-gray-dark;
+      background-color: $color-white-full;
+    }
 
     &:hover, &:focus {
       background-color: $color-accent-hover;
+
+      &._isTransparent {
+        background-color: $color-white-full;
+        color: $color-black;
+      }
     }
   }
 }

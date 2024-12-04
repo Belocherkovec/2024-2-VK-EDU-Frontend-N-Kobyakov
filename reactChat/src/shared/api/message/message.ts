@@ -39,16 +39,8 @@ export const getMessages = (
 };
 
 export const createMessage = (
-  data: ICreateMessageRequest
-): Promise<AxiosResponse<IMessage>> =>
-  $api.post<IMessage>('messages/', data, {
-    headers: {
-      'Content-Type':
-        data.files?.length || data.voice
-          ? 'multipart/form-data'
-          : 'application/json'
-    }
-  });
+  data: ICreateMessageRequest | FormData
+): Promise<AxiosResponse<IMessage>> => $api.post<IMessage>('messages/', data);
 
 export const postReadMessage = (
   msgId: string

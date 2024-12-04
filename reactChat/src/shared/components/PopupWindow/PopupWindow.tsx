@@ -13,6 +13,8 @@ export interface IPopupWindowProps {
   onClose: () => void;
   title?: string;
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  isTransparent?: boolean;
+  isCloseFixed?: boolean;
 }
 
 export const PopupWindow: React.FC<IPopupWindowProps> = (props) => {
@@ -21,8 +23,10 @@ export const PopupWindow: React.FC<IPopupWindowProps> = (props) => {
     className,
     contentClassName,
     isVisible,
+    isCloseFixed,
     onClose,
     title,
+    isTransparent,
     size = 'xs'
   } = props;
   const { handleClose, stopPropagation } = usePopupWindow(props);
@@ -33,13 +37,26 @@ export const PopupWindow: React.FC<IPopupWindowProps> = (props) => {
         className={cn(
           styles.popup,
           !className && styles[`_${size}`],
+          isTransparent && styles._isTransparent,
           className
         )}
         onClick={stopPropagation}
       >
-        <header className={styles.popup__header}>
+        <header
+          className={cn(
+            styles.popup__header,
+            isTransparent && styles._isTransparent
+          )}
+        >
           <h1>{title}</h1>
-          <span className={styles.popup__close} onClick={onClose}>
+          <span
+            className={cn(
+              styles.popup__close,
+              isTransparent && styles._isTransparent,
+              isCloseFixed && styles._isFixed
+            )}
+            onClick={onClose}
+          >
             <CloseRoundedIcon />
           </span>
         </header>

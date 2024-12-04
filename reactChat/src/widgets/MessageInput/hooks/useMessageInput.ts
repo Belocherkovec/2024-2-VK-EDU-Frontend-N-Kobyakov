@@ -17,11 +17,15 @@ export const useMessageInput = (props: IMessageInputProps) => {
   const FILES_LIMIT = 5;
 
   const dispatch = useDispatch<AppDispatch>();
+  const [value, setValue] = useState(TEXTS.empty);
+
   const tempFiles = useRef<File[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [value, setValue] = useState(TEXTS.empty);
   const [files, setFiles] = useState<File[]>([]);
+  const [imageClickId, setImageClickId] = useState<number>(0);
+
   const [isShowActions, setIsShowAction] = useState(false);
+  const [isGalleryVisible, setIsGalleryVisible] = useState(false);
   const [isPopupVisible, setIsPopupVisible] = useState<ILimitVisibleState>({
     visible: false,
     cancelButton: false,
@@ -51,6 +55,11 @@ export const useMessageInput = (props: IMessageInputProps) => {
     if (event && isPopupVisible.cancelButton) {
       tempFiles.current = [];
     }
+  };
+
+  const handleGalleryClose = () => {
+    setIsGalleryVisible(false);
+    setImageClickId(0);
   };
 
   const handlePopupConfirm = () => {
@@ -118,7 +127,14 @@ export const useMessageInput = (props: IMessageInputProps) => {
   };
 
   const handleFileClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    console.log('handleFilesChange', e.target);
+    const element = e.target as HTMLDivElement;
+    const imageId = element.getAttribute('data-image-id');
+
+    if (imageId) {
+      setImageClickId(+imageId);
+    }
+
+    setIsGalleryVisible(true);
   };
 
   const handleFileRemove = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -137,15 +153,19 @@ export const useMessageInput = (props: IMessageInputProps) => {
     if (value) {
       onSend(value, files.length ? files : undefined);
       setValue(TEXTS.empty);
+      setFiles([]);
     }
   };
 
   return {
-    FILES_LIMIT,
+    files,
     value,
-    isShowActions,
+    FILES_LIMIT,
     fileInputRef,
+    imageClickId,
+    isShowActions,
     isPopupVisible,
+    isGalleryVisible,
     handlePopupOpen,
     handlePopupClose,
     handlePopupConfirm,
@@ -156,8 +176,8 @@ export const useMessageInput = (props: IMessageInputProps) => {
     handleFilesChange,
     handleFileRemove,
     handleFileClick,
+    handleGalleryClose,
     handleShowActions,
-    handleActionGeo,
-    files
+    handleActionGeo
   };
 };
