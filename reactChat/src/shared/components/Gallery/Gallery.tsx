@@ -20,6 +20,7 @@ export const Gallery: React.FC<IGalleryProps> = (props) => {
       onClose={onClose}
       size="lg"
       isTransparent
+      isCloseFixed
       className={styles.gallery__popup}
       contentClassName={styles.gallery__popupContent}
     >

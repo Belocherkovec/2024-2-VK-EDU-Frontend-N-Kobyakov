@@ -26,6 +26,23 @@
     color: inherit;
   }
 
+  &__imageWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: space-between;
+    margin-top: 8px;
+  }
+
+  &__image {
+    flex: 1 1 200px;
+    height: 100px;
+    width: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
   &__info {
     display: flex;
     justify-content: end;

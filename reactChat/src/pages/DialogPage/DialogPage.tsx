@@ -33,6 +33,7 @@ export const DialogPage = () => {
         {messagesIdx.map((msgId, idx) => (
           <Message
             dataIndex={msgId}
+            files={messagesMap[msgId].files}
             isUserMessage={isUserMessage(msgId)}
             key={msgId + idx}
             message={messagesMap[msgId].text || TEXTS.empty}

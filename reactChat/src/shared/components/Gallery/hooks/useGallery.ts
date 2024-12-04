@@ -39,7 +39,6 @@ export const useGallery = (props: IGalleryProps) => {
       setInnerImages(newInnerImagesState);
 
       if (typeof clickIndex === 'number') {
-        console.log(newInnerImagesState);
         setCurrentImage(newInnerImagesState[clickIndex]);
       }
     });
