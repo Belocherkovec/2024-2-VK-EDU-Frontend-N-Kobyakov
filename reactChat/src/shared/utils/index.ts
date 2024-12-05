@@ -9,3 +9,5 @@ export * from './convertBytesToHuman';
 export * from './timeFormatter';
 
 export * from './urlUtils';
+
+export * from './sendNotification';

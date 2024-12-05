@@ -12,6 +12,7 @@ import {
   CentrifugoEventTypes,
   ICentrifugoEvent,
   initAndStartCentrifugo,
+  sendNotification,
   setupRefreshInterceptor,
   useAuthRedirect
 } from '@/shared';
@@ -61,26 +62,37 @@ export const useApp = () => {
     };
   }, [selectCurrentUserInfo]);
 
+  const handleSetNotification = (data: ICentrifugoEvent) => {
+    const sender = data.message.sender;
+    sendNotification(`${sender.first_name} ${sender.last_name}`);
+  };
+
   const handlePublicationEvent = (data: ICentrifugoEvent) => {
     const currentPage = window.location.hash.split('/');
 
-    if (!currentPage.includes('dialog') || currentPage.length !== 3) {
-      return;
+    if (
+      (currentPage.includes('dialog') &&
+        currentPage.at(-1) !== data.message.chat) ||
+      data.event === CentrifugoEventTypes.CREATE
+    ) {
+      handleSetNotification(data);
     }
 
-    switch (data.event) {
-      case CentrifugoEventTypes.CREATE:
-        dispatch(createMessage(data.message));
-        break;
-      case CentrifugoEventTypes.DELETE:
-        dispatch(deleteMessage(data.message));
-        break;
-      case CentrifugoEventTypes.READ:
-        dispatch(updateMessage(data.message));
-        break;
-      case CentrifugoEventTypes.UPDATE:
-        dispatch(updateMessage(data.message));
-        break;
+    if (currentPage.length !== 3) {
+      switch (data.event) {
+        case CentrifugoEventTypes.CREATE:
+          dispatch(createMessage(data.message));
+          break;
+        case CentrifugoEventTypes.DELETE:
+          dispatch(deleteMessage(data.message));
+          break;
+        case CentrifugoEventTypes.READ:
+          dispatch(updateMessage(data.message));
+          break;
+        case CentrifugoEventTypes.UPDATE:
+          dispatch(updateMessage(data.message));
+          break;
+      }
     }
   };
 };

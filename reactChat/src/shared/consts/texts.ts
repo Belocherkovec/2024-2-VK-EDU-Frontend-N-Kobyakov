@@ -1,4 +1,8 @@
 export const TEXTS = {
+  notification: {
+    title: 'Новое сообщение',
+    body: (initials: string) => `У вас одно новое сообщение от ${initials}!`
+  },
   actions: {
     createNewUser: 'Введите имя пользователя для нового диалога'
   },
