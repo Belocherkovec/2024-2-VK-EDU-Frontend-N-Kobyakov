@@ -1,1 +1,0 @@
-export { useAvatar } from './useAvatar';
