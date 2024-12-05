@@ -4,10 +4,12 @@ import SendRoundedIcon from '@mui/icons-material/SendRounded';
 import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded';
 import ImageRoundedIcon from '@mui/icons-material/ImageRounded';
 import AttachFileRoundedIcon from '@mui/icons-material/AttachFileRounded';
+import StopCircleRoundedIcon from '@mui/icons-material/StopCircleRounded';
 
 import { useMessageInput } from './hooks';
 import { ImagePreview, LimitDialog } from './ui';
 import styles from './messageInput.module.scss';
+import { KeyboardVoiceRounded } from '@mui/icons-material';
 
 export interface IMessageInputProps {
   chatId: string;
@@ -20,6 +22,7 @@ export const MessageInput: React.FC<IMessageInputProps> = (props) => {
   const {
     files,
     value,
+    recorderRef,
     FILES_LIMIT,
     imageClickId,
     isShowActions,
@@ -36,7 +39,8 @@ export const MessageInput: React.FC<IMessageInputProps> = (props) => {
     handlePopupOpen,
     handlePopupClose,
     handlePopupConfirm,
-    handleGalleryClose
+    handleGalleryClose,
+    handleVoiceClick
   } = useMessageInput(props);
 
   const { inputRef, handleChooseFile, handleFileChange } = useFileInput({
@@ -118,6 +122,14 @@ export const MessageInput: React.FC<IMessageInputProps> = (props) => {
           onClick={handleShowActions}
         >
           <AttachFileRoundedIcon />
+        </button>
+        <button
+          type="button"
+          className={styles.form__voice}
+          onClick={handleVoiceClick}
+        >
+          {recorderRef.current && <StopCircleRoundedIcon />}
+          {!recorderRef.current && <KeyboardVoiceRounded />}
         </button>
         <textarea
           className={styles.form__input}

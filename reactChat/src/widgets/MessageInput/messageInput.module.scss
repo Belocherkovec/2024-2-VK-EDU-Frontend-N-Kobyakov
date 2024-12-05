@@ -56,6 +56,30 @@
   &__file {
     margin-right: 10px;
     position: relative;
+    height: 24px;
+    color: $color-gray-dark;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: $color-black;
+    }
+  }
+
+  &__voice {
+    margin-right: 10px;
+    width: 26px;
+    height: 26px;
+    color: $color-gray-dark;
+    transition: color 0.2s ease;
+
+    svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    &:hover {
+      color: $color-black;
+    }
   }
 
   &__actionItem {

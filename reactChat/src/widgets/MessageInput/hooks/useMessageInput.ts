@@ -2,9 +2,11 @@ import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/app';
 import {
+  blobToFile,
   GEOLOCATION_ERRORS,
   GeolocationErrorType,
   getGeo,
+  recordAudio,
   TEXTS
 } from '@/shared';
 import { pushNotification } from '@/entities/Notification';
@@ -20,7 +22,12 @@ export const useMessageInput = (props: IMessageInputProps) => {
   const [value, setValue] = useState(TEXTS.empty);
 
   const tempFiles = useRef<File[]>([]);
+  const recorderRef = useRef<{
+    mediaRecorder: MediaRecorder;
+    stop: () => void;
+  } | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [voice, setVoice] = useState<Blob>();
   const [files, setFiles] = useState<File[]>([]);
   const [imageClickId, setImageClickId] = useState<number>(0);
 
@@ -147,11 +154,38 @@ export const useMessageInput = (props: IMessageInputProps) => {
     }
   };
 
+  const handleVoiceClick = () => {
+    if (!recorderRef.current) {
+      recordAudio().then((res) => {
+        if (!(res instanceof Error)) {
+          recorderRef.current = res;
+          recorderRef.current.mediaRecorder.ondataavailable =
+            handleDataAvailable;
+          recorderRef.current.mediaRecorder.start();
+        }
+      });
+    } else {
+      recorderRef.current.stop();
+    }
+  };
+
+  const handleDataAvailable = (event: BlobEvent) => {
+    if (recorderRef.current) {
+      setVoice(event.data);
+      recorderRef.current.stop();
+      recorderRef.current = null;
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
     if (value) {
-      onSend(value, files.length ? files : undefined);
+      onSend(
+        value,
+        files.length ? files : undefined,
+        voice ? blobToFile(voice, `voice-${Date.now()}.ogg`) : undefined
+      );
       setValue(TEXTS.empty);
       setFiles([]);
     }
@@ -166,6 +200,7 @@ export const useMessageInput = (props: IMessageInputProps) => {
     isShowActions,
     isPopupVisible,
     isGalleryVisible,
+    recorderRef,
     handlePopupOpen,
     handlePopupClose,
     handlePopupConfirm,
@@ -178,6 +213,7 @@ export const useMessageInput = (props: IMessageInputProps) => {
     handleFileClick,
     handleGalleryClose,
     handleShowActions,
-    handleActionGeo
+    handleActionGeo,
+    handleVoiceClick
   };
 };
