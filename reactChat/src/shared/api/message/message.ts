@@ -39,7 +39,7 @@ export const getMessages = (
 };
 
 export const createMessage = (
-  data: ICreateMessageRequest
+  data: ICreateMessageRequest | FormData
 ): Promise<AxiosResponse<IMessage>> => $api.post<IMessage>('messages/', data);
 
 export const postReadMessage = (

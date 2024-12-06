@@ -17,7 +17,7 @@ export interface IGetMessagesResponse {
 export interface IMessage {
   chat: string;
   created_at: string;
-  files: File[];
+  files: { item: string }[];
   id: string;
   sender: IUser;
   text: null | string;

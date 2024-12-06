@@ -10,7 +10,6 @@ import { fetchUsers, selectUserInfo, selectUsersMap } from '@/entities/User';
 import {
   createMessage,
   getFormattedDate,
-  ICreateMessageRequest,
   postReadMessage,
   TEXTS,
   useIntersectionObserver
@@ -119,22 +118,34 @@ export const useDialogPage = () => {
 
   useIntersectionObserver(containersRef.current, callbackFunction);
 
-  const handleAreaSend = (value: string) => {
+  const handleAreaSend = (value: string, files?: File[], voice?: File) => {
     if (!value) {
       return;
     }
 
-    const responseData: ICreateMessageRequest = {
+    const data = {
       chat: chatId,
       text: value
     };
+    const formData = new FormData();
+    formData.append('chat', chatId);
+    formData.append('text', value);
 
-    createMessage(responseData).then(() =>
-      console.log(
-        containersRef.current
-          .at(-1)
-          ?.scrollIntoView({ behavior: 'smooth', block: 'end' })
-      )
+    if (files && files.length) {
+      files.forEach((file) => {
+        formData.append('files', file);
+      });
+    }
+    if (voice) {
+      formData.append('voice', voice);
+    }
+
+    const reader = files?.length || voice ? formData : data;
+
+    createMessage(reader).then(() =>
+      containersRef.current
+        .at(-1)
+        ?.scrollIntoView({ behavior: 'smooth', block: 'end' })
     );
   };
 

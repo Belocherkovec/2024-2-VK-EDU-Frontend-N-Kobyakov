@@ -1,7 +1,8 @@
 import { Chat } from '@/entities/Chat';
 import { NewChatButton } from '@/shared';
-import { ChatsHeader, ShowUpdates } from '@/widgets';
+import { ShowUpdates } from '@/widgets';
 
+import { ChatsHeader } from './ui';
 import { useChatsPage } from './hooks/useChatsPage';
 
 export const ChatsPage = () => {

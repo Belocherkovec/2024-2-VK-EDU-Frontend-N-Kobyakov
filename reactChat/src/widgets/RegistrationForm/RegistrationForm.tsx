@@ -1,9 +1,9 @@
-import { FileInput, Input, TEXTS } from '@/shared';
+import { ALLOWED_IMG_TYPES, TEXTS } from '@/shared';
+import { FileInput, Input, UserInfo } from '@/features';
 import cn from 'classnames';
 
 import { useRegistrationForm } from './hooks';
 import styles from './registrationForm.module.scss';
-import { UserInfo } from '@/widgets/DialogHeader/ui';
 
 export const RegistrationForm = () => {
   const {
@@ -35,6 +35,16 @@ export const RegistrationForm = () => {
           ))}
         </div>
       )}
+      <div className={styles.form__userPreview}>
+        <p>{TEXTS.pages.registration.preview}</p>
+        <UserInfo
+          avatar={null}
+          file={avatar || undefined}
+          title={`${firstName} ${lastName}`}
+          bio={bio}
+          className={styles.form__userInfo}
+        />
+      </div>
       <fieldset className={styles.form__group}>
         <Input
           isError={!!registrationErrors.length || !isFormValid.username}
@@ -77,7 +87,7 @@ export const RegistrationForm = () => {
           value={bio}
         />
         <FileInput
-          accept={['image/png', 'image/jpeg']}
+          accept={ALLOWED_IMG_TYPES}
           file={avatar}
           label={TEXTS.pages.registration.avatar}
           onChange={handleAvatarChange}
@@ -99,16 +109,6 @@ export const RegistrationForm = () => {
           value={password}
         />
       </fieldset>
-      <div className={styles.form__userPreview}>
-        <p>{TEXTS.pages.registration.preview}</p>
-        <UserInfo
-          avatar={null}
-          file={avatar || undefined}
-          title={`${firstName} ${lastName}`}
-          bio={bio}
-          className={styles.form__userInfo}
-        />
-      </div>
       <button
         className={cn(styles.form__button, isDisabled() && styles._disabled)}
         disabled={isDisabled()}
