@@ -1,0 +1,11 @@
+@use "../../../../app/styles/variables" as *;
+
+.search {
+  background: transparent;
+  color: $color-white-full;
+
+  &::placeholder {
+    color: $color-white-full;
+    opacity: 0.5;
+  }
+}

@@ -1,19 +1,27 @@
-import { Store } from '@/app/store';
-import { useContext, useState } from 'react';
+import { AppDispatch } from '@/app';
+import { fetchChats, selectChatIds, selectChatMap } from '@/entities/Chat';
+import { selectUserInfo } from '@/entities/User';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const useChatsPage = () => {
-  const {
-    store: { chat, filter }
-  } = useContext(Store);
+  const dispatch = useDispatch<AppDispatch>();
+  const userInfo = useSelector(selectUserInfo);
+  const chatIds = useSelector(selectChatIds);
+  const chatMap = useSelector(selectChatMap);
 
   const [isShowUpdates, setIsShowUpdates] = useState(
-    !localStorage.getItem('isShowUpdates1')
+    !localStorage.getItem('isShowUpdates3')
   );
+
+  useEffect(() => {
+    dispatch(fetchChats());
+  }, []);
 
   const handleCloseShowUpdates = () => {
     setIsShowUpdates(false);
-    localStorage.setItem('isShowUpdates1', 'showed');
+    localStorage.setItem('isShowUpdates3', 'showed');
   };
 
-  return { chat, filter, handleCloseShowUpdates, isShowUpdates };
+  return { chatIds, chatMap, handleCloseShowUpdates, isShowUpdates, userInfo };
 };

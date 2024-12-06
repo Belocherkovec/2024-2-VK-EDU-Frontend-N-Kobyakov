@@ -38,7 +38,7 @@ export const getFormattedDate = (date: Date): string => {
   ) {
     result = `${formattedTime}`;
   } else if (month === now.getMonth() && year === now.getFullYear()) {
-    result = `${formattedTime} ${formattedDay}`;
+    result = `${formattedTime}, ${formattedDay}`;
   } else if (year === now.getFullYear()) {
     result = `${formattedMonth}`;
   } else {

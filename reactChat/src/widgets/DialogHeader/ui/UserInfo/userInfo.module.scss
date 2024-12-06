@@ -18,11 +18,10 @@
     color: inherit;
     font-weight: bold;
     font-size: 1.2em;
-    overflow: hidden;
     max-height: 1em;
   }
 
-  &__last-online {
+  &__lastOnline {
     color: $color-gray-light;
     font-size: 0.8em;
   }

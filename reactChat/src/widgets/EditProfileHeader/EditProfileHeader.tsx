@@ -1,6 +1,5 @@
 import { Header, HeaderThemes } from '@/features/Header';
-import { BackButton, DoneButton } from '@/shared/components/buttons';
-import { TEXTS } from '@/shared/consts/texts';
+import { BackButton, DoneButton, TEXTS } from '@/shared';
 
 export const EditProfileHeader: React.FC<{ onSave: () => void }> = ({
   onSave

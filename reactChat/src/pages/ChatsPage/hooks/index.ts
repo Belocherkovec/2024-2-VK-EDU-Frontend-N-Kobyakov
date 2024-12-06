@@ -1,0 +1,1 @@
+export { useChatsPage } from './useChatsPage';

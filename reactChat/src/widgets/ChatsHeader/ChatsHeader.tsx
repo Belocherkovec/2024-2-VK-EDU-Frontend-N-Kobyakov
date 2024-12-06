@@ -1,24 +1,30 @@
 import { Header, HeaderThemes } from '@/features/Header';
-import { SearchInput } from '@/shared/components';
 import {
   BackButton,
   MenuRoundedButton,
-  SearchButton
-} from '@/shared/components/buttons';
-import { TEXTS } from '@/shared/consts/texts';
-
-import { useChatsHeader } from './hooks/useChatsHeader.ts';
-import styles from './сhatsHeader.module.scss';
+  RoutePaths,
+  SearchButton,
+  SearchInput,
+  TEXTS,
+  useSearch
+} from '@/shared';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '@/app';
+import { fetchChats } from '@/entities/Chat';
 
 export const ChatsHeader: React.FC<{
   username: string;
 }> = ({ username }) => {
+  const dispatch = useDispatch<AppDispatch>();
   const {
-    handleBackClick,
-    handleSearch,
+    isSearchMode,
     handleSearchModeChange,
-    isSearchMode
-  } = useChatsHeader();
+    handleSearch,
+    handleBackClick
+  } = useSearch({
+    onSearch: (value: string) => dispatch(fetchChats(value)),
+    onClose: () => dispatch(fetchChats())
+  });
 
   return (
     <Header
@@ -33,17 +39,15 @@ export const ChatsHeader: React.FC<{
         ),
         leftNode: isSearchMode ? (
           <BackButton
-            className={styles.header__button}
             onClick={handleBackClick}
+            to={RoutePaths.chatsPage}
+            isReplace
           />
         ) : (
           <MenuRoundedButton />
         ),
         rightNode: isSearchMode ? null : (
-          <SearchButton
-            className={styles.header__button}
-            onClick={handleSearchModeChange}
-          />
+          <SearchButton onClick={handleSearchModeChange} />
         ),
         theme: HeaderThemes.COLORED
       }}

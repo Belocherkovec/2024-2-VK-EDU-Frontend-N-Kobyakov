@@ -36,10 +36,11 @@ export default tseslint.config(
     rules: {
       ...reactHooks.configs.recommended.rules,
       '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/ ban-ts-comment': 'warn',
       'accessor-pairs': 'error',
       'array-callback-return': 'error',
       'arrow-body-style': 'error',
-      'camelcase': 'error',
+      'camelcase': 'warn',
       'consistent-return': 'error',
       'curly': 'error',
       'dot-notation': 'error',

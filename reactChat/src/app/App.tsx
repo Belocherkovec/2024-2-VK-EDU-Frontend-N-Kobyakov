@@ -1,10 +1,10 @@
-import { AppRouter } from '@/app/routers';
-import { StoreProvider } from '@/app/store';
+import { Outlet } from 'react-router-dom';
 
 import './app.scss';
+import { useApp } from './hooks';
 
-export const App = () => (
-  <StoreProvider>
-    <AppRouter />
-  </StoreProvider>
-);
+export const App = () => {
+  useApp();
+
+  return <Outlet />;
+};

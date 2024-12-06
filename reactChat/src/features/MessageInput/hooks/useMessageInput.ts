@@ -1,25 +1,16 @@
-import { Store } from '@/app/store';
-import { TEXTS } from '@/shared/consts/texts';
-import { useContext, useState } from 'react';
+import { TEXTS } from '@/shared';
+import { useState } from 'react';
+import { IMessageInputProps } from '@/features/MessageInput/MessageInput';
 
-export const UseMessageInput = (
-  onSend: (value: string) => void,
-  chatId: number
-) => {
-  const {
-    handleStoreUpdate,
-    store: {
-      chat: {
-        [chatId]: { draftMessage }
-      }
-    }
-  } = useContext(Store);
-
-  const [value, setValue] = useState(draftMessage);
+export const useMessageInput = (props: IMessageInputProps) => {
+  const { chatId, onSend } = props;
+  const [value, setValue] = useState(
+    localStorage.getItem(chatId) || TEXTS.empty
+  );
 
   const handleValueChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue(e.target.value);
-    handleStoreUpdate(`chat.${chatId}.draftMessage`, e.target.value);
+    localStorage.setItem(chatId, e.target.value);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
@@ -28,6 +19,7 @@ export const UseMessageInput = (
     if (value) {
       onSend(value);
       setValue(TEXTS.empty);
+      localStorage.removeItem(chatId);
     }
   };
 

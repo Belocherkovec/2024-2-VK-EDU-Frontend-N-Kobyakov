@@ -1,4 +1,4 @@
-import { TMessageStatuses } from '@/shared/consts/statuses';
+import { TMessageStatuses } from './consts';
 
 export interface IReactChat {
   avatar: string;

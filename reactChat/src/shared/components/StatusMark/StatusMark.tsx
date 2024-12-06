@@ -1,6 +1,7 @@
-import { MessageStatuses, TMessageStatuses } from '@/shared/consts/statuses.ts';
 import CheckRoundedIcon from '@mui/icons-material/CheckRounded';
 import DoneAllRoundedIcon from '@mui/icons-material/DoneAllRounded';
+
+import { MessageStatuses, TMessageStatuses } from '../../consts';
 
 export const StatusMark: React.FC<{
   className?: string;

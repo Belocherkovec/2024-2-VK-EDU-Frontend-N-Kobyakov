@@ -1,4 +1,4 @@
-import { TEXTS } from '@/shared/consts/texts';
+import { RoutePaths, TEXTS } from '@/shared';
 import SearchOffRoundedIcon from '@mui/icons-material/SearchOffRounded';
 import { Link } from 'react-router-dom';
 
@@ -9,7 +9,7 @@ export const NotFoundPage = () => (
     <SearchOffRoundedIcon className={styles.icon} />
     <h1>{TEXTS.pages.notFound.title}</h1>
     <p className={styles.page__subtitle}>{TEXTS.pages.notFound.subtitle}</p>
-    <Link className={styles.page__button} to={'/'}>
+    <Link className={styles.page__button} to={RoutePaths.chatsPage}>
       Вернуться на главную
     </Link>
   </section>

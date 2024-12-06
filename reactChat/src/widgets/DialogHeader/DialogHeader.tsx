@@ -1,21 +1,28 @@
 import { Header, HeaderThemes } from '@/features/Header';
-import { BackButton, SwapButton } from '@/shared/components/buttons';
+import { BackButton, RoutePaths } from '@/shared';
 
 import { UserInfo } from './ui';
 
 export const DialogHeader: React.FC<{
-  avatar: string;
-  chatId: string;
+  avatar: null | string;
   className?: string;
-  fullName: string;
-}> = ({ avatar, chatId, className, fullName }) => (
-  <Header
-    centerNode={
-      <UserInfo avatar={avatar} chatId={chatId} fullName={fullName} />
-    }
-    className={className}
-    leftNode={<BackButton />}
-    rightNode={<SwapButton />}
-    theme={HeaderThemes.WHITE}
-  />
-);
+  title: string;
+  isOnline?: boolean;
+  lastOnline?: string;
+}> = ({ avatar, className, title, lastOnline, isOnline }) => {
+  return (
+    <Header
+      centerNode={
+        <UserInfo
+          avatar={avatar}
+          title={title}
+          lastOnline={lastOnline}
+          isOnline={isOnline}
+        />
+      }
+      className={className}
+      leftNode={<BackButton to={RoutePaths.chatsPage} isReplace />}
+      theme={HeaderThemes.WHITE}
+    />
+  );
+};

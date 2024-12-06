@@ -1,9 +1,17 @@
-export { Image } from './Image';
+export { Avatar } from './Avatar';
 
-export { Input } from './Input';
+export * from './buttons';
+
+export { CheckMark } from './CheckMark';
+
+export * from './inputs';
+
+export { Input } from './inputs/Input';
+
+export { SearchInput } from './inputs/SearchInput';
 
 export { Loader } from './Loader';
 
-export { SearchInput } from './SearchInput';
-
 export { StatusMark } from './StatusMark';
+
+export { TextLink } from './TextLink';
