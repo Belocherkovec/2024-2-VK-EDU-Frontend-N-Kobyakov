@@ -1,4 +1,5 @@
-import { Input, TEXTS } from '@/shared';
+import { TEXTS } from '@/shared';
+import { Input } from '@/features';
 import cn from 'classnames';
 
 import styles from './authForm.module.scss';

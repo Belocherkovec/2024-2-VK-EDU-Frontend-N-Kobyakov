@@ -1,6 +1,7 @@
 import { AxiosError, AxiosResponse } from 'axios';
-import { registrationRequest, TEXTS } from '@/shared';
+import { registrationRequest, RoutePaths, TEXTS } from '@/shared';
 import { useCallback, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 interface IErrorResponse {
   username?: string[];
@@ -32,12 +33,13 @@ const getRegistrationErrors = (responseData: IErrorResponse): string[] => {
 };
 
 export const useRegistrationForm = () => {
+  const navigate = useNavigate();
   const [formValues, setFormValues] = useState({
-    bio: '',
-    firstName: '',
-    lastName: '',
-    password: '',
-    username: ''
+    bio: TEXTS.empty,
+    firstName: TEXTS.empty,
+    lastName: TEXTS.empty,
+    password: TEXTS.empty,
+    username: TEXTS.empty
   });
   const [isFormValid, setIsFormValid] = useState({
     bio: true,
@@ -104,16 +106,18 @@ export const useRegistrationForm = () => {
 
     if (response.status && response.status >= 400) {
       handleErrorRegistrationResponse(response as AxiosError);
+    } else {
+      navigate(RoutePaths.authPage);
     }
   };
 
   const resetForm = () => {
     setFormValues({
-      bio: '',
-      firstName: '',
-      lastName: '',
-      password: '',
-      username: ''
+      bio: TEXTS.empty,
+      firstName: TEXTS.empty,
+      lastName: TEXTS.empty,
+      password: TEXTS.empty,
+      username: TEXTS.empty
     });
     setIsFormValid({
       bio: true,

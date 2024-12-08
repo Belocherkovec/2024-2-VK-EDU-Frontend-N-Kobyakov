@@ -1,4 +1,4 @@
-import { PopupWindow } from '@/features';
+import { PopupWindow } from '@/shared';
 
 import styles from './showUpdates.module.scss';
 
@@ -10,8 +10,26 @@ export const ShowUpdates: React.FC<{
     isVisible={isVisible}
     onClose={onVisibleChange}
     title={'Что нового?'}
+    size="xl"
   >
     <details open className={styles.modal__detail}>
+      <summary className={styles.modal__summary}>v1.3.0</summary>
+      <ul className={styles.modal__list}>
+        <li>
+          Поле ввода, на котором сфокусирован пользователь больше не выдает
+          ошибку, что поле не заполнено.
+        </li>
+        <li>
+          После успешной регистрации пользователя перенаправляет на страницу
+          авторизации.
+        </li>
+        <li>
+          Оптимизирована отправка запросов на список пользователей и чатов.
+          Теперь запрос происходит, только если данные отсутствуют
+        </li>
+      </ul>
+    </details>
+    <details className={styles.modal__detail}>
       <summary className={styles.modal__summary}>v1.2.0</summary>
       <ul className={styles.modal__list}>
         <li>Обновлены требования к логину и паролю при регистрации</li>
