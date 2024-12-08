@@ -38,6 +38,7 @@ export const DialogPage = () => {
             key={msgId + idx}
             message={messagesMap[msgId].text || TEXTS.empty}
             ref={(element) => handleSetRef(element)}
+            voice={messagesMap[msgId].voice}
             status={
               messagesMap[msgId].was_read_by?.length
                 ? MessageStatuses.STATUS_READ

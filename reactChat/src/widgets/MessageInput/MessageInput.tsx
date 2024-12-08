@@ -1,25 +1,28 @@
 import cn from 'classnames';
 import { ActionsMenu, Gallery, TEXTS, useFileInput } from '@/shared';
-import SendRoundedIcon from '@mui/icons-material/SendRounded';
-import LocationOnRoundedIcon from '@mui/icons-material/LocationOnRounded';
-import ImageRoundedIcon from '@mui/icons-material/ImageRounded';
-import AttachFileRoundedIcon from '@mui/icons-material/AttachFileRounded';
-import StopCircleRoundedIcon from '@mui/icons-material/StopCircleRounded';
+import {
+  AttachFileRounded,
+  ImageRounded,
+  KeyboardVoiceRounded,
+  LocationOnRounded,
+  SendRounded,
+  StopCircleRounded
+} from '@mui/icons-material';
 
 import { useMessageInput } from './hooks';
-import { ImagePreview, LimitDialog } from './ui';
+import { AudioPreview, ImagePreview, LimitDialog } from './ui';
 import styles from './messageInput.module.scss';
-import { KeyboardVoiceRounded } from '@mui/icons-material';
 
 export interface IMessageInputProps {
   chatId: string;
   className?: string;
-  onSend: (value: string, files?: File[], voice?: File) => void;
+  onSend: (value?: string, files?: File[], voice?: Blob) => void;
 }
 
 export const MessageInput: React.FC<IMessageInputProps> = (props) => {
   const { className } = props;
   const {
+    voice,
     files,
     value,
     recorderRef,
@@ -39,6 +42,7 @@ export const MessageInput: React.FC<IMessageInputProps> = (props) => {
     handlePopupOpen,
     handlePopupClose,
     handlePopupConfirm,
+    handleAudioRemove,
     handleGalleryClose,
     handleVoiceClick
   } = useMessageInput(props);
@@ -52,7 +56,7 @@ export const MessageInput: React.FC<IMessageInputProps> = (props) => {
 
   return (
     <>
-      {!!files.length && (
+      {!!files.length && !voice && (
         <div className={styles.attachments}>
           {files.map((file, id) => (
             <ImagePreview
@@ -63,6 +67,11 @@ export const MessageInput: React.FC<IMessageInputProps> = (props) => {
               onRemove={handleFileRemove}
             />
           ))}
+        </div>
+      )}
+      {!!voice && (
+        <div className={styles.attachments}>
+          <AudioPreview voice={voice} onRemove={handleAudioRemove} />
         </div>
       )}
       <form
@@ -92,7 +101,7 @@ export const MessageInput: React.FC<IMessageInputProps> = (props) => {
           className={styles.form__fileInput}
         />
         <ActionsMenu
-          isShow={isShowActions}
+          isShow={!voice && isShowActions}
           className={styles.form__actionsMenu}
         >
           <button
@@ -100,7 +109,7 @@ export const MessageInput: React.FC<IMessageInputProps> = (props) => {
             className={styles.form__actionItem}
             onClick={handleActionGeo}
           >
-            <LocationOnRoundedIcon className={styles.form__actionIcon} />
+            <LocationOnRounded className={styles.form__actionIcon} />
             <span>{TEXTS.pages.dialogPage.sendGeo}</span>
           </button>
           <button
@@ -112,7 +121,7 @@ export const MessageInput: React.FC<IMessageInputProps> = (props) => {
                 : handleChooseFile()
             }
           >
-            <ImageRoundedIcon className={styles.form__actionIcon} />
+            <ImageRounded className={styles.form__actionIcon} />
             <span>{TEXTS.pages.dialogPage.image}</span>
           </button>
         </ActionsMenu>
@@ -121,14 +130,14 @@ export const MessageInput: React.FC<IMessageInputProps> = (props) => {
           className={styles.form__file}
           onClick={handleShowActions}
         >
-          <AttachFileRoundedIcon />
+          <AttachFileRounded />
         </button>
         <button
           type="button"
           className={styles.form__voice}
           onClick={handleVoiceClick}
         >
-          {recorderRef.current && <StopCircleRoundedIcon />}
+          {recorderRef.current && <StopCircleRounded />}
           {!recorderRef.current && <KeyboardVoiceRounded />}
         </button>
         <textarea
@@ -137,15 +146,16 @@ export const MessageInput: React.FC<IMessageInputProps> = (props) => {
           onChange={handleValueChange}
           placeholder={TEXTS.placeholders.message}
           rows={1}
-          value={value}
-        ></textarea>
+          value={!!voice ? TEXTS.empty : value}
+          disabled={!!voice}
+        />
         <button
           className={cn(
             styles.form__button,
-            value && styles.form__button_active
+            (value || !!voice) && styles.form__button_active
           )}
         >
-          <SendRoundedIcon className={styles.form__icon} />
+          <SendRounded className={styles.form__icon} />
         </button>
       </form>
     </>

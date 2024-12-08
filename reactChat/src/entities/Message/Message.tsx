@@ -1,35 +1,37 @@
-import { Gallery, LazyImage, StatusMark, TMessageStatuses } from '@/shared';
+import { Gallery, StatusMark, TMessageStatuses } from '@/shared';
 import cn from 'classnames';
-import { forwardRef, useRef, useState } from 'react';
+import { Gallery, StatusMark, TMessageStatuses } from '@/shared';
 
 import styles from './message.module.scss';
+import { useMessage } from './hooks';
 
-export const Message = forwardRef<
-  HTMLLIElement,
-  {
-    dataIndex?: string;
-    isUserMessage?: boolean;
-    message: string;
-    status: TMessageStatuses;
-    timeStamp: string;
-    files?: { item: string }[];
-  }
->(
-  (
-    { dataIndex, isUserMessage = false, message, status, timeStamp, files },
-    ref
-  ) => {
-    const imageClickId = useRef(0);
-    const [isGalleryVisible, setIsGalleryVisible] = useState(false);
+export interface IMessageProps {
+  dataIndex?: string;
+  isUserMessage?: boolean;
+  message: string;
+  status: TMessageStatuses;
+  timeStamp: string;
+  files?: { item: string }[];
+  voice: string | null;
+}
 
-    const handleGalleryVisible = () => setIsGalleryVisible(false);
-    const handleImageClick = (event: React.MouseEvent<HTMLFieldSetElement>) => {
-      const index = event.currentTarget.getAttribute('data-id');
-      if (index) {
-        imageClickId.current = +index;
-        setIsGalleryVisible(true);
-      }
-    };
+export const Message = forwardRef<HTMLLIElement, IMessageProps>(
+  (props, ref) => {
+    const {
+      dataIndex,
+      isUserMessage = false,
+      message,
+      status,
+      timeStamp,
+      files,
+      voice
+    } = props;
+    const {
+      imageClickId,
+      isGalleryVisible,
+      handleGalleryVisible,
+      handleImageClick
+    } = useMessage();
 
     return (
       <li
@@ -49,16 +51,16 @@ export const Message = forwardRef<
         <div className={styles.message__imageWrapper}>
           {files &&
             files.map(({ item }, id) => (
-              <LazyImage
-                className={styles.message__image}
+              <img
                 src={item}
-                alt="Пользовательское изображение"
                 key={item}
-                onClick={handleImageClick}
-                data-id={id}
+                alt="Пользовательская картинка"
+                className={styles.message__image}
+                onClick={() => handleImageClick(id)}
               />
             ))}
         </div>
+        {voice && <audio src={voice} controls />}
         <div className={styles.message__info}>
           <span className={styles.message__timestamp}>{timeStamp}</span>
           {!isUserMessage && (

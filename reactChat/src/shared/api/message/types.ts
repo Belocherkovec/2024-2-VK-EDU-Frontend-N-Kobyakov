@@ -3,7 +3,7 @@ import { IUser } from '../user';
 export interface ICreateMessageRequest {
   chat: string;
   files?: File[];
-  text: null | string;
+  text?: string;
   voice?: File;
 }
 

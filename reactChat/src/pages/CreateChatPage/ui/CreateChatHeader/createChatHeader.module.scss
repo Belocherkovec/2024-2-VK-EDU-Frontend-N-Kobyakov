@@ -1,0 +1,15 @@
+@use "@/app/styles/variables" as *;
+
+.header {
+  &__title {
+    color: $color-white-full;
+  }
+
+  &__button {
+    transition: color 0.3s ease-in;
+
+    &:hover {
+      color: $color-white-hover;
+    }
+  }
+}

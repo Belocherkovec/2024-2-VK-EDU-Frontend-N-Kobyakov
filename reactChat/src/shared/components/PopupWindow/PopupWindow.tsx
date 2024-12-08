@@ -13,8 +13,8 @@ export interface IPopupWindowProps {
   onClose: () => void;
   title?: string;
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
-  isTransparent?: boolean;
-  isCloseFixed?: boolean;
+  background?: 'transparent';
+  closeIconPosition?: 'bottomLeft' | 'bottomRight' | 'topLeft' | 'topRight';
 }
 
 export const PopupWindow: React.FC<IPopupWindowProps> = (props) => {
@@ -23,10 +23,10 @@ export const PopupWindow: React.FC<IPopupWindowProps> = (props) => {
     className,
     contentClassName,
     isVisible,
-    isCloseFixed,
     onClose,
     title,
-    isTransparent,
+    background,
+    closeIconPosition,
     size = 'xs'
   } = props;
   const { handleClose, stopPropagation } = usePopupWindow(props);
@@ -37,7 +37,7 @@ export const PopupWindow: React.FC<IPopupWindowProps> = (props) => {
         className={cn(
           styles.popup,
           !className && styles[`_${size}`],
-          isTransparent && styles._isTransparent,
+          background && styles[`_${background}`],
           className
         )}
         onClick={stopPropagation}
@@ -45,15 +45,15 @@ export const PopupWindow: React.FC<IPopupWindowProps> = (props) => {
         <header
           className={cn(
             styles.popup__header,
-            isTransparent && styles._isTransparent
+            background && styles[`_${background}`]
           )}
         >
           <h1>{title}</h1>
           <span
             className={cn(
               styles.popup__close,
-              isTransparent && styles._isTransparent,
-              isCloseFixed && styles._isFixed
+              background && styles[`_${background}`],
+              closeIconPosition && styles[`_${closeIconPosition}`]
             )}
             onClick={onClose}
           >
