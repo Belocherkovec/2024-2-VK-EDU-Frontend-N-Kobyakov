@@ -1,32 +1,37 @@
-import { Gallery, StatusMark, TMessageStatuses } from '@/shared';
+import { forwardRef } from 'react';
 import cn from 'classnames';
-import { forwardRef, useRef, useState } from 'react';
+import { Gallery, StatusMark, TMessageStatuses } from '@/shared';
 
 import styles from './message.module.scss';
+import { useMessage } from './hooks';
 
-export const Message = forwardRef<
-  HTMLLIElement,
-  {
-    dataIndex?: string;
-    isUserMessage?: boolean;
-    message: string;
-    status: TMessageStatuses;
-    timeStamp: string;
-    files?: { item: string }[];
-  }
->(
-  (
-    { dataIndex, isUserMessage = false, message, status, timeStamp, files },
-    ref
-  ) => {
-    const imageClickId = useRef(0);
-    const [isGalleryVisible, setIsGalleryVisible] = useState(false);
+export interface IMessageProps {
+  dataIndex?: string;
+  isUserMessage?: boolean;
+  message: string;
+  status: TMessageStatuses;
+  timeStamp: string;
+  files?: { item: string }[];
+  voice: string | null;
+}
 
-    const handleGalleryVisible = () => setIsGalleryVisible(false);
-    const handleImageClick = (id: number) => {
-      imageClickId.current = id;
-      setIsGalleryVisible(true);
-    };
+export const Message = forwardRef<HTMLLIElement, IMessageProps>(
+  (props, ref) => {
+    const {
+      dataIndex,
+      isUserMessage = false,
+      message,
+      status,
+      timeStamp,
+      files,
+      voice
+    } = props;
+    const {
+      imageClickId,
+      isGalleryVisible,
+      handleGalleryVisible,
+      handleImageClick
+    } = useMessage();
 
     return (
       <li
@@ -55,6 +60,7 @@ export const Message = forwardRef<
               />
             ))}
         </div>
+        {voice && <audio src={voice} controls />}
         <div className={styles.message__info}>
           <span className={styles.message__timestamp}>{timeStamp}</span>
           {!isUserMessage && (

@@ -10,6 +10,7 @@ import {
 } from '@/shared';
 import { AppDispatch } from '@/app';
 import { fetchUsers } from '@/entities/User';
+import styles from './createChatHeader.module.scss';
 
 export const CreateChatHeader: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -25,6 +26,7 @@ export const CreateChatHeader: React.FC = () => {
 
   return (
     <Header
+      className={styles.header}
       centerNode={
         isSearchMode ? (
           <SearchInput
@@ -32,18 +34,26 @@ export const CreateChatHeader: React.FC = () => {
             placeholder={TEXTS.placeholders.search}
           />
         ) : (
-          <h4>{TEXTS.pages.createChat.title}</h4>
+          <h4 className={styles.header__title}>
+            {TEXTS.pages.createChat.title}
+          </h4>
         )
       }
       leftNode={
         <BackButton
+          className={styles.header__button}
           onClick={isSearchMode ? handleBackClick : undefined}
           to={RoutePaths.chatsPage}
           isReplace
         />
       }
       rightNode={
-        isSearchMode ? null : <SearchButton onClick={handleSearchModeChange} />
+        isSearchMode ? null : (
+          <SearchButton
+            onClick={handleSearchModeChange}
+            className={styles.header__button}
+          />
+        )
       }
       theme={HeaderThemes.COLORED}
     />

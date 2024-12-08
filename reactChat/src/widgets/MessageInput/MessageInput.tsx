@@ -16,7 +16,7 @@ import styles from './messageInput.module.scss';
 export interface IMessageInputProps {
   chatId: string;
   className?: string;
-  onSend: (value?: string, files?: File[], voice?: File) => void;
+  onSend: (value?: string, files?: File[], voice?: Blob) => void;
 }
 
 export const MessageInput: React.FC<IMessageInputProps> = (props) => {

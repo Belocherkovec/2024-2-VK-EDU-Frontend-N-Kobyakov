@@ -19,9 +19,7 @@ export const AudioPreview: React.FC<IAudioPreview> = (props) => {
 
   return (
     <div className={styles.audioPreview}>
-      <p className={styles.audioPreview__text}>
-        {TEXTS.messageInput.audioPreviewName}
-      </p>
+      <p className={styles.audioPreview__text}>{TEXTS.audio.name}</p>
       <button
         onClick={isPlaying ? handlePause : handlePlay}
         className={styles.audioPreview__button}

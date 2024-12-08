@@ -2,7 +2,6 @@ import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/app';
 import {
-  blobToFile,
   GEOLOCATION_ERRORS,
   GeolocationErrorType,
   getGeo,
@@ -191,11 +190,7 @@ export const useMessageInput = (props: IMessageInputProps) => {
       setFiles([]);
     }
     if (voice) {
-      onSend(
-        undefined,
-        undefined,
-        blobToFile(voice, `voice-${Date.now()}.ogg`)
-      );
+      onSend(undefined, undefined, voice);
       setVoice(undefined);
     }
   };

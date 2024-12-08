@@ -103,7 +103,7 @@ export const TEXTS = {
     fullName: 'Полное Имя',
     userName: 'Ник'
   },
-  messageInput: {
-    audioPreviewName: 'Голосовое сообщение'
+  audio: {
+    name: 'Голосовое сообщение'
   }
 };

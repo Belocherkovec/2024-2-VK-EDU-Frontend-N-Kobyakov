@@ -118,7 +118,7 @@ export const useDialogPage = () => {
 
   useIntersectionObserver(containersRef.current, callbackFunction);
 
-  const handleAreaSend = (value?: string, files?: File[], voice?: File) => {
+  const handleAreaSend = (value?: string, files?: File[], voice?: Blob) => {
     const data = {
       chat: chatId,
       text: value
@@ -127,7 +127,7 @@ export const useDialogPage = () => {
     formData.append('chat', chatId);
 
     if (voice) {
-      formData.append('voice', voice);
+      formData.append('voice', voice, 'voice.ogg');
     } else {
       value && formData.append('text', value);
 
