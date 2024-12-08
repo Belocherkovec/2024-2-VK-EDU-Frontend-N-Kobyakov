@@ -118,26 +118,24 @@ export const useDialogPage = () => {
 
   useIntersectionObserver(containersRef.current, callbackFunction);
 
-  const handleAreaSend = (value: string, files?: File[], voice?: File) => {
-    if (!value) {
-      return;
-    }
-
+  const handleAreaSend = (value?: string, files?: File[], voice?: File) => {
     const data = {
       chat: chatId,
       text: value
     };
     const formData = new FormData();
     formData.append('chat', chatId);
-    formData.append('text', value);
 
-    if (files && files.length) {
-      files.forEach((file) => {
-        formData.append('files', file);
-      });
-    }
     if (voice) {
       formData.append('voice', voice);
+    } else {
+      value && formData.append('text', value);
+
+      if (files && files.length) {
+        files.forEach((file) => {
+          formData.append('files', file);
+        });
+      }
     }
 
     const reader = files?.length || voice ? formData : data;

@@ -1,4 +1,4 @@
-import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import { CloseRounded } from '@mui/icons-material';
 
 import styles from './ImagePreview.module.scss';
 
@@ -26,7 +26,7 @@ export const ImagePreview: React.FC<IImagePreviewProps> = ({
       className={styles.imagePreview__button}
       data-image-id={dataImageId}
     >
-      <CloseRoundedIcon className={styles.imagePreview__icon} />
+      <CloseRounded className={styles.imagePreview__icon} />
     </button>
   </div>
 );

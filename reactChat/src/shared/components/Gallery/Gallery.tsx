@@ -19,13 +19,15 @@ export const Gallery: React.FC<IGalleryProps> = (props) => {
       isVisible={isVisible}
       onClose={onClose}
       size="lg"
-      isTransparent
-      isCloseFixed
+      background="transparent"
+      closeIconPosition="topRight"
       className={styles.gallery__popup}
       contentClassName={styles.gallery__popupContent}
     >
       <fieldset className={styles.gallery__imgWrapper}>
-        <img src={currentImage} className={styles.gallery__img} />
+        {currentImage && (
+          <img src={currentImage} className={styles.gallery__img} />
+        )}
       </fieldset>
     </PopupWindow>
   );

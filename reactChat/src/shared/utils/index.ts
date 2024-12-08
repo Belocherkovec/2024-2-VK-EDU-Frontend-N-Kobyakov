@@ -11,3 +11,7 @@ export * from './timeFormatter';
 export * from './urlUtils';
 
 export * from './sendNotification';
+
+export * from './fileUtils';
+
+export * from './recordAudio';

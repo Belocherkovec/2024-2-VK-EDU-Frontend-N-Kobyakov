@@ -102,5 +102,8 @@ export const TEXTS = {
     bio: 'Описание профиля',
     fullName: 'Полное Имя',
     userName: 'Ник'
+  },
+  messageInput: {
+    audioPreviewName: 'Голосовое сообщение'
   }
 };

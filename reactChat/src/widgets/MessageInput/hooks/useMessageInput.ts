@@ -28,6 +28,7 @@ export const useMessageInput = (props: IMessageInputProps) => {
   } | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [voice, setVoice] = useState<Blob>();
+  const [isVoiceRecord, setIsVoiceRecord] = useState<boolean>(false);
   const [files, setFiles] = useState<File[]>([]);
   const [imageClickId, setImageClickId] = useState<number>(0);
 
@@ -162,10 +163,12 @@ export const useMessageInput = (props: IMessageInputProps) => {
           recorderRef.current.mediaRecorder.ondataavailable =
             handleDataAvailable;
           recorderRef.current.mediaRecorder.start();
+          setIsVoiceRecord(true);
         }
       });
     } else {
       recorderRef.current.stop();
+      setIsVoiceRecord(false);
     }
   };
 
@@ -177,27 +180,35 @@ export const useMessageInput = (props: IMessageInputProps) => {
     }
   };
 
+  const handleAudioRemove = () => setVoice(undefined);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
     if (value) {
-      onSend(
-        value,
-        files.length ? files : undefined,
-        voice ? blobToFile(voice, `voice-${Date.now()}.ogg`) : undefined
-      );
+      onSend(value, files.length ? files : undefined);
       setValue(TEXTS.empty);
       setFiles([]);
+    }
+    if (voice) {
+      onSend(
+        undefined,
+        undefined,
+        blobToFile(voice, `voice-${Date.now()}.ogg`)
+      );
+      setVoice(undefined);
     }
   };
 
   return {
+    voice,
     files,
     value,
     FILES_LIMIT,
     fileInputRef,
     imageClickId,
     isShowActions,
+    isVoiceRecord,
     isPopupVisible,
     isGalleryVisible,
     recorderRef,
@@ -212,6 +223,7 @@ export const useMessageInput = (props: IMessageInputProps) => {
     handleFileRemove,
     handleFileClick,
     handleGalleryClose,
+    handleAudioRemove,
     handleShowActions,
     handleActionGeo,
     handleVoiceClick
