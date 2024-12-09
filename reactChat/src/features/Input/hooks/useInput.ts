@@ -68,7 +68,7 @@ export const useInput = ({
       return;
     }
 
-    const errors = inputRef.current.validity;
+    let errors = inputRef.current.validity;
     const innerErrorMessages: string[] = [];
 
     Object.entries(ErrorMessages).forEach(([errorType, getErrorMessage]) => {
@@ -102,6 +102,8 @@ export const useInput = ({
 
       setErrorMessages(innerErrorMessages);
     }
+
+    errors = null;
   };
 
   const handleBlur = (
