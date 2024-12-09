@@ -1,6 +1,6 @@
 import { IPopupWindowProps, PopupWindow, TEXTS } from '@/shared';
 
-import styles from './LimitDialog.module.scss';
+import styles from './limitDialog.module.scss';
 
 export interface ILimitVisibleState {
   visible: boolean;

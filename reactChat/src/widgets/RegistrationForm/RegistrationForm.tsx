@@ -38,8 +38,7 @@ export const RegistrationForm = () => {
       <div className={styles.form__userPreview}>
         <p>{TEXTS.pages.registration.preview}</p>
         <UserInfo
-          avatar={null}
-          file={avatar || undefined}
+          avatar={avatar ? URL.createObjectURL(avatar) : null}
           title={`${firstName} ${lastName}`}
           bio={bio}
           className={styles.form__userInfo}
