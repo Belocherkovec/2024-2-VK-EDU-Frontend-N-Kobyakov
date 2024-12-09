@@ -67,7 +67,10 @@ export const useFileInput = (props: IUseFileInputProps) => {
     if (accept && !accept.includes(innerFile.type)) {
       props.onChange(null);
       setError(true);
-      props.isValid && props.isValid(false);
+
+      if (props.isValid) {
+        props.isValid(false);
+      }
     } else if (props.isValid) {
       props.isValid(true);
       setError(false);
@@ -79,7 +82,9 @@ export const useFileInput = (props: IUseFileInputProps) => {
         .catch(() => {
           props.onChange(null);
           setError(true);
-          props.isValid && props.isValid(false);
+          if (props.isValid) {
+            props.isValid(false);
+          }
         });
     }
   };
@@ -87,7 +92,9 @@ export const useFileInput = (props: IUseFileInputProps) => {
   const handleResetFile = () => {
     onChange(null);
     setError(false);
-    isValid && isValid(true);
+    if (isValid) {
+      isValid(true);
+    }
   };
 
   return {

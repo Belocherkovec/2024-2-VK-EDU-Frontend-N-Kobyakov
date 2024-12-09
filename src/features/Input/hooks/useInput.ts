@@ -88,7 +88,9 @@ export const useInput = ({
 
       if (errors[errorType as KErrorMessages]) {
         const errorProp = getPropWithKey(errorType as KErrorMessages);
-        errorProp && innerErrorMessages.push(errorProp);
+        if (errorProp) {
+          innerErrorMessages.push(errorProp);
+        }
       }
     });
 

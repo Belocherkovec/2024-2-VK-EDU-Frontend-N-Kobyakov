@@ -129,7 +129,9 @@ export const useDialogPage = () => {
     if (voice) {
       formData.append('voice', voice, 'voice.ogg');
     } else {
-      value && formData.append('text', value);
+      if (value) {
+        formData.append('text', value);
+      }
 
       if (files && files.length) {
         files.forEach((file) => {

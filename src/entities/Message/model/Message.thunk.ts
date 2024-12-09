@@ -10,7 +10,7 @@ export const fetchMessages = createAsyncThunk<IMessage[], string>(
       const messages = [...response.data.results];
 
       while (response.data.next) {
-        response = await getMessages(chatId, page, 100);
+        response = await getMessages(chatId, ++page, 100);
         messages.push(...response.data.results);
       }
 

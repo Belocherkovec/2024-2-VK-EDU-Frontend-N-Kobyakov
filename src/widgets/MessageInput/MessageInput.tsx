@@ -154,7 +154,7 @@ export const MessageInput: React.FC<IMessageInputProps> = (props) => {
           onChange={handleValueChange}
           placeholder={TEXTS.placeholders.message}
           rows={1}
-          value={!!voice ? TEXTS.empty : value}
+          value={voice ? TEXTS.empty : value}
           disabled={!!voice}
         />
         <button

@@ -29,11 +29,15 @@ export const useLazyImage = (props: ILazyImageProps) => {
     if (imageRef.current) {
       imageRef.current.onload = () => {
         setIsLoaded(true);
-        onLoad && onLoad();
+        if (onLoad) {
+          onLoad();
+        }
       };
       imageRef.current.onerror = () => {
         setIsError(true);
-        onError && onError();
+        if (onError) {
+          onError();
+        }
       };
     }
   }, [isVisible, onLoad, isLoaded]);

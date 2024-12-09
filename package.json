@@ -4,7 +4,7 @@
   "homepage": "https://Belocherkovec.github.io/2024-2-VK-EDU-Frontend-N-Kobyakov/",
   "repository": "https://github.com/Belocherkovec/2024-2-VK-EDU-Frontend-N-Kobyakov",
   "author": "Belocherkovec <belocherkovec@gmail.com>",
-  "version": "1.1.0",
+  "version": "1.3.0",
   "type": "module",
   "browserslist": [
     "defaults"
@@ -12,8 +12,13 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "lint": "eslint reactChat",
-    "preview": "vite build --base / && vite preview"
+    "build:clean": "",
+    "preview": "vite build --base / && vite preview",
+    "lint": "ESLINT_USE_FLAT_CONFIG=true npx eslint . --quiet",
+    "lint:fix": "ESLINT_USE_FLAT_CONFIG=true npx eslint . --fix",
+    "prettier": "prettier '**/*.{ts,tsx}' --check --ignore-unknown",
+    "prettier:fix": "prettier '**/*.{ts,tsx}' --write",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
@@ -23,6 +28,7 @@
     "@reduxjs/toolkit": "^2.3.0",
     "centrifuge": "^5.2.2",
     "classnames": "^2.5.1",
+    "eslint-config-prettier": "^9.1.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-redux": "^9.1.2",
@@ -39,17 +45,19 @@
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.7",
     "eslint": "^9.11.1",
-    "eslint-plugin-perfectionist": "^3.9.1",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react": "^7.37.1",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.12",
     "globals": "^15.9.0",
-    "random-avatar-generator": "^2.0.0",
+    "husky": "^8.0.0",
     "sass-embedded": "^1.80.3",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.7.0",
     "vite": "^5.4.8",
     "vite-plugin-svgr": "^4.3.0"
+  },
+  "overrides": {
+    "eslint": "^9.11.1"
   }
 }

@@ -14,7 +14,7 @@ export interface ILazyImageProps {
 }
 
 export const LazyImage: React.FC<ILazyImageProps> = (props) => {
-  const { src, alt, onClick, className, ...otherProps } = props;
+  const { src, alt, className, ...otherProps } = props;
   const {
     isLoaded,
     isError,

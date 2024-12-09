@@ -63,7 +63,7 @@ export const useApp = () => {
   }, [selectCurrentUserInfo]);
 
   const handleSetNotification = (data: ICentrifugoEvent) => {
-    const sender = data.message.sender;
+    const { sender } = data.message;
     sendNotification(`${sender.first_name} ${sender.last_name}`);
   };
 

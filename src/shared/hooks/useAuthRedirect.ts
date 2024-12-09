@@ -22,9 +22,11 @@ export const useAuthRedirect = () => {
         location.pathname.includes(path)
       )
     ) {
-      navigate.length > 2
-        ? navigate(-1)
-        : navigate(RoutePaths.chatsPage, { replace: true });
+      if (navigate.length > 2) {
+        navigate(-1);
+      } else {
+        navigate(RoutePaths.chatsPage, { replace: true });
+      }
     }
 
     sessionStorage.setItem('lastVisitedUrl', location.pathname);
