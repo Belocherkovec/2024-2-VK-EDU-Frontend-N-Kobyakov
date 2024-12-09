@@ -1,0 +1,28 @@
+@use "../../../../app/styles/variables" as *;
+
+.button {
+  background-color: $color-accent;
+  color: $color-white-full;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  transition: background-color 0.3s ease-in;
+
+  &:hover {
+    animation: pulse 2s infinite;
+    background-color: $color-accent-hover;
+  }
+
+  &:active {
+    background-color: $color-accent-hover;
+  }
+}
+
+.icon.icon {
+  margin-top: 2px;
+  width: 30px;
+  height: 30px;
+}
