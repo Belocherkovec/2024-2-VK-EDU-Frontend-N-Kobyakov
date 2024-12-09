@@ -1,1 +1,0 @@
-export { ChatMenuDialog } from './ChatMenuDialog';

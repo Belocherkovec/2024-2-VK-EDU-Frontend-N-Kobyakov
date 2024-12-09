@@ -1,0 +1,33 @@
+@use "../../app/styles/variables" as *;
+
+.form {
+  margin: 16px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+
+  &__avatar {
+    width: 140px;
+    height: 140px;
+    overflow: hidden;
+    display: block;
+    margin: 16px auto;
+
+    &._bg {
+      background-color: $color-white-blue;
+      border-radius: 50%;
+    }
+  }
+
+  &__label {
+    color: $color-gray-dark;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  &__input {
+    background-color: $color-white-blue;
+    padding: 12px;
+    border-radius: 4px;
+  }
+}
