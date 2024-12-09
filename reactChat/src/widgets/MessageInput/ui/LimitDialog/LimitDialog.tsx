@@ -35,12 +35,14 @@ export const LimitDialog: React.FC<ILimitDialogProps> = ({
           className={styles.popup__cancel}
           type="button"
           onClick={onClose}
+          aria-label={TEXTS.ariaLabels.cancel}
         >
           {TEXTS.pages.dialogPage.cancel}
         </button>
       )}
       {confirmButton && (
         <button
+          aria-label={TEXTS.ariaLabels.confirm}
           className={styles.popup__confirm}
           type="button"
           onClick={onConfirm || onClose}

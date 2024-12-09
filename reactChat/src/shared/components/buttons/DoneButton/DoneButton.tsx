@@ -1,10 +1,15 @@
-import DoneRoundedIcon from '@mui/icons-material/DoneRounded';
+import { DoneRounded } from '@mui/icons-material';
+import { TEXTS } from '@/shared';
 
 export const DoneButton: React.FC<{
   className?: string;
   onClick: (event?: React.MouseEvent<HTMLButtonElement>) => void;
 }> = ({ className, onClick }) => (
-  <button className={className} onClick={onClick}>
-    <DoneRoundedIcon />
+  <button
+    className={className}
+    onClick={onClick}
+    aria-label={TEXTS.ariaLabels.saveChanges}
+  >
+    <DoneRounded />
   </button>
 );

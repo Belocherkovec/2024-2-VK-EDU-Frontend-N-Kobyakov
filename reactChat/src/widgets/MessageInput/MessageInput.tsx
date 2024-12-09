@@ -108,6 +108,7 @@ export const MessageInput: React.FC<IMessageInputProps> = (props) => {
             type="button"
             className={styles.form__actionItem}
             onClick={handleActionGeo}
+            aria-label={TEXTS.ariaLabels.sendGeo}
           >
             <LocationOnRounded className={styles.form__actionIcon} />
             <span>{TEXTS.pages.dialogPage.sendGeo}</span>
@@ -115,6 +116,7 @@ export const MessageInput: React.FC<IMessageInputProps> = (props) => {
           <button
             type="button"
             className={styles.form__actionItem}
+            aria-label={TEXTS.ariaLabels.addImages}
             onClick={() =>
               files.length >= FILES_LIMIT
                 ? handlePopupOpen(false, true)
@@ -129,6 +131,7 @@ export const MessageInput: React.FC<IMessageInputProps> = (props) => {
           type="button"
           className={styles.form__file}
           onClick={handleShowActions}
+          aria-label={TEXTS.ariaLabels.showActions}
         >
           <AttachFileRounded />
         </button>
@@ -136,6 +139,11 @@ export const MessageInput: React.FC<IMessageInputProps> = (props) => {
           type="button"
           className={styles.form__voice}
           onClick={handleVoiceClick}
+          aria-label={
+            recorderRef.current
+              ? TEXTS.ariaLabels.voiceMessageStop
+              : TEXTS.ariaLabels.voiceMessageStart
+          }
         >
           {recorderRef.current && <StopCircleRounded />}
           {!recorderRef.current && <KeyboardVoiceRounded />}
@@ -150,6 +158,7 @@ export const MessageInput: React.FC<IMessageInputProps> = (props) => {
           disabled={!!voice}
         />
         <button
+          aria-label={TEXTS.ariaLabels.sendMessage}
           className={cn(
             styles.form__button,
             (value || !!voice) && styles.form__button_active
