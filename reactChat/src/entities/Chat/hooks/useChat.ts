@@ -30,9 +30,11 @@ export const useChat = (userId: string) => {
     ? getFormattedDate(new Date(lastMessage.created_at))
     : undefined;
   const isUserMessage = currentUserInfo.id === userId;
+
   const isOnline = members.filter(
     (member) => member.id !== currentUserInfo.id
   )[0]?.is_online;
+
   const lastMessageStatus = lastMessage.was_read_by.length
     ? MessageStatuses.STATUS_READ
     : MessageStatuses.STATUS_SEND;

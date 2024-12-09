@@ -17,9 +17,7 @@ export const registrationRequest = (
   axios
     .post(`${import.meta.env.VITE_PUBLIC_API}register/`, data, {
       headers: {
-        'Content-Type': data.avatar
-          ? 'multipart/form-data'
-          : 'multipart/form-data'
+        'Content-Type': data.avatar ? 'multipart/form-data' : 'application/json'
       }
     })
     .then((res) => {
@@ -85,6 +83,3 @@ export const getUsers = (
 
   return $api.get<IGetUsersResponse>(buildUrlWithQuery('users/', queryParams));
 };
-
-export const switchStatusOnline = () => $api.post('user/online/');
-export const switchStatusOffline = () => $api.post('user/offline/');

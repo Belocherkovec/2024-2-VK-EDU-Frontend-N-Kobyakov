@@ -1,9 +1,8 @@
-@use "../../app/styles/variables" as *;
+@use "@/app/styles/variables" as *;
 
 .user {
   height: 80px;
   padding: 10px 16px;
-  color: $color-black;
   display: flex;
   align-items: center;
   column-gap: 12px;
@@ -23,9 +22,14 @@
   &__avatar {
     width: 60px;
     height: 60px;
+    flex-basis: 60px;
+    flex-shrink: 0;
   }
 
   &__username {
     font-size: 1em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 }

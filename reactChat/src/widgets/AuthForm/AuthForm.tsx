@@ -1,4 +1,5 @@
-import { Input, TEXTS } from '@/shared';
+import { TEXTS } from '@/shared';
+import { Input } from '@/features';
 import cn from 'classnames';
 
 import styles from './authForm.module.scss';
@@ -47,6 +48,7 @@ export const AuthForm: React.FC = () => {
         value={password}
       />
       <button
+        aria-label={TEXTS.ariaLabels.auth}
         className={cn(styles.form__button, isDisabled() && styles._disabled)}
         disabled={isDisabled()}
       >
