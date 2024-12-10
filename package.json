@@ -12,7 +12,6 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "build:clean": "",
     "preview": "vite build --base / && vite preview",
     "lint": "ESLINT_USE_FLAT_CONFIG=true npx eslint . --quiet",
     "lint:fix": "ESLINT_USE_FLAT_CONFIG=true npx eslint . --fix",

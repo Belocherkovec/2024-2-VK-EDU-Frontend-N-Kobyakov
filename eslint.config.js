@@ -20,7 +20,15 @@ export default tseslint.config(
       'stylistic': stylisticJsPlugin
     }
   },
-  { ignores: ['dist', 'node_modules', 'eslint.config.js', 'vite.config.ts'] },
+  {
+    ignores: [
+      'dist',
+      'node_modules',
+      'eslint.config.js',
+      'vite.config.ts',
+      'ts/**/*'
+    ]
+  },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
