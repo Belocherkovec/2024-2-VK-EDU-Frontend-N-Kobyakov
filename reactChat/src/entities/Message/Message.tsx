@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import cn from 'classnames';
-import { Gallery, StatusMark, TMessageStatuses } from '@/shared';
+import { Gallery, LazyImage, StatusMark, TMessageStatuses } from '@/shared';
 
 import styles from './message.module.scss';
 import { useMessage } from './hooks';
@@ -51,7 +51,7 @@ export const Message = forwardRef<HTMLLIElement, IMessageProps>(
         <div className={styles.message__imageWrapper}>
           {files &&
             files.map(({ item }, id) => (
-              <img
+              <LazyImage
                 src={item}
                 key={item}
                 alt="Пользовательская картинка"

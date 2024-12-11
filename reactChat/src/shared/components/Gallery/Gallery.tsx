@@ -1,7 +1,7 @@
 import { PopupWindow } from '@/shared';
 
 import { useGallery } from './hooks';
-import styles from './Gallery.module.scss';
+import styles from './gallery.module.scss';
 
 export interface IGalleryProps {
   images: string[] | File[];

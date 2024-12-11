@@ -1,0 +1,49 @@
+.container {
+  border: 0;
+  background: linear-gradient(101.42deg, #DFEFFF -0.04%, rgba(223, 239, 255, 0.27) 94.2%);
+  box-sizing: border-box;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: -150px;
+    top: 0;
+    height: 100%;
+    width: 150px;
+    background: linear-gradient(to right, transparent 0%, #26b3ff17 50%, transparent 100%);
+    animation: load 1s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+  }
+
+  &._loaded {
+    &::before {
+      animation: none;
+    }
+  }
+
+
+  &__image {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: inherit;
+    transition: opacity .3s ease-in-out;
+
+    &._loaded {
+      opacity: 1;
+    }
+  }
+}
+
+@keyframes load {
+  from {
+    left: -150px;
+  }
+  to   {
+    left: 100%;
+  }
+}

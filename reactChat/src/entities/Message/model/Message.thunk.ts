@@ -5,9 +5,16 @@ export const fetchMessages = createAsyncThunk<IMessage[], string>(
   'messages/fetchMessages',
   async (chatId, thunkAPI) => {
     try {
-      const response = await getMessages(chatId, undefined, 200);
+      let page = 1;
+      let response = await getMessages(chatId, page, 100);
+      const messages = [...response.data.results];
 
-      return response.data.results;
+      while (response.data.next) {
+        response = await getMessages(chatId, page, 100);
+        messages.push(...response.data.results);
+      }
+
+      return messages;
     } catch {
       return thunkAPI.rejectWithValue('Error fetching messages');
     }

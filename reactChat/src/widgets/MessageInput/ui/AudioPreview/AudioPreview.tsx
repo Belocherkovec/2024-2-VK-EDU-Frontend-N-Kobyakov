@@ -23,6 +23,9 @@ export const AudioPreview: React.FC<IAudioPreview> = (props) => {
       <button
         onClick={isPlaying ? handlePause : handlePlay}
         className={styles.audioPreview__button}
+        aria-label={
+          isPlaying ? TEXTS.ariaLabels.stopVoice : TEXTS.ariaLabels.startVoice
+        }
       >
         {isPlaying && (
           <StopCircleRounded className={styles.audioPreview__icon} />

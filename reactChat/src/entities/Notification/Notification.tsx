@@ -2,7 +2,7 @@ import cn from 'classnames';
 import ErrorOutlineRoundedIcon from '@mui/icons-material/ErrorOutlineRounded';
 
 import { useNotification } from './hooks';
-import styles from './Notification.module.scss';
+import styles from './notification.module.scss';
 
 export const Notification: React.FC = () => {
   const { notifications } = useNotification();
