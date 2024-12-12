@@ -1,6 +1,7 @@
 import { AppDispatch } from '@/app';
 import { fetchChats, selectChatMap } from '@/entities/Chat';
 import {
+  addMessage,
   fetchMessages,
   resetMessages,
   selectMessagesIdx,
@@ -140,11 +141,13 @@ export const useDialogPage = () => {
 
     const reader = files?.length || voice ? formData : data;
 
-    createMessage(reader).then(() =>
+    createMessage(reader).then((res) => {
+      dispatch(addMessage(res.data));
+
       containersRef.current
         .at(-1)
-        ?.scrollIntoView({ behavior: 'smooth', block: 'end' })
-    );
+        ?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    });
   };
 
   return {

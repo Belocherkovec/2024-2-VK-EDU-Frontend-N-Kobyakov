@@ -3,10 +3,13 @@
 .header {
   &__title {
     color: $color-white-full;
+    flex: 1;
   }
 
   &__button {
     transition: color 0.3s ease-in;
+    display: flex;
+    justify-content: end;
 
     &:hover {
       color: $color-white-hover;
