@@ -1,6 +1,6 @@
 import { CloseRounded } from '@mui/icons-material';
 
-import styles from './ImagePreview.module.scss';
+import styles from './imagePreview.module.scss';
 
 interface IImagePreviewProps {
   name: string;
