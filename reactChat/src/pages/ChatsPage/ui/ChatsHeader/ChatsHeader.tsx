@@ -4,7 +4,6 @@ import { AppDispatch } from '@/app';
 import { Header, HeaderThemes, SearchInput } from '@/features';
 import {
   BackButton,
-  MenuRoundedButton,
   RoutePaths,
   SearchButton,
   TEXTS,
@@ -47,9 +46,7 @@ export const ChatsHeader: React.FC<{
             className={styles.header__button}
             isReplace
           />
-        ) : (
-          <MenuRoundedButton />
-        ),
+        ) : null,
         rightNode: isSearchMode ? null : (
           <SearchButton
             onClick={handleSearchModeChange}

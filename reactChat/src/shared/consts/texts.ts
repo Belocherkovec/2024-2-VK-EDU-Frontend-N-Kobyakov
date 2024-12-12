@@ -54,7 +54,9 @@ export const TEXTS = {
       noAccount: 'Нет аккаунта?',
       password: 'Пароль',
       title: 'Авторизация в Simple Messenger',
-      toRegistration: 'Зарегистрироваться'
+      toRegistration: 'Зарегистрироваться',
+      loginPlaceholder: 'Введите ваш логин',
+      passwordPlaceholder: 'Введите ваш пароль'
     },
     createChat: {
       title: 'Новое сообщение'
@@ -91,7 +93,12 @@ export const TEXTS = {
       repeatPassword: 'Повторите пароль',
       title: 'Регистрация в Simple Messenger',
       toAuth: 'Войти',
-      preview: 'Предпросмотр пользователя'
+      preview: 'Предпросмотр пользователя',
+      loginPlaceholder: 'Придумайте логин',
+      passwordPlaceholder: 'Придумайте пароль',
+      firstNamePlaceholder: 'Введите ваше имя',
+      lastNamePlaceholder: 'Введите вашу Фамилию',
+      bioPlaceholder: 'Заполните краткую информацию о себе'
     }
   },
   placeholders: {

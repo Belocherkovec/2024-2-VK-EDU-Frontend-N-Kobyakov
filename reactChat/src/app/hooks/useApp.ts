@@ -1,8 +1,9 @@
-import {
-  createMessage,
-  deleteMessage,
-  updateMessage
-} from '@/entities/Message';
+import { Centrifuge, Subscription } from 'centrifuge';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addMessage, deleteMessage, updateMessage } from '@/entities/Message';
+import { useNotification } from '@/entities/Notification';
+import { selectChatMap } from '@/entities/Chat';
 import {
   fetchCurrentUser,
   selectUserInfo,
@@ -16,11 +17,7 @@ import {
   setupRefreshInterceptor,
   useAuthRedirect
 } from '@/shared';
-import { Centrifuge, Subscription } from 'centrifuge';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
-import { useNotification } from '@/entities/Notification';
 import { AppDispatch } from '../store';
 
 export const useApp = () => {
@@ -29,7 +26,8 @@ export const useApp = () => {
 
   const dispatch = useDispatch<AppDispatch>();
 
-  const selectCurrentUserInfo = useSelector(selectUserInfo);
+  const currentUserInfo = useSelector(selectUserInfo);
+  const chats = useSelector(selectChatMap);
 
   const [centrifugeObj, setCentrifugeObj] = useState<{
     centrifuge: Centrifuge;
@@ -47,10 +45,12 @@ export const useApp = () => {
   }, []);
 
   useEffect(() => {
-    if (selectCurrentUserInfo.id) {
-      setCentrifugeObj(
-        initAndStartCentrifugo(selectCurrentUserInfo.id, handlePublicationEvent)
+    if (currentUserInfo.id) {
+      const centrifugeInstance = initAndStartCentrifugo(currentUserInfo.id);
+      centrifugeInstance.subscription.on('publication', (ctx) =>
+        handlePublicationEvent(ctx.data)
       );
+      setCentrifugeObj(centrifugeInstance);
     }
 
     return () => {
@@ -60,28 +60,37 @@ export const useApp = () => {
         centrifugeObj.subscription.unsubscribe();
       }
     };
-  }, [selectCurrentUserInfo]);
+  }, [currentUserInfo]);
 
   const handleSetNotification = (data: ICentrifugoEvent) => {
-    const sender = data.message.sender;
-    sendNotification(`${sender.first_name} ${sender.last_name}`);
+    const chatId = data.message.chat;
+    const targetChat = chats[chatId];
+
+    if (targetChat) {
+      sendNotification(targetChat.title);
+    }
   };
 
   const handlePublicationEvent = (data: ICentrifugoEvent) => {
     const currentPage = window.location.hash.split('/');
 
     if (
-      (currentPage.includes('dialog') &&
+      (data.message.sender.id !== currentUserInfo.id &&
+        currentPage.includes('dialog') &&
         currentPage.at(-1) !== data.message.chat) ||
-      data.event === CentrifugoEventTypes.CREATE
+      (!currentPage.includes('dialog') &&
+        data.event === CentrifugoEventTypes.CREATE)
     ) {
       handleSetNotification(data);
     }
 
-    if (currentPage.length !== 3) {
+    if (
+      currentPage.includes('dialog') &&
+      currentPage.at(-1) === data.message.chat
+    ) {
       switch (data.event) {
         case CentrifugoEventTypes.CREATE:
-          dispatch(createMessage(data.message));
+          dispatch(addMessage(data.message));
           break;
         case CentrifugoEventTypes.DELETE:
           dispatch(deleteMessage(data.message));

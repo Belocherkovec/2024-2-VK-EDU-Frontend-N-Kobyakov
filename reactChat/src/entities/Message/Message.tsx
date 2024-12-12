@@ -47,7 +47,7 @@ export const Message = forwardRef<HTMLLIElement, IMessageProps>(
             clickIndex={imageClickId.current}
           />
         )}
-        <p className={styles.message__text}>{message.replace(/\n/g, '<br>')}</p>
+        <p className={styles.message__text}>{message}</p>
         <div className={styles.message__imageWrapper}>
           {files &&
             files.map(({ item }, id) => (

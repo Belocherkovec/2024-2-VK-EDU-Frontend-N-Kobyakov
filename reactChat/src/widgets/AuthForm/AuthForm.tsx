@@ -35,6 +35,7 @@ export const AuthForm: React.FC = () => {
         onValidChange={handleFormValidChange}
         required
         value={login}
+        placeholder={TEXTS.pages.auth.loginPlaceholder}
       />
       <Input
         isError={isLoginError || !isFormValid.password}
@@ -46,6 +47,7 @@ export const AuthForm: React.FC = () => {
         required
         type="password"
         value={password}
+        placeholder={TEXTS.pages.auth.passwordPlaceholder}
       />
       <button
         className={cn(styles.form__button, isDisabled() && styles._disabled)}
