@@ -56,6 +56,7 @@ export const RegistrationForm = () => {
           required
           patternMessage={TEXTS.pages.registration.UsernameMismatchError}
           value={username}
+          placeholder={TEXTS.pages.registration.loginPlaceholder}
         />
         <Input
           isError={!!registrationErrors.length || !isFormValid.firstName}
@@ -65,6 +66,7 @@ export const RegistrationForm = () => {
           onValidChange={handleFormValidChange}
           required
           value={firstName}
+          placeholder={TEXTS.pages.registration.firstNamePlaceholder}
         />
         <Input
           isError={!!registrationErrors.length || !isFormValid.lastName}
@@ -74,6 +76,7 @@ export const RegistrationForm = () => {
           onValidChange={handleFormValidChange}
           required
           value={lastName}
+          placeholder={TEXTS.pages.registration.lastNamePlaceholder}
         />
         <Input
           className={styles.form__area}
@@ -84,6 +87,7 @@ export const RegistrationForm = () => {
           onValidChange={handleFormValidChange}
           type="textarea"
           value={bio}
+          placeholder={TEXTS.pages.registration.bioPlaceholder}
         />
         <FileInput
           accept={ALLOWED_IMG_TYPES}
@@ -106,6 +110,7 @@ export const RegistrationForm = () => {
           pattern="^(?!\d+$).+"
           patternMessage={TEXTS.pages.registration.PasswordMismatchError}
           value={password}
+          placeholder={TEXTS.pages.registration.passwordPlaceholder}
         />
       </fieldset>
       <button

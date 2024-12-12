@@ -23,7 +23,7 @@ const selectors = {
 };
 
 const reducers = {
-  createMessage: (state: IMessagesState, action: PayloadAction<IMessage>) => {
+  addMessage: (state: IMessagesState, action: PayloadAction<IMessage>) => {
     state.messagesIdx.push(action.payload.id);
     state.messagesMap[action.payload.id] = action.payload;
   },
@@ -67,7 +67,7 @@ const messageSlice = createSlice({
 
 export const messagesSliceReducer = messageSlice.reducer;
 
-export const { createMessage, deleteMessage, resetMessages, updateMessage } =
+export const { addMessage, deleteMessage, resetMessages, updateMessage } =
   messageSlice.actions;
 
 export const { selectMessagesIdx, selectMessagesMap } = messageSlice.selectors;
