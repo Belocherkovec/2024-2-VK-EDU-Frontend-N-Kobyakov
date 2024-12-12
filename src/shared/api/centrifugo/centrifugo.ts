@@ -1,7 +1,7 @@
 import { Centrifuge, Subscription } from 'centrifuge';
 
 import { $api } from '../api';
-import { ICentrifugoEvent, ICentrifugoResponse } from './types';
+import { ICentrifugoResponse } from './types';
 
 let centrifugoInstance: Centrifuge;
 let subscriptionInstance: Subscription;
@@ -62,16 +62,9 @@ const createCentrifugoSubscription = (channel: string) => {
   return subscriptionInstance;
 };
 
-export const initAndStartCentrifugo = (
-  userId: string,
-  callback: (data: ICentrifugoEvent) => void
-) => {
+export const initAndStartCentrifugo = (userId: string) => {
   const centrifuge = createCentrifugoInstance();
   const subscription = createCentrifugoSubscription(userId);
-
-  subscription.on('publication', (ctx) => {
-    callback(ctx.data);
-  });
 
   return { centrifuge, subscription };
 };
