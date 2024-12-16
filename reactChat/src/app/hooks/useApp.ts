@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addMessage, deleteMessage, updateMessage } from '@/entities/Message';
 import { useNotification } from '@/entities/Notification';
-import { selectChatMap } from '@/entities/Chat';
+import { replaceChat, selectChatMap } from '@/entities/Chat';
 import {
   fetchCurrentUser,
   selectUserInfo,
@@ -15,7 +15,8 @@ import {
   initAndStartCentrifugo,
   sendNotification,
   setupRefreshInterceptor,
-  useAuthRedirect
+  useAuthRedirect,
+  getChat
 } from '@/shared';
 
 import { AppDispatch } from '../store';
@@ -103,5 +104,9 @@ export const useApp = () => {
           break;
       }
     }
+
+    getChat(data.message.chat).then((res) => {
+      dispatch(replaceChat(res.data))
+    })
   };
 };
