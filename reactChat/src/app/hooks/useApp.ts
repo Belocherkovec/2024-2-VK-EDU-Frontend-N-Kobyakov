@@ -10,7 +10,6 @@ import {
   setUserUnauthorized
 } from '@/entities/User';
 import {
-  $api,
   CentrifugoEventTypes,
   ICentrifugoEvent,
   initAndStartCentrifugo,
