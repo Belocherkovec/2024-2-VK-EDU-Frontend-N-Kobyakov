@@ -41,6 +41,9 @@ const reducers = {
     action: PayloadAction<Record<string, IChat>>
   ) => {
     state.chatMap = action.payload;
+  },
+  replaceChat: (state: IChatState, action: PayloadAction<IChat>) => {
+    state.chatMap[action.payload.id] = action.payload;
   }
 };
 
@@ -72,7 +75,7 @@ const chatSlice = createSlice({
 
 export const chatSliceReducer = chatSlice.reducer;
 
-export const { addChat, resetChat, setChatIds, setChatMap } = chatSlice.actions;
+export const { addChat, resetChat, setChatIds, setChatMap, replaceChat } = chatSlice.actions;
 
 export const { selectChatIds, selectChatMap, selectCurrentChat } =
   chatSlice.selectors;
