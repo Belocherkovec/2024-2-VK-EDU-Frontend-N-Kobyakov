@@ -1,6 +1,7 @@
 import { CloseRounded } from '@mui/icons-material';
 
 import styles from './imagePreview.module.scss';
+import { TEXTS } from '@/shared';
 
 interface IImagePreviewProps {
   name: string;
@@ -25,6 +26,7 @@ export const ImagePreview: React.FC<IImagePreviewProps> = ({
       onClick={onRemove}
       className={styles.imagePreview__button}
       data-image-id={dataImageId}
+      aria-label={TEXTS.ariaLabels.removeFile}
     >
       <CloseRounded className={styles.imagePreview__icon} />
     </button>

@@ -50,6 +50,7 @@ export const AuthForm: React.FC = () => {
         placeholder={TEXTS.pages.auth.passwordPlaceholder}
       />
       <button
+        aria-label={TEXTS.ariaLabels.auth}
         className={cn(styles.form__button, isDisabled() && styles._disabled)}
         disabled={isDisabled()}
       >
