@@ -15,7 +15,9 @@ export const useChatsPage = () => {
   );
 
   useEffect(() => {
-    dispatch(fetchChats());
+    if (!chatIds.length) {
+      dispatch(fetchChats());
+    }
   }, []);
 
   const handleCloseShowUpdates = () => {

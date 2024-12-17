@@ -1,9 +1,9 @@
 import { Message } from '@/entities/Message';
-import { MessageInput } from '@/features';
 import { MessageStatuses, TEXTS, timeFormatter } from '@/shared';
-import { DialogHeader } from '@/widgets';
+import { MessageInput } from '@/widgets';
 
 import styles from './dialogPage.module.scss';
+import { DialogHeader } from './ui';
 import { useDialogPage } from './hooks';
 
 export const DialogPage = () => {
@@ -27,15 +27,18 @@ export const DialogPage = () => {
         title={title}
         lastOnline={lastOnline}
         isOnline={isOnline}
+        className={styles.dialog__header}
       />
       <ul className={styles.dialog__messages}>
         {messagesIdx.map((msgId, idx) => (
           <Message
             dataIndex={msgId}
+            files={messagesMap[msgId].files}
             isUserMessage={isUserMessage(msgId)}
             key={msgId + idx}
             message={messagesMap[msgId].text || TEXTS.empty}
             ref={(element) => handleSetRef(element)}
+            voice={messagesMap[msgId].voice}
             status={
               messagesMap[msgId].was_read_by?.length
                 ? MessageStatuses.STATUS_READ

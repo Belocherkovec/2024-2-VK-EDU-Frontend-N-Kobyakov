@@ -1,7 +1,6 @@
 @use "@/app/styles/variables.scss" as *;
 
 .link {
-  color: $color-black;
   &__text {
     color: $color-accent;
     position: relative;

@@ -1,8 +1,9 @@
-import {
-  createMessage,
-  deleteMessage,
-  updateMessage
-} from '@/entities/Message';
+import { Centrifuge, Subscription } from 'centrifuge';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addMessage, deleteMessage, updateMessage } from '@/entities/Message';
+import { useNotification } from '@/entities/Notification';
+import { replaceChat, selectChatMap } from '@/entities/Chat';
 import {
   fetchCurrentUser,
   selectUserInfo,
@@ -12,23 +13,22 @@ import {
   CentrifugoEventTypes,
   ICentrifugoEvent,
   initAndStartCentrifugo,
+  sendNotification,
   setupRefreshInterceptor,
-  switchStatusOffline,
-  switchStatusOnline,
-  useAuthRedirect
+  useAuthRedirect,
+  getChat
 } from '@/shared';
-import { Centrifuge, Subscription } from 'centrifuge';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
 import { AppDispatch } from '../store';
 
 export const useApp = () => {
   useAuthRedirect();
+  useNotification();
 
   const dispatch = useDispatch<AppDispatch>();
 
-  const selectCurrentUserInfo = useSelector(selectUserInfo);
+  const currentUserInfo = useSelector(selectUserInfo);
+  const chats = useSelector(selectChatMap);
 
   const [centrifugeObj, setCentrifugeObj] = useState<{
     centrifuge: Centrifuge;
@@ -37,24 +37,21 @@ export const useApp = () => {
 
   useEffect(() => {
     setupRefreshInterceptor(dispatch);
-    document.addEventListener('visibilitychange', handleCloseTab);
 
     if (!localStorage.getItem('token')) {
       dispatch(setUserUnauthorized());
     }
 
     dispatch(fetchCurrentUser());
-
-    return () => {
-      document.removeEventListener('visibilitychange', handleCloseTab);
-    };
   }, []);
 
   useEffect(() => {
-    if (selectCurrentUserInfo.id) {
-      setCentrifugeObj(
-        initAndStartCentrifugo(selectCurrentUserInfo.id, handlePublicationEvent)
+    if (currentUserInfo.id) {
+      const centrifugeInstance = initAndStartCentrifugo(currentUserInfo.id);
+      centrifugeInstance.subscription.on('publication', (ctx) =>
+        handlePublicationEvent(ctx.data)
       );
+      setCentrifugeObj(centrifugeInstance);
     }
 
     return () => {
@@ -62,39 +59,54 @@ export const useApp = () => {
         centrifugeObj.centrifuge.disconnect();
         centrifugeObj.subscription.removeAllListeners();
         centrifugeObj.subscription.unsubscribe();
-        switchStatusOffline();
       }
     };
-  }, [selectCurrentUserInfo]);
+  }, [currentUserInfo]);
 
-  const handleCloseTab = () => {
-    if (document.visibilityState === 'hidden') {
-      switchStatusOffline();
-    } else {
-      switchStatusOnline();
+  const handleSetNotification = (data: ICentrifugoEvent) => {
+    const chatId = data.message.chat;
+    const targetChat = chats[chatId];
+
+    if (targetChat) {
+      sendNotification(targetChat.title);
     }
   };
 
   const handlePublicationEvent = (data: ICentrifugoEvent) => {
     const currentPage = window.location.hash.split('/');
 
-    if (!currentPage.includes('dialog') || currentPage.length !== 3) {
-      return;
+    if (
+      (data.message.sender.id !== currentUserInfo.id &&
+        currentPage.includes('dialog') &&
+        currentPage.at(-1) !== data.message.chat) ||
+      (!currentPage.includes('dialog') &&
+        data.event === CentrifugoEventTypes.CREATE)
+    ) {
+      handleSetNotification(data);
     }
 
-    switch (data.event) {
-      case CentrifugoEventTypes.CREATE:
-        dispatch(createMessage(data.message));
-        break;
-      case CentrifugoEventTypes.DELETE:
-        dispatch(deleteMessage(data.message));
-        break;
-      case CentrifugoEventTypes.READ:
-        dispatch(updateMessage(data.message));
-        break;
-      case CentrifugoEventTypes.UPDATE:
-        dispatch(updateMessage(data.message));
-        break;
+    if (
+      currentPage.includes('dialog') &&
+      currentPage.at(-1) === data.message.chat
+    ) {
+      switch (data.event) {
+        case CentrifugoEventTypes.CREATE:
+          dispatch(addMessage(data.message));
+          break;
+        case CentrifugoEventTypes.DELETE:
+          dispatch(deleteMessage(data.message));
+          break;
+        case CentrifugoEventTypes.READ:
+          dispatch(updateMessage(data.message));
+          break;
+        case CentrifugoEventTypes.UPDATE:
+          dispatch(updateMessage(data.message));
+          break;
+      }
     }
+
+    getChat(data.message.chat).then((res) => {
+      dispatch(replaceChat(res.data))
+    })
   };
 };

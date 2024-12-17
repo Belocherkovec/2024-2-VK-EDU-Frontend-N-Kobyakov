@@ -25,7 +25,9 @@ export const useCreateChatPage = () => {
   };
 
   useEffect(() => {
-    dispatch(fetchUsers());
+    if (!usersIds.length) {
+      dispatch(fetchUsers());
+    }
   }, []);
 
   return {

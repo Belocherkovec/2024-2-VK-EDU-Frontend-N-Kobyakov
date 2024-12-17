@@ -11,3 +11,5 @@ export { MessageStatuses, type TMessageStatuses } from './statuses';
 export { TEXTS } from './texts';
 
 export * from './commonConsts';
+
+export * from './fileUtils';
