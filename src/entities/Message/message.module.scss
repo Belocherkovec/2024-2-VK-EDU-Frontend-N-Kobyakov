@@ -1,0 +1,66 @@
+@use "../../app/styles/variables" as *;
+
+.message {
+  list-style-type: none;
+  max-width: 90%;
+  margin: 4px 0;
+  padding: 4px 12px;
+  border-radius: 6px 8px 0 8px;
+  background: $color-accent;
+  color: $color-white-full;
+  transition: opacity 0.3s ease-in;
+  word-wrap: break-word;
+
+  &_user {
+    background: $color-white-full;
+    align-self: flex-start;
+    border-radius: 8px 8px 8px 0;
+    color: $color-black;
+
+    .message__timestamp {
+      color: $color-gray-dark;
+    }
+  }
+
+  &__text {
+    color: inherit;
+    white-space: pre-wrap;
+  }
+
+  &__imageWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: space-between;
+    margin-top: 8px;
+  }
+
+  &__image {
+    flex: 1 1 200px;
+    height: 100px;
+    width: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  &__info {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    column-gap: 4px;
+  }
+
+  &__timestamp {
+    font-size: 0.7em;
+    color: $color-white-blue;
+    opacity: 0.5;
+  }
+
+  & &__icon {
+    width: 0.65em;
+    padding-bottom: 2px;
+    opacity: 0.8;
+  }
+}
+
