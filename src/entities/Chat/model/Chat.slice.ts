@@ -75,7 +75,8 @@ const chatSlice = createSlice({
 
 export const chatSliceReducer = chatSlice.reducer;
 
-export const { addChat, resetChat, setChatIds, setChatMap, replaceChat } = chatSlice.actions;
+export const { addChat, resetChat, setChatIds, setChatMap, replaceChat } =
+  chatSlice.actions;
 
 export const { selectChatIds, selectChatMap, selectCurrentChat } =
   chatSlice.selectors;

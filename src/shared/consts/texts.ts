@@ -63,6 +63,9 @@ export const TEXTS = {
   lastActivity: { recently: 'был недавно' },
   noFile: 'Файл не выбран',
   pages: {
+    chatsPage: {
+      settings: 'Настройки'
+    },
     dialogPage: {
       sendGeo: 'Геопозиция',
       image: 'Изображение',
@@ -122,6 +125,12 @@ export const TEXTS = {
       firstNamePlaceholder: 'Введите ваше имя',
       lastNamePlaceholder: 'Введите вашу Фамилию',
       bioPlaceholder: 'Заполните краткую информацию о себе'
+    },
+    profilePage: {
+      title: (name: string) => `Просмотр профиля ${name}`
+    },
+    editProfilePage: {
+      title: 'Настройки профиля'
     }
   },
   placeholders: {

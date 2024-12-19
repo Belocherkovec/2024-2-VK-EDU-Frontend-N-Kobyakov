@@ -106,7 +106,7 @@ export const useApp = () => {
     }
 
     getChat(data.message.chat).then((res) => {
-      dispatch(replaceChat(res.data))
-    })
+      dispatch(replaceChat(res.data));
+    });
   };
 };

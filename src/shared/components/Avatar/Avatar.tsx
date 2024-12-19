@@ -11,7 +11,7 @@ export interface IAvatarProps {
   lastName: string;
   src: null | string;
   isOnline?: boolean;
-  isGroupChat?: boolean;
+  isHideOnline?: boolean;
 }
 
 export const Avatar: React.FC<IAvatarProps> = (props) => {
@@ -22,14 +22,14 @@ export const Avatar: React.FC<IAvatarProps> = (props) => {
     lastName = '',
     src,
     isOnline,
-    isGroupChat
+    isHideOnline
   } = props;
   return (
     <div
       className={cn(
         styles.fieldset,
         isOnline && styles._isOnline,
-        isGroupChat && styles._isGroupChat,
+        isHideOnline && styles._isHideOnline,
         className
       )}
     >

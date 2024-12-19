@@ -29,7 +29,7 @@ export const Chat: React.FC<{ chatId: string }> = ({ chatId }) => {
         firstName={title.split(' ')[0]}
         lastName={title.split(' ')[1]}
         src={avatar}
-        isGroupChat={!isPrivate}
+        isHideOnline={!isPrivate}
         isOnline={isOnline}
       />
       <div className={styles.dialog__user}>

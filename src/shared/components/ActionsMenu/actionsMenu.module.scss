@@ -2,10 +2,9 @@
 
 .menu {
   background-color: $color-white-full;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
   padding: 6px 4px;
   border-radius: 20px;
-  top: -140%;
-  left: 10px;
   z-index: 2;
   display: none;
   flex-direction: column;
@@ -13,5 +12,19 @@
 
   &._show {
     display: flex;
+  }
+
+  & > * {
+    display: flex;
+    place-items: center;
+    padding: 8px 12px;
+    border-radius: 12px;
+    column-gap: 4px;
+    transition: background-color 0.2s ease-in;
+    color: $color-gray-light;
+
+    &:hover {
+      background-color: $color-white-blue;
+    }
   }
 }

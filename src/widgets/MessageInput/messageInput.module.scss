@@ -82,21 +82,9 @@
     }
   }
 
-  &__actionItem {
-    display: flex;
-    place-items: center;
-    padding: 8px 12px;
-    border-radius: 12px;
-    column-gap: 4px;
-    transition: background-color 0.2s ease-in;
-
-    &:hover {
-      background-color: $color-white-blue;
-    }
-  }
-
-  &__actionIcon {
-    color: $color-gray-light;
+  &__actionsMenu {
+    top: -140%;
+    left: 10px;
   }
 }
 

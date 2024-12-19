@@ -106,16 +106,14 @@ export const MessageInput: React.FC<IMessageInputProps> = (props) => {
         >
           <button
             type="button"
-            className={styles.form__actionItem}
             onClick={handleActionGeo}
             aria-label={TEXTS.ariaLabels.sendGeo}
           >
-            <LocationOnRounded className={styles.form__actionIcon} />
+            <LocationOnRounded />
             <span>{TEXTS.pages.dialogPage.sendGeo}</span>
           </button>
           <button
             type="button"
-            className={styles.form__actionItem}
             aria-label={TEXTS.ariaLabels.addImages}
             onClick={() =>
               files.length >= FILES_LIMIT
@@ -123,7 +121,7 @@ export const MessageInput: React.FC<IMessageInputProps> = (props) => {
                 : handleChooseFile()
             }
           >
-            <ImageRounded className={styles.form__actionIcon} />
+            <ImageRounded />
             <span>{TEXTS.pages.dialogPage.image}</span>
           </button>
         </ActionsMenu>
