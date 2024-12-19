@@ -1,4 +1,27 @@
 export const TEXTS = {
+  ariaLabels: {
+    showPassword: 'Показать пароль',
+    chooseFile: 'Выбрать вложение',
+    removeFile: 'Удалить вложение',
+    clearStorage: 'Очистить localStorage',
+    goBack: 'Вернуться назад',
+    saveChanges: 'Сохранить изменения',
+    openMenu: 'Открыть меню',
+    createNewChat: 'Создать новый чат',
+    search: 'Поиск',
+    auth: 'Войти в мессенджер',
+    registration: 'Зарегистрироваться',
+    addImages: 'Прикрепить изображения',
+    showActions: 'Отобразить контекстное меню',
+    voiceMessageStart: 'Начать запись голосового сообщения',
+    voiceMessageStop: 'Остановить запись голосового сообщения',
+    sendGeo: 'Отправить свою геопозицию',
+    sendMessage: 'Отправить сообщение',
+    startVoice: 'Начать проигрывать голосовое сообщение',
+    stopVoice: 'Остановить проигрывание голосового сообщения',
+    cancel: 'Отменить действие',
+    confirm: 'Подтвердить действие'
+  },
   notification: {
     title: 'Новое сообщение',
     body: (initials: string) => `У вас одно новое сообщение от ${initials}!`

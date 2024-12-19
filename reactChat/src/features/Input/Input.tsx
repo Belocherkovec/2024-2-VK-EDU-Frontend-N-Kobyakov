@@ -1,4 +1,5 @@
 import { VisibilityOffRounded, VisibilityRounded } from '@mui/icons-material';
+import { TEXTS } from '@/shared';
 import cn from 'classnames';
 import React, { memo } from 'react';
 
@@ -95,6 +96,7 @@ const InputComponent: React.FC<IInputProps> = ({
           className={styles.input__changeShow}
           onClick={handleTypeChange}
           type="button"
+          aria-label={TEXTS.ariaLabels.showPassword}
         >
           {innerType === 'password' ? (
             <VisibilityRounded />

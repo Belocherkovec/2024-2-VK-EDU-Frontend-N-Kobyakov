@@ -83,5 +83,3 @@ export const getUsers = (
 
   return $api.get<IGetUsersResponse>(buildUrlWithQuery('users/', queryParams));
 };
-
-export const switchStatusOnline = () => $api.post('user/online/');

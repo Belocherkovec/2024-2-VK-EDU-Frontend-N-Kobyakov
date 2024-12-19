@@ -11,7 +11,7 @@ export const useChatsPage = () => {
   const chatMap = useSelector(selectChatMap);
 
   const [isShowUpdates, setIsShowUpdates] = useState(
-    !localStorage.getItem('isShowUpdates3')
+    !localStorage.getItem('isShowUpdates4')
   );
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export const useChatsPage = () => {
 
   const handleCloseShowUpdates = () => {
     setIsShowUpdates(false);
-    localStorage.setItem('isShowUpdates3', 'showed');
+    localStorage.setItem('isShowUpdates4', 'showed');
   };
 
   return { chatIds, chatMap, handleCloseShowUpdates, isShowUpdates, userInfo };

@@ -1,8 +1,8 @@
-import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import cn from 'classnames';
 import { useNavigate } from 'react-router-dom';
+import { AddRounded } from '@mui/icons-material';
 
-import { RoutePaths } from '../../../consts';
+import { RoutePaths, TEXTS } from '../../../consts';
 import styles from './newChatButton.module.scss';
 
 export const NewChatButton: React.FC<{
@@ -15,8 +15,12 @@ export const NewChatButton: React.FC<{
   };
 
   return (
-    <button className={cn(styles.button, className)} onClick={handleClick}>
-      <AddRoundedIcon className={styles.icon} />
+    <button
+      className={cn(styles.button, className)}
+      onClick={handleClick}
+      aria-label={TEXTS.ariaLabels.createNewChat}
+    >
+      <AddRounded className={styles.icon} />
     </button>
   );
 };

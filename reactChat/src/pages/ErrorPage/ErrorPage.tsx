@@ -1,5 +1,5 @@
+import { ErrorOutlineRounded } from '@mui/icons-material';
 import { RoutePaths, TEXTS } from '@/shared';
-import ErrorOutlineRoundedIcon from '@mui/icons-material/ErrorOutlineRounded';
 import cn from 'classnames';
 import { Link } from 'react-router-dom';
 
@@ -11,13 +11,17 @@ export const ErrorPage: React.FC = () => {
 
   return (
     <section className={styles.error}>
-      <ErrorOutlineRoundedIcon className={styles.icon} />
+      <ErrorOutlineRounded className={styles.icon} />
       <h1>{TEXTS.pages.errorPage.title}</h1>
       <p className={styles.error__details}>
         <i>{errorMessage}</i>
       </p>
       <p>{TEXTS.pages.errorPage.callToAction}</p>
-      <button className={styles.error__button} onClick={handleClearButtonClick}>
+      <button
+        aria-label={TEXTS.ariaLabels.clearStorage}
+        className={styles.error__button}
+        onClick={handleClearButtonClick}
+      >
         {TEXTS.buttons.clearStorage}
       </button>
       <Link

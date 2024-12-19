@@ -1,4 +1,4 @@
-import ArrowBackIosRoundedIcon from '@mui/icons-material/ArrowBackIosRounded';
+import { ArrowBackIosRounded } from '@mui/icons-material';
 
 import { TEXTS } from '../../../consts';
 import { useNavigate } from 'react-router-dom';
@@ -22,8 +22,12 @@ export const BackButton: React.FC<{
   };
 
   return (
-    <button className={className} onClick={handleClick}>
-      <ArrowBackIosRoundedIcon />
+    <button
+      className={className}
+      onClick={handleClick}
+      aria-label={TEXTS.ariaLabels.goBack}
+    >
+      <ArrowBackIosRounded />
     </button>
   );
 };

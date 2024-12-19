@@ -5,13 +5,12 @@ import styles from './userInfo.module.scss';
 
 export const UserInfo: React.FC<{
   avatar: null | string;
-  file?: File;
   title: string;
   lastOnline?: string;
   isOnline?: boolean;
   bio?: string;
   className?: string;
-}> = ({ avatar, title, lastOnline, isOnline, bio, file, className }) => (
+}> = ({ avatar, title, lastOnline, isOnline, bio, className }) => (
   <div className={cn(styles.user, className)}>
     <Avatar
       alt={TEXTS.images.avatar}
@@ -21,7 +20,6 @@ export const UserInfo: React.FC<{
       src={avatar}
       isGroupChat={!lastOnline}
       isOnline={isOnline}
-      file={file}
     />
     <div className={styles.user__userWrapper}>
       <h2 className={styles.user__name}>{title}</h2>

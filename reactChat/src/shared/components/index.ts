@@ -4,7 +4,7 @@ export { CheckMark } from './CheckMark';
 
 export { Gallery } from './Gallery';
 
-export { Loader } from './Loader';
+export { LazyImage } from './LazyImage';
 
 export { StatusMark } from './StatusMark';
 
