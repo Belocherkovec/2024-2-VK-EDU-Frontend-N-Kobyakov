@@ -1,0 +1,71 @@
+@use "../../app/styles/variables" as *;
+
+.input {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+  position: relative;
+
+  &__input {
+    padding: 12px 16px;
+    background-color: $color-white-blue;
+    border-radius: 6px;
+    border: 1px solid $color-white-hover;
+    font-size: 1.1em;
+    transition: border-color 0.2s ease-in;
+
+    &:-webkit-autofill {
+      box-shadow: 0 0 0px 1000px $color-white-blue inset !important;
+      -webkit-text-fill-color: $color-black !important;
+    }
+
+
+    &:hover {
+      border-color: $color-gray-light;
+    }
+
+    &:focus {
+      border-color: $color-accent;
+    }
+
+    &._resizeDisable {
+      resize: none;
+    }
+
+    &._error {
+      border-color: $color-error;
+    }
+
+    &._password {
+      padding-right: 42px;
+    }
+  }
+
+  &__label {
+    &._required {
+      &::after {
+        content: '*';
+        color: $color-error;
+        padding-inline: 0.25em;
+      }
+    }
+  }
+
+  &__errorMessage {
+    color: $color-error;
+    margin-top: 4px;
+  }
+
+  &__changeShow {
+    position: absolute;
+    right: 12px;
+    top: 33px;
+    color: $color-gray-dark;
+    transition: color 0.2s ease-in;
+
+    &:hover, &:active {
+      color: $color-black;
+    }
+  }
+}

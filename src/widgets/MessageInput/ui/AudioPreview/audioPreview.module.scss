@@ -1,0 +1,33 @@
+@use "../../../../app/styles/variables" as *;
+
+.audioPreview {
+  background-color: $color-white-hover;
+  display: flex;
+  height: 1em;
+  padding: 13px 6px 13px 12px;
+  column-gap: 6px;
+  border-radius: 16px;
+  align-items: center;
+  font-size: 0.9em;
+  cursor: pointer;
+
+  &__button {
+    height: 20px;
+    width: 20px;
+    color: $color-gray-light;
+
+    &:hover {
+      color: $color-black;
+    }
+  }
+
+  &__text {
+    pointer-events: none;
+  }
+
+  & &__icon {
+    pointer-events: none;
+    height: 20px;
+    width: 20px;
+  }
+}
