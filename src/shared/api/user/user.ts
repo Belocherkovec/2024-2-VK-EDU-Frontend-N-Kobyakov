@@ -62,6 +62,14 @@ export const loginRequest = (
 export const getCurrentUser = (): Promise<AxiosResponse<IUser>> =>
   $api.get<IUser>('user/current/');
 
+export const updateUser = (
+  userId: string,
+  data: FormData
+): Promise<AxiosResponse<IUser>> => $api.patch<IUser>(`user/${userId}/`, data);
+
+export const deleteUser = (userId: string): Promise<void> =>
+  $api.delete(`user/${userId}/`);
+
 export const getUsers = (
   pageSize?: number,
   page?: number,

@@ -1,4 +1,36 @@
 @use "@/shared/styles/variables" as *;
+@use "@/shared/styles/mixins" as *;
+
+.form {
+  @include form();
+
+  &__buttonsWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    column-gap: 16px;
+    row-gap: 48px;
+  }
+
+  &__buttonsGroup {
+    column-gap: 16px;
+    display: flex;
+  }
+
+  &__transparentButton {
+    @include transparentButton();
+  }
+
+  &__removeButton {
+    @include transparentButton();
+    border: 2px solid $color-error;
+    color: $color-error;
+
+    &:hover {
+      border-color: $color-error;
+    }
+  }
+}
 
 .profile {
   padding: 1em;
@@ -10,6 +42,19 @@
   flex-direction: column;
   row-gap: 1em;
 
+  &__avatarWrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 4px;
+    align-items: center;
+  }
+
+  &__removeButton {
+    @include transparentButton();
+    border-width: 1px;
+    padding: 2px 8px;
+    font-size: 0.9em;
+  }
 }
 
 .userAvatar {

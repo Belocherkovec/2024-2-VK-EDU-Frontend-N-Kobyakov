@@ -9,9 +9,9 @@ import {
   TEXTS
 } from '@/shared';
 import { pushNotification } from '@/entities/Notification';
+import { ILimitVisibleState } from '@/features';
 
 import { IMessageInputProps } from '../MessageInput';
-import { ILimitVisibleState } from '../ui';
 
 export const useMessageInput = (props: IMessageInputProps) => {
   const { onSend } = props;

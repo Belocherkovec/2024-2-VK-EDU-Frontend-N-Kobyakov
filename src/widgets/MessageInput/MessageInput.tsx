@@ -9,8 +9,9 @@ import {
   StopCircleRounded
 } from '@mui/icons-material';
 
+import { ConfirmDialog } from '@/features';
 import { useMessageInput } from './hooks';
-import { AudioPreview, ImagePreview, LimitDialog } from './ui';
+import { AudioPreview, ImagePreview } from './ui';
 import styles from './messageInput.module.scss';
 
 export interface IMessageInputProps {
@@ -81,8 +82,9 @@ export const MessageInput: React.FC<IMessageInputProps> = (props) => {
         onKeyDown={handleKeyDown}
         onSubmit={handleSubmit}
       >
-        <LimitDialog
-          imagesLimit={FILES_LIMIT}
+        <ConfirmDialog
+          confirmTitle={TEXTS.errors.defaultErrorTitle}
+          confirmText={TEXTS.pages.dialogPage.imageLimit(FILES_LIMIT)}
           isVisible={isPopupVisible}
           onClose={handlePopupClose}
           onConfirm={handlePopupConfirm}

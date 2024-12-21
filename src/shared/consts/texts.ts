@@ -130,7 +130,22 @@ export const TEXTS = {
       title: (name: string) => `Просмотр профиля ${name}`
     },
     editProfilePage: {
-      title: 'Настройки профиля'
+      title: 'Настройки профиля',
+      save: 'Сохранить',
+      reset: 'Сбросить',
+      remove: 'Удалить',
+      deleteAccount: 'Удалить профиль',
+      logout: 'Выйти из профиля',
+      successTitle: 'Успех!',
+      successMessage: 'Данные пользователя успешно обновлены!',
+      errorTitle: 'Ошибка!',
+      errorMessage: 'Не удалось обновить данные пользователя!',
+      avatarUpdateErrorTitle: 'Ошибка при попытке загрузить изображение.',
+      avatarUpdateErrorMessage: 'Пожалуйста загрузите корректное изображение!',
+      confirmTitle: 'Удалить профиль',
+      confirmMessage:
+        'Вы уверены, что хотите удалить профиль? Действие необратимо!',
+      errorRemoveAccount: 'Произошла ошибка при удалении аккаунта.'
     }
   },
   placeholders: {

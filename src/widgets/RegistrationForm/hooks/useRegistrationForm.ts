@@ -1,6 +1,6 @@
 import { AxiosError, AxiosResponse } from 'axios';
 import { registrationRequest, RoutePaths, TEXTS } from '@/shared';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 interface IErrorResponse {
@@ -130,14 +130,15 @@ export const useRegistrationForm = () => {
     setAvatar(null);
   };
 
-  const isDisabled = () =>
-    !(
+  const isDisabled = useMemo(() => {
+    return !(
       Object.values(isFormValid).every((field) => field) &&
       formValues.username &&
       formValues.firstName &&
       formValues.lastName &&
       formValues.password
     );
+  }, [isFormValid, formValues]);
 
   return {
     avatar,
