@@ -47,10 +47,6 @@
     color: $color-gray-dark;
     overflow: hidden;
     text-overflow: ellipsis;
-
-    & span {
-      color: $color-accent;
-    }
   }
 
   &__info {
@@ -73,8 +69,12 @@
   &__unread {
     color: $color-white-full;
     background: $color-accent;
-    padding: 1px 6px;
-    border-radius: 4px;
     font-size: 0.8em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
   }
 }

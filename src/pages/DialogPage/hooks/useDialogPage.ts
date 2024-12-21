@@ -39,12 +39,12 @@ export const useDialogPage = () => {
     title: TEXTS.empty,
     members: []
   };
+
   const lastOnline = isPrivate
     ? getFormattedDate(
         new Date(
-          members.filter(
-            (member) => member.id !== currentUserInfo.id
-          )[0].last_online_at
+          members.filter((member) => member.id !== currentUserInfo.id)[0]
+            ?.last_online_at || new Date(0)
         )
       )
     : undefined;
@@ -108,7 +108,9 @@ export const useDialogPage = () => {
         if (
           msgId &&
           isUserMessage(msgId) &&
-          !messagesMap[msgId].was_read_by.length
+          !messagesMap[msgId].was_read_by.find(
+            (user) => user.id === currentUserInfo.id
+          )
         ) {
           postReadMessage(msgId);
         }
@@ -150,15 +152,16 @@ export const useDialogPage = () => {
   };
 
   return {
-    avatar,
-    lastOnline,
-    isOnline,
+    title,
     chatId,
-    handleAreaSend,
-    handleSetRef,
-    isUserMessage,
+    avatar,
+    isOnline,
+    isPrivate,
+    lastOnline,
     messagesIdx,
     messagesMap,
-    title
+    handleSetRef,
+    isUserMessage,
+    handleAreaSend
   };
 };

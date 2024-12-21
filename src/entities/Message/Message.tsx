@@ -6,13 +6,14 @@ import styles from './message.module.scss';
 import { useMessage } from './hooks';
 
 export interface IMessageProps {
-  dataIndex?: string;
-  isUserMessage?: boolean;
   message: string;
   status: TMessageStatuses;
   timeStamp: string;
-  files?: { item: string }[];
   voice: string | null;
+  isUserMessage?: boolean;
+  dataIndex?: string;
+  files?: { item: string }[];
+  author?: string;
 }
 
 export const Message = forwardRef<HTMLLIElement, IMessageProps>(
@@ -24,7 +25,8 @@ export const Message = forwardRef<HTMLLIElement, IMessageProps>(
       status,
       timeStamp,
       files,
-      voice
+      voice,
+      author
     } = props;
     const {
       imageClickId,
@@ -62,6 +64,9 @@ export const Message = forwardRef<HTMLLIElement, IMessageProps>(
         </div>
         {voice && <audio src={voice} controls />}
         <div className={styles.message__info}>
+          {isUserMessage && author && (
+            <span className={styles.message__timestamp}>{author}</span>
+          )}
           <span className={styles.message__timestamp}>{timeStamp}</span>
           {!isUserMessage && (
             <StatusMark className={styles.message__icon} status={status} />

@@ -8,16 +8,17 @@ import { useDialogPage } from './hooks';
 
 export const DialogPage = () => {
   const {
-    avatar,
+    title,
     chatId,
-    handleAreaSend,
-    handleSetRef,
-    isUserMessage,
+    avatar,
+    isOnline,
+    isPrivate,
+    lastOnline,
     messagesIdx,
     messagesMap,
-    lastOnline,
-    title,
-    isOnline
+    handleSetRef,
+    isUserMessage,
+    handleAreaSend
   } = useDialogPage();
 
   return (
@@ -38,6 +39,11 @@ export const DialogPage = () => {
             key={msgId + idx}
             message={messagesMap[msgId].text || TEXTS.empty}
             ref={(element) => handleSetRef(element)}
+            author={
+              !isPrivate
+                ? `${messagesMap[msgId].sender.first_name} ${messagesMap[msgId].sender.last_name}`
+                : undefined
+            }
             voice={messagesMap[msgId].voice}
             status={
               messagesMap[msgId].was_read_by?.length

@@ -1,3 +1,5 @@
+import { TEXTS } from '@/shared';
+
 export const timeFormatter = new Intl.DateTimeFormat('ru', {
   hour: 'numeric',
   hour12: false,
@@ -19,7 +21,17 @@ export const yearFormatter = new Intl.DateTimeFormat('ru', {
   year: '2-digit'
 });
 
+export const fullYearFormatter = new Intl.DateTimeFormat('ru', {
+  day: '2-digit',
+  month: '2-digit',
+  year: 'numeric'
+});
+
 export const getFormattedDate = (date: Date): string => {
+  if (!date || !(date instanceof Date)) {
+    return TEXTS.empty;
+  }
+
   const now = new Date();
   const dateDay = date.getDate();
   const month = date.getMonth();
@@ -27,7 +39,10 @@ export const getFormattedDate = (date: Date): string => {
   const formattedTime = timeFormatter.format(date);
   const formattedDay = dayFormatter.format(date);
   const formattedMonth = monthFormatter.format(date);
-  const formattedYear = yearFormatter.format(date);
+  const formattedYear =
+    date.getFullYear() >= 2000
+      ? yearFormatter.format(date)
+      : fullYearFormatter.format(date);
 
   let result;
 

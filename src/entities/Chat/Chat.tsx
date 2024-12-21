@@ -10,12 +10,14 @@ export const Chat: React.FC<{ chatId: string }> = ({ chatId }) => {
   const {
     avatar,
     title,
-    isPrivate,
-    lastMessageText,
-    lastMessageTimestamp,
-    isUserMessage,
     isOnline,
-    lastMessageStatus
+    isPrivate,
+    isUserMessage,
+    lastMessageText,
+    lastMessageSender,
+    lastMessageStatus,
+    lastMessageTimestamp,
+    unreadMessagesCount
   } = useChat(chatId);
 
   return (
@@ -35,14 +37,25 @@ export const Chat: React.FC<{ chatId: string }> = ({ chatId }) => {
       <div className={styles.dialog__user}>
         <h2 className={styles.dialog__username}>{title}</h2>
         {lastMessageText && (
-          <p className={styles.dialog__lastMessage}>{lastMessageText}</p>
+          <p className={styles.dialog__lastMessage}>
+            {!isPrivate && (
+              <span className={styles.dialog__lastMessageAuthor}>
+                {lastMessageSender}
+              </span>
+            )}
+            {lastMessageText}
+          </p>
         )}
       </div>
       <div className={styles.dialog__info}>
         <p className={styles.dialog__lastMessageTime}>{lastMessageTimestamp}</p>
         {!isUserMessage && lastMessageText && (
           <p className={styles.dialog__checkMark}>
-            <CheckMark messageStatus={lastMessageStatus} />
+            <CheckMark
+              messageStatus={lastMessageStatus}
+              unreadMessagesCount={unreadMessagesCount}
+              unreadClassName={styles.dialog__unread}
+            />
           </p>
         )}
       </div>
