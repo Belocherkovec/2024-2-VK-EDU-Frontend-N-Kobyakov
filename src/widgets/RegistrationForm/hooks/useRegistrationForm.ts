@@ -84,14 +84,19 @@ export const useRegistrationForm = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    registrationRequest(
-      {
-        ...formValues,
-        first_name: formValues.firstName,
-        last_name: formValues.lastName
-      },
-      handleRegistrationResponse
-    );
+
+    const registrationData = new FormData();
+    registrationData.append('username', formValues.username);
+    registrationData.append('first_name', formValues.firstName);
+    registrationData.append('last_name', formValues.lastName);
+    registrationData.append('bio', formValues.bio);
+    registrationData.append('password', formValues.password);
+
+    if (avatar) {
+      registrationData.append('avatar', avatar);
+    }
+
+    registrationRequest(registrationData, handleRegistrationResponse);
     resetForm();
   };
 

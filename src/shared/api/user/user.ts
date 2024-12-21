@@ -6,20 +6,15 @@ import {
   IAuthResponse,
   IGetUsersQueryParams,
   IGetUsersResponse,
-  IRegistrationRequest,
   IUser
 } from './types';
 
 export const registrationRequest = (
-  data: IRegistrationRequest,
+  data: FormData,
   callback?: (res: AxiosResponse) => void
 ): void => {
   axios
-    .post(`${import.meta.env.VITE_PUBLIC_API}register/`, data, {
-      headers: {
-        'Content-Type': data.avatar ? 'multipart/form-data' : 'application/json'
-      }
-    })
+    .post(`${import.meta.env.VITE_PUBLIC_API}register/`, data)
     .then((res) => {
       if (callback) {
         callback(res);
