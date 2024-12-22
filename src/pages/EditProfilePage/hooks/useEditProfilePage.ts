@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { AppDispatch } from '@/app';
-import { pushNotification } from '@/entities/Notification';
+import { NOTIFICATION_TYPES, pushNotification } from '@/entities/Notification';
 import {
   fetchCurrentUser,
   resetCurrentUserState,
@@ -96,7 +96,7 @@ export const useEditProfilePage = () => {
         pushNotification({
           title: TEXTS.pages.editProfilePage.errorTitle,
           message: TEXTS.pages.editProfilePage.errorRemoveAccount,
-          type: 'ERROR',
+          type: NOTIFICATION_TYPES.ERROR,
           lifeTime: 3000
         });
       });
@@ -153,7 +153,7 @@ export const useEditProfilePage = () => {
           pushNotification({
             title: TEXTS.pages.editProfilePage.successTitle,
             message: TEXTS.pages.editProfilePage.successMessage,
-            type: 'ERROR',
+            type: NOTIFICATION_TYPES.SUCCESS,
             lifeTime: 3000
           })
         );
@@ -164,7 +164,7 @@ export const useEditProfilePage = () => {
           pushNotification({
             title: TEXTS.pages.editProfilePage.errorTitle,
             message: TEXTS.pages.editProfilePage.errorMessage,
-            type: 'ERROR',
+            type: NOTIFICATION_TYPES.ERROR,
             lifeTime: 3000
           })
         );
@@ -176,7 +176,7 @@ export const useEditProfilePage = () => {
       pushNotification({
         title: TEXTS.pages.editProfilePage.avatarUpdateErrorTitle,
         message: TEXTS.pages.editProfilePage.avatarUpdateErrorMessage,
-        type: 'ERROR',
+        type: NOTIFICATION_TYPES.ERROR,
         lifeTime: 5000
       })
     );

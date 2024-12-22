@@ -35,6 +35,18 @@ const reducers = {
       state.chatIds.push(chatId);
     }
   },
+  removeChat: (state: IChatState, action: PayloadAction<string>) => {
+    const chatId = action.payload;
+    const chatIndex = state.chatIds.indexOf(chatId);
+
+    if (chatIndex !== -1) {
+      state.chatIds.splice(chatIndex, 1);
+    }
+
+    if (state.chatMap[chatId]) {
+      delete state.chatMap[chatId];
+    }
+  },
   resetChat: () => initialState,
   setChatIds: (state: IChatState, action: PayloadAction<string[]>) => {
     state.chatIds = action.payload;
@@ -91,7 +103,8 @@ export const {
   setChatIds,
   setChatMap,
   replaceChat,
-  setChatIsLoading
+  setChatIsLoading,
+  removeChat
 } = chatSlice.actions;
 
 export const {

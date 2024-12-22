@@ -8,7 +8,7 @@ import {
   recordAudio,
   TEXTS
 } from '@/shared';
-import { pushNotification } from '@/entities/Notification';
+import { NOTIFICATION_TYPES, pushNotification } from '@/entities/Notification';
 import { ILimitVisibleState } from '@/features';
 
 import { IMessageInputProps } from '../MessageInput';
@@ -102,7 +102,7 @@ export const useMessageInput = (props: IMessageInputProps) => {
               GEOLOCATION_ERRORS[error.code as GeolocationErrorType]
             ],
           lifeTime: 3000,
-          type: 'ERROR'
+          type: NOTIFICATION_TYPES.ERROR
         })
       );
     };
