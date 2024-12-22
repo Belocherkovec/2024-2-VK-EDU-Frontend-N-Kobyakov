@@ -13,6 +13,7 @@ import {
   getFormattedDate,
   postReadMessage,
   TEXTS,
+  timeFormatter,
   useIntersectionObserver
 } from '@/shared';
 import { useEffect, useRef } from 'react';
@@ -20,8 +21,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 export const useDialogPage = () => {
-  const dispatch = useDispatch<AppDispatch>();
   const containersRef = useRef<HTMLLIElement[]>([]);
+  useIntersectionObserver(containersRef.current, callbackFunction);
+
+  const dispatch = useDispatch<AppDispatch>();
   const params = useParams<{ chatId: string }>();
   const { chatId = TEXTS.empty } = params;
   const chats = useSelector(selectChatMap);
@@ -30,6 +33,7 @@ export const useDialogPage = () => {
   const messagesIdx = useSelector(selectMessagesIdx);
   const messagesMap = useSelector(selectMessagesMap);
   const currentUserInfo = useSelector(selectUserInfo);
+  const lastMessageDate = useRef<Date | null>(null);
 
   const {
     avatar,
@@ -106,7 +110,7 @@ export const useDialogPage = () => {
     containersRef.current.push(element);
   };
 
-  const callbackFunction: IntersectionObserverCallback = (entries) => {
+  function callbackFunction(entries: IntersectionObserverEntry[]) {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         const msgId = (entry.target as HTMLElement).dataset.index;
@@ -122,9 +126,7 @@ export const useDialogPage = () => {
         }
       }
     });
-  };
-
-  useIntersectionObserver(containersRef.current, callbackFunction);
+  }
 
   const handleAreaSend = (value?: string, files?: File[], voice?: Blob) => {
     const data = {
@@ -157,6 +159,40 @@ export const useDialogPage = () => {
     });
   };
 
+  const getMessageTimeStamp = (msgId: string) => {
+    if (
+      !msgId ||
+      !messagesMap ||
+      !messagesMap[msgId] ||
+      !messagesMap[msgId].created_at
+    ) {
+      return TEXTS.empty;
+    }
+
+    lastMessageDate.current = new Date(messagesMap[msgId].created_at);
+    return timeFormatter.format(new Date(messagesMap[msgId].created_at));
+  };
+
+  const isDateDiff = (msgId: string): boolean => {
+    if (
+      !msgId ||
+      !messagesMap ||
+      !messagesMap[msgId].created_at ||
+      !lastMessageDate.current
+    ) {
+      return false;
+    }
+
+    const date1 = lastMessageDate.current;
+    const date2 = new Date(messagesMap[msgId].created_at);
+
+    return (
+      date1.getDate() !== date2.getDate() ||
+      date1.getMonth() !== date2.getMonth() ||
+      date1.getFullYear() !== date2.getFullYear()
+    );
+  };
+
   return {
     title,
     chatId,
@@ -169,6 +205,8 @@ export const useDialogPage = () => {
     handleSetRef,
     isUserMessage,
     handleAreaSend,
-    isMessagesLoading
+    isMessagesLoading,
+    isDateDiff,
+    getMessageTimeStamp
   };
 };

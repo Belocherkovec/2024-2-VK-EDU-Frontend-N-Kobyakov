@@ -1,5 +1,5 @@
 import { Message } from '@/entities/Message';
-import { Loader, MessageStatuses, TEXTS, timeFormatter } from '@/shared';
+import { Loader, MessageStatuses, TEXTS, yearFormatter } from '@/shared';
 import { MessageInput } from '@/widgets';
 
 import styles from './dialogPage.module.scss';
@@ -19,7 +19,9 @@ export const DialogPage = () => {
     handleSetRef,
     isUserMessage,
     handleAreaSend,
-    isMessagesLoading
+    isMessagesLoading,
+    isDateDiff,
+    getMessageTimeStamp
   } = useDialogPage();
 
   return (
@@ -34,28 +36,37 @@ export const DialogPage = () => {
       />
       <ul className={styles.dialog__messages}>
         {messagesIdx.map((msgId, idx) => (
-          <Message
-            dataIndex={msgId}
-            files={messagesMap[msgId].files}
-            isUserMessage={isUserMessage(msgId)}
-            key={msgId + idx}
-            message={messagesMap[msgId].text || TEXTS.empty}
-            ref={(element) => handleSetRef(element)}
-            author={
-              !isPrivate
-                ? `${messagesMap[msgId].sender.first_name} ${messagesMap[msgId].sender.last_name}`
-                : undefined
-            }
-            voice={messagesMap[msgId].voice}
-            status={
-              messagesMap[msgId].was_read_by?.length
-                ? MessageStatuses.STATUS_READ
-                : MessageStatuses.STATUS_SEND
-            }
-            timeStamp={timeFormatter.format(
-              new Date(messagesMap[msgId].created_at)
+          <>
+            {isDateDiff(msgId) && (
+              <p className={styles.dialog__date}>
+                <span>
+                  {yearFormatter.format(
+                    new Date(messagesMap[msgId].created_at)
+                  )}
+                </span>
+              </p>
             )}
-          />
+            <Message
+              dataIndex={msgId}
+              files={messagesMap[msgId].files}
+              isUserMessage={isUserMessage(msgId)}
+              key={msgId + idx}
+              message={messagesMap[msgId].text || TEXTS.empty}
+              ref={(element) => handleSetRef(element)}
+              author={
+                !isPrivate
+                  ? `${messagesMap[msgId].sender.first_name} ${messagesMap[msgId].sender.last_name}`
+                  : undefined
+              }
+              voice={messagesMap[msgId].voice}
+              status={
+                messagesMap[msgId].was_read_by?.length
+                  ? MessageStatuses.STATUS_READ
+                  : MessageStatuses.STATUS_SEND
+              }
+              timeStamp={getMessageTimeStamp(msgId)}
+            />
+          </>
         ))}
       </ul>
       <MessageInput chatId={chatId} onSend={handleAreaSend} />
