@@ -1,4 +1,4 @@
-export { initAndStartCentrifugo } from './centrifugo';
+export { useCentrifugo } from './useCentrifugo';
 
 export type {
   ICentrifugoEvent,

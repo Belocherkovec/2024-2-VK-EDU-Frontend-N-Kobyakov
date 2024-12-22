@@ -6,8 +6,8 @@ import { AppDispatch } from '@/app';
 import { pushNotification } from '@/entities/Notification';
 import {
   fetchCurrentUser,
-  selectUserInfo,
-  setUserUnauthorized
+  resetCurrentUserState,
+  selectUserInfo
 } from '@/entities/User';
 import { ILimitVisibleState } from '@/features';
 import {
@@ -17,6 +17,7 @@ import {
   updateUser,
   deleteUser
 } from '@/shared';
+import { resetChat } from '@/entities/Chat';
 
 export const useEditProfilePage = () => {
   const navigate = useNavigate();
@@ -82,7 +83,8 @@ export const useEditProfilePage = () => {
   const handleLogout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('refresh');
-    dispatch(setUserUnauthorized());
+    dispatch(resetCurrentUserState());
+    dispatch(resetChat());
     navigate(RoutePaths.authPage);
   };
   const handleConfirmDeleteAccount = () => {

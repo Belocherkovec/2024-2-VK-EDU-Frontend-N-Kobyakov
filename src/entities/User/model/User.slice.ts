@@ -23,7 +23,7 @@ const initialState: IUserState = {
 
 const reducers = {
   resetCurrentUserState: (state: IUserState) => {
-    state.isAuthenticated = initialState.isAuthenticated;
+    state.isAuthenticated = false;
     state.userInfo = initialState.userInfo;
   },
   resetUsersState: (state: IUserState) => {
