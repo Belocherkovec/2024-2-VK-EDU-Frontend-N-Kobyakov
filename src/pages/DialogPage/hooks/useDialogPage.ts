@@ -4,6 +4,7 @@ import {
   fetchMessages,
   resetMessages,
   selectMessagesIdx,
+  selectMessagesIsLoading,
   selectMessagesMap
 } from '@/entities/Message';
 import { fetchUsers, selectUserInfo, selectUsersMap } from '@/entities/User';
@@ -25,6 +26,7 @@ export const useDialogPage = () => {
   const { chatId = TEXTS.empty } = params;
   const chats = useSelector(selectChatMap);
   const users = useSelector(selectUsersMap);
+  const isMessagesLoading = useSelector(selectMessagesIsLoading);
   const messagesIdx = useSelector(selectMessagesIdx);
   const messagesMap = useSelector(selectMessagesMap);
   const currentUserInfo = useSelector(selectUserInfo);
@@ -72,6 +74,10 @@ export const useDialogPage = () => {
       dispatch(resetMessages());
     };
   }, []);
+
+  useEffect(() => {
+    containersRef.current.at(-1)?.scrollIntoView();
+  }, [isMessagesLoading]);
 
   const isUserMessage = (msgId: string) => {
     let result = false;
@@ -162,6 +168,7 @@ export const useDialogPage = () => {
     messagesMap,
     handleSetRef,
     isUserMessage,
-    handleAreaSend
+    handleAreaSend,
+    isMessagesLoading
   };
 };

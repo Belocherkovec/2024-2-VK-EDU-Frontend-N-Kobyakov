@@ -2,12 +2,15 @@ import { User } from '@/entities/User';
 
 import { CreateChatHeader } from './ui';
 import { useCreateChatPage } from './hooks';
+import { Loader } from '@/shared';
 
 export const CreateChatPage: React.FC = () => {
-  const { handleUserClick, usersIds, usersMap } = useCreateChatPage();
+  const { isUsersLoading, handleUserClick, usersIds, usersMap } =
+    useCreateChatPage();
 
   return (
     <section>
+      {isUsersLoading && <Loader />}
       <CreateChatHeader />
       {usersIds.map((id) => (
         <User

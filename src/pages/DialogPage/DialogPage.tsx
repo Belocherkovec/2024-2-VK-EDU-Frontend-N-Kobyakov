@@ -1,5 +1,5 @@
 import { Message } from '@/entities/Message';
-import { MessageStatuses, TEXTS, timeFormatter } from '@/shared';
+import { Loader, MessageStatuses, TEXTS, timeFormatter } from '@/shared';
 import { MessageInput } from '@/widgets';
 
 import styles from './dialogPage.module.scss';
@@ -18,11 +18,13 @@ export const DialogPage = () => {
     messagesMap,
     handleSetRef,
     isUserMessage,
-    handleAreaSend
+    handleAreaSend,
+    isMessagesLoading
   } = useDialogPage();
 
   return (
     <section className={styles.dialog}>
+      {isMessagesLoading && <Loader />}
       <DialogHeader
         avatar={avatar}
         title={title}

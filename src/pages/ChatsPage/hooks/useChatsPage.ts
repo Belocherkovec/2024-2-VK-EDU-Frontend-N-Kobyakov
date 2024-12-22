@@ -1,5 +1,10 @@
 import { AppDispatch } from '@/app';
-import { fetchChats, selectChatIds, selectChatMap } from '@/entities/Chat';
+import {
+  fetchChats,
+  selectChatIds,
+  selectChatIsLoading,
+  selectChatMap
+} from '@/entities/Chat';
 import { selectUserInfo } from '@/entities/User';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,6 +15,7 @@ export const useChatsPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const userInfo = useSelector(selectUserInfo);
+  const isLoadingChats = useSelector(selectChatIsLoading);
   const chatIds = useSelector(selectChatIds);
   const chatMap = useSelector(selectChatMap);
 
@@ -39,6 +45,7 @@ export const useChatsPage = () => {
     userInfo,
     isShowMenu,
     isShowUpdates,
+    isLoadingChats,
     handleClickSettings,
     handleCloseShowUpdates,
     handleIsShowMenuChange

@@ -129,7 +129,10 @@ export const MessageInput: React.FC<IMessageInputProps> = (props) => {
         </ActionsMenu>
         <button
           type="button"
-          className={styles.form__file}
+          className={cn(
+            styles.form__file,
+            !voice && isShowActions && styles._isOpen
+          )}
           onClick={handleShowActions}
           aria-label={TEXTS.ariaLabels.showActions}
         >

@@ -56,12 +56,27 @@
   &__file {
     margin-right: 10px;
     position: relative;
-    height: 24px;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: $color-gray-dark;
-    transition: color 0.2s ease;
+    transition: color, background-color 0.2s ease;
+    border-radius: 50%;
 
     &:hover {
       color: $color-black;
+    }
+
+    &._isOpen {
+      background-color: $color-accent;
+      color: $color-white-full;
+
+      &:hover {
+        background-color: $color-accent-hover;
+        color: $color-white-hover;
+      }
     }
   }
 

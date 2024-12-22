@@ -8,18 +8,21 @@ import {
 import { fetchMessages } from './Message.thunk';
 
 interface IMessagesState {
+  isLoading: boolean;
   messagesIdx: string[];
   messagesMap: Record<string, IMessage>;
 }
 
 const initialState: IMessagesState = {
+  isLoading: false,
   messagesIdx: [],
   messagesMap: {}
 };
 
 const selectors = {
   selectMessagesIdx: (state: IMessagesState) => state.messagesIdx,
-  selectMessagesMap: (state: IMessagesState) => state.messagesMap
+  selectMessagesMap: (state: IMessagesState) => state.messagesMap,
+  selectMessagesIsLoading: (state: IMessagesState) => state.isLoading
 };
 
 const reducers = {
@@ -36,10 +39,19 @@ const reducers = {
   resetMessages: () => initialState,
   updateMessage: (state: IMessagesState, action: PayloadAction<IMessage>) => {
     state.messagesMap[action.payload.id] = action.payload;
+  },
+  setMessagesIsLoading: (
+    state: IMessagesState,
+    action: PayloadAction<boolean>
+  ) => {
+    state.isLoading = action.payload;
   }
 };
 
 const extraReducers = (builder: ActionReducerMapBuilder<IMessagesState>) => {
+  builder.addCase(fetchMessages.pending, (state) => {
+    state.isLoading = true;
+  });
   builder.addCase(
     fetchMessages.fulfilled,
     (state, action: PayloadAction<IMessage[]>) => {
@@ -52,6 +64,7 @@ const extraReducers = (builder: ActionReducerMapBuilder<IMessagesState>) => {
         },
         {} as Record<string, IMessage>
       );
+      state.isLoading = false;
     }
   );
   builder.addCase(fetchMessages.rejected, () => initialState);
@@ -67,7 +80,13 @@ const messageSlice = createSlice({
 
 export const messagesSliceReducer = messageSlice.reducer;
 
-export const { addMessage, deleteMessage, resetMessages, updateMessage } =
-  messageSlice.actions;
+export const {
+  addMessage,
+  deleteMessage,
+  resetMessages,
+  updateMessage,
+  setMessagesIsLoading
+} = messageSlice.actions;
 
-export const { selectMessagesIdx, selectMessagesMap } = messageSlice.selectors;
+export const { selectMessagesIdx, selectMessagesMap, selectMessagesIsLoading } =
+  messageSlice.selectors;

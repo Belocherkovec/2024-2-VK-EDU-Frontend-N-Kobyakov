@@ -1,6 +1,6 @@
 import { SettingsRounded } from '@mui/icons-material';
 import { Chat } from '@/entities/Chat';
-import { ActionsMenu, NewChatButton, TEXTS } from '@/shared';
+import { ActionsMenu, Loader, NewChatButton, TEXTS } from '@/shared';
 import { ShowUpdates } from '@/widgets';
 
 import { ChatsHeader } from './ui';
@@ -13,13 +13,20 @@ export const ChatsPage = () => {
     userInfo,
     isShowMenu,
     isShowUpdates,
+    isLoadingChats,
     handleClickSettings,
     handleCloseShowUpdates,
     handleIsShowMenuChange
   } = useChatsPage();
 
   return (
-    <>
+    <section>
+      {isLoadingChats && <Loader />}
+      <ChatsHeader
+        username={userInfo?.first_name}
+        onMenuClick={handleIsShowMenuChange}
+        isMenuOpen={isShowMenu}
+      />
       <ActionsMenu
         isShow={isShowMenu}
         className={styles.chatsPage__actionsMenu}
@@ -33,23 +40,16 @@ export const ChatsPage = () => {
           <span>{TEXTS.pages.chatsPage.settings}</span>
         </button>
       </ActionsMenu>
-      <section>
-        <ChatsHeader
-          username={userInfo?.first_name}
-          onMenuClick={handleIsShowMenuChange}
-          isMenuOpen={isShowMenu}
-        />
-        {chatIds.map((chatId) => (
-          <Chat chatId={chatId} key={chatId} />
-        ))}
-        <NewChatButton />
-      </section>
+      {chatIds.map((chatId) => (
+        <Chat chatId={chatId} key={chatId} />
+      ))}
+      <NewChatButton />
       {isShowUpdates && (
         <ShowUpdates
           isVisible={isShowUpdates}
           onVisibleChange={handleCloseShowUpdates}
         />
       )}
-    </>
+    </section>
   );
 };
