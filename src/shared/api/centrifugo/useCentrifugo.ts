@@ -62,7 +62,8 @@ export const useCentrifugo = () => {
         currentPage.includes('dialog') &&
         currentPage.at(-1) !== data.message.chat) ||
       (!currentPage.includes('dialog') &&
-        data.event === CentrifugoEventTypes.CREATE)
+        data.event === CentrifugoEventTypes.CREATE &&
+        data.message.sender.id !== currentUserInfo.id)
     ) {
       handleSetNotification(data);
     }
