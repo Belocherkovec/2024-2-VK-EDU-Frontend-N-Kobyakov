@@ -9,9 +9,32 @@
     resize: none;
     height: 100%;
     padding: 8px 16px;
+    background-color: $color-white-full;
     &:nth-child(1) {
       border-right: 1px solid $color-main-light;
     }
+
+    &:disabled {
+      background-color: $color-white-full;
+    }
+  }
+
+  &__buttonsWrapper {
+    display: flex;
+    column-gap: 16px;
+    align-items: center;
+  }
+
+  &__historyButton {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $color-accent;
+    border: 1px solid $color-main-light;
+    background-color: $color-accent-light;
+    border-radius: 50%;
   }
 
   &__button {

@@ -10,7 +10,7 @@ interface HistoryState {
 }
 
 const initialState: HistoryState = {
-  history: [],
+  history: JSON.parse(localStorage.getItem('history') || '[]').reverse(),
 };
 
 const historySlice = createSlice({
@@ -23,7 +23,7 @@ const historySlice = createSlice({
       selectedFrom: string;
       selectedTo: string;
     }>) {
-      state.history.push(action.payload);
+      state.history.unshift(action.payload);
 
       localStorage.setItem('history', JSON.stringify(state.history));
     },

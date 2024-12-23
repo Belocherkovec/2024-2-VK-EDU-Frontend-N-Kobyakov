@@ -1,74 +1,71 @@
-.historyPage {
-  display: flex;
-  flex-direction: column;
+@use "../../app/styles/variables" as *;
+@use "../../app/styles/mixins" as *;
+
+.history {
   padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 600px;
-  margin: 0 auto;
-}
+  @include content();
 
-.title {
-  font-size: 24px;
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 20px;
-}
+  &__header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    column-gap: 8px;
+  }
 
-.historyList {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
+  &__back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
-.historyItem {
-  background-color: #fff;
-  padding: 16px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+  &__historyWrapper {
+    padding: 16px;
+    border-top: 1px solid $color-main-light;
+    display: flex;
+    justify-content: end;
+  }
 
-.historyItemHeader {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
-}
+  &__title {
+    font-weight: normal;
+  }
 
-.historyItemFrom,
-.historyItemTo {
-  font-weight: bold;
-  color: #007bff;
-}
+  &__button {
+    color: $color-accent;
+  }
 
-.historyItemText {
-  font-size: 14px;
-  color: #555;
-}
+  &__list {
+    display: flex;
+    flex-direction: column;
+  }
 
-.historyItemFromText,
-.historyItemToText {
-  margin: 4px 0;
-}
+  &__emptyData {
+    text-align: center;
+    margin-top: 16px;
+  }
 
-.noHistory {
-  font-size: 16px;
-  color: #888;
-  text-align: center;
-}
+  &__item {
+    border-top: 1px solid $color-main-light;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+  }
 
-.clearButton {
-  background-color: #ff4d4d;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  &__fromToLang {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    column-gap: 8px;
+  }
 
-  &:hover {
-    background-color: #ff1a1a;
+  &__fromToText {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2px;
+  }
+
+  &__toText {
+    opacity: 0.8;
+    font-size: 0.9em;
   }
 }

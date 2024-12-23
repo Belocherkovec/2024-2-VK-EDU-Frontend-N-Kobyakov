@@ -1,11 +1,13 @@
-import languages from './languages.json';
+import languages from '../../../../consts/languages.json';
+import { Language } from "../../../../consts/types";
+import { defaultLanguages } from "../../../../consts/consts";
 import cn from 'classnames';
 import { useState } from "react";
 
 import styles from './SelectedLanguage.module.scss';
 
 interface Props {
-  onChange: (lang: string) => void;
+  onChange: (lang: Language) => void;
   defaultIndex?: number;
 }
 
@@ -14,11 +16,11 @@ export const SelectedLanguage: React.FC<Props> = ({
   defaultIndex = 0,
 }) => {
   const selectedLanguage = "default";
-  const [lastUsedLanguages, setLastUsedLanguages] = useState<(keyof typeof languages)[]>(["ru-RU", "de-DE", "en-GB"]);
+  const [lastUsedLanguages, setLastUsedLanguages] = useState<Language[]>([...defaultLanguages]);
   const [activeLanguage, setActiveLanguage] = useState<number>(defaultIndex);
 
   const handleOptionClick = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const languageKey = event.target.value as keyof typeof languages;
+    const languageKey = event.target.value as Language;
     setActiveLanguage(0);
     setLastUsedLanguages([languageKey, ...lastUsedLanguages.slice(1)]);
     onChange(languageKey);
@@ -50,7 +52,7 @@ export const SelectedLanguage: React.FC<Props> = ({
             <option value={selectedLanguage} disabled></option>
             {Object.keys(languages).map((language, idx) => (
               <option key={idx} value={language}>
-                {languages[language as keyof typeof languages]}
+                {languages[language as Language]}
               </option>
             ))}
           </select>
