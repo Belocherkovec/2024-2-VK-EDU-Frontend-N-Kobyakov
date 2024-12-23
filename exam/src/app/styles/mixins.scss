@@ -1,4 +1,17 @@
+@use "./variables" as *;
+
 @mixin content {
   max-width: 1280px;
   margin: 0 auto;
+}
+
+@mixin button {
+  color: $color-accent;
+  border: 1px solid $color-main-light;
+  background-color: $color-accent-light;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: $color-accent-light-hover;
+  }
 }

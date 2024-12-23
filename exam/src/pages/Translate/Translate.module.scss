@@ -10,7 +10,7 @@
     height: 100%;
     padding: 8px 16px;
     background-color: $color-white-full;
-    &:nth-child(1) {
+    &:first-child {
       border-right: 1px solid $color-main-light;
     }
 
@@ -26,26 +26,22 @@
   }
 
   &__historyButton {
+    @include button();
     width: 48px;
     height: 48px;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: $color-accent;
-    border: 1px solid $color-main-light;
-    background-color: $color-accent-light;
     border-radius: 50%;
   }
 
   &__button {
+    @include button();
     display: flex;
     align-items: center;
     column-gap: 8px;
     padding: 6px 16px 6px 10px;
     border-radius: 8px;
-    background-color: $color-accent-light;
-    border: 1px solid $color-main-light;
-    color: $color-accent;
   }
 
   &__header {
@@ -58,6 +54,10 @@
     border-top-right-radius: 8px;
     padding-top: 2px;
     border-bottom: none;
+
+    & > div:first-child {
+      border-right: 1px solid $color-main-light;
+    }
   }
 
   &__main {
