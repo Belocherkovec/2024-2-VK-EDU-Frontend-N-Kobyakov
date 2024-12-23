@@ -1,4 +1,19 @@
+@use "@/shared/styles/variables" as *;
+
 .actionsMenu {
   right: 16px;
   top: 45px;
+
+  &__button {
+    height: 36px;
+    width: 36px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &._active {
+      background-color: $color-white-hover;
+    }
+  }
 }

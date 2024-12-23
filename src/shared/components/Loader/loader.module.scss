@@ -17,16 +17,6 @@
   position: relative;
   z-index: 1000;
 
-  @media screen and (max-width: 800px) {
-    width: 96px;
-    height: 96px;
-
-    &:after, &:before {
-      width: 96px;
-      height: 96px;
-    }
-  }
-
   &:after, &:before {
     content: '';
     box-sizing: border-box;
@@ -41,6 +31,16 @@
   }
   &:after {
     animation: firstDelayFading 1s ease-out 1, animLoader 2s linear infinite 1s;
+  }
+
+  @media screen and (max-width: 800px) {
+    width: 96px;
+    height: 96px;
+
+    &:after, &:before {
+      width: 96px;
+      height: 96px;
+    }
   }
 }
 

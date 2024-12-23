@@ -6,13 +6,9 @@
   padding: 6px 4px;
   border-radius: 20px;
   z-index: 2;
-  display: none;
+  display: flex;
   flex-direction: column;
   position: absolute;
-
-  &._show {
-    display: flex;
-  }
 
   & > * {
     display: flex;

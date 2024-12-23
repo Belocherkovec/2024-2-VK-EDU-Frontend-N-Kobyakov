@@ -29,6 +29,7 @@ export const ChatsPage = () => {
       />
       <ActionsMenu
         isShow={isShowMenu}
+        changeShow={handleIsShowMenuChange}
         className={styles.chatsPage__actionsMenu}
       >
         <button

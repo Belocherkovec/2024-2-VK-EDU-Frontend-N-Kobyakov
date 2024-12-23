@@ -104,6 +104,7 @@ export const MessageInput: React.FC<IMessageInputProps> = (props) => {
         />
         <ActionsMenu
           isShow={!voice && isShowActions}
+          changeShow={handleShowActions}
           className={styles.form__actionsMenu}
         >
           <button

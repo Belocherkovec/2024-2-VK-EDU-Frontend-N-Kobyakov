@@ -4,6 +4,7 @@ import { DeleteRounded, MoreVertRounded } from '@mui/icons-material';
 
 import { useDialogHeader } from './hooks';
 import styles from './dialogHeader.module.scss';
+import cn from 'classnames';
 
 export const DialogHeader: React.FC<{
   avatar: null | string;
@@ -41,13 +42,23 @@ export const DialogHeader: React.FC<{
         className={className}
         leftNode={<BackButton to={RoutePaths.chatsPage} isReplace />}
         rightNode={
-          <button onClick={toggleShowActions}>
+          <button
+            onClick={toggleShowActions}
+            className={cn(
+              styles.actionsMenu__button,
+              isShowActions && styles._active
+            )}
+          >
             <MoreVertRounded />
           </button>
         }
         theme={HeaderThemes.WHITE}
       />
-      <ActionsMenu isShow={isShowActions} className={styles.actionsMenu}>
+      <ActionsMenu
+        isShow={isShowActions}
+        changeShow={toggleShowActions}
+        className={styles.actionsMenu}
+      >
         <button onClick={handleIsConfirmVisibleChange}>
           <DeleteRounded />
           {TEXTS.pages.dialogPage.removeChat}
