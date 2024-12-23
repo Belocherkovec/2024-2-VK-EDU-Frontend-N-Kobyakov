@@ -1,5 +1,5 @@
 import { DoneRounded } from '@mui/icons-material';
-import { TEXTS } from '@/shared/index';
+import { TEXTS } from '@/shared';
 
 export const DoneButton: React.FC<{
   className?: string;

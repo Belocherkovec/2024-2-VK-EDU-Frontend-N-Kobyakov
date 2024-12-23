@@ -1,5 +1,5 @@
 import { SearchRounded } from '@mui/icons-material';
-import { TEXTS } from '@/shared/index';
+import { TEXTS } from '@/shared';
 
 export const SearchButton: React.FC<{
   className?: string;

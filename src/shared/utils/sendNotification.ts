@@ -1,4 +1,4 @@
-import { TEXTS } from '@/shared/index';
+import { TEXTS } from '@/shared';
 
 export const sendNotification = async (initials: string) => {
   const perm = await Notification.requestPermission();

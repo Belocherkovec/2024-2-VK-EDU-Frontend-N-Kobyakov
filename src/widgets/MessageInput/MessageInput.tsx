@@ -75,7 +75,7 @@ export const MessageInput: React.FC<IMessageInputProps> = (props) => {
         </div>
       )}
       <form
-        action="/ReactChat/public"
+        action="/public"
         autoComplete="off"
         className={cn(styles.form, className)}
         onKeyDown={handleKeyDown}

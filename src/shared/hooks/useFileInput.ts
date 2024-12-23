@@ -1,4 +1,4 @@
-import { convertBytesToHuman, TEXTS, validateImageFile } from '@/shared/index';
+import { convertBytesToHuman, TEXTS, validateImageFile } from '@/shared';
 import { useRef, useState } from 'react';
 
 export interface IUseFileInputProps {

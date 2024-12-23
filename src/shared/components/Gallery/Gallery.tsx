@@ -1,4 +1,4 @@
-import { PopupWindow } from '@/shared/index';
+import { PopupWindow } from '@/shared';
 
 import { useGallery } from './hooks';
 import styles from './gallery.module.scss';
