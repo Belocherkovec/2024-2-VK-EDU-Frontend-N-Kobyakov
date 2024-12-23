@@ -8,7 +8,8 @@ export const RoutePaths = {
   chatsPage: '/chats',
   createChatPage: '/chats/create',
   dialogPage: '/dialog/:chatId',
-  editProfilePage: '/profile/edit/:profileId',
+  ProfilePage: '/profile/:profileId',
+  editProfilePage: '/profile/edit',
   initial: '/',
   main: '',
   notFound: '*'

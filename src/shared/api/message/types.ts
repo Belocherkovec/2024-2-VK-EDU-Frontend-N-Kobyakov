@@ -15,10 +15,10 @@ export interface IGetMessagesResponse {
 }
 
 export interface IMessage {
-  chat: string;
   created_at: string;
   files: { item: string }[];
   id: string;
+  chat: string;
   sender: IUser;
   text: null | string;
   updated_at: null | string;

@@ -1,0 +1,75 @@
+@use "./variables" as *;
+
+@mixin button {
+  padding: 16px;
+  font-size: 1.1em;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 4px;
+}
+
+@mixin formButton {
+  @include button;
+
+  background-color: $color-accent;
+  color: $color-white-full;
+  transition: background-color 0.2s ease-in;
+
+  &:hover {
+    background-color: $color-accent-hover;
+  }
+
+  &._disabled {
+    background-color: $color-gray-light;
+    pointer-events: none;
+  }
+}
+
+@mixin transparentButton {
+  @include button;
+
+  background-color: transparent;
+  border: 2px solid $color-accent;
+  transition: background-color 0.2s ease-in;
+
+  &:hover {
+    background-color: $color-white-light;
+    border-color: $color-accent-hover;
+  }
+
+  &._disabled {
+    border-color: $color-gray-light;
+    color: $color-gray-light;
+    pointer-events: none;
+  }
+}
+
+@mixin form($row-gap: 16px) {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: $row-gap;
+
+  &__group {
+    border: none;
+    display: flex;
+    flex-direction: column;
+    row-gap: 12px;
+  }
+
+  &__area {
+    height: 6em;
+  }
+
+  &__button {
+    @include formButton;
+  }
+
+  &__error {
+    color: $color-error;
+    text-align: center;
+    font-weight: bold;
+  }
+}

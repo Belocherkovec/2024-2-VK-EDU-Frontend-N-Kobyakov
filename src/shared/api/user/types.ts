@@ -35,3 +35,10 @@ export type IGetUsersQueryParams = {
   page_size?: number;
   search?: string;
 };
+
+export type IUserReadInfo = Omit<
+  IUser,
+  'id' | 'is_online' | 'last_online_at' | 'avatar'
+> & {
+  avatar: File | null;
+};

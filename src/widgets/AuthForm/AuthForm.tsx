@@ -51,8 +51,8 @@ export const AuthForm: React.FC = () => {
       />
       <button
         aria-label={TEXTS.ariaLabels.auth}
-        className={cn(styles.form__button, isDisabled() && styles._disabled)}
-        disabled={isDisabled()}
+        className={cn(styles.form__button, isDisabled && styles._disabled)}
+        disabled={isDisabled}
       >
         {TEXTS.pages.auth.action}
       </button>

@@ -6,20 +6,15 @@ import {
   IAuthResponse,
   IGetUsersQueryParams,
   IGetUsersResponse,
-  IRegistrationRequest,
   IUser
 } from './types';
 
 export const registrationRequest = (
-  data: IRegistrationRequest,
+  data: FormData,
   callback?: (res: AxiosResponse) => void
 ): void => {
   axios
-    .post(`${import.meta.env.VITE_PUBLIC_API}register/`, data, {
-      headers: {
-        'Content-Type': data.avatar ? 'multipart/form-data' : 'application/json'
-      }
-    })
+    .post(`${import.meta.env.VITE_PUBLIC_API}register/`, data)
     .then((res) => {
       if (callback) {
         callback(res);
@@ -61,6 +56,14 @@ export const loginRequest = (
 
 export const getCurrentUser = (): Promise<AxiosResponse<IUser>> =>
   $api.get<IUser>('user/current/');
+
+export const updateUser = (
+  userId: string,
+  data: FormData
+): Promise<AxiosResponse<IUser>> => $api.patch<IUser>(`user/${userId}/`, data);
+
+export const deleteUser = (userId: string): Promise<void> =>
+  $api.delete(`user/${userId}/`);
 
 export const getUsers = (
   pageSize?: number,

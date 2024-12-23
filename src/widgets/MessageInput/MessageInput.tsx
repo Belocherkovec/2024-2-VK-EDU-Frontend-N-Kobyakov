@@ -9,8 +9,9 @@ import {
   StopCircleRounded
 } from '@mui/icons-material';
 
+import { ConfirmDialog } from '@/features';
 import { useMessageInput } from './hooks';
-import { AudioPreview, ImagePreview, LimitDialog } from './ui';
+import { AudioPreview, ImagePreview } from './ui';
 import styles from './messageInput.module.scss';
 
 export interface IMessageInputProps {
@@ -81,8 +82,9 @@ export const MessageInput: React.FC<IMessageInputProps> = (props) => {
         onKeyDown={handleKeyDown}
         onSubmit={handleSubmit}
       >
-        <LimitDialog
-          imagesLimit={FILES_LIMIT}
+        <ConfirmDialog
+          confirmTitle={TEXTS.errors.defaultErrorTitle}
+          confirmText={TEXTS.pages.dialogPage.imageLimit(FILES_LIMIT)}
           isVisible={isPopupVisible}
           onClose={handlePopupClose}
           onConfirm={handlePopupConfirm}
@@ -102,20 +104,19 @@ export const MessageInput: React.FC<IMessageInputProps> = (props) => {
         />
         <ActionsMenu
           isShow={!voice && isShowActions}
+          changeShow={handleShowActions}
           className={styles.form__actionsMenu}
         >
           <button
             type="button"
-            className={styles.form__actionItem}
             onClick={handleActionGeo}
             aria-label={TEXTS.ariaLabels.sendGeo}
           >
-            <LocationOnRounded className={styles.form__actionIcon} />
+            <LocationOnRounded />
             <span>{TEXTS.pages.dialogPage.sendGeo}</span>
           </button>
           <button
             type="button"
-            className={styles.form__actionItem}
             aria-label={TEXTS.ariaLabels.addImages}
             onClick={() =>
               files.length >= FILES_LIMIT
@@ -123,13 +124,16 @@ export const MessageInput: React.FC<IMessageInputProps> = (props) => {
                 : handleChooseFile()
             }
           >
-            <ImageRounded className={styles.form__actionIcon} />
+            <ImageRounded />
             <span>{TEXTS.pages.dialogPage.image}</span>
           </button>
         </ActionsMenu>
         <button
           type="button"
-          className={styles.form__file}
+          className={cn(
+            styles.form__file,
+            !voice && isShowActions && styles._isOpen
+          )}
           onClick={handleShowActions}
           aria-label={TEXTS.ariaLabels.showActions}
         >

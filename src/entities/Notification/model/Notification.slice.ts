@@ -1,9 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+export type NotificationTypes = 'ERROR' | 'SUCCESS';
+
+export const NOTIFICATION_TYPES = {
+  ERROR: 'ERROR',
+  SUCCESS: 'SUCCESS'
+} as const;
+
 interface INotification {
   title: string;
   message: string;
-  type: 'ERROR';
+  type: NotificationTypes;
   lifeTime: number;
   key?: string;
 }

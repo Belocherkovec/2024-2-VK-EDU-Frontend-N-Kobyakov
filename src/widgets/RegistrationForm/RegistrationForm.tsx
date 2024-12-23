@@ -49,7 +49,7 @@ export const RegistrationForm = () => {
           isError={!!registrationErrors.length || !isFormValid.username}
           label={TEXTS.pages.registration.login}
           minLength={3}
-          name={'username'}
+          name="username"
           onChange={handleFormChange}
           onValidChange={handleFormValidChange}
           pattern="^[\w.@+\-]+$"
@@ -61,7 +61,7 @@ export const RegistrationForm = () => {
         <Input
           isError={!!registrationErrors.length || !isFormValid.firstName}
           label={TEXTS.pages.registration.firstName}
-          name={'firstName'}
+          name="firstName"
           onChange={handleFormChange}
           onValidChange={handleFormValidChange}
           required
@@ -71,7 +71,7 @@ export const RegistrationForm = () => {
         <Input
           isError={!!registrationErrors.length || !isFormValid.lastName}
           label={TEXTS.pages.registration.lastName}
-          name={'lastName'}
+          name="lastName"
           onChange={handleFormChange}
           onValidChange={handleFormValidChange}
           required
@@ -82,7 +82,7 @@ export const RegistrationForm = () => {
           className={styles.form__area}
           isError={!isFormValid.bio}
           label={TEXTS.pages.registration.bio}
-          name={'bio'}
+          name="bio"
           onChange={handleFormChange}
           onValidChange={handleFormValidChange}
           type="textarea"
@@ -114,8 +114,8 @@ export const RegistrationForm = () => {
         />
       </fieldset>
       <button
-        className={cn(styles.form__button, isDisabled() && styles._disabled)}
-        disabled={isDisabled()}
+        className={cn(styles.form__button, isDisabled && styles._disabled)}
+        disabled={isDisabled}
       >
         {TEXTS.pages.registration.action}
       </button>

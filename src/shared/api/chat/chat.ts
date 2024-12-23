@@ -34,6 +34,8 @@ export const getChats = (
 
 export const getChat = (uuid: string) => $api.get<IChat>(`chat/${uuid}/`);
 
+export const deleteChat = (uuid: string) => $api.delete(`chat/${uuid}/`);
+
 export const createPrivateChat = (
   interlocutorId: string
 ): Promise<AxiosResponse<IChat>> =>

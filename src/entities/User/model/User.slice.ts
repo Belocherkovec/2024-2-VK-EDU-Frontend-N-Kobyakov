@@ -10,6 +10,7 @@ import { fetchCurrentUser, fetchUsers } from './User.thunk';
 interface IUserState {
   isAuthenticated: boolean;
   userInfo: IUser;
+  isLoading: boolean;
   usersIds: string[];
   usersMap: Record<string, IUser>;
 }
@@ -17,13 +18,14 @@ interface IUserState {
 const initialState: IUserState = {
   isAuthenticated: true,
   userInfo: {} as IUser,
+  isLoading: false,
   usersIds: [],
   usersMap: {}
 };
 
 const reducers = {
   resetCurrentUserState: (state: IUserState) => {
-    state.isAuthenticated = initialState.isAuthenticated;
+    state.isAuthenticated = false;
     state.userInfo = initialState.userInfo;
   },
   resetUsersState: (state: IUserState) => {
@@ -47,10 +49,16 @@ const reducers = {
   },
   setUserUnauthorized: (state: IUserState) => {
     state.isAuthenticated = false;
+  },
+  setUsersIsLoading: (state: IUserState, action: PayloadAction<boolean>) => {
+    state.isLoading = action.payload;
   }
 };
 
 const extraReducers = (builder: ActionReducerMapBuilder<IUserState>) => {
+  builder.addCase(fetchUsers.pending, (state) => {
+    state.isLoading = true;
+  });
   builder.addCase(
     fetchUsers.fulfilled,
     (state, action: PayloadAction<IUser[]>) => {
@@ -63,8 +71,12 @@ const extraReducers = (builder: ActionReducerMapBuilder<IUserState>) => {
         },
         {} as Record<string, IUser>
       );
+      state.isLoading = false;
     }
   );
+  builder.addCase(fetchUsers.rejected, (state) => {
+    state.isLoading = false;
+  });
   builder.addCase(
     fetchCurrentUser.fulfilled,
     (state, action: PayloadAction<IUser>) => {
@@ -81,7 +93,8 @@ const selectors = {
   selectUserInfo: (state: IUserState) => state.userInfo,
   selectUserIsAuthenticated: (state: IUserState) => state.isAuthenticated,
   selectUsersIds: (state: IUserState) => state.usersIds,
-  selectUsersMap: (state: IUserState) => state.usersMap
+  selectUsersMap: (state: IUserState) => state.usersMap,
+  selectUsersIsLoading: (state: IUserState) => state.isLoading
 };
 
 const userSlice = createSlice({
@@ -101,12 +114,14 @@ export const {
   setUserIds,
   setUserInfo,
   setUsersMap,
-  setUserUnauthorized
+  setUserUnauthorized,
+  setUsersIsLoading
 } = userSlice.actions;
 
 export const {
   selectUserInfo,
   selectUserIsAuthenticated,
   selectUsersIds,
-  selectUsersMap
+  selectUsersMap,
+  selectUsersIsLoading
 } = userSlice.selectors;

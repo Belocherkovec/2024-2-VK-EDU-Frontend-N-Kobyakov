@@ -18,4 +18,5 @@ export interface IChat {
   members: IUser[];
   title: string;
   updated_at: string;
+  unread_messages_count: number;
 }

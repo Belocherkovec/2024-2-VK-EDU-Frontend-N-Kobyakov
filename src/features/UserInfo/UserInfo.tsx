@@ -18,7 +18,7 @@ export const UserInfo: React.FC<{
       firstName={title.split(' ')[0]}
       lastName={title.split(' ')[1]}
       src={avatar}
-      isGroupChat={!lastOnline}
+      isHideOnline={!lastOnline}
       isOnline={isOnline}
     />
     <div className={styles.user__userWrapper}>
