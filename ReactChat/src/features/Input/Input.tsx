@@ -1,5 +1,5 @@
 import { VisibilityOffRounded, VisibilityRounded } from '@mui/icons-material';
-import { TEXTS } from 'ReactChat/src/shared';
+import { TEXTS } from '@/shared';
 import cn from 'classnames';
 import React, { memo } from 'react';
 

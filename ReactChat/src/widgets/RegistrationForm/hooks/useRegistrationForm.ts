@@ -1,5 +1,5 @@
 import { AxiosError, AxiosResponse } from 'axios';
-import { registrationRequest, RoutePaths, TEXTS } from 'ReactChat/src/shared';
+import { registrationRequest, RoutePaths, TEXTS } from '@/shared';
 import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 

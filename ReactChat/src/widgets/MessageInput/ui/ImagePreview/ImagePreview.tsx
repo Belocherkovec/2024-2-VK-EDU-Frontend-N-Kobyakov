@@ -1,7 +1,7 @@
 import { CloseRounded } from '@mui/icons-material';
 
 import styles from './imagePreview.module.scss';
-import { TEXTS } from 'ReactChat/src/shared';
+import { TEXTS } from '@/shared';
 
 interface IImagePreviewProps {
   name: string;

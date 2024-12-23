@@ -1,6 +1,6 @@
-import { Message } from 'ReactChat/src/entities/Message';
-import { MessageStatuses, TEXTS, timeFormatter } from 'ReactChat/src/shared';
-import { MessageInput } from 'ReactChat/src/widgets';
+import { Message } from '@/entities/Message';
+import { MessageStatuses, TEXTS, timeFormatter } from '@/shared';
+import { MessageInput } from '@/widgets';
 
 import styles from './dialogPage.module.scss';
 import { DialogHeader } from './ui';

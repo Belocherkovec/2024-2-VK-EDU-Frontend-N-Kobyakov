@@ -1,4 +1,4 @@
-import { IMessage } from 'ReactChat/src/shared';
+import { IMessage } from '@/shared';
 import {
   ActionReducerMapBuilder,
   createSlice,

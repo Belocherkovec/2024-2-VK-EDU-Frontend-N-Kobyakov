@@ -1,5 +1,5 @@
-import { ALLOWED_IMG_TYPES, TEXTS } from 'ReactChat/src/shared';
-import { FileInput, Input, UserInfo } from 'ReactChat/src/features';
+import { ALLOWED_IMG_TYPES, TEXTS } from '@/shared';
+import { FileInput, Input, UserInfo } from '@/features';
 import cn from 'classnames';
 
 import { useRegistrationForm } from './hooks';

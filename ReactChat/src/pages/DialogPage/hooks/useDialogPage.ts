@@ -1,23 +1,19 @@
-import { AppDispatch } from 'ReactChat/src/app';
-import { fetchChats, selectChatMap } from 'ReactChat/src/entities/Chat';
+import { AppDispatch } from '@/app';
+import { fetchChats, selectChatMap } from '@/entities/Chat';
 import {
   fetchMessages,
   resetMessages,
   selectMessagesIdx,
   selectMessagesMap
-} from 'ReactChat/src/entities/Message';
-import {
-  fetchUsers,
-  selectUserInfo,
-  selectUsersMap
-} from 'ReactChat/src/entities/User';
+} from '@/entities/Message';
+import { fetchUsers, selectUserInfo, selectUsersMap } from '@/entities/User';
 import {
   createMessage,
   getFormattedDate,
   postReadMessage,
   TEXTS,
   useIntersectionObserver
-} from 'ReactChat/src/shared';
+} from '@/shared';
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';

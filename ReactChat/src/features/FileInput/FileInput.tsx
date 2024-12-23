@@ -1,5 +1,5 @@
 import { DeleteRounded, InsertDriveFileRounded } from '@mui/icons-material';
-import { IUseFileInputProps, TEXTS, useFileInput } from 'ReactChat/src/shared';
+import { IUseFileInputProps, TEXTS, useFileInput } from '@/shared';
 import cn from 'classnames';
 
 import styles from './fileInput.module.scss';

@@ -1,8 +1,8 @@
-import { chatSliceReducer } from 'ReactChat/src/entities/Chat';
-import { messagesSliceReducer } from 'ReactChat/src/entities/Message';
-import { userSliceReducer } from 'ReactChat/src/entities/User';
+import { chatSliceReducer } from '@/entities/Chat';
+import { messagesSliceReducer } from '@/entities/Message';
+import { userSliceReducer } from '@/entities/User';
 import { configureStore } from '@reduxjs/toolkit';
-import { notificationsSliceReducer } from 'ReactChat/src/entities/Notification';
+import { notificationsSliceReducer } from '@/entities/Notification';
 
 export const store = configureStore({
   reducer: {

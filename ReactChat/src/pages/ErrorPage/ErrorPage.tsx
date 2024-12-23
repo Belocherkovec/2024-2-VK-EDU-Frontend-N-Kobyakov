@@ -1,5 +1,5 @@
 import { ErrorOutlineRounded } from '@mui/icons-material';
-import { RoutePaths, TEXTS } from 'ReactChat/src/shared';
+import { RoutePaths, TEXTS } from '@/shared';
 import cn from 'classnames';
 import { Link } from 'react-router-dom';
 

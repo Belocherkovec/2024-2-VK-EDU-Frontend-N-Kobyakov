@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 
-import { ErrorMessages, KErrorMessages, TEXTS } from 'ReactChat/src/shared';
+import { ErrorMessages, KErrorMessages, TEXTS } from '@/shared';
 
 interface IUseInputProps {
   isError: boolean;

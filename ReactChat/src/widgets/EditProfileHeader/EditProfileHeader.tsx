@@ -1,5 +1,5 @@
-import { Header, HeaderThemes } from 'ReactChat/src/features/Header';
-import { BackButton, DoneButton, TEXTS } from 'ReactChat/src/shared';
+import { Header, HeaderThemes } from '@/features/Header';
+import { BackButton, DoneButton, TEXTS } from '@/shared';
 
 export const EditProfileHeader: React.FC<{ onSave: () => void }> = ({
   onSave

@@ -1,4 +1,4 @@
-import { getChats, IChat } from 'ReactChat/src/shared';
+import { getChats, IChat } from '@/shared';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchChats = createAsyncThunk<IChat[], string | undefined>(

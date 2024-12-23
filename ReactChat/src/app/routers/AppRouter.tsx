@@ -7,8 +7,8 @@ import {
   ErrorPage,
   NotFoundPage,
   RegistrationPage
-} from 'ReactChat/src/pages';
-import { RoutePaths } from 'ReactChat/src/shared';
+} from '@/pages';
+import { RoutePaths } from '@/shared';
 import { createHashRouter, RouterProvider } from 'react-router-dom';
 
 import { App } from '../App';

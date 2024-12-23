@@ -1,5 +1,5 @@
 import { SearchRounded } from '@mui/icons-material';
-import { TEXTS } from 'ReactChat/src/shared/index';
+import { TEXTS } from '@/shared/index';
 
 export const SearchButton: React.FC<{
   className?: string;

@@ -1,9 +1,9 @@
-import { RootState } from 'ReactChat/src/app';
+import { RootState } from '@/app';
 import { useSelector } from 'react-redux';
 
 import { selectCurrentChat } from '../model';
-import { selectUserInfo } from 'ReactChat/src/entities/User';
-import { getFormattedDate, MessageStatuses } from 'ReactChat/src/shared';
+import { selectUserInfo } from '@/entities/User';
+import { getFormattedDate, MessageStatuses } from '@/shared';
 
 export const useChat = (userId: string) => {
   const currentUserInfo = useSelector(selectUserInfo);

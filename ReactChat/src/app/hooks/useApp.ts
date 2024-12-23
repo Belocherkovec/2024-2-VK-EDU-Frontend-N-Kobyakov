@@ -1,18 +1,14 @@
 import { Centrifuge, Subscription } from 'centrifuge';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  addMessage,
-  deleteMessage,
-  updateMessage
-} from 'ReactChat/src/entities/Message';
-import { useNotification } from 'ReactChat/src/entities/Notification';
-import { replaceChat, selectChatMap } from 'ReactChat/src/entities/Chat';
+import { addMessage, deleteMessage, updateMessage } from '@/entities/Message';
+import { useNotification } from '@/entities/Notification';
+import { replaceChat, selectChatMap } from '@/entities/Chat';
 import {
   fetchCurrentUser,
   selectUserInfo,
   setUserUnauthorized
-} from 'ReactChat/src/entities/User';
+} from '@/entities/User';
 import {
   CentrifugoEventTypes,
   ICentrifugoEvent,
@@ -21,7 +17,7 @@ import {
   setupRefreshInterceptor,
   useAuthRedirect,
   getChat
-} from 'ReactChat/src/shared';
+} from '@/shared';
 
 import { AppDispatch } from '../store';
 

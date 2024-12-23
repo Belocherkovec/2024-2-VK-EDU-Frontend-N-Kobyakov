@@ -1,4 +1,4 @@
-import { User } from 'ReactChat/src/entities/User';
+import { User } from '@/entities/User';
 
 import { CreateChatHeader } from './ui';
 import { useCreateChatPage } from './hooks';

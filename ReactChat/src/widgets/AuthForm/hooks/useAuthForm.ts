@@ -1,6 +1,6 @@
-import { AppDispatch } from 'ReactChat/src/app';
-import { setUserAuthorized, setUserInfo } from 'ReactChat/src/entities/User';
-import { getCurrentUser, loginRequest, TEXTS } from 'ReactChat/src/shared';
+import { AppDispatch } from '@/app';
+import { setUserAuthorized, setUserInfo } from '@/entities/User';
+import { getCurrentUser, loginRequest, TEXTS } from '@/shared';
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 

@@ -1,5 +1,5 @@
-import { Logo, RoutePaths, TextLink, TEXTS } from 'ReactChat/src/shared';
-import { RegistrationForm } from 'ReactChat/src/widgets';
+import { Logo, RoutePaths, TextLink, TEXTS } from '@/shared';
+import { RegistrationForm } from '@/widgets';
 
 import styles from './registrationPage.module.scss';
 

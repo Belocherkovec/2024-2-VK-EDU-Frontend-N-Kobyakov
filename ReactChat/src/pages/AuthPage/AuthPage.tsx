@@ -1,5 +1,5 @@
-import { Logo, RoutePaths, TextLink, TEXTS } from 'ReactChat/src/shared';
-import { AuthForm } from 'ReactChat/src/widgets';
+import { Logo, RoutePaths, TextLink, TEXTS } from '@/shared';
+import { AuthForm } from '@/widgets';
 
 import styles from './authPage.module.scss';
 

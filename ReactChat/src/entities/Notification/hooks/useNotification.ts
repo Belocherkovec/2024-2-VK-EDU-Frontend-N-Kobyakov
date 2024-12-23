@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch } from 'ReactChat/src/app';
+import { AppDispatch } from '@/app';
 import { useEffect } from 'react';
 
 import { removeNotification, selectNotifications } from '../index';

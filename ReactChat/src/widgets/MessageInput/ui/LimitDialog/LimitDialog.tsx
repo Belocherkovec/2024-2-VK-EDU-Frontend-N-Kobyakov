@@ -1,4 +1,4 @@
-import { IPopupWindowProps, PopupWindow, TEXTS } from 'ReactChat/src/shared';
+import { IPopupWindowProps, PopupWindow, TEXTS } from '@/shared';
 
 import styles from './limitDialog.module.scss';
 

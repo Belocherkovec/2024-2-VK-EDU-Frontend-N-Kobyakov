@@ -1,5 +1,5 @@
-import { TEXTS } from 'ReactChat/src/shared';
-import { Input } from 'ReactChat/src/features';
+import { TEXTS } from '@/shared';
+import { Input } from '@/features';
 import cn from 'classnames';
 
 import styles from './authForm.module.scss';

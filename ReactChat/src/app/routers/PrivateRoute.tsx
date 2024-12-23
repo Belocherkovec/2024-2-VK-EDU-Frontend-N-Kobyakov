@@ -1,5 +1,5 @@
-import { selectUserIsAuthenticated } from 'ReactChat/src/entities/User';
-import { PublicPaths, RoutePaths } from 'ReactChat/src/shared';
+import { selectUserIsAuthenticated } from '@/entities/User';
+import { PublicPaths, RoutePaths } from '@/shared';
 import { useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 

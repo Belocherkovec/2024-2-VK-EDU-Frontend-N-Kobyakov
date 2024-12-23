@@ -1,4 +1,4 @@
-import { TEXTS } from 'ReactChat/src/shared/index';
+import { TEXTS } from '@/shared/index';
 
 export const sendNotification = async (initials: string) => {
   const perm = await Notification.requestPermission();

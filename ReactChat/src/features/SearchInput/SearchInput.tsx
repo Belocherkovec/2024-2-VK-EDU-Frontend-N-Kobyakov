@@ -1,4 +1,4 @@
-import { TEXTS } from 'ReactChat/src/shared';
+import { TEXTS } from '@/shared';
 
 import { useSearchInput } from './hooks';
 import styles from './searchInput.module.scss';

@@ -1,4 +1,4 @@
-import { Avatar, TEXTS } from 'ReactChat/src/shared';
+import { Avatar, TEXTS } from '@/shared';
 import cn from 'classnames';
 
 import styles from './userInfo.module.scss';

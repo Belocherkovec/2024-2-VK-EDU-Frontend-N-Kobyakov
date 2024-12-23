@@ -1,14 +1,14 @@
 import { useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { AppDispatch } from 'ReactChat/src/app';
+import { AppDispatch } from '@/app';
 import {
   GEOLOCATION_ERRORS,
   GeolocationErrorType,
   getGeo,
   recordAudio,
   TEXTS
-} from 'ReactChat/src/shared';
-import { pushNotification } from 'ReactChat/src/entities/Notification';
+} from '@/shared';
+import { pushNotification } from '@/entities/Notification';
 
 import { IMessageInputProps } from '../MessageInput';
 import { ILimitVisibleState } from '../ui';

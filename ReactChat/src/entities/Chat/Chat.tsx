@@ -1,4 +1,4 @@
-import { Avatar, CheckMark, RoutePaths, TEXTS } from 'ReactChat/src/shared';
+import { Avatar, CheckMark, RoutePaths, TEXTS } from '@/shared';
 import cn from 'classnames';
 import React from 'react';
 import { Link } from 'react-router-dom';

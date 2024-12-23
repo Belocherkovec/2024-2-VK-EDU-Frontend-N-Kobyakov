@@ -1,4 +1,4 @@
-import { getCurrentUser, getUsers, IUser } from 'ReactChat/src/shared';
+import { getCurrentUser, getUsers, IUser } from '@/shared';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { resetUsersState } from './User.slice';

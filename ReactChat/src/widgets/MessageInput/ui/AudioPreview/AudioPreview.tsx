@@ -3,7 +3,7 @@ import {
   PlayCircleRounded,
   StopCircleRounded
 } from '@mui/icons-material';
-import { TEXTS } from 'ReactChat/src/shared';
+import { TEXTS } from '@/shared';
 
 import { useAudioPreview } from './hooks';
 import styles from './audioPreview.module.scss';

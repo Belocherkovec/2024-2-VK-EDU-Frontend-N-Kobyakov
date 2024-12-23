@@ -3,7 +3,7 @@ import {
   useNavigate,
   useRouteError
 } from 'react-router-dom';
-import { RoutePaths } from 'ReactChat/src/shared';
+import { RoutePaths } from '@/shared';
 
 export const useErrorPage = () => {
   const navigate = useNavigate();

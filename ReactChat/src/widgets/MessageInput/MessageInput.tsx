@@ -1,10 +1,5 @@
 import cn from 'classnames';
-import {
-  ActionsMenu,
-  Gallery,
-  TEXTS,
-  useFileInput
-} from 'ReactChat/src/shared';
+import { ActionsMenu, Gallery, TEXTS, useFileInput } from '@/shared';
 import {
   AttachFileRounded,
   ImageRounded,

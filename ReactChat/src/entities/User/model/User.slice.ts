@@ -1,4 +1,4 @@
-import { IUser } from 'ReactChat/src/shared';
+import { IUser } from '@/shared';
 import {
   ActionReducerMapBuilder,
   createSlice,

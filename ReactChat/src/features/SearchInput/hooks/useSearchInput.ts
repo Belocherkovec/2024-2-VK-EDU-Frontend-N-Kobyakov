@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-import { TEXTS } from 'ReactChat/src/shared';
+import { TEXTS } from '@/shared';
 
 export const useSearchInput = (
   value?: string,

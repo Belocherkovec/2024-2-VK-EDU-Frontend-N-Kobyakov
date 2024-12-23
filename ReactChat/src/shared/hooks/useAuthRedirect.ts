@@ -1,8 +1,8 @@
-import { selectUserIsAuthenticated } from 'ReactChat/src/entities/User';
+import { selectUserIsAuthenticated } from '@/entities/User';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { PublicPaths, RoutePaths } from 'ReactChat/src/shared/index';
+import { PublicPaths, RoutePaths } from '@/shared/index';
 
 export const useAuthRedirect = () => {
   const isAuthorized = useSelector(selectUserIsAuthenticated);

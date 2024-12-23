@@ -1,5 +1,5 @@
-import { AppDispatch } from 'ReactChat/src/app/store';
-import { setUserUnauthorized } from 'ReactChat/src/entities/User/model';
+import { AppDispatch } from '@/app/store';
+import { setUserUnauthorized } from '@/entities/User/model';
 import axios from 'axios';
 
 import { IAuthResponse } from './user';

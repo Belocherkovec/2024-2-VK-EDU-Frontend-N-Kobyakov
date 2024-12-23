@@ -1,14 +1,10 @@
-import { AppDispatch } from 'ReactChat/src/app';
-import {
-  fetchUsers,
-  selectUsersIds,
-  selectUsersMap
-} from 'ReactChat/src/entities/User';
-import { createPrivateChat, RoutePaths } from 'ReactChat/src/shared';
+import { AppDispatch } from '@/app';
+import { fetchUsers, selectUsersIds, selectUsersMap } from '@/entities/User';
+import { createPrivateChat, RoutePaths } from '@/shared';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { addChat } from 'ReactChat/src/entities/Chat';
+import { addChat } from '@/entities/Chat';
 
 export const useCreateChatPage = () => {
   const dispatch = useDispatch<AppDispatch>();

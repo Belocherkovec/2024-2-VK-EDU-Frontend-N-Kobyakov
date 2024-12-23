@@ -1,15 +1,15 @@
 import { useDispatch } from 'react-redux';
 
-import { Header, HeaderThemes, SearchInput } from 'ReactChat/src/features';
+import { Header, HeaderThemes, SearchInput } from '@/features';
 import {
   BackButton,
   RoutePaths,
   SearchButton,
   TEXTS,
   useSearch
-} from 'ReactChat/src/shared';
-import { AppDispatch } from 'ReactChat/src/app';
-import { fetchUsers } from 'ReactChat/src/entities/User';
+} from '@/shared';
+import { AppDispatch } from '@/app';
+import { fetchUsers } from '@/entities/User';
 import styles from './createChatHeader.module.scss';
 
 export const CreateChatHeader: React.FC = () => {

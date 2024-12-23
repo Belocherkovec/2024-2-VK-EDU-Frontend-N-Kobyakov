@@ -1,8 +1,4 @@
-import {
-  convertBytesToHuman,
-  TEXTS,
-  validateImageFile
-} from 'ReactChat/src/shared/index';
+import { convertBytesToHuman, TEXTS, validateImageFile } from '@/shared/index';
 import { useRef, useState } from 'react';
 
 export interface IUseFileInputProps {

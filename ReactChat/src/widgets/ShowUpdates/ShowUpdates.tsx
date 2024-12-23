@@ -1,4 +1,4 @@
-import { PopupWindow } from 'ReactChat/src/shared';
+import { PopupWindow } from '@/shared';
 
 import styles from './showUpdates.module.scss';
 

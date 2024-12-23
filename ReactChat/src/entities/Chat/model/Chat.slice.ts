@@ -1,4 +1,4 @@
-import { IChat } from 'ReactChat/src/shared';
+import { IChat } from '@/shared';
 import {
   ActionReducerMapBuilder,
   createSlice,

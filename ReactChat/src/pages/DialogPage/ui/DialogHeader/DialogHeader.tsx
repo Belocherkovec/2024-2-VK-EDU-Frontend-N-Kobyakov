@@ -1,5 +1,5 @@
-import { Header, HeaderThemes, UserInfo } from 'ReactChat/src/features';
-import { BackButton, RoutePaths } from 'ReactChat/src/shared';
+import { Header, HeaderThemes, UserInfo } from '@/features';
+import { BackButton, RoutePaths } from '@/shared';
 
 export const DialogHeader: React.FC<{
   avatar: null | string;

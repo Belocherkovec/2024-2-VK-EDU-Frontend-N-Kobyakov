@@ -1,4 +1,4 @@
-import { getMessages, IMessage } from 'ReactChat/src/shared';
+import { getMessages, IMessage } from '@/shared';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchMessages = createAsyncThunk<IMessage[], string>(

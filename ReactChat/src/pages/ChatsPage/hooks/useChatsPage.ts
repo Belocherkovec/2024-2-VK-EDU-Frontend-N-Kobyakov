@@ -1,10 +1,6 @@
-import { AppDispatch } from 'ReactChat/src/app';
-import {
-  fetchChats,
-  selectChatIds,
-  selectChatMap
-} from 'ReactChat/src/entities/Chat';
-import { selectUserInfo } from 'ReactChat/src/entities/User';
+import { AppDispatch } from '@/app';
+import { fetchChats, selectChatIds, selectChatMap } from '@/entities/Chat';
+import { selectUserInfo } from '@/entities/User';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 

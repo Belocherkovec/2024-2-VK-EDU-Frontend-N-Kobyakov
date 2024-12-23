@@ -1,4 +1,4 @@
-import { Avatar } from 'ReactChat/src/shared';
+import { Avatar } from '@/shared';
 import React from 'react';
 
 import styles from './user.module.scss';

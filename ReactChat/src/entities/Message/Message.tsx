@@ -1,11 +1,6 @@
 import { forwardRef } from 'react';
 import cn from 'classnames';
-import {
-  Gallery,
-  LazyImage,
-  StatusMark,
-  TMessageStatuses
-} from 'ReactChat/src/shared';
+import { Gallery, LazyImage, StatusMark, TMessageStatuses } from '@/shared';
 
 import styles from './message.module.scss';
 import { useMessage } from './hooks';

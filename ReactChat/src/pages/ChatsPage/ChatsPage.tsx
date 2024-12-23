@@ -1,6 +1,6 @@
-import { Chat } from 'ReactChat/src/entities/Chat';
-import { NewChatButton } from 'ReactChat/src/shared';
-import { ShowUpdates } from 'ReactChat/src/widgets';
+import { Chat } from '@/entities/Chat';
+import { NewChatButton } from '@/shared';
+import { ShowUpdates } from '@/widgets';
 
 import { ChatsHeader } from './ui';
 import { useChatsPage } from './hooks/useChatsPage';

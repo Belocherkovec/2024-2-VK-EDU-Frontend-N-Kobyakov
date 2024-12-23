@@ -1,4 +1,4 @@
-import { RoutePaths, TEXTS } from 'ReactChat/src/shared';
+import { RoutePaths, TEXTS } from '@/shared';
 import SearchOffRoundedIcon from '@mui/icons-material/SearchOffRounded';
 import { Link } from 'react-router-dom';
 
