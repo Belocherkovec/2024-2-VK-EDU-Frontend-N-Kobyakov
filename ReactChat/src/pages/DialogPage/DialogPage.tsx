@@ -1,0 +1,56 @@
+import { Message } from 'ReactChat/src/entities/Message';
+import { MessageStatuses, TEXTS, timeFormatter } from 'ReactChat/src/shared';
+import { MessageInput } from 'ReactChat/src/widgets';
+
+import styles from './dialogPage.module.scss';
+import { DialogHeader } from './ui';
+import { useDialogPage } from './hooks';
+
+export const DialogPage = () => {
+  const {
+    avatar,
+    chatId,
+    handleAreaSend,
+    handleSetRef,
+    isUserMessage,
+    messagesIdx,
+    messagesMap,
+    lastOnline,
+    title,
+    isOnline
+  } = useDialogPage();
+
+  return (
+    <section className={styles.dialog}>
+      <DialogHeader
+        avatar={avatar}
+        title={title}
+        lastOnline={lastOnline}
+        isOnline={isOnline}
+        className={styles.dialog__header}
+      />
+      <ul className={styles.dialog__messages}>
+        {messagesIdx.map((msgId, idx) => (
+          <Message
+            dataIndex={msgId}
+            files={messagesMap[msgId].files}
+            isUserMessage={isUserMessage(msgId)}
+            key={msgId + idx}
+            message={messagesMap[msgId].text || TEXTS.empty}
+            ref={(element) => handleSetRef(element)}
+            voice={messagesMap[msgId].voice}
+            status={
+              messagesMap[msgId].was_read_by?.length
+                ? MessageStatuses.STATUS_READ
+                : MessageStatuses.STATUS_SEND
+            }
+            timeStamp={timeFormatter.format(
+              new Date(messagesMap[msgId].created_at)
+            )}
+          />
+        ))}
+      </ul>
+      <MessageInput chatId={chatId} onSend={handleAreaSend} />
+    </section>
+  );
+};
