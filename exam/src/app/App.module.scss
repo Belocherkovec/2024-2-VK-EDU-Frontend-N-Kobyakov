@@ -1,0 +1,20 @@
+@use "./styles/global";
+@use "./styles/variables" as *;
+@use "./styles/mixins" as *;
+
+.app {
+  &__header {
+    background-color: $color-white-full;
+    padding: 20px 0;
+    border-bottom: 1px solid $color-main-light;
+  }
+
+  &__title {
+    font-weight: normal;
+    font-size: 1.3em;
+  }
+
+  &__content {
+    @include content();
+  }
+}

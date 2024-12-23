@@ -1,0 +1,19 @@
+@use "../../../../app/styles/variables" as *;
+@use "../../../../app/styles/mixins" as *;
+
+.translate {
+  flex: 1;
+
+  &__languageButton {
+    padding: 8px 16px;
+
+    &._active {
+      border-bottom: 2px solid $color-accent;
+    }
+  }
+
+  &__select {
+    width: 40px;
+    border: none;
+  }
+}

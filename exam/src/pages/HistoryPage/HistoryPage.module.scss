@@ -1,0 +1,74 @@
+.historyPage {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.historyList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.historyItem {
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.historyItemHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.historyItemFrom,
+.historyItemTo {
+  font-weight: bold;
+  color: #007bff;
+}
+
+.historyItemText {
+  font-size: 14px;
+  color: #555;
+}
+
+.historyItemFromText,
+.historyItemToText {
+  margin: 4px 0;
+}
+
+.noHistory {
+  font-size: 16px;
+  color: #888;
+  text-align: center;
+}
+
+.clearButton {
+  background-color: #ff4d4d;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #ff1a1a;
+  }
+}
