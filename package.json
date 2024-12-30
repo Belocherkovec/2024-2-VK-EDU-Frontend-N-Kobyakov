@@ -13,8 +13,8 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite build --base / && vite preview",
-    "lint": "ESLINT_USE_FLAT_CONFIG=true npx eslint . --quiet",
-    "lint:fix": "ESLINT_USE_FLAT_CONFIG=true npx eslint . --fix",
+    "lint": "ESLINT_USE_FLAT_CONFIG=true npx eslint  --quiet",
+    "lint:fix": "ESLINT_USE_FLAT_CONFIG=true npx eslint  --fix",
     "prettier": "prettier '**/*.{ts,tsx}' --check --ignore-unknown",
     "prettier:fix": "prettier '**/*.{ts,tsx}' --write",
     "prepare": "husky install"

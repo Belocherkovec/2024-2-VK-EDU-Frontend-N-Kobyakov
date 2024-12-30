@@ -1,4 +1,4 @@
-![Simple Messenger](./public/simpleMessegner.jpg)
+![Simple Messenger](ReactChat/public/simpleMessegner.jpg)
 # Simple Messenger
 
 Веб приложения для онлайн общения, обмена фотографиями и голосовыми сообщениями.

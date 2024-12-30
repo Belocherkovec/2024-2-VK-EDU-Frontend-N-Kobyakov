@@ -1,0 +1,69 @@
+@use "../../app/styles/variables" as *;
+@use "../../app/styles/mixins" as *;
+
+.translate {
+  padding: 20px;
+  @include content();
+
+  textarea {
+    resize: none;
+    height: 100%;
+    padding: 8px 16px;
+    background-color: $color-white-full;
+    &:first-child {
+      border-right: 1px solid $color-main-light;
+    }
+
+    &:disabled {
+      background-color: $color-white-full;
+    }
+  }
+
+  &__buttonsWrapper {
+    display: flex;
+    column-gap: 16px;
+    align-items: center;
+  }
+
+  &__historyButton {
+    @include button();
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+
+  &__button {
+    @include button();
+    display: flex;
+    align-items: center;
+    column-gap: 8px;
+    padding: 6px 16px 6px 10px;
+    border-radius: 8px;
+  }
+
+  &__header {
+    width: 100%;
+    display: flex;
+    background-color: $color-white-full;
+    border: 1px solid $color-main-light;
+    margin-top: 10px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    padding-top: 2px;
+    border-bottom: none;
+
+    & > div:first-child {
+      border-right: 1px solid $color-main-light;
+    }
+  }
+
+  &__main {
+    display: flex;
+    border: 1px solid $color-main-light;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+}
