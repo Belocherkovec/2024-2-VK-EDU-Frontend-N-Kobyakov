@@ -1,5 +1,5 @@
-import { useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '@/app';
 import {
   GEOLOCATION_ERRORS,
@@ -12,12 +12,19 @@ import { NOTIFICATION_TYPES, pushNotification } from '@/entities/Notification';
 import { ILimitVisibleState } from '@/features';
 
 import { IMessageInputProps } from '../MessageInput';
+import {
+  selectEditMessage,
+  selectMessagesMap,
+  setEditMessage
+} from '@/entities/Message';
 
 export const useMessageInput = (props: IMessageInputProps) => {
-  const { onSend } = props;
+  const { onSend, onEdit } = props;
   const FILES_LIMIT = 5;
 
   const dispatch = useDispatch<AppDispatch>();
+  const messagesMap = useSelector(selectMessagesMap);
+  const editMessageId = useSelector(selectEditMessage);
   const [value, setValue] = useState(TEXTS.empty);
 
   const tempFiles = useRef<File[]>([]);
@@ -38,6 +45,12 @@ export const useMessageInput = (props: IMessageInputProps) => {
     cancelButton: false,
     confirmButton: false
   });
+
+  useEffect(() => {
+    if (editMessageId && messagesMap[editMessageId].text) {
+      setValue(messagesMap[editMessageId].text);
+    }
+  }, [editMessageId]);
 
   const handleShowActions = () => {
     setIsShowAction((prev) => !prev);
@@ -84,6 +97,11 @@ export const useMessageInput = (props: IMessageInputProps) => {
   const handleLimitClose = () => {
     tempFiles.current = [];
     handlePopupClose();
+  };
+
+  const handleEditClose = () => {
+    dispatch(setEditMessage(null));
+    setValue(TEXTS.empty);
   };
 
   const handleActionGeo = () => {
@@ -184,12 +202,14 @@ export const useMessageInput = (props: IMessageInputProps) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
 
-    if (value) {
+    if (editMessageId && onEdit) {
+      onEdit(editMessageId, value);
+      handleEditClose();
+    } else if (value) {
       onSend(value, files.length ? files : undefined);
       setValue(TEXTS.empty);
       setFiles([]);
-    }
-    if (voice) {
+    } else if (voice) {
       onSend(undefined, undefined, voice);
       setVoice(undefined);
     }
@@ -199,6 +219,7 @@ export const useMessageInput = (props: IMessageInputProps) => {
     voice,
     files,
     value,
+    editMessageId,
     FILES_LIMIT,
     fileInputRef,
     imageClickId,
@@ -221,6 +242,7 @@ export const useMessageInput = (props: IMessageInputProps) => {
     handleAudioRemove,
     handleShowActions,
     handleActionGeo,
-    handleVoiceClick
+    handleVoiceClick,
+    handleEditClose
   };
 };

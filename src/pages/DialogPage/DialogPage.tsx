@@ -19,6 +19,9 @@ export const DialogPage = () => {
     handleSetRef,
     isUserMessage,
     handleAreaSend,
+    handleAreaEditSend,
+    handleMessageEdit,
+    handleMessageRemove,
     isMessagesLoading,
     isDateDiff,
     getMessageTimeStamp
@@ -50,6 +53,8 @@ export const DialogPage = () => {
               dataIndex={msgId}
               files={messagesMap[msgId].files}
               isUserMessage={isUserMessage(msgId)}
+              onDelete={handleMessageRemove}
+              onEdit={handleMessageEdit}
               key={msgId + idx}
               message={messagesMap[msgId].text || TEXTS.empty}
               ref={(element) => handleSetRef(element)}
@@ -69,7 +74,11 @@ export const DialogPage = () => {
           </>
         ))}
       </ul>
-      <MessageInput chatId={chatId} onSend={handleAreaSend} />
+      <MessageInput
+        chatId={chatId}
+        onSend={handleAreaSend}
+        onEdit={handleAreaEditSend}
+      />
     </section>
   );
 };

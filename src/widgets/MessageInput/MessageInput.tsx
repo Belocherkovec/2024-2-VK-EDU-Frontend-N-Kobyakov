@@ -2,6 +2,7 @@ import cn from 'classnames';
 import { ActionsMenu, Gallery, TEXTS, useFileInput } from '@/shared';
 import {
   AttachFileRounded,
+  CloseRounded,
   ImageRounded,
   KeyboardVoiceRounded,
   LocationOnRounded,
@@ -18,6 +19,7 @@ export interface IMessageInputProps {
   chatId: string;
   className?: string;
   onSend: (value?: string, files?: File[], voice?: Blob) => void;
+  onEdit: (msgId: string, value: string) => void;
 }
 
 export const MessageInput: React.FC<IMessageInputProps> = (props) => {
@@ -26,6 +28,7 @@ export const MessageInput: React.FC<IMessageInputProps> = (props) => {
     voice,
     files,
     value,
+    editMessageId,
     recorderRef,
     FILES_LIMIT,
     imageClickId,
@@ -45,7 +48,8 @@ export const MessageInput: React.FC<IMessageInputProps> = (props) => {
     handlePopupConfirm,
     handleAudioRemove,
     handleGalleryClose,
-    handleVoiceClick
+    handleVoiceClick,
+    handleEditClose
   } = useMessageInput(props);
 
   const { inputRef, handleChooseFile, handleFileChange } = useFileInput({
@@ -152,23 +156,40 @@ export const MessageInput: React.FC<IMessageInputProps> = (props) => {
           {recorderRef.current && <StopCircleRounded />}
           {!recorderRef.current && <KeyboardVoiceRounded />}
         </button>
-        <textarea
-          className={styles.form__input}
-          name="message-text"
-          onChange={handleValueChange}
-          placeholder={TEXTS.placeholders.message}
-          rows={1}
-          value={voice ? TEXTS.empty : value}
-          disabled={!!voice}
-        />
+        <div className={styles.form__editWrapper}>
+          {editMessageId && (
+            <span className={styles.form__edit}>{TEXTS.placeholders.edit}</span>
+          )}
+          <textarea
+            className={cn(styles.form__input, editMessageId && styles._edit)}
+            name="message-text"
+            onChange={handleValueChange}
+            placeholder={TEXTS.placeholders.message}
+            rows={1}
+            value={voice ? TEXTS.empty : value}
+            disabled={!!voice}
+          />
+        </div>
+        <button
+          type="button"
+          aria-label={TEXTS.ariaLabels.cancel}
+          className={cn(
+            styles.form__button,
+            styles._edit,
+            editMessageId && styles._active
+          )}
+          onClick={handleEditClose}
+        >
+          <CloseRounded className={styles.form__icon} />
+        </button>
         <button
           aria-label={TEXTS.ariaLabels.sendMessage}
           className={cn(
             styles.form__button,
-            (value || !!voice) && styles.form__button_active
+            (value || !!voice) && styles._active
           )}
         >
-          <SendRounded className={styles.form__icon} />
+          <SendRounded className={styles.form__sendIcon} />
         </button>
       </form>
     </>

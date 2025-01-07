@@ -1,17 +1,27 @@
 import { forwardRef } from 'react';
 import cn from 'classnames';
-import { Gallery, LazyImage, StatusMark, TMessageStatuses } from '@/shared';
+import {
+  ActionsMenu,
+  Gallery,
+  LazyImage,
+  StatusMark,
+  TEXTS,
+  TMessageStatuses
+} from '@/shared';
 
 import styles from './message.module.scss';
 import { useMessage } from './hooks';
+import { DeleteRounded, EditRounded } from '@mui/icons-material';
 
 export interface IMessageProps {
   message: string;
+  dataIndex: string;
+  onDelete: (id: string) => void;
+  onEdit: (id: string) => void;
   status: TMessageStatuses;
   timeStamp: string;
   voice: string | null;
   isUserMessage?: boolean;
-  dataIndex?: string;
   files?: { item: string }[];
   author?: string;
 }
@@ -29,18 +39,39 @@ export const Message = forwardRef<HTMLLIElement, IMessageProps>(
       author
     } = props;
     const {
+      isShowMenu,
       imageClickId,
       isGalleryVisible,
-      handleGalleryVisible,
-      handleImageClick
-    } = useMessage();
+      closeMenu,
+      handleEdit,
+      handleDelete,
+      toggleMenuShow,
+      handleImageClick,
+      handleGalleryVisible
+    } = useMessage(props);
 
     return (
       <li
         className={cn(styles.message, isUserMessage && styles.message_user)}
         data-index={dataIndex}
         ref={ref}
+        onPointerDown={toggleMenuShow}
+        onContextMenu={toggleMenuShow}
       >
+        <ActionsMenu
+          isShow={isShowMenu}
+          changeShow={closeMenu}
+          className={styles.message__actions}
+        >
+          <button onClick={handleDelete}>
+            <DeleteRounded />
+            {TEXTS.message.delete}
+          </button>
+          <button onClick={handleEdit}>
+            <EditRounded />
+            {TEXTS.message.edit}
+          </button>
+        </ActionsMenu>
         {isGalleryVisible && (
           <Gallery
             isVisible={isGalleryVisible}

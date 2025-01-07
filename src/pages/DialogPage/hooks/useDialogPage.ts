@@ -5,11 +5,14 @@ import {
   resetMessages,
   selectMessagesIdx,
   selectMessagesIsLoading,
-  selectMessagesMap
+  selectMessagesMap,
+  setEditMessage
 } from '@/entities/Message';
 import { fetchUsers, selectUserInfo, selectUsersMap } from '@/entities/User';
 import {
   createMessage,
+  deleteMessage,
+  editMessage,
   getFormattedDate,
   postReadMessage,
   TEXTS,
@@ -159,6 +162,19 @@ export const useDialogPage = () => {
     });
   };
 
+  const handleAreaEditSend = (msgId: string, value: string) => {
+    editMessage(msgId, value);
+  };
+
+  const handleMessageRemove = (id: string) => {
+    deleteMessage(id);
+  };
+  const handleMessageEdit = (id: string) => {
+    if (messagesMap[id] && messagesMap[id].text) {
+      dispatch(setEditMessage(id));
+    }
+  };
+
   const getMessageTimeStamp = (msgId: string) => {
     if (
       !msgId ||
@@ -205,6 +221,9 @@ export const useDialogPage = () => {
     handleSetRef,
     isUserMessage,
     handleAreaSend,
+    handleAreaEditSend,
+    handleMessageEdit,
+    handleMessageRemove,
     isMessagesLoading,
     isDateDiff,
     getMessageTimeStamp

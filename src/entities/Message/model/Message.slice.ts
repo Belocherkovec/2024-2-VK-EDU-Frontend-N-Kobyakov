@@ -11,18 +11,21 @@ interface IMessagesState {
   isLoading: boolean;
   messagesIdx: string[];
   messagesMap: Record<string, IMessage>;
+  editMessageId: string | null;
 }
 
 const initialState: IMessagesState = {
   isLoading: false,
   messagesIdx: [],
-  messagesMap: {}
+  messagesMap: {},
+  editMessageId: null
 };
 
 const selectors = {
   selectMessagesIdx: (state: IMessagesState) => state.messagesIdx,
   selectMessagesMap: (state: IMessagesState) => state.messagesMap,
-  selectMessagesIsLoading: (state: IMessagesState) => state.isLoading
+  selectMessagesIsLoading: (state: IMessagesState) => state.isLoading,
+  selectEditMessage: (state: IMessagesState) => state.editMessageId
 };
 
 const reducers = {
@@ -45,6 +48,12 @@ const reducers = {
     action: PayloadAction<boolean>
   ) => {
     state.isLoading = action.payload;
+  },
+  setEditMessage: (
+    state: IMessagesState,
+    action: PayloadAction<string | null>
+  ) => {
+    state.editMessageId = action.payload;
   }
 };
 
@@ -85,8 +94,13 @@ export const {
   deleteMessage,
   resetMessages,
   updateMessage,
-  setMessagesIsLoading
+  setMessagesIsLoading,
+  setEditMessage
 } = messageSlice.actions;
 
-export const { selectMessagesIdx, selectMessagesMap, selectMessagesIsLoading } =
-  messageSlice.selectors;
+export const {
+  selectMessagesIdx,
+  selectMessagesMap,
+  selectMessagesIsLoading,
+  selectEditMessage
+} = messageSlice.selectors;

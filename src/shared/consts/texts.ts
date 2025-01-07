@@ -62,6 +62,10 @@ export const TEXTS = {
   },
   lastActivity: { recently: 'был недавно' },
   noFile: 'Файл не выбран',
+  message: {
+    delete: 'Удалить',
+    edit: 'Редактировать'
+  },
   pages: {
     chatsPage: {
       settings: 'Настройки'
@@ -155,7 +159,8 @@ export const TEXTS = {
   },
   placeholders: {
     message: 'Сообщение...',
-    search: 'Поиск...'
+    search: 'Поиск...',
+    edit: 'Редактирование'
   },
   userForm: {
     bio: 'Описание профиля',
