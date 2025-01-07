@@ -1,4 +1,4 @@
-import styles from './Loader.module.scss';
+import styles from './loader.module.scss';
 
 export const Loader: React.FC = () => (
   <div className={styles.overflow}>

@@ -13,7 +13,7 @@ import {
 } from '@/shared';
 
 import { useEditProfilePage } from './hooks';
-import styles from './EditProfilePage.module.scss';
+import styles from './editProfilePage.module.scss';
 import cn from 'classnames';
 
 export const EditProfilePage = () => {
