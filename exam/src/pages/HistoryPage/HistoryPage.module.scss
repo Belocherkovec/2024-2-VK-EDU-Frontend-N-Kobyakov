@@ -1,0 +1,71 @@
+@use "../../app/styles/variables" as *;
+@use "../../app/styles/mixins" as *;
+
+.history {
+  padding: 20px;
+  @include content();
+
+  &__header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    column-gap: 8px;
+  }
+
+  &__back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__historyWrapper {
+    padding: 16px;
+    border-top: 1px solid $color-main-light;
+    display: flex;
+    justify-content: end;
+  }
+
+  &__title {
+    font-weight: normal;
+  }
+
+  &__button {
+    color: $color-accent;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__emptyData {
+    text-align: center;
+    margin-top: 16px;
+  }
+
+  &__item {
+    border-top: 1px solid $color-main-light;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+  }
+
+  &__fromToLang {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    column-gap: 8px;
+  }
+
+  &__fromToText {
+    display: flex;
+    flex-direction: column;
+    row-gap: 2px;
+  }
+
+  &__toText {
+    opacity: 0.8;
+    font-size: 0.9em;
+  }
+}
