@@ -1,33 +1,97 @@
-@use "../../app/styles/variables" as *;
+@use "@/shared/styles/variables" as *;
+@use "@/shared/styles/mixins" as *;
 
 .form {
-  margin: 16px;
+  @include form();
+
+  &__buttonsWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    column-gap: 16px;
+    row-gap: 48px;
+  }
+
+  &__buttonsGroup {
+    column-gap: 16px;
+    display: flex;
+  }
+
+  &__transparentButton {
+    @include transparentButton();
+  }
+
+  &__removeButton {
+    @include transparentButton();
+    border: 2px solid $color-error;
+    color: $color-error;
+
+    &:hover {
+      border-color: $color-error;
+    }
+  }
+}
+
+.profile {
+  padding: 1em;
+  margin: 0 auto;
+  max-width: 800px;
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
-  row-gap: 24px;
+  row-gap: 1em;
+
+  &__avatarWrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 4px;
+    align-items: center;
+  }
+
+  &__removeButton {
+    @include transparentButton();
+    border-width: 1px;
+    padding: 2px 8px;
+    font-size: 0.9em;
+  }
+}
+
+.userAvatar {
+  position: relative;
+  width: 200px;
+  height: 200px;
+
+  & &__icon {
+    width: 32px;
+    height: 32px;
+  }
 
   &__avatar {
-    width: 140px;
-    height: 140px;
-    overflow: hidden;
-    display: block;
-    margin: 16px auto;
+    font-size: 2em;
+  }
 
-    &._bg {
-      background-color: $color-white-blue;
-      border-radius: 50%;
+  &__hoverWrapper {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    left: 0;
+    top: 0;
+    display: grid;
+    place-items: center;
+    color: $color-white-full;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.2s ease-in;
+
+    &:hover {
+      opacity: 1;
     }
   }
 
-  &__label {
-    color: $color-gray-dark;
-    display: block;
-    margin-bottom: 6px;
-  }
-
   &__input {
-    background-color: $color-white-blue;
-    padding: 12px;
-    border-radius: 4px;
+    display: none;
   }
 }

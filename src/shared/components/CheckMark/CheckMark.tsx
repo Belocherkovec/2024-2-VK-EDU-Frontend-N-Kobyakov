@@ -4,17 +4,17 @@ import { TEXTS, TMessageStatuses } from '../../consts';
 export const CheckMark: React.FC<{
   isShowUnread?: boolean;
   messageStatus: TMessageStatuses;
-  undeadMessagesCount?: number;
+  unreadMessagesCount?: number;
   unreadClassName?: string;
 }> = ({
   isShowUnread,
   messageStatus,
-  undeadMessagesCount,
+  unreadMessagesCount,
   unreadClassName
 }) => (
   <>
-    {isShowUnread && undeadMessagesCount ? (
-      <span className={unreadClassName}>{undeadMessagesCount}</span>
+    {isShowUnread && unreadMessagesCount ? (
+      <span className={unreadClassName}>{unreadMessagesCount}</span>
     ) : (
       TEXTS.empty
     )}

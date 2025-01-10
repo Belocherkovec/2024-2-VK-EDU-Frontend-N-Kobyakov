@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import { selectCurrentChat } from '../model';
 import { selectUserInfo } from '@/entities/User';
-import { getFormattedDate, MessageStatuses } from '@/shared';
+import { getFormattedDate, IMessage, MessageStatuses, TEXTS } from '@/shared';
 
 export const useChat = (userId: string) => {
   const currentUserInfo = useSelector(selectUserInfo);
@@ -16,16 +16,22 @@ export const useChat = (userId: string) => {
     title,
     is_private: isPrivate,
     last_message,
-    members
+    members,
+    unread_messages_count: unreadMessagesCount
   } = chatData;
 
-  const lastMessage = last_message || {
-    text: '',
-    created_at: null,
+  const lastMessage: IMessage = last_message || {
+    created_at: chatData.created_at,
+    files: [],
+    sender: {},
+    text: TEXTS.empty,
+    updated_at: null,
+    voice: null,
     was_read_by: []
   };
 
   const lastMessageText = lastMessage.text;
+  const lastMessageSender = `${lastMessage.sender.first_name} ${lastMessage.sender.last_name}: `;
   const lastMessageTimestamp = lastMessage.created_at
     ? getFormattedDate(new Date(lastMessage.created_at))
     : undefined;
@@ -44,9 +50,11 @@ export const useChat = (userId: string) => {
     title,
     isOnline,
     isPrivate,
-    lastMessageText,
     isUserMessage,
+    lastMessageText,
+    lastMessageSender,
+    lastMessageStatus,
     lastMessageTimestamp,
-    lastMessageStatus
+    unreadMessagesCount
   };
 };

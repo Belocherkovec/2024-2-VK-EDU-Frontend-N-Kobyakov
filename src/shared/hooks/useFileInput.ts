@@ -5,14 +5,26 @@ export interface IUseFileInputProps {
   accept?: string[];
   file?: File | null;
   onChange: (file: File | null) => void;
+  onError?: () => void;
   onMultipleFileChange?: (file: File[]) => void;
   isValid?: (state: boolean) => void;
   isMultiple?: boolean;
+  isResetOnEmpty?: boolean;
+  isResetOnError?: boolean;
 }
 
 export const useFileInput = (props: IUseFileInputProps) => {
-  const { accept, file, onChange, isValid, isMultiple, onMultipleFileChange } =
-    props;
+  const {
+    file,
+    accept,
+    isValid,
+    isMultiple,
+    isResetOnEmpty,
+    isResetOnError,
+    onError,
+    onChange,
+    onMultipleFileChange
+  } = props;
   const isOnlyImages = accept?.every((acceptRule) =>
     acceptRule.startsWith('image/')
   );
@@ -39,6 +51,8 @@ export const useFileInput = (props: IUseFileInputProps) => {
           }
         });
       }
+    } else if (isResetOnEmpty) {
+      handleResetFile();
     }
   };
 
@@ -65,12 +79,7 @@ export const useFileInput = (props: IUseFileInputProps) => {
 
   const handleSingleFileChange = (innerFile: File) => {
     if (accept && !accept.includes(innerFile.type)) {
-      props.onChange(null);
-      setError(true);
-
-      if (props.isValid) {
-        props.isValid(false);
-      }
+      handleError();
     } else if (props.isValid) {
       props.isValid(true);
       setError(false);
@@ -78,14 +87,8 @@ export const useFileInput = (props: IUseFileInputProps) => {
 
     if (isOnlyImages) {
       validateImageFile(innerFile)
-        .then(() => props.onChange(innerFile))
-        .catch(() => {
-          props.onChange(null);
-          setError(true);
-          if (props.isValid) {
-            props.isValid(false);
-          }
-        });
+        .then(() => onChange(innerFile))
+        .catch(() => handleError());
     }
   };
 
@@ -94,6 +97,27 @@ export const useFileInput = (props: IUseFileInputProps) => {
     setError(false);
     if (isValid) {
       isValid(true);
+    }
+    if (inputRef.current) {
+      inputRef.current.value = '';
+    }
+  };
+
+  const handleError = () => {
+    onChange(null);
+
+    if (isResetOnError) {
+      handleResetFile();
+    } else {
+      setError(true);
+    }
+
+    if (onError) {
+      onError();
+    }
+
+    if (props.isValid) {
+      props.isValid(false);
     }
   };
 

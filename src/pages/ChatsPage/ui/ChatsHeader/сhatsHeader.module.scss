@@ -1,4 +1,4 @@
-@use "../../../../app/styles/variables" as *;
+@use "@/shared/styles/variables" as *;
 
 .header {
   &__title {
@@ -7,12 +7,22 @@
   }
 
   &__button {
-    transition: color 0.3s ease-in;
+    padding: 6px;
+    transition: color, background-color 0.3s ease-in;
+    border-radius: 50%;
     display: flex;
     justify-content: end;
 
     &:hover {
       color: $color-white-hover;
+    }
+
+    &._isOpen {
+      background-color: $color-white-full;
+      color: $color-accent;
+      &:hover {
+        color: $color-accent-hover;
+      }
     }
   }
 }

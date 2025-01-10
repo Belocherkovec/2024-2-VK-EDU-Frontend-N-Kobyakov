@@ -31,7 +31,9 @@ export const PopupWindow: React.FC<IPopupWindowProps> = (props) => {
   } = props;
   const { handleClose, stopPropagation } = usePopupWindow(props);
 
-  return isVisible ? (
+  if (!isVisible) return null;
+
+  return (
     <aside className={styles.overlay} onClick={handleClose}>
       <div
         className={cn(
@@ -65,7 +67,5 @@ export const PopupWindow: React.FC<IPopupWindowProps> = (props) => {
         </main>
       </div>
     </aside>
-  ) : (
-    <></>
   );
 };

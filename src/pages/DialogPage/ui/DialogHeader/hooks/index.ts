@@ -1,0 +1,1 @@
+export { useDialogHeader } from './useDialogHeader';

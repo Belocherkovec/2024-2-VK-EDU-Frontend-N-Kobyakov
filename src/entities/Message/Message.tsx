@@ -1,18 +1,29 @@
 import { forwardRef } from 'react';
 import cn from 'classnames';
-import { Gallery, LazyImage, StatusMark, TMessageStatuses } from '@/shared';
+import {
+  ActionsMenu,
+  Gallery,
+  LazyImage,
+  StatusMark,
+  TEXTS,
+  TMessageStatuses
+} from '@/shared';
 
 import styles from './message.module.scss';
 import { useMessage } from './hooks';
+import { DeleteRounded, EditRounded } from '@mui/icons-material';
 
 export interface IMessageProps {
-  dataIndex?: string;
-  isUserMessage?: boolean;
   message: string;
+  dataIndex: string;
+  onDelete: (id: string) => void;
+  onEdit: (id: string) => void;
   status: TMessageStatuses;
   timeStamp: string;
-  files?: { item: string }[];
   voice: string | null;
+  isUserMessage?: boolean;
+  files?: { item: string }[];
+  author?: string;
 }
 
 export const Message = forwardRef<HTMLLIElement, IMessageProps>(
@@ -24,21 +35,43 @@ export const Message = forwardRef<HTMLLIElement, IMessageProps>(
       status,
       timeStamp,
       files,
-      voice
+      voice,
+      author
     } = props;
     const {
+      isShowMenu,
       imageClickId,
       isGalleryVisible,
-      handleGalleryVisible,
-      handleImageClick
-    } = useMessage();
+      closeMenu,
+      handleEdit,
+      handleDelete,
+      toggleMenuShow,
+      handleImageClick,
+      handleGalleryVisible
+    } = useMessage(props);
 
     return (
       <li
         className={cn(styles.message, isUserMessage && styles.message_user)}
         data-index={dataIndex}
         ref={ref}
+        onPointerDown={toggleMenuShow}
+        onContextMenu={toggleMenuShow}
       >
+        <ActionsMenu
+          isShow={isShowMenu}
+          changeShow={closeMenu}
+          className={styles.message__actions}
+        >
+          <button onClick={handleDelete}>
+            <DeleteRounded />
+            {TEXTS.message.delete}
+          </button>
+          <button onClick={handleEdit}>
+            <EditRounded />
+            {TEXTS.message.edit}
+          </button>
+        </ActionsMenu>
         {isGalleryVisible && (
           <Gallery
             isVisible={isGalleryVisible}
@@ -62,6 +95,9 @@ export const Message = forwardRef<HTMLLIElement, IMessageProps>(
         </div>
         {voice && <audio src={voice} controls />}
         <div className={styles.message__info}>
+          {isUserMessage && author && (
+            <span className={styles.message__timestamp}>{author}</span>
+          )}
           <span className={styles.message__timestamp}>{timeStamp}</span>
           {!isUserMessage && (
             <StatusMark className={styles.message__icon} status={status} />

@@ -4,14 +4,19 @@ import {
   fetchMessages,
   resetMessages,
   selectMessagesIdx,
-  selectMessagesMap
+  selectMessagesIsLoading,
+  selectMessagesMap,
+  setEditMessage
 } from '@/entities/Message';
 import { fetchUsers, selectUserInfo, selectUsersMap } from '@/entities/User';
 import {
   createMessage,
+  deleteMessage,
+  editMessage,
   getFormattedDate,
   postReadMessage,
   TEXTS,
+  timeFormatter,
   useIntersectionObserver
 } from '@/shared';
 import { useEffect, useRef } from 'react';
@@ -19,15 +24,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 export const useDialogPage = () => {
-  const dispatch = useDispatch<AppDispatch>();
   const containersRef = useRef<HTMLLIElement[]>([]);
+  useIntersectionObserver(containersRef.current, callbackFunction);
+
+  const dispatch = useDispatch<AppDispatch>();
   const params = useParams<{ chatId: string }>();
   const { chatId = TEXTS.empty } = params;
   const chats = useSelector(selectChatMap);
   const users = useSelector(selectUsersMap);
+  const isMessagesLoading = useSelector(selectMessagesIsLoading);
   const messagesIdx = useSelector(selectMessagesIdx);
   const messagesMap = useSelector(selectMessagesMap);
   const currentUserInfo = useSelector(selectUserInfo);
+  const lastMessageDate = useRef<Date | null>(null);
 
   const {
     avatar,
@@ -39,12 +48,12 @@ export const useDialogPage = () => {
     title: TEXTS.empty,
     members: []
   };
+
   const lastOnline = isPrivate
     ? getFormattedDate(
         new Date(
-          members.filter(
-            (member) => member.id !== currentUserInfo.id
-          )[0].last_online_at
+          members.filter((member) => member.id !== currentUserInfo.id)[0]
+            ?.last_online_at || new Date(0)
         )
       )
     : undefined;
@@ -73,6 +82,10 @@ export const useDialogPage = () => {
     };
   }, []);
 
+  useEffect(() => {
+    containersRef.current.at(-1)?.scrollIntoView();
+  }, [isMessagesLoading]);
+
   const isUserMessage = (msgId: string) => {
     let result = false;
 
@@ -100,7 +113,7 @@ export const useDialogPage = () => {
     containersRef.current.push(element);
   };
 
-  const callbackFunction: IntersectionObserverCallback = (entries) => {
+  function callbackFunction(entries: IntersectionObserverEntry[]) {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         const msgId = (entry.target as HTMLElement).dataset.index;
@@ -108,15 +121,15 @@ export const useDialogPage = () => {
         if (
           msgId &&
           isUserMessage(msgId) &&
-          !messagesMap[msgId].was_read_by.length
+          !messagesMap[msgId].was_read_by.find(
+            (user) => user.id === currentUserInfo.id
+          )
         ) {
           postReadMessage(msgId);
         }
       }
     });
-  };
-
-  useIntersectionObserver(containersRef.current, callbackFunction);
+  }
 
   const handleAreaSend = (value?: string, files?: File[], voice?: Blob) => {
     const data = {
@@ -149,16 +162,70 @@ export const useDialogPage = () => {
     });
   };
 
+  const handleAreaEditSend = (msgId: string, value: string) => {
+    editMessage(msgId, value);
+  };
+
+  const handleMessageRemove = (id: string) => {
+    deleteMessage(id);
+  };
+  const handleMessageEdit = (id: string) => {
+    if (messagesMap[id] && messagesMap[id].text) {
+      dispatch(setEditMessage(id));
+    }
+  };
+
+  const getMessageTimeStamp = (msgId: string) => {
+    if (
+      !msgId ||
+      !messagesMap ||
+      !messagesMap[msgId] ||
+      !messagesMap[msgId].created_at
+    ) {
+      return TEXTS.empty;
+    }
+
+    lastMessageDate.current = new Date(messagesMap[msgId].created_at);
+    return timeFormatter.format(new Date(messagesMap[msgId].created_at));
+  };
+
+  const isDateDiff = (msgId: string): boolean => {
+    if (
+      !msgId ||
+      !messagesMap ||
+      !messagesMap[msgId].created_at ||
+      !lastMessageDate.current
+    ) {
+      return false;
+    }
+
+    const date1 = lastMessageDate.current;
+    const date2 = new Date(messagesMap[msgId].created_at);
+
+    return (
+      date1.getDate() !== date2.getDate() ||
+      date1.getMonth() !== date2.getMonth() ||
+      date1.getFullYear() !== date2.getFullYear()
+    );
+  };
+
   return {
-    avatar,
-    lastOnline,
-    isOnline,
+    title,
     chatId,
-    handleAreaSend,
-    handleSetRef,
-    isUserMessage,
+    avatar,
+    isOnline,
+    isPrivate,
+    lastOnline,
     messagesIdx,
     messagesMap,
-    title
+    handleSetRef,
+    isUserMessage,
+    handleAreaSend,
+    handleAreaEditSend,
+    handleMessageEdit,
+    handleMessageRemove,
+    isMessagesLoading,
+    isDateDiff,
+    getMessageTimeStamp
   };
 };

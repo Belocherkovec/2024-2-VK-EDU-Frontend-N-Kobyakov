@@ -1,7 +1,7 @@
 import { AppDispatch } from '@/app';
 import { setUserAuthorized, setUserInfo } from '@/entities/User';
 import { getCurrentUser, loginRequest, TEXTS } from '@/shared';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
 export const useAuthForm = () => {
@@ -63,11 +63,12 @@ export const useAuthForm = () => {
     setIsFormValid({ login: true, password: true });
   };
 
-  const isDisabled = () =>
-    !(
+  const isDisabled = useMemo(() => {
+    return !(
       Object.values(isFormValid).every((field) => field) &&
       Object.values(formValues).every((field) => field)
     );
+  }, [isFormValid, formValues]);
 
   return {
     formValues,

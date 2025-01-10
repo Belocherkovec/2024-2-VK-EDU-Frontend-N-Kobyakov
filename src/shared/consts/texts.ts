@@ -62,14 +62,26 @@ export const TEXTS = {
   },
   lastActivity: { recently: 'был недавно' },
   noFile: 'Файл не выбран',
+  message: {
+    delete: 'Удалить',
+    edit: 'Редактировать'
+  },
   pages: {
+    chatsPage: {
+      settings: 'Настройки'
+    },
     dialogPage: {
       sendGeo: 'Геопозиция',
       image: 'Изображение',
       confirm: 'Продолжить',
       cancel: 'Отмена',
       imageLimit: (limit: number) =>
-        `Вы можете прикрепить к сообщению не более ${limit} изображений.`
+        `Вы можете прикрепить к сообщению не более ${limit} изображений.`,
+      removeChat: 'Удалить чат',
+      removeChatMessage:
+        'Вы уверены, что хотите удалить этот чат? Действие нельзя будет отменить!',
+      successTitle: 'Чат успешно удален',
+      errorTitle: 'Ошибка при удалении чата'
     },
     auth: {
       action: 'Войти',
@@ -122,11 +134,33 @@ export const TEXTS = {
       firstNamePlaceholder: 'Введите ваше имя',
       lastNamePlaceholder: 'Введите вашу Фамилию',
       bioPlaceholder: 'Заполните краткую информацию о себе'
+    },
+    profilePage: {
+      title: (name: string) => `Просмотр профиля ${name}`
+    },
+    editProfilePage: {
+      title: 'Настройки профиля',
+      save: 'Сохранить',
+      reset: 'Сбросить',
+      remove: 'Удалить',
+      deleteAccount: 'Удалить профиль',
+      logout: 'Выйти из профиля',
+      successTitle: 'Успех!',
+      successMessage: 'Данные пользователя успешно обновлены!',
+      errorTitle: 'Ошибка!',
+      errorMessage: 'Не удалось обновить данные пользователя!',
+      avatarUpdateErrorTitle: 'Ошибка при попытке загрузить изображение.',
+      avatarUpdateErrorMessage: 'Пожалуйста загрузите корректное изображение!',
+      confirmTitle: 'Удалить профиль',
+      confirmMessage:
+        'Вы уверены, что хотите удалить профиль? Действие необратимо!',
+      errorRemoveAccount: 'Произошла ошибка при удалении аккаунта.'
     }
   },
   placeholders: {
     message: 'Сообщение...',
-    search: 'Поиск...'
+    search: 'Поиск...',
+    edit: 'Редактирование'
   },
   userForm: {
     bio: 'Описание профиля',

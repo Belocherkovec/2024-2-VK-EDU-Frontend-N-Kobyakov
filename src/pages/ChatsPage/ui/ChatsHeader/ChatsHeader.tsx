@@ -1,9 +1,11 @@
 import { useDispatch } from 'react-redux';
+import cn from 'classnames';
 
 import { AppDispatch } from '@/app';
 import { Header, HeaderThemes, SearchInput } from '@/features';
 import {
   BackButton,
+  MenuRoundedButton,
   RoutePaths,
   SearchButton,
   TEXTS,
@@ -15,13 +17,15 @@ import styles from './сhatsHeader.module.scss';
 
 export const ChatsHeader: React.FC<{
   username: string;
-}> = ({ username }) => {
+  onMenuClick: () => void;
+  isMenuOpen?: boolean;
+}> = ({ username, onMenuClick, isMenuOpen }) => {
   const dispatch = useDispatch<AppDispatch>();
   const {
     isSearchMode,
-    handleSearchModeChange,
     handleSearch,
-    handleBackClick
+    handleBackClick,
+    handleSearchModeChange
   } = useSearch({
     onSearch: (value: string) => dispatch(fetchChats(value)),
     onClose: () => dispatch(fetchChats())
@@ -46,7 +50,12 @@ export const ChatsHeader: React.FC<{
             className={styles.header__button}
             isReplace
           />
-        ) : null,
+        ) : (
+          <MenuRoundedButton
+            onClick={onMenuClick}
+            className={cn(styles.header__button, isMenuOpen && styles._isOpen)}
+          />
+        ),
         rightNode: isSearchMode ? null : (
           <SearchButton
             onClick={handleSearchModeChange}

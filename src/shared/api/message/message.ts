@@ -46,3 +46,12 @@ export const postReadMessage = (
   msgId: string
 ): Promise<AxiosResponse<IMessage>> =>
   $api.post<IMessage>(`message/${msgId}/read/`, {});
+
+export const deleteMessage = (msgId: string): Promise<void> =>
+  $api.delete(`message/${msgId}/`);
+
+export const editMessage = (
+  msgId: string,
+  text: string
+): Promise<AxiosResponse<IMessage>> =>
+  $api.patch(`message/${msgId}/`, { text });

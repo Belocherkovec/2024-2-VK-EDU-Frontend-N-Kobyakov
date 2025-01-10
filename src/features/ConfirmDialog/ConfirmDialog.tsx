@@ -1,6 +1,6 @@
 import { IPopupWindowProps, PopupWindow, TEXTS } from '@/shared';
 
-import styles from './limitDialog.module.scss';
+import styles from './confirmDialog.module.scss';
 
 export interface ILimitVisibleState {
   visible: boolean;
@@ -10,25 +10,29 @@ export interface ILimitVisibleState {
 
 interface ILimitDialogProps
   extends Omit<IPopupWindowProps, 'children' | 'isVisible'> {
-  imagesLimit: number;
+  confirmTitle: string;
+  confirmText: string;
   isVisible: ILimitVisibleState;
+  actionText?: string;
   onConfirm?: () => void;
 }
 
-export const LimitDialog: React.FC<ILimitDialogProps> = ({
+export const ConfirmDialog: React.FC<ILimitDialogProps> = ({
   isVisible: { visible, cancelButton, confirmButton },
   onClose,
   onConfirm,
-  imagesLimit
+  actionText,
+  confirmTitle,
+  confirmText
 }) => (
   <PopupWindow
     isVisible={visible}
     onClose={onClose}
     className={styles.popup}
     contentClassName={styles.popup__content}
-    title={TEXTS.errors.defaultErrorTitle}
+    title={confirmTitle}
   >
-    <p>{TEXTS.pages.dialogPage.imageLimit(imagesLimit)}</p>
+    <p>{confirmText}</p>
     <div className={styles.popup__buttonsWrapper}>
       {cancelButton && (
         <button
@@ -47,7 +51,7 @@ export const LimitDialog: React.FC<ILimitDialogProps> = ({
           type="button"
           onClick={onConfirm || onClose}
         >
-          {TEXTS.pages.dialogPage.confirm}
+          {actionText || TEXTS.pages.dialogPage.confirm}
         </button>
       )}
     </div>

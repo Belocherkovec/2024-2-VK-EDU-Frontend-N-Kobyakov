@@ -8,18 +8,24 @@ import {
 import { fetchMessages } from './Message.thunk';
 
 interface IMessagesState {
+  isLoading: boolean;
   messagesIdx: string[];
   messagesMap: Record<string, IMessage>;
+  editMessageId: string | null;
 }
 
 const initialState: IMessagesState = {
+  isLoading: false,
   messagesIdx: [],
-  messagesMap: {}
+  messagesMap: {},
+  editMessageId: null
 };
 
 const selectors = {
   selectMessagesIdx: (state: IMessagesState) => state.messagesIdx,
-  selectMessagesMap: (state: IMessagesState) => state.messagesMap
+  selectMessagesMap: (state: IMessagesState) => state.messagesMap,
+  selectMessagesIsLoading: (state: IMessagesState) => state.isLoading,
+  selectEditMessage: (state: IMessagesState) => state.editMessageId
 };
 
 const reducers = {
@@ -36,10 +42,25 @@ const reducers = {
   resetMessages: () => initialState,
   updateMessage: (state: IMessagesState, action: PayloadAction<IMessage>) => {
     state.messagesMap[action.payload.id] = action.payload;
+  },
+  setMessagesIsLoading: (
+    state: IMessagesState,
+    action: PayloadAction<boolean>
+  ) => {
+    state.isLoading = action.payload;
+  },
+  setEditMessage: (
+    state: IMessagesState,
+    action: PayloadAction<string | null>
+  ) => {
+    state.editMessageId = action.payload;
   }
 };
 
 const extraReducers = (builder: ActionReducerMapBuilder<IMessagesState>) => {
+  builder.addCase(fetchMessages.pending, (state) => {
+    state.isLoading = true;
+  });
   builder.addCase(
     fetchMessages.fulfilled,
     (state, action: PayloadAction<IMessage[]>) => {
@@ -52,6 +73,7 @@ const extraReducers = (builder: ActionReducerMapBuilder<IMessagesState>) => {
         },
         {} as Record<string, IMessage>
       );
+      state.isLoading = false;
     }
   );
   builder.addCase(fetchMessages.rejected, () => initialState);
@@ -67,7 +89,18 @@ const messageSlice = createSlice({
 
 export const messagesSliceReducer = messageSlice.reducer;
 
-export const { addMessage, deleteMessage, resetMessages, updateMessage } =
-  messageSlice.actions;
+export const {
+  addMessage,
+  deleteMessage,
+  resetMessages,
+  updateMessage,
+  setMessagesIsLoading,
+  setEditMessage
+} = messageSlice.actions;
 
-export const { selectMessagesIdx, selectMessagesMap } = messageSlice.selectors;
+export const {
+  selectMessagesIdx,
+  selectMessagesMap,
+  selectMessagesIsLoading,
+  selectEditMessage
+} = messageSlice.selectors;

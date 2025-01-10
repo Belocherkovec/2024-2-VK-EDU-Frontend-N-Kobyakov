@@ -22,9 +22,9 @@ export const useSearch = (props: IUseSerachProps) => {
   };
 
   return {
-    handleBackClick,
+    isSearchMode,
     handleSearch,
-    handleSearchModeChange,
-    isSearchMode
+    handleBackClick,
+    handleSearchModeChange
   };
 };

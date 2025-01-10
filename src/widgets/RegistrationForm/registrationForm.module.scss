@@ -1,40 +1,8 @@
-@use "../../app/styles/variables" as *;
+@use "@/shared/styles/variables" as *;
+@use "@/shared/styles/mixins" as *;
 
 .form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  row-gap: 32px;
-
-  &__group {
-    border: none;
-    display: flex;
-    flex-direction: column;
-    row-gap: 12px;
-  }
-
-  &__area {
-    height: 6em;
-  }
-
-  &__button {
-    background-color: $color-accent;
-    color: $color-white-full;
-    padding: 16px;
-    font-size: 1.1em;
-    border-radius: 8px;
-
-    &._disabled {
-      background-color: $color-gray-light;
-      pointer-events: none;
-    }
-  }
-
-  &__error {
-    color: $color-error;
-    text-align: center;
-    font-weight: bold;
-  }
+  @include form($row-gap: 32px);
 
   &__userPreview {
     display: flex;

@@ -1,6 +1,7 @@
-@use "../../app/styles/variables" as *;
+@use "@/shared/styles/variables" as *;
 
 .message {
+  position: relative;
   list-style-type: none;
   max-width: 90%;
   margin: 4px 0;
@@ -20,6 +21,11 @@
     .message__timestamp {
       color: $color-gray-dark;
     }
+  }
+
+  &__actions {
+    width: max-content;
+    right: 0;
   }
 
   &__text {
